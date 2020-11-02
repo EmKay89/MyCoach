@@ -1,0 +1,18 @@
+﻿<Window x:Class="MyCoach.Windows.Exercises"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCoach.Windows"
+        mc:Ignorable="d"
+        Title="Übungen - " Height="450" Width="800" ResizeMode="NoResize" Background="LightGoldenrodYellow">
+    <DockPanel Margin="10">
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button Content="Bearbeiten"/>
+            <Button Content="Löschen"/>
+            <Button Content="Schließen"/>
+            <Label VerticalAlignment="Top" Height="10" Background="#FFF1EDD0"/>
+        </DockPanel>
+        <DataGrid DockPanel.Dock="Top" Background="AliceBlue"/>
+    </DockPanel>
+</Window>

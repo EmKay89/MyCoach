@@ -1,0 +1,106 @@
+﻿<Window x:Class="MyCoach.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyCoach"
+        mc:Ignorable="d"
+        Title="MyCoach" Height="550" MinHeight="550" Width="900" MinWidth="900">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    </Window.Background>
+    <Grid Background ="LightGoldenrodYellow">
+        <DockPanel Margin="10" Background="White">
+            <Menu DockPanel.Dock="Top" Height ="30" Background ="#FFF1EDD0">
+                <MenuItem Header="Übungen"  Background="#FFF1EDD0" Width="90" Height ="30">
+                    <MenuItem Header="Übungskategorien" Click="MenuItemExerciseCategories_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Aufwärmübungen" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 1" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 2" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 3" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 4" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 5" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 6" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 7" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Kategorie 8" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem Header="Abwärmübungen" Click="MenuItemSpecificCategory_Click"/>
+                    <Separator/>
+                    <MenuItem Header="Import"/>
+                    <MenuItem Header="Export"/>
+                    <Separator/>
+                    <MenuItem Header="Zurücksetzen"/>
+                </MenuItem>
+                <MenuItem Header="Trainingsplan" Background="#FFF1EDD0" Width="90" Height ="30">
+                    <MenuItem Header="Auswertung" Click="MenuItemEvaluation_Click"/>
+                    <MenuItem Header="Bearbeiten" Click="MenuItemTrainingSchedule_Click"/>
+                </MenuItem>
+                <MenuItem Header="Einstellungen" Background="#FFF1EDD0" Width="90" Height ="30">
+                    <MenuItem Header="Bearbeiten"/>
+                    <MenuItem Header="Zurücksetzen"/>
+                </MenuItem>
+                <MenuItem Header=" Hilfe" Background="#FFF1EDD0" Width="90" Height ="30"/>
+            </Menu>
+            <DockPanel x:Name="pnlTrainingSettings" DockPanel.Dock="Right" Width="15" Background="LightGoldenrodYellow" VerticalAlignment="Stretch">
+                <DockPanel>
+                    <Button x:Name="btnExpand" Background="LightGoldenrodYellow" Width="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold" Click="btnExpand_Click">
+                        &lt;
+                    </Button>
+                    <DockPanel>
+                        <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0" Height="210" DockPanel.Dock="Top">
+                            <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
+                            <CheckBox x:Name="cbxWarmUp" Content="Aufwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat1" Content="Übungskategorie1" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat2" Content="Übungskategorie2" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat3" Content="Übungskategorie3" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat4" Content="Übungskategorie4" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat5" Content="Übungskategorie5" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat6" Content="Übungskategorie6" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat7" Content="Übungskategorie7" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCat8" Content="Übungskategorie8" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="cbxCoolDown" Content="Abwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
+                        </StackPanel>
+                        <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0" Height="105" DockPanel.Dock="Top">
+                            <Label Content="Runden" FontWeight="Bold"/>
+                            <RadioButton x:Name="radOneLap" Content="eine Runde" Margin="3, 3, 0, 0"/>
+                            <RadioButton x:Name="radTwoLaps" Content="zwei Runden" Margin="3, 3, 0, 0"  IsChecked="True"/>
+                            <RadioButton x:Name="radThreeLaps" Content="drei Runden" Margin="3, 3, 0, 0"/>
+                            <RadioButton x:Name="radFourLaps" Content="vier Runden" Margin="3, 3, 0, 0"/>
+                        </StackPanel>
+                        <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0">
+                            <Label Content="Trainingsfokus" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Kategorie"/>
+                                <ComboBox Width="210" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Zusätzliche Übungen je Runde" Margin="0,3,0,0"/>
+                                <ComboBox Width="100" Margin="10,3,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Multiplikator Wiederholungen" Margin="0,3,0,0"/>
+                                <TextBox Width="70" Margin="12,3,0,0" VerticalAlignment="Center" Height="22" TextAlignment="Center" FontSize="14" Background="AliceBlue">100</TextBox>
+                                    <Label Content="%" Margin="0,3,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DockPanel>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel>
+                <StackPanel Height="30" Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Background="#FFF1EDD0">
+                    <Button x:Name="btnStart" BorderThickness="0" Background="#FFF1EDD0" Width="90" Click="btnStart_Click">
+                        Start
+                    </Button>
+                    <Button x:Name="btnTimer" BorderThickness="0" Background="#FFF1EDD0" Width="90" Click="btnTimer_Click">
+                        Timer
+                    </Button>
+                    <Label Foreground="Red" Margin="0,2,0,0" Visibility="Hidden">
+                        Achtung, im Traingsplan ausgewählte, aktuelle Monat stimmt nicht mit  dem aktuellen Monat der Systemzeit des PCs überein!
+                    </Label>
+                </StackPanel>
+                <DataGrid DockPanel.Dock="Top" Background="AliceBlue"/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>
+    
