@@ -8,7 +8,7 @@
         Title="Trainingsplan Bearbeiten" Height="450" Width="800" Background="LightGoldenrodYellow" ResizeMode="NoResize">
     <DockPanel Margin="10">
         <StackPanel DockPanel.Dock="Top">
-            <RadioButton x:Name="GenericSchedule" Content="Generischer Trainingsplan (für jeden Monat gleich)" Margin="5" IsChecked="True"/>
+            <RadioButton x:Name="GenericSchedule" Content="Generischer Trainingsplan (Punkteziel für jeden Monat gleich)" Margin="5" IsChecked="True"/>
             <RadioButton x:Name="TimeBasedSchedule" Content="Zeitbasierter Trainingsplan" Margin="5"/>
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="30">

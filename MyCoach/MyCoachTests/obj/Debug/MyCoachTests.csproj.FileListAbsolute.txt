@@ -2,9 +2,6 @@ C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingspl
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
-C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\de\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
-C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\de\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
-C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\de\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\MyCoachTests.dll
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\MyCoachTests.pdb
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
@@ -121,3 +118,4 @@ C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingspl
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\Moq.xml
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoachTests\obj\Debug\MyCoachTests.csproj.CoreCompileInputs.cache

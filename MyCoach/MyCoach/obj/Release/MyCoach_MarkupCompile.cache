@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\
+C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Release\
 MyCoach
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\App.xaml
 9-1624801097
 
-34222704931
+33-745222130
 171487001921
 Windows\TrainingSchedule.xaml;Windows\Evaluation.xaml;Windows\ExerciseCategories.xaml;Windows\Exercises.xaml;Windows\MainWindow.xaml;Windows\Settings.xaml;Windows\Timer.xaml;Windows\TrainingScheduleGeneric.xaml;Windows\TrainingScheduleTimeBased.xaml;
 
