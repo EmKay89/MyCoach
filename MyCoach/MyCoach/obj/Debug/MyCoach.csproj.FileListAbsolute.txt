@@ -31,3 +31,5 @@ C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingspl
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\Windows\TrainingScheduleGeneric.baml
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\Windows\TrainingScheduleTimeBased.baml
 C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\App.baml
+C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\MyCoach.csprojAssemblyReference.cache
+C:\Users\martin\Desktop\Programmierung\C# Programmierung\Projekte\06_Trainingsplandesigner 4.0\MyCoach\MyCoach\obj\Debug\MyCoach.csproj.CoreCompileInputs.cache
