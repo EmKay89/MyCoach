@@ -41,31 +41,28 @@
                 </MenuItem>
                 <MenuItem Header=" Hilfe" Background="#FFF1EDD0" Width="90" Height ="30"/>
             </Menu>
-            <DockPanel x:Name="pnlTrainingSettings" DockPanel.Dock="Right" Width="15" Background="LightGoldenrodYellow" VerticalAlignment="Stretch">
+            <DockPanel x:Name="pnlTrainingSettings" DockPanel.Dock="Right" Width="300" Background="LightGoldenrodYellow" VerticalAlignment="Stretch">
                 <DockPanel>
-                    <Button x:Name="btnExpand" Background="LightGoldenrodYellow" Width="15" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Bold" Click="btnExpand_Click">
-                        &lt;
-                    </Button>
-                    <DockPanel>
+                    <DockPanel Margin="10,0,0,0">
                         <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0" Height="210" DockPanel.Dock="Top">
                             <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
-                            <CheckBox x:Name="cbxWarmUp" Content="Aufwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat1" Content="Übungskategorie1" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat2" Content="Übungskategorie2" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat3" Content="Übungskategorie3" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat4" Content="Übungskategorie4" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat5" Content="Übungskategorie5" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat6" Content="Übungskategorie6" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat7" Content="Übungskategorie7" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCat8" Content="Übungskategorie8" Margin="3, 3, 0, 0" IsChecked="True"/>
-                            <CheckBox x:Name="cbxCoolDown" Content="Abwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkWarmUp" Content="Aufwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat1" Content="Übungskategorie1" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat2" Content="Übungskategorie2" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat3" Content="Übungskategorie3" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat4" Content="Übungskategorie4" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat5" Content="Übungskategorie5" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat6" Content="Übungskategorie6" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat7" Content="Übungskategorie7" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCat8" Content="Übungskategorie8" Margin="3, 3, 0, 0" IsChecked="True"/>
+                            <CheckBox x:Name="chkCoolDown" Content="Abwärmübung" Margin="3, 3, 0, 0" IsChecked="True"/>
                         </StackPanel>
                         <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0" Height="105" DockPanel.Dock="Top">
                             <Label Content="Runden" FontWeight="Bold"/>
-                            <RadioButton x:Name="radOneLap" Content="eine Runde" Margin="3, 3, 0, 0"/>
-                            <RadioButton x:Name="radTwoLaps" Content="zwei Runden" Margin="3, 3, 0, 0"  IsChecked="True"/>
-                            <RadioButton x:Name="radThreeLaps" Content="drei Runden" Margin="3, 3, 0, 0"/>
-                            <RadioButton x:Name="radFourLaps" Content="vier Runden" Margin="3, 3, 0, 0"/>
+                            <RadioButton x:Name="rdoOneLap" Content="eine Runde" Margin="3, 3, 0, 0"/>
+                            <RadioButton x:Name="rdoTwoLaps" Content="zwei Runden" Margin="3, 3, 0, 0"  IsChecked="True"/>
+                            <RadioButton x:Name="rdoThreeLaps" Content="drei Runden" Margin="3, 3, 0, 0"/>
+                            <RadioButton x:Name="rdoFourLaps" Content="vier Runden" Margin="3, 3, 0, 0"/>
                         </StackPanel>
                         <StackPanel Margin="0, 10, 0, 0" Background="#FFF1EDD0">
                             <Label Content="Trainingsfokus" FontWeight="Bold"/>
@@ -88,17 +85,17 @@
             </DockPanel>
             <DockPanel>
                 <StackPanel Height="30" Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Background="#FFF1EDD0">
-                    <Button x:Name="btnStart" BorderThickness="0" Background="#FFF1EDD0" Width="90" Click="btnStart_Click">
+                    <Button x:Name="btnStart" Click="btnStart_Click">
                         Start
                     </Button>
-                    <Button x:Name="btnTimer" BorderThickness="0" Background="#FFF1EDD0" Width="90" Click="btnTimer_Click">
+                    <Button x:Name="btnTimer" Click="btnTimer_Click">
                         Timer
                     </Button>
                     <Label Foreground="Red" Margin="0,2,0,0" Visibility="Hidden">
                         Achtung, im Traingsplan ausgewählte, aktuelle Monat stimmt nicht mit  dem aktuellen Monat der Systemzeit des PCs überein!
                     </Label>
                 </StackPanel>
-                <DataGrid DockPanel.Dock="Top" Background="AliceBlue"/>
+                <DataGrid x:Name="dgTraining" DockPanel.Dock="Top" Background="AliceBlue"/>
             </DockPanel>
         </DockPanel>
     </Grid>

@@ -21,24 +21,7 @@ namespace MyCoach
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool plnTrainingSettingsVisible;
         private bool trainingActive;
-
-        public bool PnlTrainingSettingsVisible
-        {
-            get => this.plnTrainingSettingsVisible;
-
-            set
-            {
-                if (value == this.plnTrainingSettingsVisible)
-                {
-                    return;
-                }
-
-                plnTrainingSettingsVisible = value;
-                this.OnTrainingSettingsVisibleChanged();
-            }
-        }
 
         public bool TrainingActive
         {
@@ -63,11 +46,6 @@ namespace MyCoach
             InitializeComponent();
         }
 
-        private void btnExpand_Click(object sender, RoutedEventArgs e)
-        {
-            this.PnlTrainingSettingsVisible = this.PnlTrainingSettingsVisible ? false : true;
-        }
-
         private void btnStart_Click(object sender, RoutedEventArgs e)
         {
             this.TrainingActive = this.TrainingActive ? false : true;
@@ -85,7 +63,6 @@ namespace MyCoach
             timerWindow.Show();
             this.IsTimerWindowOpen = true;
         }
-
         private void MenuItemExerciseCategories_Click(object sender, RoutedEventArgs e)
         {
             var exerciseCategoriesWindow = new Windows.ExerciseCategories();
@@ -110,31 +87,14 @@ namespace MyCoach
             trainingScheduleWindow.ShowDialog();
         }
 
-        private void OnTrainingSettingsVisibleChanged ()
-        {
-            if (this.PnlTrainingSettingsVisible)
-            {
-                this.pnlTrainingSettings.Width = 300;
-                this.btnExpand.Content = ">";
-            }
-            else
-            {
-                this.pnlTrainingSettings.Width = 15;
-                this.btnExpand.Content = "<";
-            }
-        }
-
         private void OnTrainingActiveChanged()
         {
             if (this.TrainingActive)
             {
-                this.PnlTrainingSettingsVisible = false;
-                this.btnExpand.IsEnabled = false;
                 this.btnStart.Content = "Stop";
             }
             else
             {
-                this.btnExpand.IsEnabled = true;
                 this.btnStart.Content = "Start";
             }
         }
