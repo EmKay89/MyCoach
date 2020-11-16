@@ -9,10 +9,10 @@
     <DockPanel Margin="10">
         <Label Content="Bitte geben Sie die Beschreibung der Übung hier ein oder verlinken Sie ein Video:" DockPanel.Dock="Top"/>
         <DockPanel DockPanel.Dock="Bottom" Height="30">
-            <Button Content="Speichern"/>
-            <Button Content="Schließen"/>
+            <Button x:Name="btnSave" Content="Speichern"/>
+            <Button x:Name="btnClose" Content="Schließen"/>
             <Label Background="#FFF1EDD0" Height="10" VerticalAlignment="Top"/>
         </DockPanel>
-        <RichTextBox/>
+        <RichTextBox x:Name="rtbDescription"/>
     </DockPanel>
 </Window>
