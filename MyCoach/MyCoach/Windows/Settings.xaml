@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Einstellungen" Height="410" Width="450" ResizeMode="NoResize" Background="LightGoldenrodYellow">
     <StackPanel>
-        <Grid Margin="10" Background="#FFF1EDD0">
+        <Grid Margin="10,10,10,0" Background="#FFF1EDD0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="105"/>
                 <ColumnDefinition/>
@@ -61,7 +61,7 @@
                 <Label Content="%"/>
             </StackPanel>
         </Grid>
-        <StackPanel Margin="10,5,10,5" Background="#FFF1EDD0" Height="150">
+        <StackPanel Margin="10,10,10,0" Background="#FFF1EDD0" Height="150">
             <Label Content="Übungswiederholungen" FontWeight="Bold"/>
             <Label Content="Wiederholungen von Übungen in einer Trainingsrunde erlauben:"/>
             <ComboBox Width="90" HorizontalAlignment="Left" Margin="3"/>
@@ -74,7 +74,7 @@
                 </TextBlock>
             </Label>
         </StackPanel>
-        <StackPanel Margin="10,5,10,5" Orientation="Horizontal">
+        <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
             <Button Content="Speichern"/>
             <Button Content="Schließen"/>
         </StackPanel>

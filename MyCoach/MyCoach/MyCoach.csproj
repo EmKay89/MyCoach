@@ -64,6 +64,9 @@
     <Compile Include="Windows\ExerciseDescription.xaml.cs">
       <DependentUpon>ExerciseDescription.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MonthChange.xaml.cs">
+      <DependentUpon>MonthChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\TrainingSchedule.xaml.cs">
       <DependentUpon>TrainingSchedule.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <DependentUpon>TrainingScheduleTimeBased.xaml</DependentUpon>
     </Compile>
     <Page Include="Windows\ExerciseDescription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MonthChange.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
