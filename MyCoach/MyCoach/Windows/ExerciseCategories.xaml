@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCoach.Windows"
         mc:Ignorable="d"
-        Title="Übungskategorien" Height="590" Width="590" ResizeMode="NoResize" Background="LightGoldenrodYellow">
+        Title="Übungskategorien" Height="545" Width="590" ResizeMode="NoResize" Background="LightGoldenrodYellow">
     <StackPanel>
         <StackPanel Background="#FFF1EDD0" Margin="10,10,10,0">
             <Label Content="Aufwärmübungen" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
+                <TextBox x:Name="txtNameWarmUp" Width="300"/>
                 <Label Content="Anzahl" Margin="10,0,0,0"/>
-                <TextBox Width="50"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
+                <TextBox x:Name="txtCountWarmUp" Width="50"/>
+                <CheckBox x:Name="cbxWarmUpActive" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -27,8 +27,8 @@
             <Label Content="Trainingsübungen" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise1" Width="300"/>
+                <CheckBox x:Name="cbxExercise1Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -38,8 +38,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise2" Width="300"/>
+                <CheckBox x:Name="cbxExercise2Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -49,8 +49,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise3" Width="300"/>
+                <CheckBox x:Name="cbxExercise3Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -60,8 +60,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise4" Width="300"/>
+                <CheckBox x:Name="cbxExercise4Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -71,8 +71,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise5" Width="300"/>
+                <CheckBox x:Name="cbxExercise5Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -82,8 +82,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise6" Width="300"/>
+                <CheckBox x:Name="cbxExercise6Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -93,8 +93,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise7" Width="300"/>
+                <CheckBox x:Name="cbxExercise7Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -104,19 +104,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
-                    <CheckBox.Resources>
-                        <Style TargetType="{x:Type Path}">
-                            <Setter Property="FlowDirection" Value="LeftToRight"/>
-                        </Style>
-                    </CheckBox.Resources>
-                </CheckBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
-                <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                <TextBox x:Name="txtNameExercise8" Width="300"/>
+                <CheckBox x:Name="cbxExercise8Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
                             <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -129,9 +118,9 @@
             <Label Content="Abwärmübungen" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <Label Content="Bezeichnung"/>
-                <TextBox Width="300"/>
+                <TextBox x:Name="txtNameCoolDown" Width="300"/>
                 <Label Content="Anzahl" Margin="10,0,0,0"/>
-                <TextBox Width="50"/>
+                <TextBox x:Name="txtCountCoolDown" Width="50"/>
                 <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
                     <CheckBox.Resources>
                         <Style TargetType="{x:Type Path}">
@@ -142,8 +131,8 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
-            <Button Content="Speichern" HorizontalAlignment="Left"/>
-            <Button Content="Schließen" HorizontalAlignment="Left"/>
+            <Button x:Name="btnSave" Content="Speichern" HorizontalAlignment="Left"/>
+            <Button x:Name="btnClose" Content="Schließen" HorizontalAlignment="Left"/>
         </StackPanel>
     </StackPanel>
 </Window>

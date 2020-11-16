@@ -15,16 +15,16 @@
                 <MenuItem Header="Übungen"  Background="#FFF1EDD0" Width="90" Height ="30">
                     <MenuItem Header="Übungskategorien" Click="MenuItemExerciseCategories_Click"/>
                     <Separator/>
-                    <MenuItem Header="Aufwärmübungen" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 1" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 2" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 3" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 4" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 5" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 6" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 7" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Kategorie 8" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem Header="Abwärmübungen" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuWarmUp" Header="Aufwärmübungen" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise1" Header="Kategorie 1" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise2" Header="Kategorie 2" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise3" Header="Kategorie 3" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise4" Header="Kategorie 4" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise5" Header="Kategorie 5" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise6" Header="Kategorie 6" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise7" Header="Kategorie 7" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuExercise8" Header="Kategorie 8" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuCoolDown" Header="Abwärmübungen" Click="MenuItemSpecificCategory_Click"/>
                     <Separator/>
                     <MenuItem Header="Import"/>
                     <MenuItem Header="Export"/>
@@ -68,15 +68,15 @@
                             <Label Content="Trainingsfokus" FontWeight="Bold"/>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Kategorie"/>
-                                <ComboBox Width="210" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="cboCategory" Width="210" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Zusätzliche Übungen je Runde" Margin="0,3,0,0"/>
-                                <ComboBox Width="100" Margin="10,3,0,0" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="cboAdditionalExercises" Width="100" Margin="10,3,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Multiplikator Wiederholungen" Margin="0,3,0,0"/>
-                                <TextBox Width="70" Margin="12,3,0,0" VerticalAlignment="Center" Height="22" TextAlignment="Center" FontSize="14" Background="AliceBlue">100</TextBox>
+                                <TextBox x:Name="txtFactorRepeats"  Width="70" Margin="12,3,0,0" VerticalAlignment="Center" Height="22" TextAlignment="Center" FontSize="14" Background="AliceBlue">100</TextBox>
                                     <Label Content="%" Margin="0,3,0,0"/>
                             </StackPanel>
                         </StackPanel>
@@ -85,14 +85,10 @@
             </DockPanel>
             <DockPanel>
                 <StackPanel Height="30" Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" Background="#FFF1EDD0">
-                    <Button x:Name="btnStart" Click="btnStart_Click">
-                        Start
-                    </Button>
-                    <Button x:Name="btnTimer" Click="btnTimer_Click">
-                        Timer
-                    </Button>
+                    <Button x:Name="btnStart" Content="Start" Click="btnStart_Click"/>
+                    <Button x:Name="btnTimer" Content="Timer" Click="btnTimer_Click"/>
                     <Label Foreground="Red" Margin="0,2,0,0" Visibility="Hidden">
-                        Achtung, im Traingsplan ausgewählte, aktuelle Monat stimmt nicht mit  dem aktuellen Monat der Systemzeit des PCs überein!
+                        Monatswechsel im Trainingsplan ausstehend!
                     </Label>
                 </StackPanel>
                 <DataGrid x:Name="dgTraining" DockPanel.Dock="Top" Background="AliceBlue"/>

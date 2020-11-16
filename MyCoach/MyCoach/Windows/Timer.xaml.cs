@@ -49,7 +49,7 @@ namespace MyCoach.Windows
             this.timer.Interval = (int)TimeSpan.FromSeconds(1).TotalMilliseconds;
             this.timer.Tick += this.OnTimerElapsed;
             this.Closing += this.OnClosing;
-            this.tbxTime.Text = this.time.ToString();
+            this.txtTime.Text = this.time.ToString();
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)
@@ -67,25 +67,25 @@ namespace MyCoach.Windows
             if (this.TimerActive)
             {
                 this.btnStart.Content = "Stop";
-                this.tbxTime.IsEnabled = false;
+                this.txtTime.IsEnabled = false;
                 this.timer.Start();
             }
             else
             {
                 this.btnStart.Content = "Start";
-                this.tbxTime.IsEnabled = true;
+                this.txtTime.IsEnabled = true;
                 this.timer.Stop();
             }
         }
 
-        private void tbxTime_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtTime_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.TimerActive)
             {
                 return;
             }
 
-            if (TimeSpan.TryParse(this.tbxTime.Text, out TimeSpan newTime)
+            if (TimeSpan.TryParse(this.txtTime.Text, out TimeSpan newTime)
                 && newTime.TotalMilliseconds > 0)
             {
                 this.time = newTime;
@@ -106,7 +106,7 @@ namespace MyCoach.Windows
                 this.time = this.lastUsedTime;
                 SystemSounds.Beep.Play();
 
-                if ((bool)this.ckbAutoRestart.IsChecked)
+                if ((bool)this.chkAutoRestart.IsChecked)
                 {
                     this.timer.Start();
                 }
@@ -116,7 +116,7 @@ namespace MyCoach.Windows
                 }
             }
 
-            this.tbxTime.Text = this.time.ToString();
+            this.txtTime.Text = this.time.ToString();
         }
 
         private void OnClosing(object sender, EventArgs e)

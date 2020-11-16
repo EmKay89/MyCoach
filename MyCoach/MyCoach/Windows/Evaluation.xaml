@@ -55,11 +55,11 @@
     <DockPanel Margin="10">
         <DockPanel DockPanel.Dock="Top" Height="30">
             <Label Content="Aktueller Monat:" HorizontalAlignment="Right"/>
-            <Button Content="Monatswechsel" HorizontalAlignment="Right"/>
+            <Button x:Name="btnMonthChange" Content="Monatswechsel" HorizontalAlignment="Right"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Height="30">
             <Button Content="Schließen" HorizontalAlignment="Left"/>
-            <Label Background="#FFF1EDD0" Height="10" VerticalAlignment="Top"/>
+            <Label x:Name="btnClose" Background="#FFF1EDD0" Height="10" VerticalAlignment="Top"/>
         </DockPanel>
         <TabControl Background="LightGoldenrodYellow">
             <TabItem Header="Punkte Monat" Background="LightGoldenrodYellow">
@@ -78,7 +78,8 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition MinWidth="70" MaxWidth="370" Width="Auto"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="148*"/>
+                        <ColumnDefinition Width="549*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Gesamt" Grid.Row="0" Grid.Column="0"/>
                     <Label Content="Kategorie 1" Grid.Row="1" Grid.Column="0"/>
@@ -89,32 +90,32 @@
                     <Label Content="Kategorie 6" Grid.Row="6" Grid.Column="0"/>
                     <Label Content="Kategorie 7" Grid.Row="7" Grid.Column="0"/>
                     <Label Content="Kategorie 8" Grid.Row="8" Grid.Column="0"/>
-                    <ProgressBar Grid.Row="0" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="1" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="2" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="3" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="4" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="5" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="6" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="7" Grid.Column="1" Margin="5"/>
-                    <ProgressBar Grid.Row="8" Grid.Column="1" Margin="5"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="0" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="1" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="2" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="3" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="4" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="5" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="6" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="7" Grid.Column="1" Text="X von Y"/>
-                    <TextBox Style="{StaticResource ScoreBarTextBox}" Grid.Row="8" Grid.Column="1" Text="X von Y"/>
-                    <Button Style="{StaticResource BroadButton}" Content="Manuelle Korrektur" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ProgressBar x:Name="bpTotal" Grid.Row="0" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory1" Grid.Row="1" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory2" Grid.Row="2" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory3" Grid.Row="3" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory4" Grid.Row="4" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory5" Grid.Row="5" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory6" Grid.Row="6" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory7" Grid.Row="7" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <ProgressBar x:Name="pbCategory8" Grid.Row="8" Grid.Column="1" Margin="5" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txtTotal" Style="{StaticResource ScoreBarTextBox}" Grid.Row="0" Grid.Column="2" Text="X von Y" Margin="155,6,304,6"/>
+                    <TextBox x:Name="txtCategory1" Style="{StaticResource ScoreBarTextBox}" Grid.Row="1" Grid.Column="2" Text="X von Y" Margin="155,6,304,5"/>
+                    <TextBox x:Name="txtCategory2" Style="{StaticResource ScoreBarTextBox}" Grid.Row="2" Grid.Column="2" Text="X von Y" Margin="155,5,304,6"/>
+                    <TextBox x:Name="txtCategory3" Style="{StaticResource ScoreBarTextBox}" Grid.Row="3" Grid.Column="2" Text="X von Y" Margin="155,6,304,5"/>
+                    <TextBox x:Name="txtCategory4" Style="{StaticResource ScoreBarTextBox}" Grid.Row="4" Grid.Column="2" Text="X von Y" Margin="155,5,304,6"/>
+                    <TextBox x:Name="txtCategory5" Style="{StaticResource ScoreBarTextBox}" Grid.Row="5" Grid.Column="2" Text="X von Y" Margin="155,6,304,5"/>
+                    <TextBox x:Name="txtCategory6" Style="{StaticResource ScoreBarTextBox}" Grid.Row="6" Grid.Column="2" Text="X von Y" Margin="155,5,304,6"/>
+                    <TextBox x:Name="txtCategory7" Style="{StaticResource ScoreBarTextBox}" Grid.Row="7" Grid.Column="2" Text="X von Y" Margin="155,6,304,5"/>
+                    <TextBox x:Name="txtCategory8" Style="{StaticResource ScoreBarTextBox}" Grid.Row="8" Grid.Column="2" Text="X von Y" Margin="155,5,304,6"/>
+                    <Button x:Name="btnManualCorrection" Style="{StaticResource BroadButton}" Content="Manuelle Korrektur" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Punkte Gesamtzeitraum Trainingsplan" Background="LightGoldenrodYellow">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Top">
                         <Label Content="Kategorie"/>
-                        <ComboBox Width="150"/>
+                        <ComboBox x:Name="cbxCategory" Width="150"/>
                         <Label Content="Es wurde kein Trainingsplan erstellt!" HorizontalContentAlignment="Center"/>
                     </DockPanel>
                     <Grid DockPanel.Dock="Bottom" Margin="20,10,20,10" x:Name="ScheduleGrid">
@@ -147,114 +148,114 @@
                             <RowDefinition/>
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
-                        <ProgressBar Grid.Row="0" Grid.Column="0" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="1" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="2" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="3" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="4" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="5" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="6" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="7" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="8" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="9" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="10" Orientation="Vertical" Width="25"/>
-                        <ProgressBar Grid.Row="0" Grid.Column="11" Orientation="Vertical" Width="25"/>
-                        <Label Grid.Row="0" Grid.Column="0" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <ProgressBar x:Name="pbMonth1" Grid.Row="0" Grid.Column="0" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth2" Grid.Row="0" Grid.Column="1" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth3" Grid.Row="0" Grid.Column="2" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth4" Grid.Row="0" Grid.Column="3" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth5" Grid.Row="0" Grid.Column="4" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth6" Grid.Row="0" Grid.Column="5" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth7" Grid.Row="0" Grid.Column="6" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth8" Grid.Row="0" Grid.Column="7" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth9" Grid.Row="0" Grid.Column="8" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth10" Grid.Row="0" Grid.Column="9" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth11" Grid.Row="0" Grid.Column="10" Orientation="Vertical" Width="25"/>
+                        <ProgressBar x:Name="pbMonth12" Grid.Row="0" Grid.Column="11" Orientation="Vertical" Width="25"/>
+                        <Label x:Name="lblMonth1Points" Grid.Row="0" Grid.Column="0" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="1" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth2Points" Grid.Row="0" Grid.Column="1" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="2" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth3Points" Grid.Row="0" Grid.Column="2" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="3" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth4Points" Grid.Row="0" Grid.Column="3" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="4" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth5Points" Grid.Row="0" Grid.Column="4" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="5" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth6Points" Grid.Row="0" Grid.Column="5" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="6" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth7Points" Grid.Row="0" Grid.Column="6" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="7" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth8Points" Grid.Row="0" Grid.Column="7" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="8" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth9Points" Grid.Row="0" Grid.Column="8" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="9" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth10Points" Grid.Row="0" Grid.Column="9" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="10" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth11Points" Grid.Row="0" Grid.Column="10" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="11" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
+                        <Label x:Name="lblMonth12Points" Grid.Row="0" Grid.Column="11" Margin="5" Content="X von Y"  HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0" RenderTransformOrigin="0.5,0.5">
                             <Label.RenderTransform>
                                 <TransformGroup>
                                     <RotateTransform Angle="-90"/>
                                 </TransformGroup>
                             </Label.RenderTransform>
                         </Label>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Label Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="11" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth1Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth2Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth3Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth4Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth5Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth6Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth7Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth8Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth9Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth10Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth11Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Label x:Name="lblMonth12Name" Content="Jan&#x0a;2020" Grid.Row="1" Grid.Column="11" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </DockPanel>
             </TabItem>

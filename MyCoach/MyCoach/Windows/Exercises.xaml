@@ -8,9 +8,9 @@
         Title="Übungen - " Height="450" Width="800" ResizeMode="NoResize" Background="LightGoldenrodYellow">
     <DockPanel Margin="10">
         <DockPanel DockPanel.Dock="Bottom">
-            <Button Content="Bearbeiten"/>
-            <Button Content="Löschen"/>
-            <Button Content="Schließen"/>
+            <Button x:Name="btnEdit" Content="Bearbeiten"/>
+            <Button x:Name="btnDelete" Content="Löschen"/>
+            <Button x:Name="btnClose" Content="Schließen"/>
             <Label VerticalAlignment="Top" Height="10" Background="#FFF1EDD0"/>
         </DockPanel>
         <DataGrid DockPanel.Dock="Top" Background="AliceBlue"/>

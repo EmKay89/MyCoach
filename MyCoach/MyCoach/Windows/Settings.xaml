@@ -26,45 +26,45 @@
             <Label Content="Anzahl Punkte" Grid.Row="1" Grid.Column="2"/>
             <Label Content="Runde 1" Grid.Row="2" Grid.Column="0"/>
             <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1">
-                <TextBox/>
+                <TextBox x:Name="txtRepetitionFactorRound1"/>
                 <Label Content="%"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="2">
-                <TextBox/>
+                <TextBox x:Name="txtPointsFactorRound1"/>
                 <Label Content="%"/>
             </StackPanel>
             <Label Content="Runde 2" Grid.Row="3" Grid.Column="0"/>
             <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1">
-                <TextBox/>
+                <TextBox x:Name="txtRepetitionFactorRound2"/>
                 <Label Content="%"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="2">
-                <TextBox/>
+                <TextBox x:Name="txtPointsFactorRound2"/>
                 <Label Content="%"/>
             </StackPanel>
             <Label Content="Runde 3" Grid.Row="4" Grid.Column="0"/>
             <StackPanel Orientation="Horizontal"  Grid.Row="4" Grid.Column="1">
-                <TextBox/>
+                <TextBox x:Name="txtRepetitionFactorRound3"/>
                 <Label Content="%"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="4" Grid.Column="2">
-                <TextBox/>
+                <TextBox x:Name="txtPointsFactorRound3"/>
                 <Label Content="%"/>
             </StackPanel>
             <Label Content="Runde 4" Grid.Row="5" Grid.Column="0"/>
             <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="1">
-                <TextBox/>
+                <TextBox x:Name="txtRepetitionFactorRound4"/>
                 <Label Content="%"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.Column="2">
-                <TextBox/>
+                <TextBox x:Name="txtPointsFactorRound4"/>
                 <Label Content="%"/>
             </StackPanel>
         </Grid>
         <StackPanel Margin="10,10,10,0" Background="#FFF1EDD0" Height="150">
             <Label Content="Übungswiederholungen" FontWeight="Bold"/>
             <Label Content="Wiederholungen von Übungen in einer Trainingsrunde erlauben:"/>
-            <ComboBox Width="90" HorizontalAlignment="Left" Margin="3"/>
+            <ComboBox x:Name="cboAllowRepetitions"  Width="90" HorizontalAlignment="Left" Margin="3"/>
             <Label Width="450">
                 <TextBlock>
                     Eine Übung wird kein zweites Mal ins Training eingeplant, auch nicht,<LineBreak/>
@@ -75,8 +75,8 @@
             </Label>
         </StackPanel>
         <StackPanel Margin="10,10,10,0" Orientation="Horizontal">
-            <Button Content="Speichern"/>
-            <Button Content="Schließen"/>
+            <Button x:Name="btnSave" Content="Speichern"/>
+            <Button x:Name="btnClose" Content="Schließen"/>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -16,7 +16,7 @@
             </StackPanel >            
         </StackPanel>
         <StackPanel Margin="10" Orientation="Horizontal" DockPanel.Dock="Bottom">
-            <Button x:Name="btnSave" Content="Speichern"/>
+            <Button x:Name="btnSave" Content="Aktualisieren"/>
             <Button x:Name="btnClose" Content="Schließen"/>
         </StackPanel>
         <StackPanel Margin="10,10,10,0" Background="#FFF1EDD0" DockPanel.Dock="Top">
