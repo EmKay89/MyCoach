@@ -15,16 +15,16 @@
                 <MenuItem Header="Übungen"  Background="#FFF1EDD0" Width="90" Height ="30">
                     <MenuItem Header="Übungskategorien" Click="MenuItemExerciseCategories_Click"/>
                     <Separator/>
-                    <MenuItem x:Name="mnuWarmUp" Header="Aufwärmübungen" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise1" Header="Kategorie 1" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise2" Header="Kategorie 2" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise3" Header="Kategorie 3" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise4" Header="Kategorie 4" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise5" Header="Kategorie 5" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise6" Header="Kategorie 6" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise7" Header="Kategorie 7" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuExercise8" Header="Kategorie 8" Click="MenuItemSpecificCategory_Click"/>
-                    <MenuItem x:Name="mnuCoolDown" Header="Abwärmübungen" Click="MenuItemSpecificCategory_Click"/>
+                    <MenuItem x:Name="mnuWarmUp" Header="Aufwärmübungen" Click="MenuItemCategoryWarmUp_Click"/>
+                    <MenuItem x:Name="mnuExercise1" Header="Kategorie 1" Click="MenuItemCategory1_Click"/>
+                    <MenuItem x:Name="mnuExercise2" Header="Kategorie 2" Click="MenuItemCategory2_Click"/>
+                    <MenuItem x:Name="mnuExercise3" Header="Kategorie 3" Click="MenuItemCategory3_Click"/>
+                    <MenuItem x:Name="mnuExercise4" Header="Kategorie 4" Click="MenuItemCategory4_Click"/>
+                    <MenuItem x:Name="mnuExercise5" Header="Kategorie 5" Click="MenuItemCategory5_Click"/>
+                    <MenuItem x:Name="mnuExercise6" Header="Kategorie 6" Click="MenuItemCategory6_Click"/>
+                    <MenuItem x:Name="mnuExercise7" Header="Kategorie 7" Click="MenuItemCategory7_Click"/>
+                    <MenuItem x:Name="mnuExercise8" Header="Kategorie 8" Click="MenuItemCategory8_Click"/>
+                    <MenuItem x:Name="mnuCoolDown" Header="Abwärmübungen" Click="MenuItemCategoryCoolDown_Click"/>
                     <Separator/>
                     <MenuItem Header="Import"/>
                     <MenuItem Header="Export"/>

@@ -18,9 +18,9 @@ namespace MyCoachTests
             get
             {
                 var categories = new List<Category>();
-                categories.Add(new Category { Name = "Erwärmung", Count = 3, Active = true });
-                categories.Add(new Category { Name = "Arme", Active = true });
-                categories.Add(new Category { Name = "Dehnung", Count = 0, Active = false });
+                categories.Add(new Category { ID = 0, Name = "Erwärmung", Count = 3, Active = true });
+                categories.Add(new Category { ID = 1, Name = "Arme", Active = true });
+                categories.Add(new Category { ID = 2, Name = "Dehnung", Count = 0, Active = false });
                 return categories;
             }
         }

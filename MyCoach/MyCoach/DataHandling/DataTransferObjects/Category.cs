@@ -7,6 +7,11 @@
     public class Category : IDataTransferObject
     {
         /// <summary>
+        ///     Ruft den eindeutigen Identifizierer der Übungskategorie auf oder legt ihn fest.
+        /// </summary>
+        public ushort ID { get; set; }
+
+        /// <summary>
         ///     Ruft den Namen der Übungskategorie auf oder legt ihn fest.
         /// </summary>
         public string Name { get; set; }

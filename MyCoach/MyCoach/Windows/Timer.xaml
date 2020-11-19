@@ -13,7 +13,7 @@
             <CheckBox x:Name="chkAutoRestart" Content="Auto Restart" Margin="10"/>
         </StackPanel>
         <Grid Background="#FFF1EDD0" Margin="10,10,10,0">
-            <TextBox x:Name="txtTime" Margin="10" TextChanged="tbxTime_TextChanged" FontSize="120" FontWeight="Bold" Height="Auto" Width="Auto"/>
+            <TextBox x:Name="txtTime" Margin="10" TextChanged="txtTime_TextChanged" FontSize="120" FontWeight="Bold" Height="Auto" Width="Auto"/>
         </Grid>        
     </DockPanel>
 </Window>

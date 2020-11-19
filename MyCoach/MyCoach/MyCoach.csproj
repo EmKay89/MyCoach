@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enumerations\ExerciseCategory.cs" />
     <Compile Include="Windows\ExerciseDescription.xaml.cs">
       <DependentUpon>ExerciseDescription.xaml</DependentUpon>
     </Compile>

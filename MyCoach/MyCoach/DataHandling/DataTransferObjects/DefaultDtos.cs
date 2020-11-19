@@ -13,7 +13,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     {
         public static List<Category> Categories
         {
-            get => new List<Category>();
+            get => new List<Category>() { new Category { ID = 1, Name = "Arme", Count = 0, Active = true } };
         }
 
         public static List<Exercise> Exercises
