@@ -86,6 +86,24 @@
     <Compile Include="Enumerations\ExerciseType.cs" />
     <Compile Include="Enumerations\ExerciseSchedulingRepetitionPermission.cs" />
     <Compile Include="Enumerations\Month.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ExerciseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\TrainingScheduleViewModel.cs" />
+    <Compile Include="ViewModels\TrainingViewModel.cs" />
+    <Compile Include="Views\ExerciseView.xaml.cs">
+      <DependentUpon>ExerciseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingscheduleView.xaml.cs">
+      <DependentUpon>TrainingscheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TrainingView.xaml.cs">
+      <DependentUpon>TrainingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -120,10 +138,24 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="InternalLogicElements\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\ExerciseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingscheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TrainingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
