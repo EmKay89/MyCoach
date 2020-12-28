@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCoach.Windows"
+        xmlns:views="clr-namespace:MyCoach.Views"
+        xmlns:viewmodels="clr-namespace:MyCoach.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="900" MinHeight="550" MinWidth="900">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10,10,10,0"/>
@@ -16,22 +18,17 @@
             <Setter Property="BorderBrush" Value="LightGray"/>
         </Style>
     </Window.Resources>
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
     <DockPanel>
         <StackPanel Width="180" Background="AliceBlue">
-            <Button>
-                Training
-            </Button>
-            <Button>
-                Übungen
-            </Button>
-            <Button>
-                Trainingsplan
-            </Button>
-            <Button>
-                Einstellungen
-            </Button>
+            <Button Content="Training" Command="{Binding UpdateViewCommand}" CommandParameter="Training"/>
+            <Button Content="Übungen" Command="{Binding UpdateViewCommand}" CommandParameter="Exercise"/>
+            <Button Content="Trainingsplan" Command="{Binding UpdateViewCommand}" CommandParameter="TrainingSchedule"/>
+            <Button Content="Einstellungen" Command="{Binding UpdateViewCommand}" CommandParameter="Settings"/>
         </StackPanel>
         <Label DockPanel.Dock="Top" Background="LightGray" Height="4"/>
-        <ContentControl/>
+        <ContentControl Content="{Binding SelectedViewModel}"/>
     </DockPanel>
 </Window>

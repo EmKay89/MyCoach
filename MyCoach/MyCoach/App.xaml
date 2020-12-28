@@ -2,7 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MyCoach"
+             xmlns:views="clr-namespace:MyCoach.Views"
+             xmlns:viewmodels="clr-namespace:MyCoach.ViewModels"
              StartupUri="Windows\MainWindow.xaml">
     <Application.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:ExerciseViewModel}">
+            <views:ExerciseView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleViewModel}">
+            <views:TrainingScheduleView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TrainingViewModel}">
+            <views:TrainingView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

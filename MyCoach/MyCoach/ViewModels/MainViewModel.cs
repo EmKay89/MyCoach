@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace MyCoach.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : SuperViewModel
     {
+        public MainViewModel() : base()
+        {
+            this.SelectedViewModel = new TrainingViewModel();
+        }
     }
 }
