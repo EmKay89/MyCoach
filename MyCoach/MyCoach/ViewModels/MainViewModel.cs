@@ -8,9 +8,9 @@ namespace MyCoach.ViewModels
 {
     public class MainViewModel : SuperViewModel
     {
-        public MainViewModel() : base()
+        public MainViewModel()
         {
-            this.SelectedViewModel = new TrainingViewModel();
+
         }
     }
 }

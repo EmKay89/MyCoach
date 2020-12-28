@@ -26,7 +26,13 @@ namespace MyCoach.ViewModels
 
             set
             {
+                if (this.selectedViewModel == value)
+                {
+                    return;
+                }
+
                 selectedViewModel = value;
+                this.InvokePropertyChanged();
             }
         }
 
