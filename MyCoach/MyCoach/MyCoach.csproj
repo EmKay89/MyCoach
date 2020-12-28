@@ -62,64 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Enumerations\ExerciseCategory.cs" />
-    <Compile Include="Windows\ExerciseDescription.xaml.cs">
-      <DependentUpon>ExerciseDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\MonthChange.xaml.cs">
-      <DependentUpon>MonthChange.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\TrainingSchedule.xaml.cs">
-      <DependentUpon>TrainingSchedule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Evaluation.xaml.cs">
-      <DependentUpon>Evaluation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\ExerciseCategories.xaml.cs">
-      <DependentUpon>ExerciseCategories.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Exercises.xaml.cs">
-      <DependentUpon>Exercises.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\Timer.xaml.cs">
-      <DependentUpon>Timer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\TrainingScheduleGeneric.xaml.cs">
-      <DependentUpon>TrainingScheduleGeneric.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\TrainingScheduleTimeBased.xaml.cs">
-      <DependentUpon>TrainingScheduleTimeBased.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Windows\ExerciseDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\MonthChange.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\TrainingSchedule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Evaluation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\ExerciseCategories.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Exercises.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -146,24 +88,7 @@
     <Compile Include="Enumerations\Month.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\Timer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\TrainingScheduleGeneric.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\TrainingScheduleTimeBased.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -194,6 +119,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="InternalLogicElements\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Windows\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
