@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:MyCoach.Windows"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10,10,10,0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel Width="180" Background="AliceBlue">
+            <Button>
+                Training
+            </Button>
+            <Button>
+                Übungen
+            </Button>
+            <Button>
+                Trainingsplan
+            </Button>
+            <Button>
+                Einstellungen
+            </Button>
+        </StackPanel>
+        <Label DockPanel.Dock="Top" Background="LightGray" Height="4"/>
+        <ContentControl/>
+    </DockPanel>
 </Window>
