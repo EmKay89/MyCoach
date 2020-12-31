@@ -4,9 +4,30 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyCoach.Views"
+             xmlns:viewmodels="clr-namespace:MyCoach.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="Training"/>
-    </Grid>
+    <UserControl.DataContext>
+        <viewmodels:TrainingViewModel/>
+    </UserControl.DataContext>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <Button Content="Start"/>
+            <Button Content="Timer"/>
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Right" Width="300">
+            <StackPanel>
+                <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Runden" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel>
+                <Label Content="Fokus" FontWeight="Bold"/>
+            </StackPanel>
+        </StackPanel>
+        <DockPanel>
+            <DataGrid Margin="5"/>
+        </DockPanel>
+    </DockPanel>
 </UserControl>

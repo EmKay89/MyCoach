@@ -4,31 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCoach.Windows"
-        xmlns:views="clr-namespace:MyCoach.Views"
         xmlns:viewmodels="clr-namespace:MyCoach.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="900" MinHeight="550" MinWidth="900">
-    <Window.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="10,10,10,0"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-        </Style>
-    </Window.Resources>
+        Title="MyCoach" Height="550" Width="900" MinHeight="550" MinWidth="900">
     <Window.DataContext>
         <viewmodels:MainViewModel/>
     </Window.DataContext>
     <DockPanel>
-        <StackPanel Width="180" Background="AliceBlue">
-            <Button Content="Training" Command="{Binding UpdateViewCommand}" CommandParameter="Training"/>
-            <Button Content="Übungen" Command="{Binding UpdateViewCommand}" CommandParameter="Exercise"/>
-            <Button Content="Trainingsplan" Command="{Binding UpdateViewCommand}" CommandParameter="TrainingSchedule"/>
-            <Button Content="Einstellungen" Command="{Binding UpdateViewCommand}" CommandParameter="Settings"/>
+        <StackPanel DockPanel.Dock="Left"  Width="180" Background="AliceBlue">
+            <Button Content="Training" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Training"/>
+            <Button Content="Übungen" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Exercise"/>
+            <Button Content="Trainingsplan" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="TrainingSchedule"/>
+            <Button Content="Einstellungen" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Settings"/>
         </StackPanel>
         <Label DockPanel.Dock="Top" Background="LightGray" Height="4"/>
-        <ContentControl Content="{Binding SelectedViewModel}"/>
+        <ContentControl Content="{Binding SelectedViewModel}" Margin="0,0,0,10"/>
     </DockPanel>
 </Window>
