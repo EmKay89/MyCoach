@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyCoach.Views
+namespace MyCoach.View
 {
     /// <summary>
-    /// Interaction logic for TrainingView.xaml
+    /// Interaction logic for SettingsView.xaml
     /// </summary>
-    public partial class TrainingView : UserControl
+    public partial class SettingsView : UserControl
     {
-        public TrainingView()
+        public SettingsView()
         {
             InitializeComponent();
         }

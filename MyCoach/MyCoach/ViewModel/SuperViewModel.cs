@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MyCoach.ViewModels
+namespace MyCoach.ViewModel
 {
     public abstract class SuperViewModel : BaseViewModel
     {

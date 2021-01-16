@@ -61,8 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\UpdateViewCommand.cs" />
-    <Compile Include="Enumerations\ExerciseCategory.cs" />
+    <Compile Include="ViewModel\Commands\UpdateViewCommand.cs" />
+    <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -84,29 +84,29 @@
     <Compile Include="DataHandling\DataTransferObjects\TrainingSchedule.cs" />
     <Compile Include="DataHandling\DataTransferObjects\TrainingScore.cs" />
     <Compile Include="DataHandling\DataManager\XmlFileDataManager.cs" />
-    <Compile Include="Enumerations\ExerciseType.cs" />
-    <Compile Include="Enumerations\ExerciseSchedulingRepetitionPermission.cs" />
-    <Compile Include="Enumerations\Month.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ExerciseViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="ViewModels\SuperViewModel.cs" />
-    <Compile Include="ViewModels\TrainingScheduleViewModel.cs" />
-    <Compile Include="ViewModels\TrainingViewModel.cs" />
-    <Compile Include="Views\ExerciseView.xaml.cs">
+    <Compile Include="Defines\ExerciseType.cs" />
+    <Compile Include="Defines\ExerciseSchedulingRepetitionPermission.cs" />
+    <Compile Include="Defines\Month.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ExerciseViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\SuperViewModel.cs" />
+    <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\TrainingViewModel.cs" />
+    <Compile Include="View\ExerciseView.xaml.cs">
       <DependentUpon>ExerciseView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsView.xaml.cs">
+    <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrainingScheduleView.xaml.cs">
+    <Compile Include="View\TrainingScheduleView.xaml.cs">
       <DependentUpon>TrainingScheduleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TrainingView.xaml.cs">
+    <Compile Include="View\TrainingView.xaml.cs">
       <DependentUpon>TrainingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -137,27 +137,25 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="InternalLogicElements\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\ExerciseView.xaml">
+    <Page Include="View\ExerciseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SettingsView.xaml">
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrainingScheduleView.xaml">
+    <Page Include="View\TrainingScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TrainingView.xaml">
+    <Page Include="View\TrainingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

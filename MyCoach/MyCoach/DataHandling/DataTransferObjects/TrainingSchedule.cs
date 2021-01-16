@@ -1,4 +1,4 @@
-﻿using MyCoach.Enumerations;
+﻿using MyCoach.Defines;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {

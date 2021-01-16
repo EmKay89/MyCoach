@@ -1,4 +1,4 @@
-﻿using MyCoach.ViewModels;
+﻿using MyCoach.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModels
+namespace MyCoach.ViewModel
 {
-    public class SettingsViewModel : BaseViewModel
+    public class TrainingScheduleViewModel : BaseViewModel
     {
     }
 }

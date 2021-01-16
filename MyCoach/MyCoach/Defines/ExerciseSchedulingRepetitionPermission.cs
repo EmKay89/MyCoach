@@ -1,4 +1,4 @@
-﻿namespace MyCoach.Enumerations
+﻿namespace MyCoach.Defines
 {
     public enum ExerciseSchedulingRepetitionPermission
     {

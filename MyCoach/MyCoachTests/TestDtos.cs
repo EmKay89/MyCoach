@@ -1,4 +1,4 @@
-﻿using MyCoach.Enumerations;
+﻿using MyCoach.Defines;
 using MyCoach.DataHandling.DataTransferObjects;
 using System;
 using System.Collections.Generic;

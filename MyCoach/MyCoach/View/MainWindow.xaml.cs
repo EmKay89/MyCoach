@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyCoach.Views
+namespace MyCoach.View
 {
     /// <summary>
-    /// Interaction logic for SettingsView.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class SettingsView : UserControl
+    public partial class MainWindow : Window
     {
-        public SettingsView()
+        public MainWindow()
         {
             InitializeComponent();
         }
