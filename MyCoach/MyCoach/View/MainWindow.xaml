@@ -12,10 +12,26 @@
     </Window.DataContext>
     <DockPanel>
         <StackPanel DockPanel.Dock="Left"  Width="180" Background="AliceBlue">
-            <Button Content="Training" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Training"/>
-            <Button Content="Übungen" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Exercise"/>
-            <Button Content="Trainingsplan" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="TrainingSchedule"/>
-            <Button Content="Einstellungen" Style="{StaticResource MainMenuButton}" Command="{Binding UpdateViewCommand}" CommandParameter="Settings"/>
+            <ToggleButton Content="Training" 
+                          Style="{StaticResource MainMenuButton}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="Training"
+                          IsChecked="{Binding TrainingViewSelected, Mode=OneWay}"/>
+            <ToggleButton Content="Übungen" 
+                          Style="{StaticResource MainMenuButton}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="Exercise"
+                          IsChecked="{Binding ExerciseViewSelected, Mode=OneWay}"/>
+            <ToggleButton Content="Trainingsplan" 
+                          Style="{StaticResource MainMenuButton}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="TrainingSchedule"
+                          IsChecked="{Binding TrainingScheduleViewSelected, Mode=OneWay}"/>
+            <ToggleButton Content="Einstellungen" 
+                          Style="{StaticResource MainMenuButton}" 
+                          Command="{Binding UpdateViewCommand}" 
+                          CommandParameter="Settings"
+                          IsChecked="{Binding SettingsViewSelected, Mode=OneWay}"/>
         </StackPanel>
         <Label DockPanel.Dock="Top" Background="LightGray" Height="4"/>
         <ContentControl Content="{Binding SelectedViewModel}" Margin="0,0,0,10"/>

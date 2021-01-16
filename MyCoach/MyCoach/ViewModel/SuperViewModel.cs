@@ -8,6 +8,10 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
+    /// <summary>
+    ///     Basisklasse für ein übergeordnetes ViewModel, das in seiner Property <see cref="SelectedViewModel"/> ein anderes
+    ///     ViewModel halten kann und dieses über ein <see cref="UpdateViewCommand"/> tauschen kann.
+    /// </summary>
     public abstract class SuperViewModel : BaseViewModel
     {
         private BaseViewModel selectedViewModel;
