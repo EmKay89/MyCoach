@@ -7,9 +7,6 @@
              xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <viewmodels:TrainingViewModel/>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <Style TargetType="Button" x:Key="StartStopButton" BasedOn="{StaticResource DefaultButton}">
             <Setter Property="Content" Value="Start"/>
