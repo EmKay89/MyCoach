@@ -1,6 +1,7 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
+using MyCoach.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,10 +15,13 @@ namespace MyCoach.ViewModel
 {
     public class TrainingViewModel : BaseViewModel
     {
+        private bool trainingActive;
+
         public TrainingViewModel()
         {
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
+            this.StartTrainingCommand = new StartTraingingCommand(this);
         }
 
         public ObservableCollection<Category> Categories { get; }
@@ -62,7 +66,26 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownActive => GetCategoryActive(ExerciseCategory.CoolDown);
 
-        public bool TrainingActive { get; private set; }
+        public StartTraingingCommand StartTrainingCommand { get; }
+
+        public bool TrainingActive
+        { 
+            get => trainingActive;
+
+            set
+            {
+                if (this.trainingActive == value)
+                {
+                    return;
+                }
+
+                this.trainingActive = value;
+                this.TrainingActiveChanged?.Invoke(this, new EventArgs());
+                this.InvokePropertyChanged();
+            }
+        }
+
+        public event EventHandler TrainingActiveChanged;
 
         private bool GetCategoryActive(ExerciseCategory category) => this.Categories?.Where(c => c.ID == (int)category).FirstOrDefault()?.Active ?? false;
 

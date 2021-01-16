@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\StartTraingingCommand.cs" />
     <Compile Include="ViewModel\Commands\UpdateViewCommand.cs" />
     <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">

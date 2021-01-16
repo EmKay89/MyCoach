@@ -10,10 +10,22 @@
     <UserControl.DataContext>
         <viewmodels:TrainingViewModel/>
     </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="StartStopButton" BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="Content" Value="Start"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TrainingActive}" Value="True">
+                    <Setter Property="Content" Value="Stop"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <Button Content="Start"/>
-            <Button Content="Timer"/>
+            <Button Command="{Binding StartTrainingCommand}"
+                    Style="{StaticResource StartStopButton}"/>
+            <Button Content="Timer"
+                    Style="{StaticResource DefaultButton}"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Width="300">
             <StackPanel>
