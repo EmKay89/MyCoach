@@ -19,10 +19,21 @@ namespace MyCoach.Commands
             this.viewModel = viewModel;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
+            if (this.viewModel is MainViewModel mainVm
+                && mainVm.SelectedViewModel is TrainingViewModel trainingVm
+                && trainingVm.TrainingActive)
+            {
+                return false;
+            }
+
             return true;
         }
 

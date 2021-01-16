@@ -62,6 +62,8 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownActive => GetCategoryActive(ExerciseCategory.CoolDown);
 
+        public bool TrainingActive { get; private set; }
+
         private bool GetCategoryActive(ExerciseCategory category) => this.Categories?.Where(c => c.ID == (int)category).FirstOrDefault()?.Active ?? false;
 
         private string GetCategoryName(ExerciseCategory category) => this.Categories?.Where(c => c.ID == (int)category).FirstOrDefault()?.Name;
