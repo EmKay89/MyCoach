@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MyCoach.Commands
+namespace MyCoach.ViewModel.Commands
 {
-    public class UpdateViewCommand : ICommand
+    public class UpdateMainViewCommand : ICommand
     {
-        private SuperViewModel viewModel;
+        private MainViewModel viewModel;
 
-        public UpdateViewCommand(SuperViewModel viewModel)
+        public UpdateMainViewCommand(MainViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -27,9 +27,8 @@ namespace MyCoach.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (this.viewModel is MainViewModel mainVm
-                && mainVm.SelectedViewModel is TrainingViewModel trainingVm
-                && trainingVm.TrainingActive)
+            if (this.viewModel.SelectedViewModel == this.viewModel.TrainingViewModel
+                && this.viewModel.TrainingViewModel.TrainingActive)
             {
                 return false;
             }
@@ -42,16 +41,16 @@ namespace MyCoach.Commands
             switch (parameter.ToString())
             {
                 case "Exercise":
-                    this.viewModel.SelectedViewModel = new ExerciseViewModel();
+                    this.viewModel.SelectedViewModel = viewModel.ExerciseViewModel;
                     break;
                 case "Settings":
-                    this.viewModel.SelectedViewModel = new SettingsViewModel();
+                    this.viewModel.SelectedViewModel = viewModel.SettingsViewModel;
                     break;
                 case "TrainingSchedule":
-                    this.viewModel.SelectedViewModel = new TrainingScheduleViewModel();
+                    this.viewModel.SelectedViewModel = viewModel.TrainingScheduleViewModel;
                     break;
                 case "Training":
-                    this.viewModel.SelectedViewModel = new TrainingViewModel();
+                    this.viewModel.SelectedViewModel = viewModel.TrainingViewModel;
                     break;
             }
         }

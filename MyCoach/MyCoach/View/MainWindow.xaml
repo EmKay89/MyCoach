@@ -14,22 +14,22 @@
         <StackPanel DockPanel.Dock="Left"  Width="180" Background="AliceBlue">
             <ToggleButton Content="Training" 
                           Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateViewCommand}" 
+                          Command="{Binding UpdateMainViewCommand}" 
                           CommandParameter="Training"
                           IsChecked="{Binding TrainingViewSelected, Mode=OneWay}"/>
             <ToggleButton Content="Übungen" 
                           Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateViewCommand}" 
+                          Command="{Binding UpdateMainViewCommand}" 
                           CommandParameter="Exercise"
                           IsChecked="{Binding ExerciseViewSelected, Mode=OneWay}"/>
             <ToggleButton Content="Trainingsplan" 
                           Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateViewCommand}" 
+                          Command="{Binding UpdateMainViewCommand}" 
                           CommandParameter="TrainingSchedule"
                           IsChecked="{Binding TrainingScheduleViewSelected, Mode=OneWay}"/>
             <ToggleButton Content="Einstellungen" 
                           Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateViewCommand}" 
+                          Command="{Binding UpdateMainViewCommand}" 
                           CommandParameter="Settings"
                           IsChecked="{Binding SettingsViewSelected, Mode=OneWay}"/>
         </StackPanel>

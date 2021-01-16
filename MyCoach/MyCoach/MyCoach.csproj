@@ -61,8 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Commands\UpdateMainViewCommand.cs" />
     <Compile Include="ViewModel\Commands\StartTraingingCommand.cs" />
-    <Compile Include="ViewModel\Commands\UpdateViewCommand.cs" />
     <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -92,7 +92,6 @@
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\SuperViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
