@@ -27,5 +27,13 @@
         ///     Gibt an, ob eine Übungskategorie aktiv ist. Nur Übungen einer aktiven Kategorie werden in ein Training eingeplant.
         /// </summary>
         public bool Active { get; set; }
+
+        /// <summary>
+        ///     <see cref="ToString"/> Methode ist überschrieben und gibt den Namen der Kategorie zurück.
+        /// </summary>
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

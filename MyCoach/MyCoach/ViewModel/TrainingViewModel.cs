@@ -15,6 +15,8 @@ namespace MyCoach.ViewModel
 {
     public class TrainingViewModel : BaseViewModel
     {
+        private Category categoryInFocus;
+        private int selectedLapCount = 2;
         private bool trainingActive;
 
         public TrainingViewModel()
@@ -24,7 +26,38 @@ namespace MyCoach.ViewModel
             this.StartTrainingCommand = new StartTraingingCommand(this);
         }
 
+        public List<Category> ActiveCategories
+        {
+            get
+            {
+                List<Category> categories = new List<Category>
+                {
+                    new Category { ID = 0, Name = "- keine Auswahl -" }
+                };
+
+                categories.AddRange(this.Categories.Where(
+                    c => c.Active && c.ID != (int)ExerciseCategory.WarmUp && c.ID != (int)ExerciseCategory.CoolDown));
+
+                return categories;
+            }
+        }
+
         public ObservableCollection<Category> Categories { get; }
+
+        public Category CategoryInFocus
+        {
+            get { return this.categoryInFocus; }
+            set 
+            {
+                if (value == this.categoryInFocus)
+                {
+                    return;
+                }
+
+                this.categoryInFocus = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         public string CategoryWarmUpName => GetCategoryName(ExerciseCategory.WarmUp);
 
@@ -66,11 +99,28 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownActive => GetCategoryActive(ExerciseCategory.CoolDown);
 
+        public ObservableCollection<int> Laps { get; } = new ObservableCollection<int>() { 1, 2, 3, 4 };
+
+        public int SelectedLapCount
+        {
+            get => this.selectedLapCount;
+            set
+            {
+                if (this.selectedLapCount == value)
+                {
+                    return;
+                }
+
+                this.selectedLapCount = value;
+                this.InvokePropertyChanged();
+            }
+        }
+
         public StartTraingingCommand StartTrainingCommand { get; }
 
         public bool TrainingActive
-        { 
-            get => trainingActive;
+        {
+            get => this.trainingActive;
 
             set
             {
@@ -94,6 +144,7 @@ namespace MyCoach.ViewModel
         private void OnCategoriesChanged(object sender, EventArgs e)
         {
             this.InvokePropertiesChanged(
+                "ActiveCategories",
                 "CategoryWarmUpName",
                 "CategoryWarmUpActive",
                 "Category1Name",

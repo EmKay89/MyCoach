@@ -50,9 +50,11 @@
             </StackPanel>
             <StackPanel>
                 <Label Content="Runden" FontWeight="Bold"/>
+                <ComboBox ItemsSource="{Binding Laps}" SelectedValue="{Binding SelectedLapCount}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Fokus" FontWeight="Bold"/>
+                <ComboBox ItemsSource="{Binding ActiveCategories}" SelectedIndex="0" SelectedValue="{Binding SelectedCategoryInFocus, Mode=OneWayToSource}"/>
             </StackPanel>
         </StackPanel>
         <DockPanel>
