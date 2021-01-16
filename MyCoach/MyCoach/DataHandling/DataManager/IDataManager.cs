@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling.DataTransferObjects;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling.DataManager
 {
@@ -13,9 +14,9 @@ namespace MyCoach.DataHandling.DataManager
 
         string ErrorMessageSaving { get; }
 
-        List<T> GetDataTransferObjects<T>() where T : IDataTransferObject;
+        ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject;
         
-        bool SetDataTransferObjects<T>(List<T> dataTransferObjects) where T : IDataTransferObject;
+        bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject;
 
         bool TryExportExerciseSet(string path);
 

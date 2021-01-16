@@ -2,6 +2,7 @@
 using MyCoach.DataHandling.DataTransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling
 {
@@ -37,12 +38,12 @@ namespace MyCoach.DataHandling
             dataManager = manager;
         }
 
-        public List<T> GetDataTransferObjects<T>() where T : IDataTransferObject
+        public ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject
         {
             return dataManager.GetDataTransferObjects<T>();
         }
 
-        public bool SetDataTransferObjects<T>(List<T> dataTransferObjects) where T : IDataTransferObject
+        public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
         {
             return dataManager.SetDataTransferObjects<T>(dataTransferObjects);
         }

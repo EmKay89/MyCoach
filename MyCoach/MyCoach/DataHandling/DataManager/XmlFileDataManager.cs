@@ -2,6 +2,7 @@
 using MyCoach.DataHandling.DataTransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Xml.Serialization;
@@ -17,22 +18,22 @@ namespace MyCoach.DataHandling.DataManager
         /// </summary>
         public string SaveFileDirectory { get; set; }
 
-        public List<T> GetDataTransferObjects<T>() where T : IDataTransferObject
+        public ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject
         {
             switch (typeof(T).Name)
             {
                 case nameof(Category):
-                    return this.Buffer.Categories as List<T>;
+                    return this.Buffer.Categories as ObservableCollection<T>;
                 case nameof(Exercise):
-                    return this.Buffer.Exercises as List<T>;
+                    return this.Buffer.Exercises as ObservableCollection<T>;
                 case nameof(Settings):
-                    return this.Buffer.Settings as List<T>;
+                    return this.Buffer.Settings as ObservableCollection<T>;
                 case nameof(TrainingSchedule):
-                    return this.Buffer.TrainingSchedules as List<T>;
+                    return this.Buffer.TrainingSchedules as ObservableCollection<T>;
                 case nameof(TrainingScore):
-                    return this.Buffer.TrainingScores as List<T>;
+                    return this.Buffer.TrainingScores as ObservableCollection<T>;
                 default:
-                    return new List<T>();
+                    return new ObservableCollection<T>();
             }
         }
 
@@ -42,23 +43,23 @@ namespace MyCoach.DataHandling.DataManager
         /// <typeparam name="T"></typeparam>
         /// <param name="dataTransferObjects"></param>
         /// <returns></returns>
-        public bool SetDataTransferObjects<T>(List<T> dataTransferObjects) where T : IDataTransferObject
+        public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
         {
             switch (dataTransferObjects)
             {
-                case List<Category> list:
+                case ObservableCollection<Category> list:
                     this.Buffer.Categories = list;
                     break;
-                case List<Exercise> list:
+                case ObservableCollection<Exercise> list:
                     this.Buffer.Exercises = list;
                     break;
-                case List<Settings> list:
+                case ObservableCollection<Settings> list:
                     this.Buffer.Settings = list;
                     break;
-                case List<TrainingSchedule> list:
+                case ObservableCollection<TrainingSchedule> list:
                     this.Buffer.TrainingSchedules = list;
                     break;
-                case List<TrainingScore> list:
+                case ObservableCollection<TrainingScore> list:
                     this.Buffer.TrainingScores = list;
                     break;
             }

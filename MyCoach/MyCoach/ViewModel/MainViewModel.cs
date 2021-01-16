@@ -11,6 +11,11 @@ namespace MyCoach.ViewModel
 {
     public class MainViewModel : SuperViewModel
     {
+        public MainViewModel()
+        {
+            App.Current.Windows.OfType<MainWindow>().FirstOrDefault().Loaded += this.OnMainWindowLoaded;
+            base.PropertyChanged += this.OnSelectedViewModelChanged;
+        }
         public bool ExerciseViewSelected => this.SelectedViewModel?.GetType() == typeof(ExerciseViewModel);
 
         public bool SettingsViewSelected => this.SelectedViewModel?.GetType() == typeof(SettingsViewModel);
@@ -19,20 +24,11 @@ namespace MyCoach.ViewModel
 
         public bool TrainingScheduleViewSelected => this.SelectedViewModel?.GetType() == typeof(TrainingScheduleViewModel);
 
-        public MainViewModel()
-        {
-            App.Current.Windows.OfType<MainWindow>().FirstOrDefault().Loaded += this.OnMainWindowLoaded;
-            base.PropertyChanged += this.OnSelectedViewModelChanged;
-        }
-
         private void OnSelectedViewModelChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "SelectedViewModel")
             {
-                this.InvokePropertyChanged("ExerciseViewSelected");
-                this.InvokePropertyChanged("SettingsViewSelected");
-                this.InvokePropertyChanged("TrainingViewSelected");
-                this.InvokePropertyChanged("TrainingScheduleViewSelected");
+                this.InvokePropertiesChanged("ExerciseViewSelected", "SettingsViewSelected", "TrainingViewSelected", "TrainingScheduleViewSelected");
             }
         }
 

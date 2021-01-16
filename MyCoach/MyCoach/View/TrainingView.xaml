@@ -18,6 +18,26 @@
         <StackPanel DockPanel.Dock="Right" Width="300">
             <StackPanel>
                 <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
+                <CheckBox Content="{Binding CategoryWarmUpName}" 
+                          Visibility="{Binding CategoryWarmUpActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category1Name}" 
+                          Visibility="{Binding Category1Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category2Name}" 
+                          Visibility="{Binding Category2Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category3Name}" 
+                          Visibility="{Binding Category3Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category4Name}" 
+                          Visibility="{Binding Category4Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category5Name}" 
+                          Visibility="{Binding Category5Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category6Name}" 
+                          Visibility="{Binding Category6Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category7Name}" 
+                          Visibility="{Binding Category7Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding Category8Name}" 
+                          Visibility="{Binding Category8Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox Content="{Binding CategoryCoolDownName}" 
+                          Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Runden" FontWeight="Bold"/>

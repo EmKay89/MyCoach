@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 {
     public static class DtoUtilities
     {
-        public static bool AreEqual(List<Category> list1, List<Category> list2)
+        public static bool AreEqual(ObservableCollection<Category> list1, ObservableCollection<Category> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -29,7 +30,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(List<Exercise> list1, List<Exercise> list2)
+        public static bool AreEqual(ObservableCollection<Exercise> list1, ObservableCollection<Exercise> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -54,7 +55,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(List<Settings> list1, List<Settings> list2)
+        public static bool AreEqual(ObservableCollection<Settings> list1, ObservableCollection<Settings> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -80,7 +81,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(List<TrainingSchedule> list1, List<TrainingSchedule> list2)
+        public static bool AreEqual(ObservableCollection<TrainingSchedule> list1, ObservableCollection<TrainingSchedule> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -100,7 +101,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(List<TrainingScore> list1, List<TrainingScore> list2)
+        public static bool AreEqual(ObservableCollection<TrainingScore> list1, ObservableCollection<TrainingScore> list2)
         {
             if (list1.Count != list2.Count)
             {

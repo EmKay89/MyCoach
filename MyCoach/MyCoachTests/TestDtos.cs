@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace MyCoachTests
 {
@@ -13,11 +14,11 @@ namespace MyCoachTests
     /// </summary>
     public static class TestDtos
     {
-        public static List<Category> Categories
+        public static ObservableCollection<Category> Categories
         {
             get
             {
-                var categories = new List<Category>();
+                var categories = new ObservableCollection<Category>();
                 categories.Add(new Category { ID = 0, Name = "Erwärmung", Count = 3, Active = true });
                 categories.Add(new Category { ID = 1, Name = "Arme", Active = true });
                 categories.Add(new Category { ID = 2, Name = "Dehnung", Count = 0, Active = false });
@@ -25,11 +26,11 @@ namespace MyCoachTests
             }
         }
 
-        public static List<Exercise> Exercises
+        public static ObservableCollection<Exercise> Exercises
         {
             get
             {
-                var exercices = new List<Exercise>();
+                var exercices = new ObservableCollection<Exercise>();
                 exercices.Add(new Exercise
                 {
                     Type = ExerciseType.WarmUp,
@@ -70,11 +71,11 @@ namespace MyCoachTests
             }
         }
 
-        public static List<Settings> Settings
+        public static ObservableCollection<Settings> Settings
         {
             get
             {
-                var settings = new List<Settings>();
+                var settings = new ObservableCollection<Settings>();
                 settings.Add(new Settings
                 {
                     Permission = ExerciseSchedulingRepetitionPermission.NotPreferred,
@@ -92,11 +93,11 @@ namespace MyCoachTests
             }
         }
 
-        public static List<TrainingSchedule> TrainingSchedules
+        public static ObservableCollection<TrainingSchedule> TrainingSchedules
         {
             get
             {
-                var schedules = new List<TrainingSchedule>();
+                var schedules = new ObservableCollection<TrainingSchedule>();
                 schedules.Add(new TrainingSchedule
                 {
                     StartMonth = Month.April,
@@ -108,11 +109,11 @@ namespace MyCoachTests
             }
         }
 
-        public static List<TrainingScore> TrainingScores
+        public static ObservableCollection<TrainingScore> TrainingScores
         {
             get
             {
-                var scores = new List<TrainingScore>();
+                var scores = new ObservableCollection<TrainingScore>();
                 scores.Add(new TrainingScore
                 {
                     Month = Month.März,

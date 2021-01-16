@@ -12,9 +12,17 @@ namespace MyCoach.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected void InvokePropertiesChanged(params string[] properties)
+        {
+            foreach (var property in properties)
+            {
+                this.InvokePropertyChanged(property);
+            }
+        }
+
         protected void InvokePropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

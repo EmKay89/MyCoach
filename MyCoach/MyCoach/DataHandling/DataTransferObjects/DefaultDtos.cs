@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,29 +12,29 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// </summary>
     public static class DefaultDtos
     {
-        public static List<Category> Categories
+        public static ObservableCollection<Category> Categories
         {
-            get => new List<Category>() { new Category { ID = 1, Name = "Arme", Count = 0, Active = true } };
+            get => new ObservableCollection<Category>() { new Category { ID = 1, Name = "Arme", Count = 0, Active = true } };
         }
 
-        public static List<Exercise> Exercises
+        public static ObservableCollection<Exercise> Exercises
         {
-            get => new List<Exercise>();
+            get => new ObservableCollection<Exercise>();
         }
 
-        public static List<Settings> Settings
+        public static ObservableCollection<Settings> Settings
         {
-            get => new List<Settings>();
+            get => new ObservableCollection<Settings>();
         }
 
-        public static List<TrainingSchedule> TrainingSchedules
+        public static ObservableCollection<TrainingSchedule> TrainingSchedules
         {
-            get => new List<TrainingSchedule>();
+            get => new ObservableCollection<TrainingSchedule>();
         }
 
-        public static List<TrainingScore> TrainingScores
+        public static ObservableCollection<TrainingScore> TrainingScores
         {
-            get => new List<TrainingScore>();
+            get => new ObservableCollection<TrainingScore>();
         }
 
         public static DtoCollection Collection

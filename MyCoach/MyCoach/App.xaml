@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:MyCoach"
              xmlns:views="clr-namespace:MyCoach.View"
              xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
+             xmlns:converter="clr-namespace:MyCoach.ViewModel.TypeConverter"
              StartupUri="View\MainWindow.xaml">
     <Application.Resources>
         
@@ -39,5 +40,8 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="LightGray"/>
         </Style>
+
+        <!-- ViewModel - View links -->
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Application.Resources>
 </Application>

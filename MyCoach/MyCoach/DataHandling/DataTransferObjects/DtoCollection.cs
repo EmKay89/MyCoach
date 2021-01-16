@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling.DataTransferObjects;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
@@ -8,10 +9,10 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// </summary>
     public class DtoCollection
     {
-        public List<Category> Categories { get; set; }
-        public List<Exercise> Exercises { get; set; }
-        public List<Settings> Settings { get; set; }
-        public List<TrainingSchedule> TrainingSchedules { get; set; }
-        public List<TrainingScore> TrainingScores { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Exercise> Exercises { get; set; }
+        public ObservableCollection<Settings> Settings { get; set; }
+        public ObservableCollection<TrainingSchedule> TrainingSchedules { get; set; }
+        public ObservableCollection<TrainingScore> TrainingScores { get; set; }
     }
 }

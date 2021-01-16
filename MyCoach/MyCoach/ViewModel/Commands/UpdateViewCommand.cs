@@ -1,4 +1,6 @@
-﻿using MyCoach.ViewModel;
+﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

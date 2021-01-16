@@ -5,6 +5,7 @@ using MyCoach.DataHandling.DataManager;
 using MyCoach.DataHandling.DataTransferObjects;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MyCoachTests.DataHandling
 {
@@ -12,13 +13,13 @@ namespace MyCoachTests.DataHandling
     public class DataInterfaceTests
     {
         private IDataManager dataManager;
-        private List<Exercise> exerciseList;
+        private ObservableCollection<Exercise> exerciseList;
         private DataInterface dataInterface;
 
         [TestInitialize]
         public void Init()
         {
-            this.exerciseList = new List<Exercise>();
+            this.exerciseList = new ObservableCollection<Exercise>();
             this.dataManager = Mock.Of<IDataManager>(manager => manager.TryExportExerciseSet("path") == true &&
                                                                 manager.TryImportExerciseSet("path") == true &&
                                                                 manager.GetDataTransferObjects<Exercise>() == this.exerciseList &&

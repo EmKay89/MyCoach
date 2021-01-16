@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// </summary>
     public class ExerciseSet
     {
-        public List<Category> Categories { get; set; }
-        public List<Exercise> Exercises { get; set; }
+        public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Exercise> Exercises { get; set; }
     }
 }
