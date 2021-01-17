@@ -29,45 +29,66 @@
                 <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
                 <CheckBox Content="{Binding CategoryWarmUpName}"
                           IsChecked="{Binding CategoryWarmUpEnabledForTraining}"
-                          Visibility="{Binding CategoryWarmUpActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding CategoryWarmUpActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category1Name}" 
                           IsChecked="{Binding Category1EnabledForTraining}"
-                          Visibility="{Binding Category1Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category1Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category2Name}"
                           IsChecked="{Binding Category2EnabledForTraining}"
-                          Visibility="{Binding Category2Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category2Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category3Name}" 
                           IsChecked="{Binding Category3EnabledForTraining}"
-                          Visibility="{Binding Category3Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category3Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category4Name}"
                           IsChecked="{Binding Category4EnabledForTraining}"
-                          Visibility="{Binding Category4Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category4Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category5Name}"
                           IsChecked="{Binding Category5EnabledForTraining}"
-                          Visibility="{Binding Category5Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category5Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category6Name}"
                           IsChecked="{Binding Category6EnabledForTraining}"
-                          Visibility="{Binding Category6Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category6Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category7Name}"
                           IsChecked="{Binding Category7EnabledForTraining}"
-                          Visibility="{Binding Category7Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category7Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding Category8Name}"
                           IsChecked="{Binding Category8EnabledForTraining}"
-                          Visibility="{Binding Category8Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding Category8Active, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
                 <CheckBox Content="{Binding CategoryCoolDownName}" 
                           IsChecked="{Binding CategoryCoolDownEnabledForTraining}"
-                          Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Runden" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding Laps}"
-                          SelectedValue="{Binding SelectedLapCount}"/>
+                          SelectedValue="{Binding SelectedLapCount}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Fokus" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding ActiveCategories}"
                           SelectedIndex="0"
-                          SelectedValue="{Binding CategoryInFocus}"/>
+                          SelectedValue="{Binding CategoryInFocus}"
+                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                <Label Content="Zusätzliche Übungen für die Kategorie im Fokus:"/>
+                <RadioButton Content="keine"
+                          IsEnabled="{Binding TrainingSettingsFocusEnabled}"/>
+                <RadioButton Content="eine"
+                          IsEnabled="{Binding TrainingSettingsFocusEnabled}"/>
+                <RadioButton Content="zwei"
+                          IsEnabled="{Binding TrainingSettingsFocusEnabled}"/>
+                <Label Content="Multiplikator für Wiederholungsanzahl:"/>
+                <TextBox IsEnabled="{Binding TrainingSettingsFocusEnabled}"/>
             </StackPanel>
         </StackPanel>
         <DockPanel>

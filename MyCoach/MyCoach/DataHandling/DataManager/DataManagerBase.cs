@@ -77,7 +77,7 @@ namespace MyCoach.DataHandling.DataManager
                     this.XmlFileReaderWriter.WriteXmlToFile(writer.ToString(), path);
                     success = true;
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     // ToDo: Fehlerfälle erweitern
                     this.ErrorMessageExerciseSetExport = Constants.ExportError;

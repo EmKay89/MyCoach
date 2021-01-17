@@ -55,7 +55,9 @@ namespace MyCoach.ViewModel
                 }
 
                 this.categoryInFocus = value;
-                this.InvokePropertyChanged();
+                this.InvokePropertiesChanged(
+                    "CategoryInFocus",
+                    "TrainingSettingsFocusEnabled");
             }
         }
 
@@ -148,12 +150,16 @@ namespace MyCoach.ViewModel
                 }
 
                 this.trainingActive = value;
-                this.TrainingActiveChanged?.Invoke(this, new EventArgs());
-                this.InvokePropertyChanged();
+                this.InvokePropertiesChanged(
+                    "TrainingActive",
+                    "TrainingSettingsEnabled",
+                    "TrainingSettingsFocusEnabled");
             }
         }
 
-        public event EventHandler TrainingActiveChanged;
+        public bool TrainingSettingsEnabled => !this.TrainingActive;
+
+        public bool TrainingSettingsFocusEnabled => this.TrainingSettingsEnabled && this.CategoryInFocus.ToString() != "- keine Auswahl -";
 
         private bool GetCategoryActive(ExerciseCategory category) => this.Categories?.Where(c => c.ID == category).FirstOrDefault()?.Active ?? false;
 
