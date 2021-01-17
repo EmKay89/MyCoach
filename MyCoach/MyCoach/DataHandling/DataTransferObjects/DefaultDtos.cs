@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.Defines;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     {
         public static ObservableCollection<Category> Categories
         {
-            get => new ObservableCollection<Category>() { new Category { ID = 1, Name = "Arme", Count = 0, Active = true } };
+            get => new ObservableCollection<Category>() { new Category { ID = ExerciseCategory.Category1, Name = "Arme", Count = 0, Active = true, Type = ExerciseType.Training } };
         }
 
         public static ObservableCollection<Exercise> Exercises

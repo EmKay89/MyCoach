@@ -15,7 +15,7 @@ namespace MyCoach.ViewModel
 {
     public class TrainingViewModel : BaseViewModel
     {
-        private Category categoryInFocus;
+        private Category categoryInFocus = new Category { ID = 0, Name = "- keine Auswahl -" };
         private int selectedLapCount = 2;
         private bool trainingActive;
 
@@ -36,7 +36,7 @@ namespace MyCoach.ViewModel
                 };
 
                 categories.AddRange(this.Categories.Where(
-                    c => c.Active && c.ID != (int)ExerciseCategory.WarmUp && c.ID != (int)ExerciseCategory.CoolDown));
+                    c => c.Active && c.Type == ExerciseType.Training));
 
                 return categories;
             }
@@ -63,37 +63,55 @@ namespace MyCoach.ViewModel
 
         public bool CategoryWarmUpActive => GetCategoryActive(ExerciseCategory.WarmUp);
 
+        public bool CategoryWarmUpEnabledForTraining { get; set; } = true;
+
         public string Category1Name => GetCategoryName(ExerciseCategory.Category1);
 
         public bool Category1Active => GetCategoryActive(ExerciseCategory.Category1);
+
+        public bool Category1EnabledForTraining { get; set; } = true;
 
         public string Category2Name => GetCategoryName(ExerciseCategory.Category2);
 
         public bool Category2Active => GetCategoryActive(ExerciseCategory.Category2);
 
+        public bool Category2EnabledForTraining { get; set; } = true;
+
         public string Category3Name => GetCategoryName(ExerciseCategory.Category3);
 
         public bool Category3Active => GetCategoryActive(ExerciseCategory.Category3);
+
+        public bool Category3EnabledForTraining { get; set; } = true;
 
         public string Category4Name => GetCategoryName(ExerciseCategory.Category4);
 
         public bool Category4Active => GetCategoryActive(ExerciseCategory.Category4);
 
+        public bool Category4EnabledForTraining { get; set; } = true;
+
         public string Category5Name => GetCategoryName(ExerciseCategory.Category5);
 
         public bool Category5Active => GetCategoryActive(ExerciseCategory.Category5);
+
+        public bool Category5EnabledForTraining { get; set; } = true;
 
         public string Category6Name => GetCategoryName(ExerciseCategory.Category6);
 
         public bool Category6Active => GetCategoryActive(ExerciseCategory.Category6);
 
+        public bool Category6EnabledForTraining { get; set; } = true;
+
         public string Category7Name => GetCategoryName(ExerciseCategory.Category7);
 
         public bool Category7Active => GetCategoryActive(ExerciseCategory.Category7);
 
+        public bool Category7EnabledForTraining { get; set; } = true;
+
         public string Category8Name => GetCategoryName(ExerciseCategory.Category8);
 
         public bool Category8Active => GetCategoryActive(ExerciseCategory.Category8);
+
+        public bool Category8EnabledForTraining { get; set; } = true;
 
         public string CategoryCoolDownName => GetCategoryName(ExerciseCategory.CoolDown);
 
@@ -137,9 +155,9 @@ namespace MyCoach.ViewModel
 
         public event EventHandler TrainingActiveChanged;
 
-        private bool GetCategoryActive(ExerciseCategory category) => this.Categories?.Where(c => c.ID == (int)category).FirstOrDefault()?.Active ?? false;
+        private bool GetCategoryActive(ExerciseCategory category) => this.Categories?.Where(c => c.ID == category).FirstOrDefault()?.Active ?? false;
 
-        private string GetCategoryName(ExerciseCategory category) => this.Categories?.Where(c => c.ID == (int)category).FirstOrDefault()?.Name;
+        private string GetCategoryName(ExerciseCategory category) => this.Categories?.Where(c => c.ID == category).FirstOrDefault()?.Name;
 
         private void OnCategoriesChanged(object sender, EventArgs e)
         {

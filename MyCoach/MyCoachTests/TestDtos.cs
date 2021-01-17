@@ -19,9 +19,9 @@ namespace MyCoachTests
             get
             {
                 var categories = new ObservableCollection<Category>();
-                categories.Add(new Category { ID = 0, Name = "Erwärmung", Count = 3, Active = true });
-                categories.Add(new Category { ID = 1, Name = "Arme", Active = true });
-                categories.Add(new Category { ID = 2, Name = "Dehnung", Count = 0, Active = false });
+                categories.Add(new Category { ID = ExerciseCategory.WarmUp, Name = "Erwärmung", Count = 3, Active = true, Type = ExerciseType.WarmUp });
+                categories.Add(new Category { ID = ExerciseCategory.Category1, Name = "Arme", Active = true, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnung", Count = 0, Active = false, Type = ExerciseType.CoolDown });
                 return categories;
             }
         }
@@ -33,11 +33,10 @@ namespace MyCoachTests
                 var exercices = new ObservableCollection<Exercise>();
                 exercices.Add(new Exercise
                 {
-                    Type = ExerciseType.WarmUp,
-                    Category = 0,
+                    Category = ExerciseCategory.WarmUp,
                     Count = 10,
                     Name = "Armkreisen",
-                    RelatedCategory = 1,
+                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 0,
                     Info = "https://www.youtube.com/watch?v=Gl6g9CZTZL0",
                     Active = true
@@ -45,11 +44,10 @@ namespace MyCoachTests
 
                 exercices.Add(new Exercise
                 {
-                    Type = ExerciseType.Training,
-                    Category = 1,
+                    Category = ExerciseCategory.Category1,
                     Count = 10,
                     Name = "Hantelheben 10kg",
-                    RelatedCategory = 1,
+                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 10,
                     Info = "Hier könnte Ihre Testbeschreibung stehen ... ",
                     Active = true
@@ -57,11 +55,10 @@ namespace MyCoachTests
 
                 exercices.Add(new Exercise
                 {
-                    Type = ExerciseType.CoolDown,
-                    Category = 9,
+                    Category = ExerciseCategory.CoolDown,
                     Count = 10,
                     Name = "Arme strecken",
-                    RelatedCategory = 1,
+                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 0,
                     Info = "Die Arme in die Höhe!",
                     Active = false

@@ -1,4 +1,6 @@
-﻿namespace MyCoach.DataHandling.DataTransferObjects
+﻿using MyCoach.Defines;
+
+namespace MyCoach.DataHandling.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert eine Übungskategorie. Übungen können in Typen unterteilt werden, die Typen wiederum in Kategorien. Die Typen
@@ -9,12 +11,17 @@
         /// <summary>
         ///     Ruft den eindeutigen Identifizierer der Übungskategorie auf oder legt ihn fest.
         /// </summary>
-        public ushort ID { get; set; }
+        public ExerciseCategory ID { get; set; }
 
         /// <summary>
         ///     Ruft den Namen der Übungskategorie auf oder legt ihn fest.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        ///     Ruft den Übungstyp auf oder legt ihn fest.
+        /// </summary>
+        public ExerciseType Type { get; set; }
 
         /// <summary>
         ///     Ruft die Anzahl der Übungen der Übungskategorie in einem Training auf oder legt sie fest. Dieser Wert ist nur

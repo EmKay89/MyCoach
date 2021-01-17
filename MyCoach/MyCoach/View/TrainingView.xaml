@@ -27,34 +27,47 @@
         <StackPanel DockPanel.Dock="Right" Width="300">
             <StackPanel>
                 <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
-                <CheckBox Content="{Binding CategoryWarmUpName}" 
+                <CheckBox Content="{Binding CategoryWarmUpName}"
+                          IsChecked="{Binding CategoryWarmUpEnabledForTraining}"
                           Visibility="{Binding CategoryWarmUpActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 <CheckBox Content="{Binding Category1Name}" 
+                          IsChecked="{Binding Category1EnabledForTraining}"
                           Visibility="{Binding Category1Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category2Name}" 
+                <CheckBox Content="{Binding Category2Name}"
+                          IsChecked="{Binding Category2EnabledForTraining}"
                           Visibility="{Binding Category2Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 <CheckBox Content="{Binding Category3Name}" 
+                          IsChecked="{Binding Category3EnabledForTraining}"
                           Visibility="{Binding Category3Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category4Name}" 
+                <CheckBox Content="{Binding Category4Name}"
+                          IsChecked="{Binding Category4EnabledForTraining}"
                           Visibility="{Binding Category4Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category5Name}" 
+                <CheckBox Content="{Binding Category5Name}"
+                          IsChecked="{Binding Category5EnabledForTraining}"
                           Visibility="{Binding Category5Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category6Name}" 
+                <CheckBox Content="{Binding Category6Name}"
+                          IsChecked="{Binding Category6EnabledForTraining}"
                           Visibility="{Binding Category6Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category7Name}" 
+                <CheckBox Content="{Binding Category7Name}"
+                          IsChecked="{Binding Category7EnabledForTraining}"
                           Visibility="{Binding Category7Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                <CheckBox Content="{Binding Category8Name}" 
+                <CheckBox Content="{Binding Category8Name}"
+                          IsChecked="{Binding Category8EnabledForTraining}"
                           Visibility="{Binding Category8Active, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 <CheckBox Content="{Binding CategoryCoolDownName}" 
+                          IsChecked="{Binding CategoryCoolDownEnabledForTraining}"
                           Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Runden" FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding Laps}" SelectedValue="{Binding SelectedLapCount}"/>
+                <ComboBox ItemsSource="{Binding Laps}"
+                          SelectedValue="{Binding SelectedLapCount}"/>
             </StackPanel>
             <StackPanel>
                 <Label Content="Fokus" FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding ActiveCategories}" SelectedIndex="0" SelectedValue="{Binding SelectedCategoryInFocus, Mode=OneWayToSource}"/>
+                <ComboBox ItemsSource="{Binding ActiveCategories}"
+                          SelectedIndex="0"
+                          SelectedValue="{Binding CategoryInFocus}"/>
             </StackPanel>
         </StackPanel>
         <DockPanel>
