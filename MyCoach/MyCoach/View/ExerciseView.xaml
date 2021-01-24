@@ -6,16 +6,179 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel>
+            <Label Content="Übungskategorien benennen"
+                   FontWeight="Bold"/>
+            <StackPanel>
+                <StackPanel Margin="10,10,10,0">
+                    <Label Content="Aufwärmübungen"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameWarmUp" Width="300"/>
+                        <CheckBox x:Name="cbxWarmUpActive" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="10,10,10,0">
+                    <Label Content="Trainingsübungen"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise1" Width="300"/>
+                        <CheckBox x:Name="cbxExercise1Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise2" Width="300"/>
+                        <CheckBox x:Name="cbxExercise2Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise3" Width="300"/>
+                        <CheckBox x:Name="cbxExercise3Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise4" Width="300"/>
+                        <CheckBox x:Name="cbxExercise4Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise5" Width="300"/>
+                        <CheckBox x:Name="cbxExercise5Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise6" Width="300"/>
+                        <CheckBox x:Name="cbxExercise6Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise7" Width="300"/>
+                        <CheckBox x:Name="cbxExercise7Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameExercise8" Width="300"/>
+                        <CheckBox x:Name="cbxExercise8Active" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Margin="10,10,10,0">
+                    <Label Content="Abwärmübungen"/>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Bezeichnung"/>
+                        <TextBox x:Name="txtNameCoolDown" Width="300"/>
+                        <CheckBox Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0" FlowDirection="RightToLeft">
+                            <CheckBox.Resources>
+                                <Style TargetType="{x:Type Path}">
+                                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                                </Style>
+                            </CheckBox.Resources>
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
             <Button Content="Speichern"
+                Style="{StaticResource DefaultButton}"
+                HorizontalAlignment="Left"/>
+            <Label Content="Anzahl Auf- und Abwärmübungen"
+               FontWeight="Bold"/>
+            <TextBlock Text="Hier können Sie die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
+                       TextWrapping="WrapWithOverflow"/>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="Aufwärmübungen"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+                <TextBox Width="70"
+                         Grid.Row="0"
+                         Grid.Column="1"/>
+                <Label Content="Abwärmübungen"
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+                <TextBox Width="70"
+                         Grid.Row="1"
+                         Grid.Column="1"/>
+            </Grid>
+            <Button Content="Speichern"
+                Style="{StaticResource DefaultButton}"
+                HorizontalAlignment="Left"/>
+            <Label Content="Übungen bearbeiten"
+               FontWeight="Bold"/>
+            <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
+            <ComboBox/>
+            <DataGrid/>
+            <Button Content="Speichern"
+                Style="{StaticResource DefaultButton}"
+                HorizontalAlignment="Left"/>
+            <Label Content="Übungssatz importieren oder exportieren"
+               FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Export"
                     Style="{StaticResource DefaultButton}"/>
-            <Button Content="Export"
+                <Button Content="Import"
                     Style="{StaticResource DefaultButton}"/>
-            <Button Content="Import"
-                    Style="{StaticResource DefaultButton}"/>
+            </StackPanel>
         </StackPanel>
-        <Label Content="Übungskategorien bearbeiten"/>            
-        <Label Content="Übungen bearbeiten"/>
-    </StackPanel>
+    </ScrollViewer>
 </UserControl>
