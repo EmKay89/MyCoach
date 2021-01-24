@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace MyCoach.View
         public TrainingView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var timerWindow = App.Current.Windows.OfType<TimerWindow>().FirstOrDefault();
+
+            if (timerWindow != null)
+            {
+                timerWindow.Focus();
+                return;
+            }
+
+            new TimerWindow().Show();
         }
     }
 }

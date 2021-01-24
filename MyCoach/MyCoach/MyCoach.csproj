@@ -101,6 +101,9 @@
     <Compile Include="View\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TimerWindow.xaml.cs">
+      <DependentUpon>TimerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TrainingScheduleView.xaml.cs">
       <DependentUpon>TrainingScheduleView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
     <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TimerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\TrainingScheduleView.xaml">
       <SubType>Designer</SubType>

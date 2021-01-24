@@ -22,7 +22,7 @@
             <Button Command="{Binding StartTrainingCommand}"
                     Style="{StaticResource StartStopButton}"/>
             <Button Content="Timer"
-                    Style="{StaticResource DefaultButton}"/>
+                    Style="{StaticResource DefaultButton}" Click="Button_Click"/>
         </StackPanel>
         <StackPanel DockPanel.Dock="Right" Width="300">
             <StackPanel>
