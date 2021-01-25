@@ -16,7 +16,7 @@
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <Label Content="Bezeichnung"/>
                         <TextBox Text="{Binding CategoryWarmUpName}" Width="300"/>
-                        <CheckBox IsChecked="{Binding CategoryWarmActive}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
+                        <CheckBox IsChecked="{Binding CategoryWarmUpActive}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
                                 <Style TargetType="{x:Type Path}">
                                     <Setter Property="FlowDirection" Value="LeftToRight"/>

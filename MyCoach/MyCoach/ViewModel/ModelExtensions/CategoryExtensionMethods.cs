@@ -28,7 +28,7 @@ namespace MyCoach.ViewModel.ModelExtensions
 
             if (selectedCategory == null)
             {
-                categories.Add(new Category { ID = category, Active = value });
+                categories.Add(new Category { ID = category, Active = value, Type = GetTypeFromCategory(category) });
                 return;
             }
 
@@ -46,11 +46,24 @@ namespace MyCoach.ViewModel.ModelExtensions
 
             if (selectedCategory == null)
             {
-                categories.Add(new Category { ID = category, Name = value });
+                categories.Add(new Category { ID = category, Name = value, Type = GetTypeFromCategory(category) });
                 return;
             }
 
             selectedCategory.Name = value;
+        }
+
+        private static ExerciseType GetTypeFromCategory(ExerciseCategory category)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.WarmUp:
+                    return ExerciseType.WarmUp;
+                case ExerciseCategory.CoolDown:
+                    return ExerciseType.CoolDown;
+                default:
+                    return ExerciseType.Training;
+            }
         }
     }
 }

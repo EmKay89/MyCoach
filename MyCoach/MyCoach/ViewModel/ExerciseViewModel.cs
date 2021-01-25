@@ -22,7 +22,7 @@ namespace MyCoach.ViewModel
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
 
-            this.SaveCategoryCommand = new SaveCategoriesCommand(this);
+            this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
 
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
@@ -348,7 +348,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public ICommand SaveCategoryCommand { get; }
+        public ICommand SaveCategoriesCommand { get; }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

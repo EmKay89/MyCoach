@@ -120,6 +120,8 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownActive => this.Categories.IsActive(ExerciseCategory.CoolDown);
 
+        public bool CategoryCoolDownEnabledForTraining { get; set; } = true;
+
         public ObservableCollection<int> Laps { get; } = new ObservableCollection<int>() { 1, 2, 3, 4 };
 
         public int SelectedLapCount
