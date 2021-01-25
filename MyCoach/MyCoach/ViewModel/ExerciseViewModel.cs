@@ -1,11 +1,13 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
+using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.ModelExtensions;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
@@ -19,6 +21,8 @@ namespace MyCoach.ViewModel
         {
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+
+            this.SaveCategoryCommand = new SaveCategoriesCommand(this);
 
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
@@ -343,6 +347,8 @@ namespace MyCoach.ViewModel
                 this.InvokePropertyChanged();
             }
         }
+
+        public ICommand SaveCategoryCommand { get; }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
