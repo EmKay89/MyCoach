@@ -20,6 +20,7 @@ namespace MyCoach.ViewModel
             this.LoadCategoryBuffer();
 
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
+            this.SaveExercisesCommand = new SaveExercisesCommand(this);
 
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
@@ -384,6 +385,8 @@ namespace MyCoach.ViewModel
         }
 
         public ICommand SaveCategoriesCommand { get; }
+
+        public ICommand SaveExercisesCommand { get; }
 
         public void LoadCategoryBuffer()
         {
