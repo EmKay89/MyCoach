@@ -11,6 +11,9 @@ namespace MyCoach.ViewModel.ModelExtensions
 {
     public static class CategoryExtensionMethods
     {
+        public static ushort GetCount(this ObservableCollection<Category> categories, ExerciseCategory category)
+            => categories?.Where(c => c.ID == category).FirstOrDefault()?.Count ?? 1;
+
         public static string GetName(this ObservableCollection<Category> categories, ExerciseCategory category)
             => categories?.Where(c => c.ID == category).FirstOrDefault()?.Name ?? string.Empty;
 
@@ -33,6 +36,24 @@ namespace MyCoach.ViewModel.ModelExtensions
             }
 
             selectedCategory.Active = value;
+        }
+
+        public static void SetCount(this ObservableCollection<Category> categories, ExerciseCategory category, ushort value)
+        {
+            if (categories == null)
+            {
+                return;
+            }
+
+            var selectedCategory = categories.Where(c => c.ID == category).FirstOrDefault();
+
+            if (selectedCategory == null)
+            {
+                categories.Add(new Category { ID = category, Count = value, Type = GetTypeFromCategory(category) });
+                return;
+            }
+
+            selectedCategory.Count = value;
         }
 
         public static void SetName(this ObservableCollection<Category> categories, ExerciseCategory category, string value)

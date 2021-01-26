@@ -13,10 +13,6 @@ namespace MyCoach.ViewModel
 {
     public class ExerciseViewModel : BaseViewModel
     {
-        public ObservableCollection<Category> Categories;
-
-        public ObservableCollection<Exercise> Exercises;
-
         public ExerciseViewModel()
         {
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
@@ -27,6 +23,12 @@ namespace MyCoach.ViewModel
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
         }
+
+        public ObservableCollection<Category> Categories;
+
+        public ObservableCollection<Exercise> Exercises;
+
+        public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         public bool CategoryWarmUpActive
         {
@@ -344,6 +346,38 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Categories.SetName(ExerciseCategory.CoolDown, value);
+                this.InvokePropertyChanged();
+            }
+        }
+
+        public ushort CategoryWarmUpCount
+        {
+            get => this.Categories.GetCount(ExerciseCategory.WarmUp);
+
+            set
+            {
+                if (this.Categories.GetCount(ExerciseCategory.WarmUp) == value)
+                {
+                    return;
+                }
+
+                this.Categories.SetCount(ExerciseCategory.WarmUp, value);
+                this.InvokePropertyChanged();
+            }
+        }
+
+        public ushort CategoryCoolDownCount
+        {
+            get => this.Categories.GetCount(ExerciseCategory.CoolDown);
+
+            set
+            {
+                if (this.Categories.GetCount(ExerciseCategory.CoolDown) == value)
+                {
+                    return;
+                }
+
+                this.Categories.SetCount(ExerciseCategory.CoolDown, value);
                 this.InvokePropertyChanged();
             }
         }

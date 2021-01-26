@@ -151,15 +151,17 @@
                 <Label Content="Aufwärmübungen"
                        Grid.Row="0"
                        Grid.Column="0"/>
-                <TextBox Width="70"
-                         Grid.Row="0"
-                         Grid.Column="1"/>
+                <ComboBox ItemsSource="{Binding NumbersOneToTen}"
+                          SelectedValue="{Binding CategoryWarmUpCount}"
+                          Grid.Row="0"
+                          Grid.Column="1"/>
                 <Label Content="Abwärmübungen"
                        Grid.Row="1"
                        Grid.Column="0"/>
-                <TextBox Width="70"
-                         Grid.Row="1"
-                         Grid.Column="1"/>
+                <ComboBox ItemsSource="{Binding NumbersOneToTen}"
+                          SelectedValue="{Binding CategoryCoolDownCount}"
+                          Grid.Row="1"
+                          Grid.Column="1"/>
             </Grid>
             <Button Content="Speichern"
                     Command="{Binding SaveCategoriesCommand}"
