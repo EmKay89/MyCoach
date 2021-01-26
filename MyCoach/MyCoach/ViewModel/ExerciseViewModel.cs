@@ -18,6 +18,7 @@ namespace MyCoach.ViewModel
             this.Categories = new ObservableCollection<Category>();
             this.Exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
             this.LoadCategoryBuffer();
+            this.LoadExerciseBuffer();
 
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
@@ -395,6 +396,16 @@ namespace MyCoach.ViewModel
             foreach (var category in savedCategories)
             {
                 this.Categories.Add((Category)category.Clone());
+            }
+        }
+
+        public void LoadExerciseBuffer()
+        {
+            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+
+            foreach (var exercise in savedExercises)
+            {
+                this.Exercises.Add((Exercise)exercise.Clone());
             }
         }
 
