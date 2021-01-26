@@ -15,8 +15,9 @@ namespace MyCoach.ViewModel
     {
         public ExerciseViewModel()
         {
-            this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.Categories = new ObservableCollection<Category>();
             this.Exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            this.LoadCategoryBuffer();
 
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
 
@@ -24,9 +25,9 @@ namespace MyCoach.ViewModel
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
         }
 
-        public ObservableCollection<Category> Categories;
+        public ObservableCollection<Category> Categories { get; }
 
-        public ObservableCollection<Exercise> Exercises;
+        public ObservableCollection<Exercise> Exercises { get; }
 
         public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
@@ -383,6 +384,16 @@ namespace MyCoach.ViewModel
         }
 
         public ICommand SaveCategoriesCommand { get; }
+
+        public void LoadCategoryBuffer()
+        {
+            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+
+            foreach (var category in savedCategories)
+            {
+                this.Categories.Add((Category)category.Clone());
+            }
+        }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {

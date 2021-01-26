@@ -7,7 +7,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     ///     den monatsbezogenen Punktezielen für die jeweiligen Kategorien zusammen, welche in der Klasse TrainingScore
     ///     gespeichert sind.
     /// </summary>
-    public class TrainingSchedule : IDataTransferObject
+    public class TrainingSchedule : DtoBase
     {
         /// <summary>
         ///     Ruft den Startmonat des Trainingsplans auf, oder legt ihn fest.

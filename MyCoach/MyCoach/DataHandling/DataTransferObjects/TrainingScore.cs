@@ -5,7 +5,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// <summary>
     ///     Repräsentiert Istwerte und Ziele für das Erreichen von Trainingspunkten der jeweiligen Übungskategorien bezogen auf einen Monat.
     /// </summary>
-    public class TrainingScore : IDataTransferObject
+    public class TrainingScore : DtoBase
     {
         /// <summary>
         ///     Ruft den Bezugsmonat auf, oder legt ihn fest.

@@ -27,7 +27,14 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            DataInterface.GetInstance().SetDataTransferObjects<Category>(exerciseViewModel.Categories);
+            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            savedCategories.Clear();
+            foreach (var category in this.exerciseViewModel.Categories)
+            {
+                savedCategories.Add((Category)category.Clone());
+            }
+            
+            DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
         }
     }
 }

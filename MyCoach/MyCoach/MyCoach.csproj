@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
     <Compile Include="ViewModel\Commands\SaveCategoriesCommand.cs" />
     <Compile Include="ViewModel\Commands\UpdateMainViewCommand.cs" />
     <Compile Include="ViewModel\Commands\StartTraingingCommand.cs" />

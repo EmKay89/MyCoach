@@ -5,7 +5,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// <summary>
     ///     Repräsentiert einen Einstellungssatz. 
     /// </summary>
-    public class Settings : IDataTransferObject
+    public class Settings : DtoBase
     {
         /// <summary>
         ///     Ruft die Erlaubnis, eine Übung mehrfach in ein Training einzuplanen, auf, oder legt sie fest.

@@ -6,7 +6,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     ///     Repräsentiert eine Übungskategorie. Übungen können in Typen unterteilt werden, die Typen wiederum in Kategorien. Die Typen
     ///     WarmUp und CoolDown haben jeweils nur eine gleichnamige Kategorie.
     /// </summary>
-    public class Category : IDataTransferObject
+    public class Category : DtoBase
     {
         /// <summary>
         ///     Ruft den eindeutigen Identifizierer der Übungskategorie auf oder legt ihn fest.
