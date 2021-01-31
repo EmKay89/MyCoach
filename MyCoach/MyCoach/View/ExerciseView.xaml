@@ -170,7 +170,8 @@
             <Label Content="Übungen bearbeiten"
                    FontWeight="Bold"/>
             <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
-            <ComboBox/>
+            <ComboBox ItemsSource="{Binding Categories}"
+                      SelectedValue="{Binding SelectedCategoryForExerciseDisplay}"/>
             <DataGrid/>
             <Button Content="Speichern"
                     Style="{StaticResource DefaultButton}"

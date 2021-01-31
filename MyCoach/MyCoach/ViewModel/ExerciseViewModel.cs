@@ -13,6 +13,8 @@ namespace MyCoach.ViewModel
 {
     public class ExerciseViewModel : BaseViewModel
     {
+        private Category selectedCategoryForExerciseDisplay;
+
         public ExerciseViewModel()
         {
             this.Categories = new ObservableCollection<Category>();
@@ -25,6 +27,8 @@ namespace MyCoach.ViewModel
 
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
+
+            this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
         }
 
         public ObservableCollection<Category> Categories { get; }
@@ -388,6 +392,22 @@ namespace MyCoach.ViewModel
         public ICommand SaveCategoriesCommand { get; }
 
         public ICommand SaveExercisesCommand { get; }
+
+        public Category SelectedCategoryForExerciseDisplay
+        {
+            get => this.selectedCategoryForExerciseDisplay;
+
+            set
+            {
+                if (this.selectedCategoryForExerciseDisplay == value)
+                {
+                    return;
+                }
+
+                this.selectedCategoryForExerciseDisplay = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         public void LoadCategoryBuffer()
         {
