@@ -29,6 +29,7 @@ namespace MyCoach.ViewModel
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
 
             this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
+            this.Exercises.Add(new Exercise { Name = "Hallo", Active = true, Count = 15, RelatedCategory = ExerciseCategory.Category1, Scores = 10, Info = "Hier könnte ihre Beschreibung stehen" });
         }
 
         public ObservableCollection<Category> Categories { get; }
