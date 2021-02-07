@@ -29,7 +29,7 @@
                 <StackPanel Margin="10,10,10,0">
                     <Label Content="Trainingsübungen"/>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 1"/>
                         <TextBox Text="{Binding Category1Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category1Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -40,7 +40,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 2"/>
                         <TextBox Text="{Binding Category2Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category2Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -51,7 +51,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 3"/>
                         <TextBox Text="{Binding Category3Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category3Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -62,7 +62,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 4"/>
                         <TextBox Text="{Binding Category4Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category4Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -73,7 +73,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 5"/>
                         <TextBox Text="{Binding Category5Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category5Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -84,7 +84,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 6"/>
                         <TextBox Text="{Binding Category6Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category6Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -95,7 +95,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 7"/>
                         <TextBox Text="{Binding Category7Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category7Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -106,7 +106,7 @@
                         </CheckBox>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Bezeichnung"/>
+                        <Label Content="Kategory 8"/>
                         <TextBox Text="{Binding Category8Name}" Width="300"/>
                         <CheckBox IsChecked="{Binding Category8Active}" Content="Aktiv" VerticalAlignment="Center" Margin="10,0,0,0"  FlowDirection="RightToLeft">
                             <CheckBox.Resources>
@@ -182,7 +182,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Content="Speichern"
+            <Button Content="Hinzufügen"
                     Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             <Label Content="Übungssatz importieren oder exportieren"
