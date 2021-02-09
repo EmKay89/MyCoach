@@ -6,7 +6,9 @@ using MyCoach.ViewModel.ModelExtensions;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace MyCoach.ViewModel
@@ -14,27 +16,40 @@ namespace MyCoach.ViewModel
     public class ExerciseViewModel : BaseViewModel
     {
         private Category selectedCategoryForExerciseDisplay;
+        private CollectionViewSource exercisesFilteredByCategorySource;
 
         public ExerciseViewModel()
         {
             this.Categories = new ObservableCollection<Category>();
-            this.Exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            this.Exercises = new ObservableCollection<Exercise>();
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
 
+            this.AddExerciseCommand = new AddExerciseCommand(this);
+            this.RemoveExerciseCommand = new RemoveExerciseCommand(this);
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
-
+            
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
 
             this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
-            this.Exercises.Add(new Exercise { Name = "Hallo", Active = true, Count = 15, RelatedCategory = ExerciseCategory.Category1, Scores = 10, Info = "Hier könnte ihre Beschreibung stehen" });
+            this.exercisesFilteredByCategorySource = new CollectionViewSource();
+            this.exercisesFilteredByCategorySource.Source = this.Exercises;
+            this.exercisesFilteredByCategorySource.Filter += this.FilterExercises;
         }
 
         public ObservableCollection<Category> Categories { get; }
 
         public ObservableCollection<Exercise> Exercises { get; }
+
+        public ICollectionView ExercisesFilteredByCategory
+        {
+            get
+            {
+                return this.exercisesFilteredByCategorySource?.View;
+            }
+        }
 
         public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
@@ -390,6 +405,10 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public ICommand AddExerciseCommand { get; }
+
+        public ICommand RemoveExerciseCommand { get; }
+
         public ICommand SaveCategoriesCommand { get; }
 
         public ICommand SaveExercisesCommand { get; }
@@ -407,12 +426,14 @@ namespace MyCoach.ViewModel
 
                 this.selectedCategoryForExerciseDisplay = value;
                 this.InvokePropertyChanged();
+                this.ExercisesFilteredByCategory?.Refresh();
             }
         }
 
         public void LoadCategoryBuffer()
         {
             var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.Categories.Clear();
 
             foreach (var category in savedCategories)
             {
@@ -423,6 +444,7 @@ namespace MyCoach.ViewModel
         public void LoadExerciseBuffer()
         {
             var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            this.Exercises.Clear();
 
             foreach (var exercise in savedExercises)
             {
@@ -438,6 +460,13 @@ namespace MyCoach.ViewModel
         private void OnExercisesChanges(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.InvokePropertyChanged("Exercises");
+        }
+
+        private void FilterExercises(object sender, FilterEventArgs e)
+        {
+            var exercise = e.Item as Exercise;
+
+            e.Accepted = exercise != null && exercise.Category == this.SelectedCategoryForExerciseDisplay.ID ? true : false;
         }
     }
 }

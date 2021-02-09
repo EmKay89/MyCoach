@@ -173,18 +173,27 @@
             <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
             <ComboBox ItemsSource="{Binding Categories}"
                       SelectedValue="{Binding SelectedCategoryForExerciseDisplay}"/>
-            <ItemsControl ItemsSource="{Binding Exercises}">
+            <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <uc:ExerciseUserControl Exercise="{Binding}"/>
+                            <uc:ExerciseUserControl Exercise="{Binding}"
+                                                    RemoveExercise="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ExerciseView},
+                                                                             Path=DataContext.RemoveExerciseCommand}"/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Content="Hinzufügen"
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Speichern"
+                    Style="{StaticResource DefaultButton}"
+                    Command="{Binding SaveExercisesCommand}"
+                    HorizontalAlignment="Left"/>
+                <Button Content="Hinzufügen"
+                    Command="{Binding AddExerciseCommand}"
                     Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
+            </StackPanel>
             <Label Content="Übungssatz importieren oder exportieren"
                FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">

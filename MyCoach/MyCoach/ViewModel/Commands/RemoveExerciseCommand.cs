@@ -1,5 +1,4 @@
-﻿using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.DataHandling.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +8,11 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel.Commands
 {
-    public class SaveExercisesCommand : ICommand
+    public class RemoveExerciseCommand : ICommand
     {
         private ExerciseViewModel exerciseViewModel;
 
-        public SaveExercisesCommand(ExerciseViewModel vm)
+        public RemoveExerciseCommand(ExerciseViewModel vm)
         {
             this.exerciseViewModel = vm;
         }
@@ -27,14 +26,12 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
-            savedExercises.Clear();
-            foreach (var exercise in this.exerciseViewModel.Exercises)
+            var exercise = parameter as Exercise;
+
+            if (exercise != null)
             {
-                savedExercises.Add((Exercise)exercise.Clone());
+                this.exerciseViewModel.Exercises.Remove(exercise);
             }
-            
-            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
         }
     }
 }

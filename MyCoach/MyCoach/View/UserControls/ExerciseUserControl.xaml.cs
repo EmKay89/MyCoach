@@ -36,6 +36,16 @@ namespace MyCoach.View.UserControls
         public static readonly DependencyProperty ExerciseProperty =
             DependencyProperty.Register("Exercise", typeof(Exercise), typeof(ExerciseUserControl), new PropertyMetadata(null, SetValues));
 
+        public ICommand RemoveExercise
+        {
+            get { return (ICommand)GetValue(RemoveExerciseProperty); }
+            set { SetValue(RemoveExerciseProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RemoveExercise.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RemoveExerciseProperty =
+            DependencyProperty.Register("RemoveExercise", typeof(ICommand), typeof(ExerciseUserControl), new PropertyMetadata(null));
+
         private static void SetValues(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             ExerciseUserControl exerciseUserControl = d as ExerciseUserControl;

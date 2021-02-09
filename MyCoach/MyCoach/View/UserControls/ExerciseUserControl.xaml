@@ -75,7 +75,10 @@
                 <Button Grid.Row="3"
                         Grid.Column="3"
                         Style="{StaticResource DefaultButton}"
-                        Content="Löschen"/>
+                        Content="Löschen"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ExerciseUserControl},
+                                          Path=RemoveExercise}"
+                        CommandParameter="{Binding}"/>                        
                 <TextBox Grid.Row="4"
                          Grid.Column="0"
                          Grid.ColumnSpan="4"
