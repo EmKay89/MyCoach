@@ -187,6 +187,10 @@
                     Style="{StaticResource DefaultButton}"
                     Command="{Binding SaveExercisesCommand}"
                     HorizontalAlignment="Left"/>
+                <Button Content="Verwerfen"
+                    Style="{StaticResource DefaultButton}"
+                    Command="{Binding ResetExercisesCommand}"
+                    HorizontalAlignment="Left"/>
                 <Button Content="Hinzufügen"
                     Command="{Binding AddExerciseCommand}"
                     Style="{StaticResource DefaultButton}"

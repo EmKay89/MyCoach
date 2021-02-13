@@ -25,6 +25,7 @@ namespace MyCoach.ViewModel
             this.LoadExerciseBuffer();
 
             this.AddExerciseCommand = new AddExerciseCommand(this);
+            this.ResetExercisesCommand = new ResetExercisesCommand(this);
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
             
@@ -395,9 +396,11 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool HasUnsavedChanges { get; set; }
+        public bool HasUnsavedExercises { get; set; }
 
         public ICommand AddExerciseCommand { get; }
+
+        public ICommand ResetExercisesCommand { get; }
 
         public ICommand SaveCategoriesCommand { get; }
 
@@ -417,17 +420,6 @@ namespace MyCoach.ViewModel
                 this.selectedCategoryForExerciseDisplay = value;
                 this.InvokePropertyChanged();
                 this.RefreshExercisesFilteredByCategory();
-            }
-        }
-
-        private void LoadCategoryBuffer()
-        {
-            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
-            this.Categories.Clear();
-
-            foreach (var category in savedCategories)
-            {
-                this.Categories.Add((Category)category.Clone());
             }
         }
 
@@ -452,7 +444,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void LoadExerciseBuffer()
+        public void LoadExerciseBuffer()
         {
             var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
             this.Exercises.Clear();
@@ -460,6 +452,19 @@ namespace MyCoach.ViewModel
             foreach (var exercise in savedExercises)
             {
                 this.Exercises.Add((Exercise)exercise.Clone());
+            }
+
+            this.RefreshExercisesFilteredByCategory();
+        }
+
+        private void LoadCategoryBuffer()
+        {
+            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.Categories.Clear();
+
+            foreach (var category in savedCategories)
+            {
+                this.Categories.Add((Category)category.Clone());
             }
         }
 

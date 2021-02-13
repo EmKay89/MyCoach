@@ -34,7 +34,7 @@ namespace MyCoach.ViewModel.Commands
             this.exerciseViewModel.Exercises.Add(
                 new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.exerciseViewModel.SelectedCategoryForExerciseDisplay.ID });
             this.exerciseViewModel.RefreshExercisesFilteredByCategory();
-            this.exerciseViewModel.HasUnsavedChanges = true;
+            this.exerciseViewModel.HasUnsavedExercises = true;
         }
     }
 }

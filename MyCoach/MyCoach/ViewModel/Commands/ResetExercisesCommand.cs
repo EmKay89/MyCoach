@@ -9,11 +9,11 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel.Commands
 {
-    public class SaveExercisesCommand : ICommand
+    public class ResetExercisesCommand : ICommand
     {
         private ExercisesViewModel exerciseViewModel;
 
-        public SaveExercisesCommand(ExercisesViewModel vm)
+        public ResetExercisesCommand(ExercisesViewModel vm)
         {
             this.exerciseViewModel = vm;
         }
@@ -31,14 +31,7 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
-            savedExercises.Clear();
-            foreach (var exercise in this.exerciseViewModel.Exercises)
-            {
-                savedExercises.Add((Exercise)exercise.Clone());
-            }
-            
-            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            this.exerciseViewModel.LoadExerciseBuffer();
             this.exerciseViewModel.HasUnsavedExercises = false;
         }
     }
