@@ -18,11 +18,15 @@ namespace MyCoach.ViewModel.Commands
             this.exerciseViewModel = vm;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return this.exerciseViewModel.HasUnsavedChanges;
         }
 
         public void Execute(object parameter)
@@ -35,6 +39,7 @@ namespace MyCoach.ViewModel.Commands
             }
             
             DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            this.exerciseViewModel.HasUnsavedChanges = false;
         }
     }
 }

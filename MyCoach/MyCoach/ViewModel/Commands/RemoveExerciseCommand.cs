@@ -32,6 +32,7 @@ namespace MyCoach.ViewModel.Commands
             {
                 this.exerciseViewModel.Parent.Exercises.Remove(exercise);
                 this.exerciseViewModel.Parent.RefreshExercisesFilteredByCategory();
+                this.exerciseViewModel.Parent.HasUnsavedChanges = true;
             }
         }
     }

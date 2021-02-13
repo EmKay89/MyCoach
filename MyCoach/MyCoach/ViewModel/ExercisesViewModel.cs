@@ -395,6 +395,8 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool HasUnsavedChanges { get; set; }
+
         public ICommand AddExerciseCommand { get; }
 
         public ICommand SaveCategoriesCommand { get; }

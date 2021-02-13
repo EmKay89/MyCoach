@@ -15,10 +15,8 @@ namespace MyCoach.ViewModel
         public ExerciseViewModel()
         {
             this.RemoveExerciseCommand = new RemoveExerciseCommand(this);
-            this.PropertyChanged += delegate { this.HasUnsavedChanges = true; };
+            this.PropertyChanged += delegate { this.Parent.HasUnsavedChanges = true; };
         }
-
-        public bool HasUnsavedChanges { get; set; }
 
         public Exercise Exercise { get; set; }
 
