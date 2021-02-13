@@ -10,9 +10,9 @@ namespace MyCoach.ViewModel.Commands
 {
     public class AddExerciseCommand : ICommand
     {
-        private ExerciseViewModel exerciseViewModel;
+        private ExercisesViewModel exerciseViewModel;
 
-        public AddExerciseCommand(ExerciseViewModel vm)
+        public AddExerciseCommand(ExercisesViewModel vm)
         {
             this.exerciseViewModel = vm;
         }

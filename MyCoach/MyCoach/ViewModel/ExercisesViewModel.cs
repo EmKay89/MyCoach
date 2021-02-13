@@ -13,12 +13,12 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
-    public class ExerciseViewModel : BaseViewModel
+    public class ExercisesViewModel : BaseViewModel
     {
         private Category selectedCategoryForExerciseDisplay;
         private CollectionViewSource exercisesFilteredByCategorySource;
 
-        public ExerciseViewModel()
+        public ExercisesViewModel()
         {
             this.Categories = new ObservableCollection<Category>();
             this.Exercises = new ObservableCollection<Exercise>();

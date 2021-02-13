@@ -11,9 +11,9 @@ namespace MyCoach.ViewModel.Commands
 {
     public class SaveExercisesCommand : ICommand
     {
-        private ExerciseViewModel exerciseViewModel;
+        private ExercisesViewModel exerciseViewModel;
 
-        public SaveExercisesCommand(ExerciseViewModel vm)
+        public SaveExercisesCommand(ExercisesViewModel vm)
         {
             this.exerciseViewModel = vm;
         }

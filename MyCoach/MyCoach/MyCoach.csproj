@@ -94,7 +94,7 @@
     <Compile Include="Defines\ExerciseSchedulingRepetitionPermission.cs" />
     <Compile Include="Defines\Month.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\ExerciseViewModel.cs" />
+    <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModelExtensions\CategoryExtensionMethods.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />

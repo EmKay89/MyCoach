@@ -17,7 +17,7 @@ namespace MyCoach.ViewModel
 
         public MainViewModel()
         {
-            this.ExerciseViewModel = new ExerciseViewModel();
+            this.ExerciseViewModel = new ExercisesViewModel();
             this.SettingsViewModel = new SettingsViewModel();
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
             this.TrainingViewModel = new TrainingViewModel();
@@ -57,7 +57,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public ExerciseViewModel ExerciseViewModel { get; }
+        public ExercisesViewModel ExerciseViewModel { get; }
 
         public SettingsViewModel SettingsViewModel { get; }
 

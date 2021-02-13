@@ -10,9 +10,9 @@ namespace MyCoach.ViewModel.Commands
 {
     public class RemoveExerciseCommand : ICommand
     {
-        private ExerciseViewModel exerciseViewModel;
+        private ExercisesViewModel exerciseViewModel;
 
-        public RemoveExerciseCommand(ExerciseViewModel vm)
+        public RemoveExerciseCommand(ExercisesViewModel vm)
         {
             this.exerciseViewModel = vm;
         }
