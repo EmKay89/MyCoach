@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MyCoach.View
 {
     /// <summary>
-    /// Interaction logic for ExerciseView.xaml
+    /// Interaction logic for ExercisesView.xaml
     /// </summary>
-    public partial class ExerciseView : UserControl
+    public partial class ExercisesView : UserControl
     {
-        public ExerciseView()
+        public ExercisesView()
         {
             InitializeComponent();
         }

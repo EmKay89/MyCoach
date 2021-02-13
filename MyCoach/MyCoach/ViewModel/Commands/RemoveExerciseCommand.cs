@@ -10,9 +10,9 @@ namespace MyCoach.ViewModel.Commands
 {
     public class RemoveExerciseCommand : ICommand
     {
-        private ExercisesViewModel exerciseViewModel;
+        private ExerciseViewModel exerciseViewModel;
 
-        public RemoveExerciseCommand(ExercisesViewModel vm)
+        public RemoveExerciseCommand(ExerciseViewModel vm)
         {
             this.exerciseViewModel = vm;
         }
@@ -30,7 +30,8 @@ namespace MyCoach.ViewModel.Commands
 
             if (exercise != null)
             {
-                this.exerciseViewModel.Exercises.Remove(exercise);
+                this.exerciseViewModel.Parent.Exercises.Remove(exercise);
+                this.exerciseViewModel.Parent.RefreshExercisesFilteredByCategory();
             }
         }
     }

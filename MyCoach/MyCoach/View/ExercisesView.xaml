@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MyCoach.View.ExerciseView"
+﻿<UserControl x:Class="MyCoach.View.ExercisesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -177,9 +177,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <uc:ExerciseUserControl Exercise="{Binding}"
-                                                    RemoveExercise="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ExerciseView},
-                                                                             Path=DataContext.RemoveExerciseCommand}"/>
+                            <uc:ExerciseUserControl/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -1,4 +1,5 @@
 ﻿using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,36 +25,6 @@ namespace MyCoach.View.UserControls
         public ExerciseUserControl()
         {
             InitializeComponent();
-        }
-
-        public Exercise Exercise
-        {
-            get { return (Exercise)GetValue(ExerciseProperty); }
-            set { SetValue(ExerciseProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Exercise.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ExerciseProperty =
-            DependencyProperty.Register("Exercise", typeof(Exercise), typeof(ExerciseUserControl), new PropertyMetadata(null, SetValues));
-
-        public ICommand RemoveExercise
-        {
-            get { return (ICommand)GetValue(RemoveExerciseProperty); }
-            set { SetValue(RemoveExerciseProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for RemoveExercise.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty RemoveExerciseProperty =
-            DependencyProperty.Register("RemoveExercise", typeof(ICommand), typeof(ExerciseUserControl), new PropertyMetadata(null));
-
-        private static void SetValues(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ExerciseUserControl exerciseUserControl = d as ExerciseUserControl;
-
-            if (exerciseUserControl != null)
-            {
-                exerciseUserControl.DataContext = exerciseUserControl.Exercise;
-            }
         }
     }
 }

@@ -16,7 +16,6 @@ namespace MyCoach.ViewModel
     public class ExercisesViewModel : BaseViewModel
     {
         private Category selectedCategoryForExerciseDisplay;
-        private CollectionViewSource exercisesFilteredByCategorySource;
 
         public ExercisesViewModel()
         {
@@ -26,30 +25,21 @@ namespace MyCoach.ViewModel
             this.LoadExerciseBuffer();
 
             this.AddExerciseCommand = new AddExerciseCommand(this);
-            this.RemoveExerciseCommand = new RemoveExerciseCommand(this);
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
             
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
 
+            this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
             this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
-            this.exercisesFilteredByCategorySource = new CollectionViewSource();
-            this.exercisesFilteredByCategorySource.Source = this.Exercises;
-            this.exercisesFilteredByCategorySource.Filter += this.FilterExercises;
         }
 
         public ObservableCollection<Category> Categories { get; }
 
         public ObservableCollection<Exercise> Exercises { get; }
 
-        public ICollectionView ExercisesFilteredByCategory
-        {
-            get
-            {
-                return this.exercisesFilteredByCategorySource?.View;
-            }
-        }
+        public ObservableCollection<ExerciseViewModel> ExercisesFilteredByCategory { get; set; }
 
         public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
@@ -407,8 +397,6 @@ namespace MyCoach.ViewModel
 
         public ICommand AddExerciseCommand { get; }
 
-        public ICommand RemoveExerciseCommand { get; }
-
         public ICommand SaveCategoriesCommand { get; }
 
         public ICommand SaveExercisesCommand { get; }
@@ -426,11 +414,11 @@ namespace MyCoach.ViewModel
 
                 this.selectedCategoryForExerciseDisplay = value;
                 this.InvokePropertyChanged();
-                this.ExercisesFilteredByCategory?.Refresh();
+                this.RefreshExercisesFilteredByCategory();
             }
         }
 
-        public void LoadCategoryBuffer()
+        private void LoadCategoryBuffer()
         {
             var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Categories.Clear();
@@ -441,7 +429,28 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public void LoadExerciseBuffer()
+        public void RefreshExercisesFilteredByCategory()
+        {
+            if (this.ExercisesFilteredByCategory == null)
+            {
+                return;
+            }
+
+            this.ExercisesFilteredByCategory.Clear();
+            var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategoryForExerciseDisplay.ID);
+
+            foreach (var exercise in exercises)
+            {
+                this.ExercisesFilteredByCategory.Add(
+                    new ExerciseViewModel
+                    {
+                        Exercise = exercise,
+                        Parent = this
+                    });
+            }
+        }
+
+        private void LoadExerciseBuffer()
         {
             var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
             this.Exercises.Clear();
