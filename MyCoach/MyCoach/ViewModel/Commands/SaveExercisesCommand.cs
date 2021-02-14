@@ -11,11 +11,11 @@ namespace MyCoach.ViewModel.Commands
 {
     public class SaveExercisesCommand : ICommand
     {
-        private ExercisesViewModel exerciseViewModel;
+        private ExercisesViewModel exercisesViewModel;
 
         public SaveExercisesCommand(ExercisesViewModel vm)
         {
-            this.exerciseViewModel = vm;
+            this.exercisesViewModel = vm;
         }
 
         public event EventHandler CanExecuteChanged
@@ -26,12 +26,12 @@ namespace MyCoach.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return this.exerciseViewModel.HasUnsavedExercises;
+            return this.exercisesViewModel.HasUnsavedExercises;
         }
 
         public void Execute(object parameter)
         {
-            this.exerciseViewModel.SaveExercises();
+            this.exercisesViewModel.SaveExercises();
         }
     }
 }

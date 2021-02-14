@@ -11,11 +11,11 @@ namespace MyCoach.ViewModel.Commands
 {
     public class ResetCategoriesCommand : ICommand
     {
-        private ExercisesViewModel exerciseViewModel;
+        private ExercisesViewModel exercisesViewModel;
 
         public ResetCategoriesCommand(ExercisesViewModel vm)
         {
-            this.exerciseViewModel = vm;
+            this.exercisesViewModel = vm;
         }
 
         public event EventHandler CanExecuteChanged
@@ -26,12 +26,12 @@ namespace MyCoach.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return this.exerciseViewModel.HasUnsavedCategories;
+            return this.exercisesViewModel.HasUnsavedCategories;
         }
 
         public void Execute(object parameter)
         {
-            this.exerciseViewModel.LoadCategoryBuffer();
+            this.exercisesViewModel.LoadCategoryBuffer();
         }
     }
 }

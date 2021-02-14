@@ -10,18 +10,22 @@ namespace MyCoach.ViewModel.Commands
 {
     public class AddExerciseCommand : ICommand
     {
-        private ExercisesViewModel exerciseViewModel;
+        private ExercisesViewModel exercisesViewModel;
 
         public AddExerciseCommand(ExercisesViewModel vm)
         {
-            this.exerciseViewModel = vm;
+            this.exercisesViewModel = vm;
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public bool CanExecute(object parameter)
         {
-            if (this.exerciseViewModel.SelectedCategory == null)
+            if (this.exercisesViewModel.SelectedCategory == null)
             {
                 return false;
             }
@@ -31,10 +35,10 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            this.exerciseViewModel.Exercises.Add(
-                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.exerciseViewModel.SelectedCategory.ID });
-            this.exerciseViewModel.RefreshExercisesFilteredByCategory();
-            this.exerciseViewModel.HasUnsavedExercises = true;
+            this.exercisesViewModel.Exercises.Add(
+                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.exercisesViewModel.SelectedCategory.ID });
+            this.exercisesViewModel.RefreshExercisesFilteredByCategory();
+            this.exercisesViewModel.HasUnsavedExercises = true;
         }
     }
 }
