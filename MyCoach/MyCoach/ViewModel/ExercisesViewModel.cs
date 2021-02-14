@@ -447,6 +447,16 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public void ImportExercises()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExportExercises()
+        {
+            throw new NotImplementedException();
+        }
+
         public void RefreshExercisesFilteredByCategory()
         {
             if (this.ExercisesFilteredByCategory == null)

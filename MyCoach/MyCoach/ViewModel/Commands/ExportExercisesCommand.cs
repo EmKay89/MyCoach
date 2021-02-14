@@ -9,13 +9,13 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel.Commands
 {
-    public class SetDefaultSettingsCommand : ICommand
+    public class ExportExercisesCommand : ICommand
     {
-        private SettingsViewModel settingsViewModel;
+        private ExercisesViewModel exercisesViewModel;
 
-        public SetDefaultSettingsCommand(SettingsViewModel vm)
+        public ExportExercisesCommand(ExercisesViewModel vm)
         {
-            this.settingsViewModel = vm;
+            this.exercisesViewModel = vm;
         }
 
         public event EventHandler CanExecuteChanged
@@ -31,7 +31,7 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            this.settingsViewModel.SetDefaultSettings();
+            this.exercisesViewModel.ExportExercises();
         }
     }
 }
