@@ -32,7 +32,6 @@ namespace MyCoach.ViewModel.Commands
         public void Execute(object parameter)
         {
             this.exerciseViewModel.LoadExerciseBuffer();
-            this.exerciseViewModel.HasUnsavedExercises = false;
         }
     }
 }

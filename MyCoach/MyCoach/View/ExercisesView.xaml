@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
-            <Label Content="Übungskategorien benennen"
+            <Label Content="Übungskategorien bearbeiten"
                    FontWeight="Bold"/>
             <StackPanel>
                 <StackPanel Margin="10,10,10,0">
@@ -132,12 +132,6 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Button Content="Speichern"
-                    Command="{Binding SaveCategoriesCommand}"
-                    Style="{StaticResource DefaultButton}"
-                    HorizontalAlignment="Left"/>
-            <Label Content="Anzahl Auf- und Abwärmübungen"
-               FontWeight="Bold"/>
             <TextBlock Text="Hier können Sie die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
                        TextWrapping="WrapWithOverflow"/>
             <Grid Margin="5">
@@ -164,14 +158,20 @@
                           Grid.Row="1"
                           Grid.Column="1"/>
             </Grid>
-            <Button Content="Speichern"
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Speichern"
                     Command="{Binding SaveCategoriesCommand}"
                     Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
+                <Button Content="Verwerfen"
+                    Command="{Binding ResetCategoriesCommand}"
+                    Style="{StaticResource DefaultButton}"
+                    HorizontalAlignment="Left"/>
+            </StackPanel>
             <Label Content="Übungen bearbeiten"
                    FontWeight="Bold"/>
             <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
-            <ComboBox ItemsSource="{Binding Categories}"
+            <ComboBox ItemsSource="{Binding Categories, Mode=TwoWay}"
                       SelectedValue="{Binding SelectedCategoryForExerciseDisplay}"/>
             <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}">
                 <ItemsControl.ItemTemplate>

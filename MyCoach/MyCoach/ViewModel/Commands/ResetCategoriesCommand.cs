@@ -9,11 +9,11 @@ using System.Windows.Input;
 
 namespace MyCoach.ViewModel.Commands
 {
-    public class SaveCategoriesCommand : ICommand
+    public class ResetCategoriesCommand : ICommand
     {
         private ExercisesViewModel exerciseViewModel;
 
-        public SaveCategoriesCommand(ExercisesViewModel vm)
+        public ResetCategoriesCommand(ExercisesViewModel vm)
         {
             this.exerciseViewModel = vm;
         }
@@ -31,7 +31,7 @@ namespace MyCoach.ViewModel.Commands
 
         public void Execute(object parameter)
         {
-            this.exerciseViewModel.SaveCategories();
+            this.exerciseViewModel.LoadCategoryBuffer();
         }
     }
 }

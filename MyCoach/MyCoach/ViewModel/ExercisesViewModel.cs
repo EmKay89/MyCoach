@@ -25,6 +25,7 @@ namespace MyCoach.ViewModel
             this.LoadExerciseBuffer();
 
             this.AddExerciseCommand = new AddExerciseCommand(this);
+            this.ResetCategoriesCommand = new ResetCategoriesCommand(this);
             this.ResetExercisesCommand = new ResetExercisesCommand(this);
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
@@ -36,7 +37,7 @@ namespace MyCoach.ViewModel
             this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
         }
 
-        public ObservableCollection<Category> Categories { get; }
+        public ObservableCollection<Category> Categories { get; set; }
 
         public ObservableCollection<Exercise> Exercises { get; }
 
@@ -57,6 +58,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.WarmUp, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -73,6 +75,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.WarmUp, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -89,6 +92,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category1, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -105,6 +109,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category1, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -121,6 +126,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category2, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -137,6 +143,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category2, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -153,6 +160,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category3, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -169,6 +177,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category3, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -185,6 +194,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category4, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -201,6 +211,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category4, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -217,6 +228,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category5, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -233,6 +245,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category5, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -249,6 +262,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category6, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -265,6 +279,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category6, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -281,6 +296,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category7, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -297,6 +313,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category7, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -313,6 +330,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.Category8, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -329,6 +347,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.Category8, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -345,6 +364,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetActive(ExerciseCategory.CoolDown, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -361,6 +381,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetName(ExerciseCategory.CoolDown, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -377,6 +398,7 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetCount(ExerciseCategory.WarmUp, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
 
@@ -393,12 +415,17 @@ namespace MyCoach.ViewModel
 
                 this.Categories.SetCount(ExerciseCategory.CoolDown, value);
                 this.InvokePropertyChanged();
+                this.HasUnsavedCategories = true;
             }
         }
+
+        public bool HasUnsavedCategories { get; set; }
 
         public bool HasUnsavedExercises { get; set; }
 
         public ICommand AddExerciseCommand { get; }
+
+        public ICommand ResetCategoriesCommand { get; }
 
         public ICommand ResetExercisesCommand { get; }
 
@@ -412,7 +439,7 @@ namespace MyCoach.ViewModel
 
             set
             {
-                if (this.selectedCategoryForExerciseDisplay == value)
+                if (value == this.selectedCategoryForExerciseDisplay || value == null)
                 {
                     return;
                 }
@@ -431,7 +458,7 @@ namespace MyCoach.ViewModel
             }
 
             this.ExercisesFilteredByCategory.Clear();
-            var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategoryForExerciseDisplay.ID);
+            var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategoryForExerciseDisplay?.ID);
 
             foreach (var exercise in exercises)
             {
@@ -455,9 +482,10 @@ namespace MyCoach.ViewModel
             }
 
             this.RefreshExercisesFilteredByCategory();
+            this.HasUnsavedExercises = false;
         }
 
-        private void LoadCategoryBuffer()
+        public void LoadCategoryBuffer()
         {
             var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Categories.Clear();
@@ -466,23 +494,67 @@ namespace MyCoach.ViewModel
             {
                 this.Categories.Add((Category)category.Clone());
             }
+
+            this.HasUnsavedCategories = false;
+        }
+
+        public void SaveCategories()
+        {
+            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            savedCategories.Clear();
+            foreach (var category in this.Categories)
+            {
+                savedCategories.Add((Category)category.Clone());
+            }
+
+            DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            this.HasUnsavedCategories = false;
+        }
+
+        public void SaveExercises()
+        {
+            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            savedExercises.Clear();
+            foreach (var exercise in this.Exercises)
+            {
+                savedExercises.Add((Exercise)exercise.Clone());
+            }
+
+            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            this.HasUnsavedExercises = false;
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.InvokePropertyChanged("Categories");
+            this.InvokePropertiesChanged(
+                nameof(this.Categories),
+                nameof(this.CategoryWarmUpActive),
+                nameof(this.CategoryWarmUpCount),
+                nameof(this.Category1Active),
+                nameof(this.Category1Name),
+                nameof(this.Category2Active),
+                nameof(this.Category2Name),
+                nameof(this.Category3Active),
+                nameof(this.Category3Name),
+                nameof(this.Category4Active),
+                nameof(this.Category4Name),
+                nameof(this.Category5Active),
+                nameof(this.Category5Name),
+                nameof(this.Category6Active),
+                nameof(this.Category6Name),
+                nameof(this.Category7Active),
+                nameof(this.Category7Name),
+                nameof(this.Category8Active),
+                nameof(this.Category8Name),
+                nameof(this.CategoryCoolDownActive),
+                nameof(this.CategoryCoolDownName),
+                nameof(this.CategoryWarmUpCount),
+                nameof(this.CategoryCoolDownCount));
         }
 
         private void OnExercisesChanges(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.InvokePropertyChanged("Exercises");
-        }
-
-        private void FilterExercises(object sender, FilterEventArgs e)
-        {
-            var exercise = e.Item as Exercise;
-
-            e.Accepted = exercise != null && exercise.Category == this.SelectedCategoryForExerciseDisplay.ID ? true : false;
         }
     }
 }
