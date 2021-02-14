@@ -171,8 +171,8 @@
             <Label Content="Übungen bearbeiten"
                    FontWeight="Bold"/>
             <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
-            <ComboBox ItemsSource="{Binding Categories, Mode=TwoWay}"
-                      SelectedValue="{Binding SelectedCategoryForExerciseDisplay}"/>
+            <ComboBox ItemsSource="{Binding Categories}"
+                      SelectedValue="{Binding SelectedCategory}"/>
             <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

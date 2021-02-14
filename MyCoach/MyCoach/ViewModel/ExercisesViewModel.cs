@@ -15,12 +15,15 @@ namespace MyCoach.ViewModel
 {
     public class ExercisesViewModel : BaseViewModel
     {
-        private Category selectedCategoryForExerciseDisplay;
+        private Category selectedCategory;
 
         public ExercisesViewModel()
         {
+            this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
             this.Categories = new ObservableCollection<Category>();
             this.Exercises = new ObservableCollection<Exercise>();
+            this.Categories.CollectionChanged += this.OnCategoriesChanged;
+            this.Exercises.CollectionChanged += this.OnExercisesChanges;
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
 
@@ -29,12 +32,6 @@ namespace MyCoach.ViewModel
             this.ResetExercisesCommand = new ResetExercisesCommand(this);
             this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
             this.SaveExercisesCommand = new SaveExercisesCommand(this);
-            
-            this.Categories.CollectionChanged += this.OnCategoriesChanged;
-            this.Exercises.CollectionChanged += this.OnExercisesChanges;
-
-            this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
-            this.SelectedCategoryForExerciseDisplay = this.Categories.FirstOrDefault();
         }
 
         public ObservableCollection<Category> Categories { get; set; }
@@ -433,18 +430,18 @@ namespace MyCoach.ViewModel
 
         public ICommand SaveExercisesCommand { get; }
 
-        public Category SelectedCategoryForExerciseDisplay
+        public Category SelectedCategory
         {
-            get => this.selectedCategoryForExerciseDisplay;
+            get => this.selectedCategory;
 
             set
             {
-                if (value == this.selectedCategoryForExerciseDisplay || value == null)
+                if (value == this.selectedCategory || value == null)
                 {
                     return;
                 }
 
-                this.selectedCategoryForExerciseDisplay = value;
+                this.selectedCategory = value;
                 this.InvokePropertyChanged();
                 this.RefreshExercisesFilteredByCategory();
             }
@@ -458,7 +455,7 @@ namespace MyCoach.ViewModel
             }
 
             this.ExercisesFilteredByCategory.Clear();
-            var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategoryForExerciseDisplay?.ID);
+            var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategory?.ID);
 
             foreach (var exercise in exercises)
             {
@@ -487,6 +484,7 @@ namespace MyCoach.ViewModel
 
         public void LoadCategoryBuffer()
         {
+            var savedSelectedCategoryId = this.SelectedCategory?.ID;
             var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Categories.Clear();
 
@@ -496,6 +494,15 @@ namespace MyCoach.ViewModel
             }
 
             this.HasUnsavedCategories = false;
+
+            if (savedSelectedCategoryId != null
+                && this.Categories.FirstOrDefault(c => c.ID == savedSelectedCategoryId) is var foundCategory)
+            {
+                this.SelectedCategory = foundCategory;
+                return;
+            }
+
+            this.SelectedCategory = this.Categories.FirstOrDefault();
         }
 
         public void SaveCategories()
@@ -508,6 +515,7 @@ namespace MyCoach.ViewModel
             }
 
             DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            this.InvokePropertyChanged(nameof(SelectedCategory));
             this.HasUnsavedCategories = false;
         }
 
@@ -549,7 +557,8 @@ namespace MyCoach.ViewModel
                 nameof(this.CategoryCoolDownActive),
                 nameof(this.CategoryCoolDownName),
                 nameof(this.CategoryWarmUpCount),
-                nameof(this.CategoryCoolDownCount));
+                nameof(this.CategoryCoolDownCount),
+                nameof(this.SelectedCategory));
         }
 
         private void OnExercisesChanges(object sender, NotifyCollectionChangedEventArgs e)

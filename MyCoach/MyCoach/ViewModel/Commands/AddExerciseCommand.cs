@@ -21,7 +21,7 @@ namespace MyCoach.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            if (this.exerciseViewModel.SelectedCategoryForExerciseDisplay == null)
+            if (this.exerciseViewModel.SelectedCategory == null)
             {
                 return false;
             }
@@ -32,7 +32,7 @@ namespace MyCoach.ViewModel.Commands
         public void Execute(object parameter)
         {
             this.exerciseViewModel.Exercises.Add(
-                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.exerciseViewModel.SelectedCategoryForExerciseDisplay.ID });
+                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.exerciseViewModel.SelectedCategory.ID });
             this.exerciseViewModel.RefreshExercisesFilteredByCategory();
             this.exerciseViewModel.HasUnsavedExercises = true;
         }
