@@ -66,6 +66,9 @@
     <Compile Include="ViewModel\Commands\RemoveExerciseCommand.cs" />
     <Compile Include="ViewModel\Commands\ResetCategoriesCommand.cs" />
     <Compile Include="ViewModel\Commands\ResetExercisesCommand.cs" />
+    <Compile Include="ViewModel\Commands\ResetSettingsCommand.cs" />
+    <Compile Include="ViewModel\Commands\SetDefaultSettingsCommand.cs" />
+    <Compile Include="ViewModel\Commands\SaveSettingsCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveExercisesCommand.cs" />
     <Compile Include="ViewModel\Commands\SaveCategoriesCommand.cs" />
     <Compile Include="ViewModel\Commands\UpdateMainViewCommand.cs" />
