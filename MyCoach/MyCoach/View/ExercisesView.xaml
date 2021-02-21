@@ -200,9 +200,11 @@
                FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Export"
-                    Style="{StaticResource DefaultButton}"/>
+                        Command="{Binding ExportExercisesCommand}"
+                        Style="{StaticResource DefaultButton}"/>
                 <Button Content="Import"
-                    Style="{StaticResource DefaultButton}"/>
+                        Command="{Binding ImportExercisesCommand}"
+                        Style="{StaticResource DefaultButton}"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
