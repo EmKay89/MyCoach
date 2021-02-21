@@ -27,11 +27,13 @@ namespace MyCoach.ViewModel
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
 
-            this.AddExerciseCommand = new AddExerciseCommand(this);
-            this.ResetCategoriesCommand = new ResetCategoriesCommand(this);
-            this.ResetExercisesCommand = new ResetExercisesCommand(this);
-            this.SaveCategoriesCommand = new SaveCategoriesCommand(this);
-            this.SaveExercisesCommand = new SaveExercisesCommand(this);
+            this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory == null ? false : true);
+            this.ExportExercisesCommand = new RelayCommand(this.ExportExercises);
+            this.ImportExercisesCommand = new RelayCommand(this.ImportExercises);
+            this.ResetCategoriesCommand = new RelayCommand(this.LoadCategoryBuffer, () => this.HasUnsavedCategories);
+            this.ResetExercisesCommand = new RelayCommand(this.LoadExerciseBuffer, () => this.HasUnsavedExercises);
+            this.SaveCategoriesCommand = new RelayCommand(this.SaveCategories, () => this.HasUnsavedCategories);
+            this.SaveExercisesCommand = new RelayCommand(this.SaveExercises, () => this.HasUnsavedExercises);
         }
 
         public ObservableCollection<Category> Categories { get; set; }
@@ -420,15 +422,19 @@ namespace MyCoach.ViewModel
 
         public bool HasUnsavedExercises { get; set; }
 
-        public ICommand AddExerciseCommand { get; }
+        public RelayCommand AddExerciseCommand { get; }
 
-        public ICommand ResetCategoriesCommand { get; }
+        public RelayCommand ExportExercisesCommand { get; }
 
-        public ICommand ResetExercisesCommand { get; }
+        public RelayCommand ImportExercisesCommand { get; }
 
-        public ICommand SaveCategoriesCommand { get; }
+        public RelayCommand ResetCategoriesCommand { get; }
 
-        public ICommand SaveExercisesCommand { get; }
+        public RelayCommand ResetExercisesCommand { get; }
+
+        public RelayCommand SaveCategoriesCommand { get; }
+
+        public RelayCommand SaveExercisesCommand { get; }
 
         public Category SelectedCategory
         {
@@ -445,16 +451,6 @@ namespace MyCoach.ViewModel
                 this.InvokePropertyChanged();
                 this.RefreshExercisesFilteredByCategory();
             }
-        }
-
-        public void ImportExercises()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ExportExercises()
-        {
-            throw new NotImplementedException();
         }
 
         public void RefreshExercisesFilteredByCategory()
@@ -478,21 +474,25 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public void LoadExerciseBuffer()
+        private void AddExercise()
         {
-            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
-            this.Exercises.Clear();
-
-            foreach (var exercise in savedExercises)
-            {
-                this.Exercises.Add((Exercise)exercise.Clone());
-            }
-
+            this.Exercises.Add(
+                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.SelectedCategory.ID });
             this.RefreshExercisesFilteredByCategory();
-            this.HasUnsavedExercises = false;
+            this.HasUnsavedExercises = true;
         }
 
-        public void LoadCategoryBuffer()
+        private void ImportExercises()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExportExercises()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LoadCategoryBuffer()
         {
             var savedSelectedCategoryId = this.SelectedCategory?.ID;
             var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
@@ -515,30 +515,17 @@ namespace MyCoach.ViewModel
             this.SelectedCategory = this.Categories.FirstOrDefault();
         }
 
-        public void SaveCategories()
-        {
-            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
-            savedCategories.Clear();
-            foreach (var category in this.Categories)
-            {
-                savedCategories.Add((Category)category.Clone());
-            }
-
-            DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
-            this.InvokePropertyChanged(nameof(SelectedCategory));
-            this.HasUnsavedCategories = false;
-        }
-
-        public void SaveExercises()
+        private void LoadExerciseBuffer()
         {
             var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
-            savedExercises.Clear();
-            foreach (var exercise in this.Exercises)
+            this.Exercises.Clear();
+
+            foreach (var exercise in savedExercises)
             {
-                savedExercises.Add((Exercise)exercise.Clone());
+                this.Exercises.Add((Exercise)exercise.Clone());
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            this.RefreshExercisesFilteredByCategory();
             this.HasUnsavedExercises = false;
         }
 
@@ -574,6 +561,33 @@ namespace MyCoach.ViewModel
         private void OnExercisesChanges(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.InvokePropertyChanged("Exercises");
+        }
+
+        private void SaveCategories()
+        {
+            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            savedCategories.Clear();
+            foreach (var category in this.Categories)
+            {
+                savedCategories.Add((Category)category.Clone());
+            }
+
+            DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            this.InvokePropertyChanged(nameof(SelectedCategory));
+            this.HasUnsavedCategories = false;
+        }
+
+        private void SaveExercises()
+        {
+            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            savedExercises.Clear();
+            foreach (var exercise in this.Exercises)
+            {
+                savedExercises.Add((Exercise)exercise.Clone());
+            }
+
+            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            this.HasUnsavedExercises = false;
         }
     }
 }

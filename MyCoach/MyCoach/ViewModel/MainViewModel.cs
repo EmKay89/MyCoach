@@ -21,7 +21,9 @@ namespace MyCoach.ViewModel
             this.SettingsViewModel = new SettingsViewModel();
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
             this.TrainingViewModel = new TrainingViewModel();
-            this.UpdateMainViewCommand = new UpdateMainViewCommand(this);
+            this.UpdateMainViewCommand = new RelayCommand(
+                this.SelectViewModel, 
+                () => this.SelectedViewModel != this.TrainingViewModel || this.TrainingViewModel.TrainingActive == false);
             App.Current.Windows.OfType<MainWindow>().FirstOrDefault().Loaded += this.OnMainWindowLoaded;
         }
 
@@ -65,11 +67,30 @@ namespace MyCoach.ViewModel
 
         public TrainingViewModel TrainingViewModel { get; }
 
-        public ICommand UpdateMainViewCommand { get; set; }
+        public RelayCommand UpdateMainViewCommand { get; set; }
 
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
-            this.UpdateMainViewCommand.Execute("Training");
+            this.SelectViewModel("Training");
+        }
+
+        private void SelectViewModel(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+                case "Exercise":
+                    this.SelectedViewModel = ExerciseViewModel;
+                    break;
+                case "Settings":
+                    this.SelectedViewModel = SettingsViewModel;
+                    break;
+                case "TrainingSchedule":
+                    this.SelectedViewModel = TrainingScheduleViewModel;
+                    break;
+                case "Training":
+                    this.SelectedViewModel = TrainingViewModel;
+                    break;
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel
     {
         public ExerciseViewModel()
         {
-            this.RemoveExerciseCommand = new RemoveExerciseCommand(this);
+            this.RemoveExerciseCommand = new RelayCommand(this.RemoveExercise);
             this.PropertyChanged += delegate { this.Parent.HasUnsavedExercises = true; };
         }
 
@@ -22,7 +22,7 @@ namespace MyCoach.ViewModel
 
         public ExercisesViewModel Parent { get; set; }
 
-        public ICommand RemoveExerciseCommand { get; }
+        public RelayCommand RemoveExerciseCommand { get; }
 
         public bool Active
         {
@@ -117,6 +117,18 @@ namespace MyCoach.ViewModel
 
                 this.Exercise.Scores = value;
                 this.InvokePropertyChanged();
+            }
+        }
+
+        private void RemoveExercise(object parameter)
+        {
+            var exercise = parameter as Exercise;
+
+            if (exercise != null)
+            {
+                this.Parent.Exercises.Remove(exercise);
+                this.Parent.RefreshExercisesFilteredByCategory();
+                this.Parent.HasUnsavedExercises = true;
             }
         }
     }

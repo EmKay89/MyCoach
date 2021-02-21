@@ -18,12 +18,18 @@ namespace MyCoach.ViewModel
         {
             this.Settings = new Settings();
             this.LoadSettingsBuffer();
-            this.SaveSettingsCommand = new SaveSettingsCommand(this);
+            this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedSettings);
+            this.SetDefaultSettingsCommand = new RelayCommand(this.SetDefaultSettings);
+            this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedSettings);
         }
 
         public bool HasUnsavedSettings { get; set; }
 
-        public ICommand SaveSettingsCommand { get; }
+        public RelayCommand SaveSettingsCommand { get; }
+
+        public RelayCommand SetDefaultSettingsCommand { get; }
+
+        public RelayCommand ResetSettingsCommand { get; }
 
         public Settings Settings { get; private set; }
 
@@ -171,7 +177,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public void LoadSettingsBuffer()
+        private void LoadSettingsBuffer()
         {
             var savedSettings = DataInterface.GetInstance().GetDataTransferObjects<Settings>()?.FirstOrDefault();
 
@@ -184,13 +190,13 @@ namespace MyCoach.ViewModel
             this.Settings = (Settings)savedSettings.Clone();
         }
 
-        public void SaveSettings()
+        private void SaveSettings()
         {
             ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
             DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
         }
 
-        public void SetDefaultSettings()
+        private void SetDefaultSettings()
         {
             this.Settings = new Settings
             {

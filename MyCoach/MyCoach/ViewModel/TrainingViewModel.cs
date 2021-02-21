@@ -24,7 +24,7 @@ namespace MyCoach.ViewModel
         {
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
-            this.StartTrainingCommand = new StartTraingingCommand(this);
+            this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = this.TrainingActive ? false : true; });
         }
 
         public List<Category> ActiveCategories
@@ -139,7 +139,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public StartTraingingCommand StartTrainingCommand { get; }
+        public RelayCommand StartTrainingCommand { get; }
 
         public bool TrainingActive
         {

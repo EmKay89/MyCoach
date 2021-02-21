@@ -62,19 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
-    <Compile Include="ViewModel\Commands\AddExerciseCommand.cs" />
-    <Compile Include="ViewModel\Commands\RemoveExerciseCommand.cs" />
-    <Compile Include="ViewModel\Commands\ResetCategoriesCommand.cs" />
-    <Compile Include="ViewModel\Commands\ResetExercisesCommand.cs" />
-    <Compile Include="ViewModel\Commands\ResetSettingsCommand.cs" />
-    <Compile Include="ViewModel\Commands\ExportExercisesCommand.cs" />
-    <Compile Include="ViewModel\Commands\ImportExercisesCommand.cs" />
-    <Compile Include="ViewModel\Commands\SetDefaultSettingsCommand.cs" />
-    <Compile Include="ViewModel\Commands\SaveSettingsCommand.cs" />
-    <Compile Include="ViewModel\Commands\SaveExercisesCommand.cs" />
-    <Compile Include="ViewModel\Commands\SaveCategoriesCommand.cs" />
-    <Compile Include="ViewModel\Commands\UpdateMainViewCommand.cs" />
-    <Compile Include="ViewModel\Commands\StartTraingingCommand.cs" />
+    <Compile Include="ViewModel\Commands\RelayCommand.cs" />
     <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
