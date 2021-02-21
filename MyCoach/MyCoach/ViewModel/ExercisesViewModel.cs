@@ -7,10 +7,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MyCoach.ViewModel
@@ -484,79 +482,14 @@ namespace MyCoach.ViewModel
             this.HasUnsavedExercises = true;
         }
 
-        private string GetExportPath()
-        {
-            var filePath = string.Empty;
-
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.InitialDirectory = Application.StartupPath;
-                saveFileDialog.Filter = "XML files (*.xml)|*.xml";
-                saveFileDialog.FilterIndex = 1;
-                saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = saveFileDialog.FileName;
-                }
-            }
-
-            return filePath;
-        }
-
-        private string GetImportPath()
-        {
-            var filePath = string.Empty;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = Application.StartupPath;
-                openFileDialog.Filter = "XML files (*.xml)|*.xml";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = openFileDialog.FileName;
-                }
-            }
-
-            return filePath;
-        }
-
         private void ImportExercises()
         {
-            var path = this.GetImportPath();
-            if (path == string.Empty)
-            {
-                return;
-            }
-
-            if (DataInterface.GetInstance().ImportExerciseSet(path))
-            {
-                this.LoadCategoryBuffer();
-                this.LoadExerciseBuffer();
-                return;
-            }
-
-            MessageBox.Show("Fehler beim Laden", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            throw new NotImplementedException();
         }
 
         private void ExportExercises()
         {
-            var path = this.GetExportPath();
-            if (path == string.Empty)
-            {
-                return;
-            }
-
-            this.LoadCategoryBuffer();
-            this.LoadExerciseBuffer();
-
-            if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
-            {
-                MessageBox.Show("Fehler beim Speichern", "Fehler beim Speichern", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            throw new NotImplementedException();
         }
 
         private void LoadCategoryBuffer()
