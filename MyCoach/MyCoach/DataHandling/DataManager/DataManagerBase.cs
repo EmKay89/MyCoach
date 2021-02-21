@@ -56,6 +56,32 @@ namespace MyCoach.DataHandling.DataManager
         protected IXmlFileReaderWriter XmlFileReaderWriter { get; set; }
 
         /// <summary>
+        ///     Setzt die Werte eines DataTransferObjects im Buffer auf die Standardwerte zurück
+        /// </summary>
+        /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
+        public virtual void SetDefaults<T>() where T : IDataTransferObject
+        {
+            switch (typeof(T).Name)
+            {
+                case nameof(Category):
+                    this.Buffer.Categories = DefaultDtos.Categories;
+                    break;
+                case nameof(Exercise):
+                    this.Buffer.Exercises = DefaultDtos.Exercises;
+                    break;
+                case nameof(Settings):
+                    this.Buffer.Settings = DefaultDtos.Settings;
+                    break;
+                case nameof(TrainingSchedule):
+                    this.Buffer.TrainingSchedules = DefaultDtos.TrainingSchedules;
+                    break;
+                case nameof(TrainingScore):
+                    this.Buffer.TrainingScores = DefaultDtos.TrainingScores;
+                    break;
+            }
+        }
+
+        /// <summary>
         ///     Speichert den aktuell geladenen Übungssatz in eine Datei unter dem angegebenen Pfad und gibt den Erfolg
         ///     der Aktion als boolschen Wert zurück.
         /// </summary>

@@ -60,6 +60,17 @@ namespace MyCoachTests.DataHandling
         }
 
         [TestMethod]
+        public void SetDefaults_CallsSetDefaultsOfDataManager()
+        {
+            this.dataInterface = DataInterface.GetInstance();
+            DataInterface.SetDataManager(dataManager);
+
+            this.dataInterface.SetDefaults<Exercise>();
+
+            Mock.Get(this.dataManager).Verify((m) => m.SetDefaults<Exercise>(), Times.Once);
+        }
+
+        [TestMethod]
         public void SetDataTransferObjects_CallsGetDataTransferObjectsOfDataManager()
         {
             this.dataInterface = DataInterface.GetInstance();

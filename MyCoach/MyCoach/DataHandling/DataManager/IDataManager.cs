@@ -15,7 +15,9 @@ namespace MyCoach.DataHandling.DataManager
         string ErrorMessageSaving { get; }
 
         ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject;
-        
+
+        void SetDefaults<T>() where T : IDataTransferObject;
+
         bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject;
 
         bool TryExportExerciseSet(string path);

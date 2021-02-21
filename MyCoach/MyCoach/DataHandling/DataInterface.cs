@@ -43,6 +43,11 @@ namespace MyCoach.DataHandling
             return dataManager.GetDataTransferObjects<T>();
         }
 
+        public void SetDefaults<T>() where T : IDataTransferObject
+        {
+            dataManager.SetDefaults<T>();
+        }
+
         public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
         {
             return dataManager.SetDataTransferObjects<T>(dataTransferObjects);

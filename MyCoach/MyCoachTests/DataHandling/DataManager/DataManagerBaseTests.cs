@@ -36,6 +36,28 @@ namespace MyCoachTests.DataHandling.DataManager
         }
 
         [TestMethod]
+        public void SetDefaults_HappyPath_SetsDefaultData()
+        {
+            this.sut.GetBuffer().Categories = null;
+            this.sut.GetBuffer().Exercises = null;
+            this.sut.GetBuffer().Settings = null;
+            this.sut.GetBuffer().TrainingSchedules = null;
+            this.sut.GetBuffer().TrainingScores = null;
+
+            this.sut.SetDefaults<Category>();
+            this.sut.SetDefaults<Exercise>();
+            this.sut.SetDefaults<Settings>();
+            this.sut.SetDefaults<TrainingSchedule>();
+            this.sut.SetDefaults<TrainingScore>();
+
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
+        }
+
+        [TestMethod]
         public void TryExportAndImportExerciseSet_HappyPath_ExercisesAreExportedAndReimportedCorrectly()
         {
             this.sut.GetBuffer().Categories = TestDtos.Categories;

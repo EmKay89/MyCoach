@@ -9,6 +9,9 @@ using System.Xml.Serialization;
 
 namespace MyCoach.DataHandling.DataManager
 {
+    /// <summary>
+    ///     DataManager, der seine Daten in einer XML Speicherdatei zwischenspeichert bzw. sie aus dieser läd.
+    /// </summary>
     public class XmlFileDataManager : DataManagerBase, IDataManager
     {
         public XmlFileDataManager(IXmlFileReaderWriter xmlFileReaderWriter) : base(xmlFileReaderWriter) { }
@@ -18,6 +21,11 @@ namespace MyCoach.DataHandling.DataManager
         /// </summary>
         public string SaveFileDirectory { get; set; }
 
+        /// <summary>
+        ///     Gibt die im Buffer gespeicherten DataTransferObjects eines gewählten Typs als ObservableCollection zurück.
+        /// </summary>
+        /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
+        /// <returns>Die ObservableCollection des gewählten Typs.</returns>
         public ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject
         {
             switch (typeof(T).Name)
@@ -38,11 +46,23 @@ namespace MyCoach.DataHandling.DataManager
         }
 
         /// <summary>
-        ///     
+        ///     Setzt die Werte eines DataTransferObjects im Buffer auf die Standardwerte zurück und speichert dann den gesamten Buffer
+        ///     in die Speicherdatei.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dataTransferObjects"></param>
-        /// <returns></returns>
+        /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
+        public override void SetDefaults<T>()
+        {
+            base.SetDefaults<T>();
+            this.TrySaveBufferToFile();
+        }
+
+        /// <summary>
+        ///     Speichert eine ObservableCollection eines DataTransferObjects im Buffer und speichert dann den gesamten Buffer
+        ///     in die Speicherdatei.
+        /// </summary>
+        /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
+        /// <param name="dataTransferObjects">Die ObservableCollection des DataTransferObjects.</param>
+        /// <returns>True, wenn das Speichern erfolgreich war, andernfalls false.</returns>
         public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
         {
             switch (dataTransferObjects)
@@ -89,6 +109,11 @@ namespace MyCoach.DataHandling.DataManager
             }
         }
 
+        /// <summary>
+        ///     Führt das initiale Laden der gespeicherten Daten aus der Speicherdatei aus und füllt den internen Buffer
+        ///     mit den geladenen Daten.
+        /// </summary>
+        /// <returns>True, wenn die Daten erfolgreich geladen werden konnten, ansonsten false.</returns>
         protected override bool TryInitialLoading()
         {
             try
