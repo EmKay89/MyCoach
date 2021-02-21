@@ -527,6 +527,10 @@ namespace MyCoach.ViewModel
         private void ImportExercises()
         {
             var path = this.GetImportPath();
+            if (path == string.Empty)
+            {
+                return;
+            }
 
             if (DataInterface.GetInstance().ImportExerciseSet(path))
             {
@@ -541,6 +545,11 @@ namespace MyCoach.ViewModel
         private void ExportExercises()
         {
             var path = this.GetExportPath();
+            if (path == string.Empty)
+            {
+                return;
+            }
+
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
 
