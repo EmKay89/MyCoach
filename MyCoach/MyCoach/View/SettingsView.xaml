@@ -6,7 +6,64 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="Settings"/>
-    </Grid>
+    <StackPanel>
+        <Label Content="Einstellungen bearbeiten"
+               FontWeight="Bold"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="13"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="13"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Anzahl Wiederholungen" Grid.Column="1"/>
+            <TextBlock Text="Anzahl Punkte" Grid.Column="3"/>
+            <TextBlock Text="Trainingsrunde 1" Grid.Row="1"/>
+            <TextBox Text="{Binding RepeatsRound1}" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock Text="%" Grid.Column="2" Grid.Row="1"/>
+            <TextBox Text="{Binding ScoresRound1}" Grid.Column="3" Grid.Row="1"/>
+            <TextBlock Text="%" Grid.Column="4" Grid.Row="1"/>
+            <TextBlock Text="Trainingsrunde 2" Grid.Row="2"/>
+            <TextBox Text="{Binding RepeatsRound2}" Grid.Column="1" Grid.Row="2"/>
+            <TextBlock Text="%" Grid.Column="2" Grid.Row="2"/>
+            <TextBox Text="{Binding ScoresRound2}" Grid.Column="3" Grid.Row="2"/>
+            <TextBlock Text="%" Grid.Column="4" Grid.Row="2"/>
+            <TextBlock Text="Trainingsrunde 3" Grid.Row="3"/>
+            <TextBox Text="{Binding RepeatsRound3}" Grid.Column="1" Grid.Row="3"/>
+            <TextBlock Text="%" Grid.Column="2" Grid.Row="3"/>
+            <TextBox Text="{Binding ScoresRound3}" Grid.Column="3" Grid.Row="3"/>
+            <TextBlock Text="%" Grid.Column="4" Grid.Row="3"/>
+            <TextBlock Text="Trainingsrunde 4" Grid.Row="4"/>
+            <TextBox Text="{Binding RepeatsRound4}" Grid.Column="1" Grid.Row="4"/>
+            <TextBlock Text="%" Grid.Column="2" Grid.Row="4"/>
+            <TextBox Text="{Binding ScoresRound4}" Grid.Column="3" Grid.Row="4"/>
+            <TextBlock Text="%" Grid.Column="4" Grid.Row="4"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Speichern"
+                    Command="{Binding SaveSettingsCommand}"
+                    Style="{StaticResource DefaultButton}"
+                    HorizontalAlignment="Left"/>
+            <Button Content="Verwerfen"
+                    Command="{Binding ResetSettingsCommand}"
+                    Style="{StaticResource DefaultButton}"
+                    HorizontalAlignment="Left"/>
+        </StackPanel>
+        <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen."
+               FontWeight="Bold"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Zurücksetzen"
+                        Style="{StaticResource DefaultButton}"
+                        Command="{Binding SetDefaultsCommand}"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>

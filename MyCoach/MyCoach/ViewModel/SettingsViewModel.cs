@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MyCoach.ViewModel
@@ -19,15 +20,16 @@ namespace MyCoach.ViewModel
             this.Settings = new Settings();
             this.LoadSettingsBuffer();
             this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedSettings);
-            this.SetDefaultSettingsCommand = new RelayCommand(this.SetDefaultSettings);
+            this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
             this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedSettings);
+            this.PropertyChanged += delegate { this.HasUnsavedSettings = true; };
         }
 
         public bool HasUnsavedSettings { get; set; }
 
         public RelayCommand SaveSettingsCommand { get; }
 
-        public RelayCommand SetDefaultSettingsCommand { get; }
+        public RelayCommand SetDefaultsCommand { get; }
 
         public RelayCommand ResetSettingsCommand { get; }
 
@@ -188,30 +190,39 @@ namespace MyCoach.ViewModel
             }
 
             this.Settings = (Settings)savedSettings.Clone();
+            this.HasUnsavedSettings = false;
+            this.InvokePropertiesChanged(   
+                nameof(this.Permission),
+                nameof(this.RepeatsRound1),
+                nameof(this.RepeatsRound2),
+                nameof(this.RepeatsRound3),
+                nameof(this.RepeatsRound4),
+                nameof(this.ScoresRound1),
+                nameof(this.ScoresRound2),
+                nameof(this.ScoresRound3),
+                nameof(this.ScoresRound4));
         }
 
         private void SaveSettings()
         {
             ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
             DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
+            this.HasUnsavedSettings = false;
         }
 
         private void SetDefaultSettings()
         {
-            this.Settings = new Settings
-            {
-                Permission = ExerciseSchedulingRepetitionPermission.NotPreferred,
-                RepeatsRound1 = 100,
-                RepeatsRound2 = 75,
-                RepeatsRound3 = 60,
-                RepeatsRound4 = 50,
-                ScoresRound1 = 100,
-                ScoresRound2 = 100,
-                ScoresRound3 = 100,
-                ScoresRound4 = 100
-            };
+            var result = MessageBox.Show("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
+                "Zurücksetzen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-            this.SaveSettings();
+            if (result == DialogResult.Yes)
+            {
+                DataInterface.GetInstance().SetDefaults<Settings>();
+                this.LoadSettingsBuffer();
+                this.HasUnsavedSettings = false;
+            }
         }
     }
 }

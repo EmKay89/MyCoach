@@ -25,7 +25,21 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
         public static ObservableCollection<Settings> Settings
         {
-            get => new ObservableCollection<Settings>();
+            get => new ObservableCollection<Settings>
+            {
+                new Settings
+                {
+                    Permission = ExerciseSchedulingRepetitionPermission.NotPreferred,
+                    RepeatsRound1 = 100,
+                    RepeatsRound2 = 75,
+                    RepeatsRound3 = 60,
+                    RepeatsRound4 = 50,
+                    ScoresRound1 = 100,
+                    ScoresRound2 = 100,
+                    ScoresRound3 = 100,
+                    ScoresRound4 = 100
+                }
+            };
         }
 
         public static ObservableCollection<TrainingSchedule> TrainingSchedules
