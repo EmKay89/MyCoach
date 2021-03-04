@@ -36,6 +36,7 @@ namespace MyCoach.ViewModel
             this.ResetExercisesCommand = new RelayCommand(this.LoadExerciseBuffer, () => this.HasUnsavedExercises);
             this.SaveCategoriesCommand = new RelayCommand(this.SaveCategories, () => this.HasUnsavedCategories);
             this.SaveExercisesCommand = new RelayCommand(this.SaveExercises, () => this.HasUnsavedExercises);
+            this.SetDefaultsCommand = new RelayCommand(this.SetDefaults);
         }
 
         public ObservableCollection<Category> Categories { get; set; }
@@ -438,6 +439,8 @@ namespace MyCoach.ViewModel
 
         public RelayCommand SaveExercisesCommand { get; }
 
+        public RelayCommand SetDefaultsCommand { get; }
+
         public Category SelectedCategory
         {
             get => this.selectedCategory;
@@ -601,7 +604,7 @@ namespace MyCoach.ViewModel
             this.InvokePropertiesChanged(
                 nameof(this.Categories),
                 nameof(this.CategoryWarmUpActive),
-                nameof(this.CategoryWarmUpCount),
+                nameof(this.CategoryWarmUpName),
                 nameof(this.Category1Active),
                 nameof(this.Category1Name),
                 nameof(this.Category2Active),
@@ -655,6 +658,22 @@ namespace MyCoach.ViewModel
 
             DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
             this.HasUnsavedExercises = false;
+        }
+
+        private void SetDefaults()
+        {
+            var result = MessageBox.Show("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
+                "Zurücksetzen",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                DataInterface.GetInstance().SetDefaults<Exercise>();
+                DataInterface.GetInstance().SetDefaults<Category>();
+                this.LoadCategoryBuffer();
+                this.LoadExerciseBuffer();
+            }
         }
     }
 }

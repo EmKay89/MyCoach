@@ -9,6 +9,16 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
+            <Label Content="Übungssatz importieren oder exportieren"
+               FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Export"
+                        Style="{StaticResource DefaultButton}"
+                        Command="{Binding ExportExercisesCommand}"/>
+                <Button Content="Import"
+                        Style="{StaticResource DefaultButton}"
+                        Command="{Binding ImportExercisesCommand}"/>
+            </StackPanel>
             <Label Content="Übungskategorien bearbeiten"
                    FontWeight="Bold"/>
             <StackPanel>
@@ -196,13 +206,12 @@
                     Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             </StackPanel>
-            <Label Content="Übungssatz importieren oder exportieren"
+            <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen."
                FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Export"
-                    Style="{StaticResource DefaultButton}"/>
-                <Button Content="Import"
-                    Style="{StaticResource DefaultButton}"/>
+                <Button Content="Zurücksetzen"
+                        Style="{StaticResource DefaultButton}"
+                        Command="{Binding SetDefaultsCommand}"/>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>

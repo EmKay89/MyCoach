@@ -64,19 +64,44 @@ namespace MyCoach.DataHandling.DataManager
             switch (typeof(T).Name)
             {
                 case nameof(Category):
-                    this.Buffer.Categories = DefaultDtos.Categories;
+                    this.Buffer.Categories.Clear();
+                    foreach (var category in DefaultDtos.Categories)
+                    {
+                        this.Buffer.Categories.Add(category);
+                    }
+
                     break;
                 case nameof(Exercise):
-                    this.Buffer.Exercises = DefaultDtos.Exercises;
+                    this.Buffer.Exercises.Clear();
+                    foreach (var exercise in DefaultDtos.Exercises)
+                    {
+                        this.Buffer.Exercises.Add(exercise);
+                    }
+
                     break;
                 case nameof(Settings):
-                    this.Buffer.Settings = DefaultDtos.Settings;
+                    this.Buffer.Settings.Clear();
+                    foreach (var setting in DefaultDtos.Settings)
+                    {
+                        this.Buffer.Settings.Add(setting);
+                    }
                     break;
+
                 case nameof(TrainingSchedule):
-                    this.Buffer.TrainingSchedules = DefaultDtos.TrainingSchedules;
+                    this.Buffer.TrainingSchedules.Clear();
+                    foreach (var ts in DefaultDtos.TrainingSchedules)
+                    {
+                        this.Buffer.TrainingSchedules.Add(ts);
+                    }
+
                     break;
                 case nameof(TrainingScore):
-                    this.Buffer.TrainingScores = DefaultDtos.TrainingScores;
+                    this.Buffer.TrainingScores.Clear();
+                    foreach (var ts in DefaultDtos.TrainingScores)
+                    {
+                        this.Buffer.TrainingScores.Add(ts);
+                    }
+
                     break;
             }
         }
@@ -128,8 +153,19 @@ namespace MyCoach.DataHandling.DataManager
                 reader = new StringReader(xmlString);
                 XmlSerializer serializer = new XmlSerializer(typeof(ExerciseSet));                
                 var exerciseSet = (ExerciseSet)(serializer.Deserialize(reader));
-                this.Buffer.Categories = exerciseSet.Categories;
-                this.Buffer.Exercises = exerciseSet.Exercises;
+
+                this.Buffer.Categories.Clear();
+                foreach (var category in exerciseSet.Categories)
+                {
+                    this.Buffer.Categories.Add(category);
+                }
+
+                this.Buffer.Exercises.Clear();
+                foreach (var exercise in exerciseSet.Exercises)
+                {
+                    this.Buffer.Exercises.Add(exercise);
+                }
+
                 success = true;
             }
             catch (Exception e)
