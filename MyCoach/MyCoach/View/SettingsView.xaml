@@ -48,7 +48,7 @@
             <TextBox Text="{Binding ScoresRound4}" Grid.Column="3" Grid.Row="4"/>
             <TextBlock Text="%" Grid.Column="4" Grid.Row="4"/>
         </Grid>
-        <TextBlock Text="Wiederholungen von Übungen in einer Trainingsrunde erlauben" TextWrapping="WrapWithOverflow"/>
+        <TextBlock Text="Wiederholungen von Übungen im Training erlauben" TextWrapping="WrapWithOverflow"/>
         <ComboBox ItemsSource="{Binding PremissionsWithCaption}"
                   SelectedValue="{Binding Permission}"
                   DisplayMemberPath="Value" 

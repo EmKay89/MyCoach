@@ -31,8 +31,6 @@ namespace MyCoach.ViewModel
                 { ExerciseSchedulingRepetitionPermission.NotPreferred, "Nicht bevorzugt" },
                 { ExerciseSchedulingRepetitionPermission.Yes, "Ja" }
             };
-
-            this.UpdatePermissionText();
         }
 
         public bool HasUnsavedSettings { get; private set; }
@@ -219,8 +217,10 @@ namespace MyCoach.ViewModel
             }
 
             this.Settings = (Settings)savedSettings.Clone();
+            this.UpdatePermissionText();
             this.InvokePropertiesChanged(   
                 nameof(this.Permission),
+                nameof(this.PermissionText),
                 nameof(this.RepeatsRound1),
                 nameof(this.RepeatsRound2),
                 nameof(this.RepeatsRound3),
@@ -256,6 +256,7 @@ namespace MyCoach.ViewModel
 
         private void UpdatePermissionText()
         {
+            var savedSettings = this.HasUnsavedSettings;
             switch (this.Permission)
             {
                 case ExerciseSchedulingRepetitionPermission.Yes:
@@ -276,6 +277,8 @@ namespace MyCoach.ViewModel
                     this.PermissionText = "Keine Auswahl";
                     break;
             }
+
+            this.HasUnsavedSettings = savedSettings;
         }
     }
 }
