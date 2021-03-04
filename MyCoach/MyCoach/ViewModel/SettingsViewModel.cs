@@ -15,6 +15,8 @@ namespace MyCoach.ViewModel
 {
     public class SettingsViewModel : BaseViewModel
     {
+        private string permissionText;
+
         public SettingsViewModel()
         {
             this.Settings = new Settings();
@@ -23,9 +25,19 @@ namespace MyCoach.ViewModel
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
             this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedSettings);
             this.PropertyChanged += delegate { this.HasUnsavedSettings = true; };
+            this.PremissionsWithCaption = new Dictionary<ExerciseSchedulingRepetitionPermission, string>
+            {
+                { ExerciseSchedulingRepetitionPermission.No, "Nein" },
+                { ExerciseSchedulingRepetitionPermission.NotPreferred, "Nicht bevorzugt" },
+                { ExerciseSchedulingRepetitionPermission.Yes, "Ja" }
+            };
+
+            this.UpdatePermissionText();
         }
 
-        public bool HasUnsavedSettings { get; set; }
+        public bool HasUnsavedSettings { get; private set; }
+
+        public Dictionary<ExerciseSchedulingRepetitionPermission, string> PremissionsWithCaption { get; }
 
         public RelayCommand SaveSettingsCommand { get; }
 
@@ -47,6 +59,23 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Settings.Permission = value;
+                this.InvokePropertyChanged();
+                this.UpdatePermissionText();
+            }
+        }
+
+        public string PermissionText
+        {
+            get => this.permissionText;
+
+            set
+            {
+                if (this.permissionText == value)
+                {
+                    return;
+                }
+
+                this.permissionText = value;
                 this.InvokePropertyChanged();
             }
         }
@@ -190,7 +219,6 @@ namespace MyCoach.ViewModel
             }
 
             this.Settings = (Settings)savedSettings.Clone();
-            this.HasUnsavedSettings = false;
             this.InvokePropertiesChanged(   
                 nameof(this.Permission),
                 nameof(this.RepeatsRound1),
@@ -201,6 +229,7 @@ namespace MyCoach.ViewModel
                 nameof(this.ScoresRound2),
                 nameof(this.ScoresRound3),
                 nameof(this.ScoresRound4));
+            this.HasUnsavedSettings = false;
         }
 
         private void SaveSettings()
@@ -222,6 +251,30 @@ namespace MyCoach.ViewModel
                 DataInterface.GetInstance().SetDefaults<Settings>();
                 this.LoadSettingsBuffer();
                 this.HasUnsavedSettings = false;
+            }
+        }
+
+        private void UpdatePermissionText()
+        {
+            switch (this.Permission)
+            {
+                case ExerciseSchedulingRepetitionPermission.Yes:
+                    this.PermissionText = "Eine Übung wird zufällig und somit unabhängig davon in eine Trainingsrunde " +
+                        "eingeplant, ob sie bereits in einer vorherigen Runde eingeplant wurde " +
+                        "und ob noch andere Übungen derselben Kategorie nicht eingeplant wurden.";
+                    break;
+                case ExerciseSchedulingRepetitionPermission.NotPreferred:
+                    this.PermissionText = "Eine Übung wird nur dann erneut in eine Trainingsrunde eingeplant, " +
+                        "wenn bereits alle anderen Übungen derselben Kategorie einmal eingeplant wurden.";
+                    break;
+                case ExerciseSchedulingRepetitionPermission.No:
+                    this.PermissionText = "Eine Übung wird kein zweites Mal ins Training eingeplant. Sind weniger Übungen einer " +
+                        "Kategorie vorhanden, als das Training Runden hat, werden für diese Kategorie nicht in jeder Runde " +
+                        "Übungen zur Verfügung stehen.";
+                    break;
+                default:
+                    this.PermissionText = "Keine Auswahl";
+                    break;
             }
         }
     }
