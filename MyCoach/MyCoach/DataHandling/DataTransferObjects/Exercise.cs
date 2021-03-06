@@ -5,7 +5,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// <summary>
     ///     Repräsentiert eine Übung.
     /// </summary>
-    public class Exercise : DtoBase
+    public class Exercise : DtoBase, IDataTransferObject
     {
         /// <summary>
         ///     Ruft die Übungskategorie auf oder legt sie fest.

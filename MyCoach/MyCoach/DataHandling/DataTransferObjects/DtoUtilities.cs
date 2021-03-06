@@ -159,5 +159,34 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
             return true;
         }
+
+        public static bool AreEqual<T>(T dto1, T dto2) where T : IDataTransferObject
+        {
+            switch (dto1)
+            {
+                case Category category:
+                    var categories1 = new ObservableCollection<Category> { category };
+                    var categories2 = new ObservableCollection<Category> { dto2 as Category };
+                    return AreEqual(categories1, categories2);
+                case Exercise exercise:
+                    var exercises1 = new ObservableCollection<Exercise> { exercise };
+                    var exercises2 = new ObservableCollection<Exercise> { dto2 as Exercise };
+                    return AreEqual(exercises1, exercises2);
+                case Settings settings:
+                    var settings1 = new ObservableCollection<Settings> { settings };
+                    var settings2 = new ObservableCollection<Settings> { dto2 as Settings };
+                    return AreEqual(settings1, settings2);
+                case TrainingSchedule schedule:
+                    var schedules1 = new ObservableCollection<TrainingSchedule> { schedule };
+                    var schedules2 = new ObservableCollection<TrainingSchedule> { dto2 as TrainingSchedule };
+                    return AreEqual(schedules1, schedules2);
+                case TrainingScore score:
+                    var scores1 = new ObservableCollection<TrainingScore> { score };
+                    var scores2 = new ObservableCollection<TrainingScore> { dto2 as TrainingScore };
+                    return AreEqual(scores1, scores2);
+                default:
+                    return false;
+            }
+        }
     }
 }

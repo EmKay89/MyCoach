@@ -75,15 +75,15 @@ namespace MyCoachTests
                 var settings = new ObservableCollection<Settings>();
                 settings.Add(new Settings
                 {
-                    Permission = ExerciseSchedulingRepetitionPermission.NotPreferred,
-                    RepeatsRound1 = 100,
-                    ScoresRound1 = 100,
-                    RepeatsRound2 = 70,
-                    ScoresRound2 = 100,
-                    RepeatsRound3 = 50,
-                    ScoresRound3 = 100,
-                    RepeatsRound4 = 30,
-                    ScoresRound4 = 100
+                    Permission = ExerciseSchedulingRepetitionPermission.No,
+                    RepeatsRound1 = 101,
+                    ScoresRound1 = 101,
+                    RepeatsRound2 = 71,
+                    ScoresRound2 = 101,
+                    RepeatsRound3 = 51,
+                    ScoresRound3 = 101,
+                    RepeatsRound4 = 31,
+                    ScoresRound4 = 101
                 });
 
                 return settings;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
-    public class DtoBase : IDataTransferObject, ICloneable
+    public class DtoBase : ICloneable
     {
         public object Clone()
         {

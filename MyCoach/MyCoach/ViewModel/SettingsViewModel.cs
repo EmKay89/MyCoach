@@ -21,10 +21,10 @@ namespace MyCoach.ViewModel
         {
             this.Settings = new Settings();
             this.LoadSettingsBuffer();
-            this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedSettings);
+            this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedChanges);
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
-            this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedSettings);
-            this.PropertyChanged += delegate { this.HasUnsavedSettings = true; };
+            this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedChanges);
+            this.PropertyChanged += delegate { this.HasUnsavedChanges = true; };
             this.PremissionsWithCaption = new Dictionary<ExerciseSchedulingRepetitionPermission, string>
             {
                 { ExerciseSchedulingRepetitionPermission.No, "Nein" },
@@ -33,7 +33,7 @@ namespace MyCoach.ViewModel
             };
         }
 
-        public bool HasUnsavedSettings { get; private set; }
+        public bool HasUnsavedChanges { get; private set; }
 
         public Dictionary<ExerciseSchedulingRepetitionPermission, string> PremissionsWithCaption { get; }
 
@@ -229,18 +229,20 @@ namespace MyCoach.ViewModel
                 nameof(this.ScoresRound2),
                 nameof(this.ScoresRound3),
                 nameof(this.ScoresRound4));
-            this.HasUnsavedSettings = false;
+            this.HasUnsavedChanges = false;
         }
 
         private void SaveSettings()
         {
+            // ToDo: Fehlermeldung einbauen, für den Fall, dass das Speichern nicht erfolgreich war.
             ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
             DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
-            this.HasUnsavedSettings = false;
+            this.HasUnsavedChanges = false;
         }
 
         private void SetDefaultSettings()
         {
+            // ToDo: Unittestbarkeit herstellen
             var result = MessageBox.Show("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
                 "Zurücksetzen",
                 MessageBoxButtons.YesNo,
@@ -250,13 +252,13 @@ namespace MyCoach.ViewModel
             {
                 DataInterface.GetInstance().SetDefaults<Settings>();
                 this.LoadSettingsBuffer();
-                this.HasUnsavedSettings = false;
+                this.HasUnsavedChanges = false;
             }
         }
 
         private void UpdatePermissionText()
         {
-            var savedSettings = this.HasUnsavedSettings;
+            var savedSettings = this.HasUnsavedChanges;
             switch (this.Permission)
             {
                 case ExerciseSchedulingRepetitionPermission.Yes:
@@ -278,7 +280,7 @@ namespace MyCoach.ViewModel
                     break;
             }
 
-            this.HasUnsavedSettings = savedSettings;
+            this.HasUnsavedChanges = savedSettings;
         }
     }
 }

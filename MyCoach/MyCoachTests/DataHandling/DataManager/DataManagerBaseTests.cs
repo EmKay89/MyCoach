@@ -38,11 +38,11 @@ namespace MyCoachTests.DataHandling.DataManager
         [TestMethod]
         public void SetDefaults_HappyPath_SetsDefaultData()
         {
-            this.sut.GetBuffer().Categories = null;
-            this.sut.GetBuffer().Exercises = null;
-            this.sut.GetBuffer().Settings = null;
-            this.sut.GetBuffer().TrainingSchedules = null;
-            this.sut.GetBuffer().TrainingScores = null;
+            this.sut.GetBuffer().Categories.Clear();
+            this.sut.GetBuffer().Exercises.Clear();
+            this.sut.GetBuffer().Settings.Clear();
+            this.sut.GetBuffer().TrainingSchedules.Clear();
+            this.sut.GetBuffer().TrainingScores.Clear();
 
             this.sut.SetDefaults<Category>();
             this.sut.SetDefaults<Exercise>();
