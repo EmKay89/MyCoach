@@ -4,6 +4,7 @@ using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyCoachTests.ViewModel
 {
@@ -18,6 +20,7 @@ namespace MyCoachTests.ViewModel
     public class SettingsViewModelTests
     {
         IDataManager dataManager;
+        IMessageBoxService messageBoxService;
         SettingsViewModel sut;
         List<string> propertyChangedEvents;
 
@@ -25,9 +28,12 @@ namespace MyCoachTests.ViewModel
         public void Init()
         {
             this.dataManager = Mock.Of<IDataManager>(manager =>
-                manager.GetDataTransferObjects<Settings>() == TestDtos.Settings);
+                manager.GetDataTransferObjects<Settings>() == TestDtos.Settings &&
+                manager.SetDataTransferObjects<Settings>(It.IsAny<ObservableCollection<Settings>>()) == true);
+            this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
+                service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
             DataInterface.SetDataManager(dataManager);
-            this.sut = new SettingsViewModel();
+            this.sut = new SettingsViewModel(this.messageBoxService);
             this.propertyChangedEvents = new List<string>();
             this.sut.PropertyChanged += 
                 (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };
@@ -165,9 +171,19 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SetDefaultsCommandExecute_CallsSetDataTransferObjectsOfDataManagerAndHasUnsavedChangesIsFalse()
+        public void SetDefaultsCommandExecute_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
         {
-            // ToDo: Ausfüllen
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns(DefaultDtos.Settings);
+            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Settings>(), Times.Never);
+            Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
+            Assert.IsTrue(this.sut.HasUnsavedChanges);
+
+            this.sut.SetDefaultsCommand.Execute(null);
+
+            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Settings>(), Times.Once);
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
         [TestMethod]
@@ -185,11 +201,13 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void ResetSettingsCommandExecute_CallsSetDataTransferObjectsOfDataManagerAndHasUnsavedChangesIsFalse()
+        public void ResetSettingsCommandExecute_DiscardsChangesAndHasUnsavedChangesIsFalse()
         {
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
             this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(this.sut.HasUnsavedChanges);
 
             this.sut.ResetSettingsCommand.Execute(null);
 

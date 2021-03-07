@@ -93,6 +93,8 @@
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModelExtensions\CategoryExtensionMethods.cs" />
+    <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
+    <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />

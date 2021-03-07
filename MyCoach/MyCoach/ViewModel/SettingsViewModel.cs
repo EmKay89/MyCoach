@@ -2,13 +2,14 @@
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MyCoach.ViewModel
@@ -16,9 +17,11 @@ namespace MyCoach.ViewModel
     public class SettingsViewModel : BaseViewModel
     {
         private string permissionText;
+        private IMessageBoxService messageBoxService;
 
-        public SettingsViewModel()
+        public SettingsViewModel(IMessageBoxService messageBoxService = null)
         {
+            this.messageBoxService = messageBoxService ?? new MessageBoxService();
             this.Settings = new Settings();
             this.LoadSettingsBuffer();
             this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedChanges);
@@ -212,6 +215,7 @@ namespace MyCoach.ViewModel
 
             if (savedSettings == null)
             {
+                // ToDo: passt noch nicht.
                 this.SetDefaultSettings();
                 return;
             }
@@ -234,21 +238,27 @@ namespace MyCoach.ViewModel
 
         private void SaveSettings()
         {
-            // ToDo: Fehlermeldung einbauen, für den Fall, dass das Speichern nicht erfolgreich war.
             ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
-            DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
+            var result = DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
+            if (result == false)
+            {
+                this.messageBoxService.ShowMessage("Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.",
+                    "Speichern",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+
             this.HasUnsavedChanges = false;
         }
 
         private void SetDefaultSettings()
         {
-            // ToDo: Unittestbarkeit herstellen
-            var result = MessageBox.Show("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
+            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Übungen verloren. Möchten Sie fortfahren?",
                 "Zurücksetzen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
-            if (result == DialogResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 DataInterface.GetInstance().SetDefaults<Settings>();
                 this.LoadSettingsBuffer();
