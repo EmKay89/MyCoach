@@ -3,6 +3,7 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.ModelExtensions;
+using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -18,8 +19,9 @@ namespace MyCoach.ViewModel
     public class ExercisesViewModel : BaseViewModel
     {
         private Category selectedCategory;
+        private IMessageBoxService messageBoxService;
 
-        public ExercisesViewModel()
+        public ExercisesViewModel(IMessageBoxService messageBoxService = null)
         {
             this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
             this.Categories = new ObservableCollection<Category>();
@@ -28,6 +30,7 @@ namespace MyCoach.ViewModel
             this.Exercises.CollectionChanged += this.OnExercisesChanges;
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
+            this.messageBoxService = messageBoxService ?? new MessageBoxService();
 
             this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory == null ? false : true);
             this.ExportExercisesCommand = new RelayCommand(this.ExportExercises);
