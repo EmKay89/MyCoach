@@ -48,6 +48,28 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
+        public void Construction_DataInterfaceSettingsIsNull_SetsBufferToDefaultSettings()
+        {
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns((ObservableCollection<Settings>)null);
+
+            this.sut = new SettingsViewModel(this.messageBoxService);
+
+            Assert.IsNotNull(this.sut.Settings);
+            Assert.IsTrue(DtoUtilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+        }
+
+        [TestMethod]
+        public void Construction_DataInterfaceSettingsIsEmpty_SetsBufferToDefaultSettings()
+        {
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns(new ObservableCollection<Settings>());
+
+            this.sut = new SettingsViewModel(this.messageBoxService);
+
+            Assert.IsNotNull(this.sut.Settings);
+            Assert.IsTrue(DtoUtilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+        }
+
+        [TestMethod]
         public void Permission_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
         {            
             this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;

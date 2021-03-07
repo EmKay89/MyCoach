@@ -213,14 +213,10 @@ namespace MyCoach.ViewModel
         {
             var savedSettings = DataInterface.GetInstance().GetDataTransferObjects<Settings>()?.FirstOrDefault();
 
-            if (savedSettings == null)
-            {
-                // ToDo: passt noch nicht.
-                this.SetDefaultSettings();
-                return;
-            }
+            this.Settings = savedSettings != null
+                ? (Settings)savedSettings.Clone()
+                : (Settings)DefaultDtos.Settings.FirstOrDefault().Clone();
 
-            this.Settings = (Settings)savedSettings.Clone();
             this.UpdatePermissionText();
             this.InvokePropertiesChanged(   
                 nameof(this.Permission),

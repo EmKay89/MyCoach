@@ -21,7 +21,14 @@ namespace MyCoachTests
                 var categories = new ObservableCollection<Category>();
                 categories.Add(new Category { ID = ExerciseCategory.WarmUp, Name = "Erwärmung", Count = 3, Active = true, Type = ExerciseType.WarmUp });
                 categories.Add(new Category { ID = ExerciseCategory.Category1, Name = "Arme", Active = true, Type = ExerciseType.Training });
-                categories.Add(new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnung", Count = 0, Active = false, Type = ExerciseType.CoolDown });
+                categories.Add(new Category { ID = ExerciseCategory.Category2, Name = "Bauch", Active = true, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category3, Name = "Seiten", Active = true, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category4, Name = "Rücken", Active = true, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category5, Name = "Beine", Active = true, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category6, Name = "", Active = false, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category7, Name = "", Active = false, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.Category8, Name = "", Active = false, Type = ExerciseType.Training });
+                categories.Add(new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnung", Count = 3, Active = false, Type = ExerciseType.CoolDown });
                 return categories;
             }
         }

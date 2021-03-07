@@ -40,21 +40,51 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        [DataRow("CategoryWarmUpActive")]
-        [DataRow("Category1Active")]
-        [DataRow("Category2Active")]
-        [DataRow("Category3Active")]
-        [DataRow("Category4Active")]
-        [DataRow("Category5Active")]
-        [DataRow("Category6Active")]
-        [DataRow("Category7Active")]
-        [DataRow("Category8Active")]
-        [DataRow("CategoryCoolDownActive")]
-        public void BooleanCategoryProperty_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue(string propertyName)
+        public void Construction_HappyPath_LoadsBuffersAndHasNoUnsavedChanges()
         {
-            var value = this.sut.GetType().GetProperty(propertyName).GetValue(sut, null) as bool?;
+            Assert.IsNotNull(this.sut.Categories);
+            Assert.IsTrue(DtoUtilities.AreEqual(sut.Categories, TestDtos.Categories));
+            Assert.IsFalse(this.sut.HasUnsavedCategories);
 
-            this.sut.GetType().GetProperty(propertyName).SetValue(sut, !value);
+            Assert.IsNotNull(this.sut.Exercises);
+            Assert.IsTrue(DtoUtilities.AreEqual(sut.Exercises, TestDtos.Exercises));
+            Assert.IsFalse(this.sut.HasUnsavedExercises);
+        }
+
+        [TestMethod]
+        [DataRow("CategoryWarmUpActive")]
+        [DataRow("CategoryWarmUpName")]
+        [DataRow("Category1Active")]
+        [DataRow("Category1Name")]
+        [DataRow("Category2Active")]
+        [DataRow("Category2Name")]
+        [DataRow("Category3Active")]
+        [DataRow("Category3Name")]
+        [DataRow("Category4Active")]
+        [DataRow("Category4Name")]
+        [DataRow("Category5Active")]
+        [DataRow("Category5Name")]
+        [DataRow("Category6Active")]
+        [DataRow("Category6Name")]
+        [DataRow("Category7Active")]
+        [DataRow("Category7Name")]
+        [DataRow("Category8Active")]
+        [DataRow("Category8Name")]
+        [DataRow("CategoryCoolDownActive")]
+        [DataRow("CategoryCoolDownName")]
+        public void Property_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue(string propertyName)
+        {
+            switch (this.sut.GetType().GetProperty(propertyName).GetValue(this.sut, null))
+            {
+                case bool boolProperty:
+                    this.sut.GetType().GetProperty(propertyName).SetValue(sut, !boolProperty);
+                    break;
+                case string stringProperty:
+                    this.sut.GetType().GetProperty(propertyName).SetValue(sut, string.Concat(stringProperty, "SomeAddition"));
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
 
             Assert.AreEqual(1, this.propertyChangedEvents.Count);
             Assert.AreEqual(this.propertyChangedEvents[0], propertyName);
