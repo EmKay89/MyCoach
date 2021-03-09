@@ -45,9 +45,13 @@ namespace MyCoach.ViewModel
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaults);
         }
 
+        public const string NEW_EXERCISE_NAME = "Neue Übung";
+        public const string LOADING_ERROR_TEXT = "Fehler beim Laden";
+        public const string SAVING_ERROR_TEXT = "Fehler beim Speichern";
+
         public ObservableCollection<Category> Categories { get; set; }
 
-        public ObservableCollection<Exercise> Exercises { get; }
+        public ObservableCollection<Exercise> Exercises { get; set; }
 
         public ObservableCollection<ExerciseViewModel> ExercisesFilteredByCategory { get; set; }
 
@@ -453,7 +457,7 @@ namespace MyCoach.ViewModel
 
             set
             {
-                if (value == this.selectedCategory || value == null)
+                if (value == this.selectedCategory)
                 {
                     return;
                 }
@@ -488,7 +492,7 @@ namespace MyCoach.ViewModel
         private void AddExercise()
         {
             this.Exercises.Add(
-                new Exercise { Name = "Neue Übung", Active = true, Scores = 10, Category = this.SelectedCategory.ID });
+                new Exercise { Name = NEW_EXERCISE_NAME, Active = true, Scores = 10, Category = this.SelectedCategory.ID });
             this.RefreshExercisesFilteredByCategory();
             this.HasUnsavedExercises = true;
         }
@@ -500,6 +504,7 @@ namespace MyCoach.ViewModel
 
             if (path == null)
             {
+                this.messageBoxService.ShowMessage(LOADING_ERROR_TEXT, LOADING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -510,7 +515,7 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            this.messageBoxService.ShowMessage("Fehler beim Laden", "Fehler beim Laden", MessageBoxButton.OK, MessageBoxImage.Error);
+            this.messageBoxService.ShowMessage(LOADING_ERROR_TEXT, LOADING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void ExportExercises()
@@ -520,6 +525,7 @@ namespace MyCoach.ViewModel
 
             if (path == null)
             {
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -528,7 +534,7 @@ namespace MyCoach.ViewModel
 
             if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
             {
-                this.messageBoxService.ShowMessage("Fehler beim Speichern", "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

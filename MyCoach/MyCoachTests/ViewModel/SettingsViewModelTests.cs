@@ -175,7 +175,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SaveSettingsCommandExecute_CallsSetDataTransferObjectsOfDataManagerAndHasUnsavedChangesIsFalse()
+        public void SaveSettingsCommandExecute_HappyPath_CallsSetDataTransferObjectsOfDataManagerAndHasUnsavedChangesIsFalse()
         {
             this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
 
@@ -193,7 +193,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SetDefaultsCommandExecute_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
+        public void SetDefaultsCommandExecute_HappyPath_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
         {
             Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns(DefaultDtos.Settings);
             Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Settings>(), Times.Never);
@@ -223,7 +223,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void ResetSettingsCommandExecute_DiscardsChangesAndHasUnsavedChangesIsFalse()
+        public void ResetSettingsCommandExecute_HappyPath_DiscardsChangesAndHasUnsavedChangesIsFalse()
         {
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
