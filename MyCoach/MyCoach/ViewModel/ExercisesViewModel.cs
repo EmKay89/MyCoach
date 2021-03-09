@@ -1,4 +1,5 @@
-﻿using MyCoach.DataHandling;
+﻿using Microsoft.Win32;
+using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
@@ -10,8 +11,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace MyCoach.ViewModel
@@ -20,8 +21,9 @@ namespace MyCoach.ViewModel
     {
         private Category selectedCategory;
         private IMessageBoxService messageBoxService;
+        private IFileDialogService fileDialogService;
 
-        public ExercisesViewModel(IMessageBoxService messageBoxService = null)
+        public ExercisesViewModel(IMessageBoxService messageBoxService = null, IFileDialogService fileDialogService = null)
         {
             this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
             this.Categories = new ObservableCollection<Category>();
@@ -31,6 +33,7 @@ namespace MyCoach.ViewModel
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
+            this.fileDialogService = fileDialogService ?? new FileDialogService();
 
             this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory == null ? false : true);
             this.ExportExercisesCommand = new RelayCommand(this.ExportExercises);
@@ -490,50 +493,12 @@ namespace MyCoach.ViewModel
             this.HasUnsavedExercises = true;
         }
 
-        private string GetExportPath()
-        {
-            var filePath = string.Empty;
-
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.InitialDirectory = Application.StartupPath;
-                saveFileDialog.Filter = "XML files (*.xml)|*.xml";
-                saveFileDialog.FilterIndex = 1;
-                saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = saveFileDialog.FileName;
-                }
-            }
-
-            return filePath;
-        }
-
-        private string GetImportPath()
-        {
-            var filePath = string.Empty;
-
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = Application.StartupPath;
-                openFileDialog.Filter = "XML files (*.xml)|*.xml";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = openFileDialog.FileName;
-                }
-            }
-
-            return filePath;
-        }
-
         private void ImportExercises()
         {
-            var path = this.GetImportPath();
-            if (path == string.Empty)
+            var path = this.fileDialogService.OpenFile(
+                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
+
+            if (path == null)
             {
                 return;
             }
@@ -545,13 +510,15 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            MessageBox.Show("Fehler beim Laden", "Fehler beim Laden", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.messageBoxService.ShowMessage("Fehler beim Laden", "Fehler beim Laden", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void ExportExercises()
         {
-            var path = this.GetExportPath();
-            if (path == string.Empty)
+            var path = this.fileDialogService.SaveFile(
+                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
+
+            if (path == null)
             {
                 return;
             }
@@ -561,7 +528,7 @@ namespace MyCoach.ViewModel
 
             if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
             {
-                MessageBox.Show("Fehler beim Speichern", "Fehler beim Speichern", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.messageBoxService.ShowMessage("Fehler beim Speichern", "Fehler beim Speichern", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -645,7 +612,15 @@ namespace MyCoach.ViewModel
                 savedCategories.Add((Category)category.Clone());
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            var result = DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            if (result == false)
+            {
+                this.messageBoxService.ShowMessage("Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.",
+                    "Speichern",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+
             this.InvokePropertyChanged(nameof(SelectedCategory));
             this.HasUnsavedCategories = false;
         }
@@ -665,12 +640,12 @@ namespace MyCoach.ViewModel
 
         private void SetDefaults()
         {
-            var result = MessageBox.Show("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
+            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
                 "Zurücksetzen",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
-            if (result == DialogResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 DataInterface.GetInstance().SetDefaults<Exercise>();
                 DataInterface.GetInstance().SetDefaults<Category>();
