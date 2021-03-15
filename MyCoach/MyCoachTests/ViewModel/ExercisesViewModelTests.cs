@@ -88,16 +88,12 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void AddExerciseCommandCanExecute_SelectedCategoryIsNull_ReturnsFalse()
+        public void AddExerciseCommandCanExecute_SelectedCategoryIsNotNull_ReturnsTrue()
         {
             this.sut.SelectedCategory = null;
 
             Assert.IsFalse(this.sut.AddExerciseCommand.CanExecute(null));
-        }
 
-        [TestMethod]
-        public void AddExerciseCommandCanExecute_SelectedCategoryIsNotNull_ReturnsTrue()
-        {
             this.sut.SelectedCategory = this.sut.Categories.FirstOrDefault();
 
             Assert.IsTrue(this.sut.AddExerciseCommand.CanExecute(null));
@@ -152,6 +148,87 @@ namespace MyCoachTests.ViewModel
                 It.IsAny<MessageBoxImage>()), Times.Once());
         }
 
+        [TestMethod]
+        public void ImportExercisesCommandCanExecute_ReturnsTrue()
+        {
+            Assert.IsTrue(this.sut.ImportExercisesCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void ImportExerciseCommandExecute_HappyPath_TriggersImportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
+        {
+            Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Exercise>()).Returns(DefaultDtos.Exercises);
+            this.sut.HasUnsavedCategories = true;
+            this.sut.HasUnsavedExercises = true;
+
+            this.sut.ImportExercisesCommand.Execute(null);
+
+            Mock.Get(this.dataManager).Verify(dm => dm.TryImportExerciseSet(validImportPath), Times.Once);
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
+            Assert.IsFalse(this.sut.HasUnsavedCategories);
+            Assert.IsFalse(this.sut.HasUnsavedExercises);
+        }
+
+        [TestMethod]
+        public void ImportExerciseCommandExecute_DataManagerReturnsFalse_ShowsLoadingErrorMessage()
+        {
+            Mock.Get(this.dataManager).Setup(dm => dm.TryImportExerciseSet(It.IsAny<string>())).Returns(false);
+
+            this.sut.ImportExercisesCommand.Execute(null);
+
+            Mock.Get(this.messageBoxService).Verify(service => service.ShowMessage(
+                ExercisesViewModel.LOADING_ERROR_TEXT,
+                ExercisesViewModel.LOADING_ERROR_TEXT,
+                It.IsAny<MessageBoxButton>(),
+                It.IsAny<MessageBoxImage>()),Times.Once());
+        }
+
+        [TestMethod]
+        public void ResetCategoriesCommandCanExecute_UnsavedCategories_ReturnsTrue()
+        {
+            Assert.IsFalse(this.sut.ResetCategoriesCommand.CanExecute(null));
+
+            this.sut.HasUnsavedCategories = true;
+
+            Assert.IsTrue(this.sut.ResetCategoriesCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void ResetCategoriesCommandExecute_HappyPath_ReloadsCategoriesFromDataManager()
+        {
+            this.sut.Categories = DefaultDtos.Categories;
+            this.sut.HasUnsavedCategories = true;
+
+            this.sut.ResetCategoriesCommand.Execute(null);
+
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, TestDtos.Categories));
+            Assert.IsFalse(this.sut.HasUnsavedCategories);
+        }
+
+        [TestMethod]
+        public void ResetExercisesCommandCanExecute_UnsavedExercises_ReturnsTrue()
+        {
+            Assert.IsFalse(this.sut.ResetExercisesCommand.CanExecute(null));
+
+            this.sut.HasUnsavedExercises = true;
+
+            Assert.IsTrue(this.sut.ResetExercisesCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void ResetExercisesCommandExecute_HappyPath_ReloadsExercisesFromDataManager()
+        {
+            this.sut.Exercises = DefaultDtos.Exercises;
+            this.sut.HasUnsavedExercises = true;
+
+            this.sut.ResetExercisesCommand.Execute(null);
+
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
+            Assert.IsFalse(this.sut.HasUnsavedExercises);
+        }
+
         private void SetupServices()
         {
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
@@ -169,10 +246,8 @@ namespace MyCoachTests.ViewModel
                 manager.GetDataTransferObjects<Exercise>() == TestDtos.Exercises &&
                 manager.SetDataTransferObjects<Exercise>(It.IsAny<ObservableCollection<Exercise>>()) == true &&
                 manager.TryExportExerciseSet(validExportPath) == true &&
-                manager.TryExportExerciseSet(It.IsAny<string>()) == false &&
-                manager.TryImportExerciseSet(validImportPath) == true &&
-                manager.TryImportExerciseSet(It.IsAny<string>()) == false);
-            DataInterface.SetDataManager(dataManager);
+                manager.TryImportExerciseSet(validImportPath) == true);
+            DataInterface.SetDataManager(this.dataManager);
         }
     }
 }

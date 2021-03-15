@@ -497,6 +497,26 @@ namespace MyCoach.ViewModel
             this.HasUnsavedExercises = true;
         }
 
+        private void ExportExercises()
+        {
+            var path = this.fileDialogService.SaveFile(
+                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
+
+            if (path == null)
+            {
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            this.LoadCategoryBuffer();
+            this.LoadExerciseBuffer();
+
+            if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
+            {
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void ImportExercises()
         {
             var path = this.fileDialogService.OpenFile(
@@ -516,26 +536,6 @@ namespace MyCoach.ViewModel
             }
 
             this.messageBoxService.ShowMessage(LOADING_ERROR_TEXT, LOADING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-
-        private void ExportExercises()
-        {
-            var path = this.fileDialogService.SaveFile(
-                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
-
-            if (path == null)
-            {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            this.LoadCategoryBuffer();
-            this.LoadExerciseBuffer();
-
-            if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
-            {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         private void LoadCategoryBuffer()

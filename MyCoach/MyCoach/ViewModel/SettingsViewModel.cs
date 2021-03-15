@@ -249,7 +249,7 @@ namespace MyCoach.ViewModel
 
         private void SetDefaultSettings()
         {
-            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Übungen verloren. Möchten Sie fortfahren?",
+            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Einstellungen verloren. Möchten Sie fortfahren?",
                 "Zurücksetzen",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
