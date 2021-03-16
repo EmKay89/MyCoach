@@ -17,6 +17,8 @@ namespace MyCoachTests.ViewModel
     [TestClass]
     public class ExercisesViewModelTests
     {
+        #region Initialization and Cleanup
+
         private const string validExportPath = "validExportPath";
         private const string validImportPath = "validImportPath";
         IDataManager dataManager;
@@ -35,6 +37,10 @@ namespace MyCoachTests.ViewModel
             this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };
         }
 
+        #endregion
+
+        #region Construction and Properties Tests
+
         [TestMethod]
         public void Construction_HappyPath_LoadsBuffersAndHasNoUnsavedChanges()
         {
@@ -48,26 +54,26 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        [DataRow("CategoryWarmUpActive")]
-        [DataRow("CategoryWarmUpName")]
-        [DataRow("Category1Active")]
-        [DataRow("Category1Name")]
-        [DataRow("Category2Active")]
-        [DataRow("Category2Name")]
-        [DataRow("Category3Active")]
-        [DataRow("Category3Name")]
-        [DataRow("Category4Active")]
-        [DataRow("Category4Name")]
-        [DataRow("Category5Active")]
-        [DataRow("Category5Name")]
-        [DataRow("Category6Active")]
-        [DataRow("Category6Name")]
-        [DataRow("Category7Active")]
-        [DataRow("Category7Name")]
-        [DataRow("Category8Active")]
-        [DataRow("Category8Name")]
-        [DataRow("CategoryCoolDownActive")]
-        [DataRow("CategoryCoolDownName")]
+        [DataRow(nameof(ExercisesViewModel.CategoryWarmUpActive))]
+        [DataRow(nameof(ExercisesViewModel.CategoryWarmUpName))]
+        [DataRow(nameof(ExercisesViewModel.Category1Active))]
+        [DataRow(nameof(ExercisesViewModel.Category1Name))]
+        [DataRow(nameof(ExercisesViewModel.Category2Active))]
+        [DataRow(nameof(ExercisesViewModel.Category2Name))]
+        [DataRow(nameof(ExercisesViewModel.Category3Active))]
+        [DataRow(nameof(ExercisesViewModel.Category3Name))]
+        [DataRow(nameof(ExercisesViewModel.Category4Active))]
+        [DataRow(nameof(ExercisesViewModel.Category4Name))]
+        [DataRow(nameof(ExercisesViewModel.Category5Active))]
+        [DataRow(nameof(ExercisesViewModel.Category5Name))]
+        [DataRow(nameof(ExercisesViewModel.Category6Active))]
+        [DataRow(nameof(ExercisesViewModel.Category6Name))]
+        [DataRow(nameof(ExercisesViewModel.Category7Active))]
+        [DataRow(nameof(ExercisesViewModel.Category7Name))]
+        [DataRow(nameof(ExercisesViewModel.Category8Active))]
+        [DataRow(nameof(ExercisesViewModel.Category8Name))]
+        [DataRow(nameof(ExercisesViewModel.CategoryCoolDownActive))]
+        [DataRow(nameof(ExercisesViewModel.CategoryCoolDownName))]
         public void Property_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue(string propertyName)
         {
             switch (this.sut.GetType().GetProperty(propertyName).GetValue(this.sut, null))
@@ -86,6 +92,10 @@ namespace MyCoachTests.ViewModel
             Assert.AreEqual(this.propertyChangedEvents[0], propertyName);
             Assert.IsTrue(this.sut.HasUnsavedCategories);
         }
+
+        #endregion
+
+        #region Command Tests
 
         [TestMethod]
         public void AddExerciseCommandCanExecute_SelectedCategoryIsNotNull_ReturnsTrue()
@@ -118,7 +128,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void ExportExerciseCommandExecute_HappyPath_TriggersExportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
+        public void ExportExerciseCommandExecute_HappyPath_CallsExportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
         {
             this.sut.Categories = DefaultDtos.Categories;
             this.sut.Exercises = DefaultDtos.Exercises;
@@ -142,8 +152,8 @@ namespace MyCoachTests.ViewModel
             this.sut.ExportExercisesCommand.Execute(null);
 
             Mock.Get(this.messageBoxService).Verify(service => service.ShowMessage(
-                ExercisesViewModel.SAVING_ERROR_TEXT,
-                ExercisesViewModel.SAVING_ERROR_TEXT,
+                ExercisesViewModel.EXPORT_ERROR_TEXT,
+                ExercisesViewModel.EXPORT_ERROR_TEXT,
                 It.IsAny<MessageBoxButton>(),
                 It.IsAny<MessageBoxImage>()), Times.Once());
         }
@@ -155,7 +165,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void ImportExerciseCommandExecute_HappyPath_TriggersImportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
+        public void ImportExerciseCommandExecute_HappyPath_CallsImportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
         {
             Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Category>()).Returns(DefaultDtos.Categories);
             Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Exercise>()).Returns(DefaultDtos.Exercises);
@@ -179,8 +189,8 @@ namespace MyCoachTests.ViewModel
             this.sut.ImportExercisesCommand.Execute(null);
 
             Mock.Get(this.messageBoxService).Verify(service => service.ShowMessage(
-                ExercisesViewModel.LOADING_ERROR_TEXT,
-                ExercisesViewModel.LOADING_ERROR_TEXT,
+                ExercisesViewModel.IMPORT_ERROR_TEXT,
+                ExercisesViewModel.IMPORT_ERROR_TEXT,
                 It.IsAny<MessageBoxButton>(),
                 It.IsAny<MessageBoxImage>()),Times.Once());
         }
@@ -229,6 +239,114 @@ namespace MyCoachTests.ViewModel
             Assert.IsFalse(this.sut.HasUnsavedExercises);
         }
 
+        [TestMethod]
+        public void SaveCategoriesCommandCanExecute_UnsavedCategories_ReturnsTrue()
+        {
+            Assert.IsFalse(this.sut.SaveCategoriesCommand.CanExecute(null));
+
+            this.sut.HasUnsavedCategories = true;
+
+            Assert.IsTrue(this.sut.SaveCategoriesCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void SaveCategoriesCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndSetsUnsavedCategoriesToFalseAndRaisesPropertyChanged()
+        {
+            this.sut.HasUnsavedCategories = true;
+
+            this.sut.SaveCategoriesCommand.Execute(null);
+
+            Mock.Get(this.dataManager).Verify(
+                dataManager => dataManager.SetDataTransferObjects(
+                    It.Is<ObservableCollection<Category>>(c => DtoUtilities.AreEqual(c, TestDtos.Categories))), Times.Once);
+            Assert.IsTrue(this.sut.HasUnsavedCategories == false);
+            Assert.AreEqual(1, this.propertyChangedEvents.Count);
+            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedCategory));
+        }
+
+        [TestMethod]
+        public void SaveCategoriesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedCategoriesToFalse()
+        {
+            Mock.Get(this.dataManager).Setup(dm => dm.SetDataTransferObjects(It.IsAny<ObservableCollection<Category>>())).Returns(false);
+            this.sut.HasUnsavedCategories = true;
+
+            this.sut.SaveCategoriesCommand.Execute(null);
+
+            Mock.Get(this.messageBoxService).Verify(
+                service => service.ShowMessage(
+                    ExercisesViewModel.SAVING_ERROR_TEXT,
+                    ExercisesViewModel.SAVING_ERROR_CAPTION,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error), Times.Once);
+
+            Assert.IsTrue(this.sut.HasUnsavedCategories == false);
+        }
+
+        [TestMethod]
+        public void SaveExercisesCommandCanExecute_UnsavedExercises_ReturnsTrue()
+        {
+            Assert.IsFalse(this.sut.SaveExercisesCommand.CanExecute(null));
+
+            this.sut.HasUnsavedExercises = true;
+
+            Assert.IsTrue(this.sut.SaveExercisesCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void SaveExercisesCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndSetsUnsavedExercisesToFalse()
+        {
+            this.sut.HasUnsavedExercises = true;
+
+            this.sut.SaveExercisesCommand.Execute(null);
+
+            Mock.Get(this.dataManager).Verify(
+                dataManager => dataManager.SetDataTransferObjects(
+                    It.Is<ObservableCollection<Exercise>>(e => DtoUtilities.AreEqual(e, TestDtos.Exercises))), Times.Once);
+            this.sut.HasUnsavedExercises = false;
+        }
+
+        [TestMethod]
+        public void SaveExercisesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedExercisesToFalse()
+        {
+            Mock.Get(this.dataManager).Setup(dm => dm.SetDataTransferObjects(It.IsAny<ObservableCollection<Exercise>>())).Returns(false);
+            this.sut.HasUnsavedExercises = true;
+
+            this.sut.SaveExercisesCommand.Execute(null);
+
+            Mock.Get(this.messageBoxService).Verify(
+                service => service.ShowMessage(
+                    ExercisesViewModel.SAVING_ERROR_TEXT,
+                    ExercisesViewModel.SAVING_ERROR_CAPTION,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error), Times.Once);
+
+            Assert.IsTrue(this.sut.HasUnsavedExercises == false);
+        }
+
+        [TestMethod]
+        public void SetDefaultsCommandCanExecute_ReturnsTrue()
+        {
+            Assert.IsTrue(this.sut.SetDefaultsCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void SetDefaultsCommandCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndLoadsExerciseAndCategoryBuffer()
+        {
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Exercise>()).Returns(DefaultDtos.Exercises);
+
+            this.sut.SetDefaultsCommand.Execute(null);
+
+            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Exercise>(), Times.Once);
+            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Category>(), Times.Once);
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
+            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
+        }
+
+        #endregion
+
+        #region Helper Methods
+
         private void SetupServices()
         {
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
@@ -242,12 +360,14 @@ namespace MyCoachTests.ViewModel
         {
             this.dataManager = Mock.Of<IDataManager>(manager =>
                 manager.GetDataTransferObjects<Category>() == TestDtos.Categories &&
-                manager.SetDataTransferObjects<Category>(It.IsAny<ObservableCollection<Category>>()) == true &&
+                manager.SetDataTransferObjects(It.IsAny<ObservableCollection<Category>>()) == true &&
                 manager.GetDataTransferObjects<Exercise>() == TestDtos.Exercises &&
-                manager.SetDataTransferObjects<Exercise>(It.IsAny<ObservableCollection<Exercise>>()) == true &&
+                manager.SetDataTransferObjects(It.IsAny<ObservableCollection<Exercise>>()) == true &&
                 manager.TryExportExerciseSet(validExportPath) == true &&
                 manager.TryImportExerciseSet(validImportPath) == true);
             DataInterface.SetDataManager(this.dataManager);
         }
+
+        #endregion
     }
 }

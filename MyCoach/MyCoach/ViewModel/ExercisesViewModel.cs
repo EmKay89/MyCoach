@@ -46,8 +46,12 @@ namespace MyCoach.ViewModel
         }
 
         public const string NEW_EXERCISE_NAME = "Neue Übung";
-        public const string LOADING_ERROR_TEXT = "Fehler beim Laden";
-        public const string SAVING_ERROR_TEXT = "Fehler beim Speichern";
+        public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
+        public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
+        public const string SAVING_ERROR_CAPTION = "Speichern fehlgeschlagen";
+        public const string SAVING_ERROR_TEXT = "Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.";
+        public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
+        public const string RESET_CAPTION = "Zurücksetzen";
 
         public ObservableCollection<Category> Categories { get; set; }
 
@@ -504,7 +508,7 @@ namespace MyCoach.ViewModel
 
             if (path == null)
             {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+                this.messageBoxService.ShowMessage(EXPORT_ERROR_TEXT, EXPORT_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -513,7 +517,7 @@ namespace MyCoach.ViewModel
 
             if (DataInterface.GetInstance().ExportExerciseSet(path) == false)
             {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+                this.messageBoxService.ShowMessage(EXPORT_ERROR_TEXT, EXPORT_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -524,7 +528,7 @@ namespace MyCoach.ViewModel
 
             if (path == null)
             {
-                this.messageBoxService.ShowMessage(LOADING_ERROR_TEXT, LOADING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+                this.messageBoxService.ShowMessage(IMPORT_ERROR_TEXT, IMPORT_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -535,7 +539,7 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            this.messageBoxService.ShowMessage(LOADING_ERROR_TEXT, LOADING_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
+            this.messageBoxService.ShowMessage(IMPORT_ERROR_TEXT, IMPORT_ERROR_TEXT, MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
         private void LoadCategoryBuffer()
@@ -621,10 +625,7 @@ namespace MyCoach.ViewModel
             var result = DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
             if (result == false)
             {
-                this.messageBoxService.ShowMessage("Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.",
-                    "Speichern",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             this.InvokePropertyChanged(nameof(SelectedCategory));
@@ -640,16 +641,18 @@ namespace MyCoach.ViewModel
                 savedExercises.Add((Exercise)exercise.Clone());
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            var result = DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            if (result == false)
+            {
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
             this.HasUnsavedExercises = false;
         }
 
         private void SetDefaults()
         {
-            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?",
-                "Zurücksetzen",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Warning);
+            var result = this.messageBoxService.ShowMessage(RESET_TEXT, RESET_CAPTION, MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
