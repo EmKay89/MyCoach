@@ -14,22 +14,36 @@ namespace MyCoach.ViewModel
         public TrainingScheduleViewModel()
         {
             this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.TrainingSchedule = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault();
+            this.Months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+
+            this.BuildMonths();
+
             this.EditViewModel = new EditTrainingScheduleViewModel();
-            this.ViewViewModel = new ViewTriainingScheduleViewModel();
+            this.ViewViewModel = new ViewTriainingScheduleViewModel(this);
         }
 
 #region Proerties
 
+        public ObservableCollection<Category> Categories { get; }
+
         public EditTrainingScheduleViewModel EditViewModel { get; }
+
+        public ObservableCollection<Month> Months { get; }
+
+        public TrainingSchedule TrainingSchedule { get; }
 
         public ViewTriainingScheduleViewModel ViewViewModel { get; }
 
-        public ObservableCollection<Category> Categories { get; set; }
-
 #endregion
 
+#region Methods
 
+        private void BuildMonths()
+        {
+            // ToDo: Make sure, that there are always 13 months in the DataInterface Buffer.
+        }
 
-
+#endregion
     }
 }

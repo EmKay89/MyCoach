@@ -108,6 +108,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// <summary>
         ///     Ruft das Punkteziel für alle Monate ab, oder legt es fest.
         /// </summary>
-        public int TotalGoal { get; set; }
+        public uint TotalGoal { get; set; }
     }
 }

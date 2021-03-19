@@ -301,7 +301,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public int TotalGoal
+        public uint TotalGoal
         {
             get => this.month.TotalGoal;
 
