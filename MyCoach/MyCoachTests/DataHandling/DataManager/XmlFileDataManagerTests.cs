@@ -29,7 +29,7 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
             var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
             var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<TrainingScore>();
+            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
 
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, TestDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, TestDtos.Exercises));
@@ -48,7 +48,7 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
             var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
             var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<TrainingScore>();
+            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, DefaultDtos.Settings));
@@ -74,13 +74,13 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.SetDataTransferObjects<Exercise>(DefaultDtos.Exercises);
             this.sut.SetDataTransferObjects<Settings>(DefaultDtos.Settings);
             this.sut.SetDataTransferObjects<TrainingSchedule>(DefaultDtos.TrainingSchedules);
-            this.sut.SetDataTransferObjects<TrainingScore>(DefaultDtos.TrainingScores);
+            this.sut.SetDataTransferObjects<Month>(DefaultDtos.TrainingScores);
 
             var loadedCategories = this.sut.GetDataTransferObjects<Category>();
             var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
             var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
             var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<TrainingScore>();
+            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, DefaultDtos.Settings));
@@ -105,7 +105,7 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
             var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
             var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<TrainingScore>();
+            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, TestDtos.Settings));

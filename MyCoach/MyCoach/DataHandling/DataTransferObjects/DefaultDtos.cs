@@ -47,9 +47,9 @@ namespace MyCoach.DataHandling.DataTransferObjects
             get => new ObservableCollection<TrainingSchedule>();
         }
 
-        public static ObservableCollection<TrainingScore> TrainingScores
+        public static ObservableCollection<Month> TrainingScores
         {
-            get => new ObservableCollection<TrainingScore>();
+            get => new ObservableCollection<Month>();
         }
 
         public static DtoCollection Collection

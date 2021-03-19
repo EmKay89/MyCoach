@@ -38,7 +38,7 @@ namespace MyCoach.DataHandling.DataManager
                     return this.Buffer.Settings as ObservableCollection<T>;
                 case nameof(TrainingSchedule):
                     return this.Buffer.TrainingSchedules as ObservableCollection<T>;
-                case nameof(TrainingScore):
+                case nameof(Month):
                     return this.Buffer.TrainingScores as ObservableCollection<T>;
                 default:
                     return new ObservableCollection<T>();
@@ -79,7 +79,7 @@ namespace MyCoach.DataHandling.DataManager
                 case ObservableCollection<TrainingSchedule> list:
                     this.Buffer.TrainingSchedules = list;
                     break;
-                case ObservableCollection<TrainingScore> list:
+                case ObservableCollection<Month> list:
                     this.Buffer.TrainingScores = list;
                     break;
             }

@@ -91,7 +91,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             for (int i = 0; i < list1.Count; i++)
             {
                 if (list1[i].StartMonth != list2[i].StartMonth ||
-                    list1[i].StartYear != list2[i].StartYear ||
+                    list1[i].ScheduleType != list2[i].ScheduleType ||
                     list1[i].Duration != list2[i].Duration)
                 {
                     return false;
@@ -101,7 +101,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(ObservableCollection<TrainingScore> list1, ObservableCollection<TrainingScore> list2)
+        public static bool AreEqual(ObservableCollection<Month> list1, ObservableCollection<Month> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -110,7 +110,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
             for (int i = 0; i < list1.Count; i++)
             {
-                if (list1[i].Month != list2[i].Month ||
+                if (list1[i].Number != list2[i].Number ||
                     list1[i].Category1Goal != list2[i].Category1Goal ||
                     list1[i].Category1Scores != list2[i].Category1Scores ||
                     list1[i].Category2Goal != list2[i].Category2Goal ||
@@ -126,7 +126,8 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     list1[i].Category7Goal != list2[i].Category7Goal ||
                     list1[i].Category7Scores != list2[i].Category7Scores ||
                     list1[i].Category8Goal != list2[i].Category8Goal ||
-                    list1[i].Category8Scores != list2[i].Category8Scores)
+                    list1[i].Category8Scores != list2[i].Category8Scores ||
+                    list1[i].TotalGoal != list2[i].TotalScores)
                 {
                     return false;
                 }
@@ -180,9 +181,9 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     var schedules1 = new ObservableCollection<TrainingSchedule> { schedule };
                     var schedules2 = new ObservableCollection<TrainingSchedule> { dto2 as TrainingSchedule };
                     return AreEqual(schedules1, schedules2);
-                case TrainingScore score:
-                    var scores1 = new ObservableCollection<TrainingScore> { score };
-                    var scores2 = new ObservableCollection<TrainingScore> { dto2 as TrainingScore };
+                case Month score:
+                    var scores1 = new ObservableCollection<Month> { score };
+                    var scores2 = new ObservableCollection<Month> { dto2 as Month };
                     return AreEqual(scores1, scores2);
                 default:
                     return false;

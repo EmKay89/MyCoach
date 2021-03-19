@@ -1,23 +1,24 @@
 ﻿using MyCoach.Defines;
+using System;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert die Eckdaten eines Trainingsplans. Der gesamte Plan setzt sich aus den Daten dieser Klasse und
-    ///     den monatsbezogenen Punktezielen für die jeweiligen Kategorien zusammen, welche in der Klasse TrainingScore
+    ///     den monatsbezogenen Punktezielen für die jeweiligen Kategorien zusammen, welche in der Klasse <see cref="Month"/>
     ///     gespeichert sind.
     /// </summary>
     public class TrainingSchedule : DtoBase, IDataTransferObject
     {
         /// <summary>
-        ///     Ruft den Startmonat des Trainingsplans auf, oder legt ihn fest.
+        ///     Ruft den Trainingsplantyp an, oder legt ihn fest.
         /// </summary>
-        public Month StartMonth { get; set; }
+        public ScheduleType ScheduleType { get; set; }
 
         /// <summary>
-        ///     Ruft das Startjahr des Trainingsplans auf, oder legt es fest.
+        ///     Ruft den Startmonat des Trainingsplans auf, oder legt ihn fest.
         /// </summary>
-        public ushort StartYear { get; set; }
+        public DateTime StartMonth { get; set; }
 
         /// <summary>
         ///     Ruft die Dauer des Trainingsplans in Monaten auf, oder legt sie fest.

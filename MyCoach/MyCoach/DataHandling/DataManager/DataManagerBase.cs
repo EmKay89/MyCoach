@@ -95,7 +95,7 @@ namespace MyCoach.DataHandling.DataManager
                     }
 
                     break;
-                case nameof(TrainingScore):
+                case nameof(Month):
                     this.Buffer.TrainingScores.Clear();
                     foreach (var ts in DefaultDtos.TrainingScores)
                     {

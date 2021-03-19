@@ -104,8 +104,8 @@ namespace MyCoachTests
                 var schedules = new ObservableCollection<TrainingSchedule>();
                 schedules.Add(new TrainingSchedule
                 {
-                    StartMonth = Month.April,
-                    StartYear = 2020,
+                    StartMonth = DateTime.MinValue,
+                    ScheduleType = ScheduleType.TimeBased,
                     Duration = 5
                 });
 
@@ -113,14 +113,14 @@ namespace MyCoachTests
             }
         }
 
-        public static ObservableCollection<TrainingScore> TrainingScores
+        public static ObservableCollection<Month> TrainingScores
         {
             get
             {
-                var scores = new ObservableCollection<TrainingScore>();
-                scores.Add(new TrainingScore
+                var scores = new ObservableCollection<Month>();
+                scores.Add(new Month
                 {
-                    Month = Month.März,
+                    Number = MonthNumber.Month3,
                     Category1Goal = 100,
                     Category1Scores = 50,
                     Category2Goal = 100,
@@ -139,9 +139,9 @@ namespace MyCoachTests
                     Category8Scores = 50
                 });
 
-                scores.Add(new TrainingScore
+                scores.Add(new Month
                 {
-                    Month = Month.April,
+                    Number = MonthNumber.Month4,
                     Category1Goal = 120,
                     Category1Scores = 70,
                     Category2Goal = 120,

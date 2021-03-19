@@ -48,7 +48,7 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.SetDefaults<Exercise>();
             this.sut.SetDefaults<Settings>();
             this.sut.SetDefaults<TrainingSchedule>();
-            this.sut.SetDefaults<TrainingScore>();
+            this.sut.SetDefaults<Month>();
 
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));

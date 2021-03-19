@@ -5,12 +5,12 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// <summary>
     ///     Repräsentiert Istwerte und Ziele für das Erreichen von Trainingspunkten der jeweiligen Übungskategorien bezogen auf einen Monat.
     /// </summary>
-    public class TrainingScore : DtoBase, IDataTransferObject
+    public class Month : DtoBase, IDataTransferObject
     {
         /// <summary>
         ///     Ruft den Bezugsmonat auf, oder legt ihn fest.
         /// </summary>
-        public Month Month { get; set; }
+        public MonthNumber Number { get; set; }
 
         /// <summary>
         ///     Ruft die für Kategorie 1 erreichten Punkte auf, oder legt sie fest.
@@ -91,5 +91,23 @@ namespace MyCoach.DataHandling.DataTransferObjects
         ///     Ruft das für Kategorie 8 gesetzte Punkteziel auf, oder legt es fest.
         /// </summary>
         public ushort Category8Goal { get; set; }
+
+        /// <summary>
+        ///     Ruft die für alle Kategorien erreichten Punkte auf.
+        /// </summary>
+        public int TotalScores { get => this.Category1Scores
+                + this.Category2Scores
+                + this.Category3Scores
+                + this.Category4Scores
+                + this.Category5Scores
+                + this.Category6Scores
+                + this.Category7Scores
+                + this.Category8Scores;
+        }
+
+        /// <summary>
+        ///     Ruft das Punkteziel für alle Monate ab, oder legt es fest.
+        /// </summary>
+        public ushort TotalGoal { get; set; }
     }
 }

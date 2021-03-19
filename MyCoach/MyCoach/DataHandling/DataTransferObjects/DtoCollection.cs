@@ -13,6 +13,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         public ObservableCollection<Exercise> Exercises { get; set; }
         public ObservableCollection<Settings> Settings { get; set; }
         public ObservableCollection<TrainingSchedule> TrainingSchedules { get; set; }
-        public ObservableCollection<TrainingScore> TrainingScores { get; set; }
+        public ObservableCollection<Month> TrainingScores { get; set; }
     }
 }

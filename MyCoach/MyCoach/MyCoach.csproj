@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
+    <Compile Include="Defines\ScheduleType.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
     <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
@@ -83,11 +84,11 @@
     <Compile Include="DataHandling\DataTransferObjects\IDataTransferObject.cs" />
     <Compile Include="DataHandling\DataTransferObjects\Settings.cs" />
     <Compile Include="DataHandling\DataTransferObjects\TrainingSchedule.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\TrainingScore.cs" />
+    <Compile Include="DataHandling\DataTransferObjects\Month.cs" />
     <Compile Include="DataHandling\DataManager\XmlFileDataManager.cs" />
     <Compile Include="Defines\ExerciseType.cs" />
     <Compile Include="Defines\ExerciseSchedulingRepetitionPermission.cs" />
-    <Compile Include="Defines\Month.cs" />
+    <Compile Include="Defines\MonthNumber.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
