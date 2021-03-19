@@ -29,7 +29,6 @@ namespace MyCoach.ViewModel
             this.Categories = new ObservableCollection<Category>();
             this.Exercises = new ObservableCollection<Exercise>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
-            this.Exercises.CollectionChanged += this.OnExercisesChanges;
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
@@ -606,11 +605,6 @@ namespace MyCoach.ViewModel
                 nameof(this.CategoryWarmUpCount),
                 nameof(this.CategoryCoolDownCount),
                 nameof(this.SelectedCategory));
-        }
-
-        private void OnExercisesChanges(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            this.InvokePropertyChanged("Exercises");
         }
 
         private void SaveCategories()

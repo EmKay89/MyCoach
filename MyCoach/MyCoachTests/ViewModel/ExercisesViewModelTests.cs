@@ -93,6 +93,17 @@ namespace MyCoachTests.ViewModel
             Assert.IsTrue(this.sut.HasUnsavedCategories);
         }
 
+        [TestMethod]
+        public void SelectedCategory_Changes_ExercisesFilteredByCategoryUpdated()
+        {
+            foreach (Category category in this.sut.Categories)
+            {
+                this.sut.SelectedCategory = category;
+
+                Assert.IsTrue(this.sut.ExercisesFilteredByCategory.All(e => e.Category == this.sut.SelectedCategory.ID));
+            }
+        }
+
         #endregion
 
         #region Command Tests
@@ -113,10 +124,12 @@ namespace MyCoachTests.ViewModel
         public void AddExerciseCommandExecute_HappyPath_AddsNewExerciseOfSelectedCategory()
         {
             var oldExercisesCount = this.sut.Exercises.Count;
+            var oldExercisesFilteredByCategoryCount = this.sut.ExercisesFilteredByCategory.Count;
 
             this.sut.AddExerciseCommand.Execute(null);
 
             Assert.AreEqual(this.sut.Exercises.Count, oldExercisesCount + 1);
+            Assert.AreEqual(this.sut.ExercisesFilteredByCategory.Count, oldExercisesFilteredByCategoryCount + 1);
             var newExercise = this.sut.Exercises.Where(e => e.Name == ExercisesViewModel.NEW_EXERCISE_NAME).FirstOrDefault();
             newExercise.Category = this.sut.SelectedCategory.ID;
         }
