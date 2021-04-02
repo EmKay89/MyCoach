@@ -1,7 +1,9 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,11 +15,13 @@ namespace MyCoach.ViewModel
     {
         private Month month;
         private DateTime startDate;
+        private ObservableCollection<Category> categories;
 
         public MonthViewModel(DateTime startDate, Month month)
         {            
             this.month = month;
             this.startDate = startDate;
+            this.categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
         }
 
         public string Description => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.startDate.Month) + " " + startDate.Year.ToString();
@@ -56,6 +60,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool Category1Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category1 && c.Active) == true;
+        }
+
         public ushort Category2Scores
         {
             get => this.month.Category2Scores;
@@ -86,6 +95,11 @@ namespace MyCoach.ViewModel
                 this.month.Category2Goal = value;
                 this.InvokePropertyChanged();
             }
+        }
+
+        public bool Category2Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category2 && c.Active) == true;
         }
 
         public ushort Category3Scores
@@ -120,6 +134,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool Category3Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category3 && c.Active) == true;
+        }
+
         public ushort Category4Scores
         {
             get => this.month.Category4Scores;
@@ -150,6 +169,11 @@ namespace MyCoach.ViewModel
                 this.month.Category4Goal = value;
                 this.InvokePropertyChanged();
             }
+        }
+
+        public bool Category4Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category4 && c.Active) == true;
         }
 
         public ushort Category5Scores
@@ -184,6 +208,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool Category5Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category5 && c.Active) == true;
+        }
+
         public ushort Category6Scores
         {
             get => this.month.Category6Scores;
@@ -214,6 +243,11 @@ namespace MyCoach.ViewModel
                 this.month.Category6Goal = value;
                 this.InvokePropertyChanged();
             }
+        }
+
+        public bool Category6Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category6 && c.Active) == true;
         }
 
         public ushort Category7Scores
@@ -248,6 +282,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool Category7Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category7 && c.Active) == true;
+        }
+
         public ushort Category8Scores
         {
             get => this.month.Category8Scores;
@@ -278,6 +317,11 @@ namespace MyCoach.ViewModel
                 this.month.Category8Goal = value;
                 this.InvokePropertyChanged();
             }
+        }
+
+        public bool Category8Visibility
+        {
+            get => this.categories?.Any(c => c.ID == ExerciseCategory.Category8 && c.Active) == true;
         }
 
         public uint TotalGoal
