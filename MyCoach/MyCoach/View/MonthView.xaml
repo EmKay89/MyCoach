@@ -20,13 +20,13 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Gesamt"/>
+            <DockPanel>
+                <TextBlock Text="Gesamt" Width="200"/>
                 <Grid>
-                    <TextBlock Text="{Binding TotalScores}"/>
                     <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding TotalPercentage, Mode=OneWay}"/>
+                    <TextBlock Text="{Binding TotalScores}" VerticalAlignment="Center" HorizontalAlignment="Center"/>                    
                 </Grid>
-            </StackPanel>
+            </DockPanel>
         </StackPanel>
     </Border>
 </UserControl>

@@ -52,7 +52,7 @@ namespace MyCoach.ViewModel
 
                 if (this.scoresOfVisibleProperties < this.month.TotalGoal)
                 {
-                    return (uint)(this.scoresOfVisibleProperties / this.month.TotalGoal);
+                    return (uint)(this.scoresOfVisibleProperties * 100 / this.month.TotalGoal);
                 }
 
                 return 100;
