@@ -93,19 +93,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         public ushort Category8Goal { get; set; }
 
         /// <summary>
-        ///     Ruft die für alle Kategorien erreichten Punkte auf.
-        /// </summary>
-        public int TotalScores { get => this.Category1Scores
-                + this.Category2Scores
-                + this.Category3Scores
-                + this.Category4Scores
-                + this.Category5Scores
-                + this.Category6Scores
-                + this.Category7Scores
-                + this.Category8Scores;
-        }
-
-        /// <summary>
         ///     Ruft das Punkteziel für alle Monate ab, oder legt es fest.
         /// </summary>
         public uint TotalGoal { get; set; }

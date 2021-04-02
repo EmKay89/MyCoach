@@ -127,7 +127,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     list1[i].Category7Scores != list2[i].Category7Scores ||
                     list1[i].Category8Goal != list2[i].Category8Goal ||
                     list1[i].Category8Scores != list2[i].Category8Scores ||
-                    list1[i].TotalGoal != list2[i].TotalScores)
+                    list1[i].TotalGoal != list2[i].TotalGoal)
                 {
                     return false;
                 }
