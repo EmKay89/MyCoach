@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,35 +14,48 @@ namespace MyCoach.ViewModel
     {
         public ViewTrainingScheduleViewModel()
         {
-            this.MonthViewModels = new ObservableCollection<MonthViewModel>();
-            // this.PopulateMonthViewModels();
-            // ToDo: Schauen, ob das sinnvoll ist, alles über parent properties zu machen
+            this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
+            this.Months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+            this.TrainingSchedule = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault();
+            this.PopulateMonthViewModels();
         }
 
-        // public TrainingSchedule TrainingSchedule => this.parent.TrainingSchedule;
+        public TrainingSchedule TrainingSchedule { get; }
 
-        // public DateTime StartDate => this.TrainingSchedule.StartMonth;
+        public DateTime StartDate => this.TrainingSchedule.StartMonth;
 
-        // public ObservableCollection<Month> Months => this.parent.Months;
+        public ObservableCollection<Month> Months { get; }
 
-        public ObservableCollection<MonthViewModel> MonthViewModels { get; }
+        public MonthViewModel MonthViewModelCurrent { get; private set; }
 
-        //private void PopulateMonthViewModels()
-        //{
-        //    this.MonthViewModels.Clear();
-        //    var type = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault().ScheduleType;
-            
-        //    if (type == Defines.ScheduleType.TimeBased)
-        //    {
-        //        foreach (var Month in this.Months)
-        //        {
-        //            this.MonthViewModels.Add(new MonthViewModel(this, Month));
-        //        }
+        public ObservableCollection<MonthViewModel> MonthViewModelsInTimeBasedSchedule { get; }
 
-        //        return;
-        //    }
+        private void PopulateMonthViewModels()
+        {
+            var currentMonth = this.Months.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
+            this.MonthViewModelCurrent = new MonthViewModel(this.CalculateStartDate(currentMonth), currentMonth);
 
-        //    this.MonthViewModels.Add(new MonthViewModel(this, this.Months.FirstOrDefault()));
-        //}
+            this.MonthViewModelsInTimeBasedSchedule.Clear();
+
+            foreach (var month in this.Months)
+            {
+                if (month.Number == MonthNumber.Current)
+                {
+                    continue;
+                }
+
+                this.MonthViewModelsInTimeBasedSchedule.Add(new MonthViewModel(this.CalculateStartDate(month), month));
+            }
+        }
+
+        private DateTime CalculateStartDate(Month month)
+        {
+            if (month.Number == MonthNumber.Current)
+            {
+                return DateTime.Now;
+            }
+
+            return this.TrainingSchedule.StartMonth.AddMonths((int)month.Number - 1);
+        }
     }
 }

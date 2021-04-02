@@ -12,36 +12,15 @@ namespace MyCoach.ViewModel
     public class MonthViewModel : BaseViewModel
     {
         private Month month;
-        private ViewTrainingScheduleViewModel parent;
+        private DateTime startDate;
 
-        public MonthViewModel(ViewTrainingScheduleViewModel parent, Month month)
-        {
-            this.parent = parent;
+        public MonthViewModel(DateTime startDate, Month month)
+        {            
             this.month = month;
+            this.startDate = startDate;
         }
 
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        int monthToInt;
-        //        int year;
-
-        //        if (this.Number == MonthNumber.Current)
-        //        {
-        //            monthToInt = DateTime.Now.Month;
-        //            year = DateTime.Now.Year;
-        //        }
-        //        else
-        //        {
-        //            var targetDate = this.parent.StartDate.AddMonths((int)this.Number);
-        //            monthToInt = targetDate.Month;
-        //            year = targetDate.Year;
-        //        }
-
-        //        return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthToInt) + " " + year.ToString();
-        //    }
-        //}
+        public string Description => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.startDate.Month) + " " + startDate.Year.ToString();
 
         public MonthNumber Number => this.month.Number;
 
