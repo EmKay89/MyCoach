@@ -1,5 +1,6 @@
 ﻿using MyCoach.View;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.DataBaseValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace MyCoach.ViewModel
 
         public MainViewModel()
         {
+            DtoCollectionsValidator.ValidateAll();
             this.ExerciseViewModel = new ExercisesViewModel();
             this.SettingsViewModel = new SettingsViewModel();
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
