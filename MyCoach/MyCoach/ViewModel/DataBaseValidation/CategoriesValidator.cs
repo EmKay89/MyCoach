@@ -25,7 +25,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
             {
                 if (categories.Any(c => c.ID == category) == false)
                 {
-                    categories.Add(new Category { ID = category });
+                    categories.Add(new Category { ID = category, Type = GetTypeFromCategory(category) });
                 }
 
                 var dublicates = categories.Where(c => c.ID == category).Skip(1);
@@ -37,6 +37,19 @@ namespace MyCoach.ViewModel.DataBaseValidation
             }
 
             DataInterface.GetInstance().SetDataTransferObjects(categories);
+        }
+
+        private static ExerciseType GetTypeFromCategory(ExerciseCategory category)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.WarmUp:
+                    return ExerciseType.WarmUp;
+                case ExerciseCategory.CoolDown:
+                    return ExerciseType.CoolDown;
+                default:
+                    return ExerciseType.Training;
+            }
         }
     }
 }

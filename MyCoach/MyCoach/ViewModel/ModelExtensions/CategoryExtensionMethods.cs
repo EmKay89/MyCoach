@@ -22,69 +22,20 @@ namespace MyCoach.ViewModel.ModelExtensions
 
         public static void SetActive(this ObservableCollection<Category> categories, ExerciseCategory category, bool value)
         {
-            if (categories == null)
-            {
-                return;
-            }
-
             var selectedCategory = categories.Where(c => c.ID == category).FirstOrDefault();
-
-            if (selectedCategory == null)
-            {
-                categories.Add(new Category { ID = category, Active = value, Type = GetTypeFromCategory(category) });
-                return;
-            }
-
             selectedCategory.Active = value;
         }
 
         public static void SetCount(this ObservableCollection<Category> categories, ExerciseCategory category, ushort value)
         {
-            if (categories == null)
-            {
-                return;
-            }
-
             var selectedCategory = categories.Where(c => c.ID == category).FirstOrDefault();
-
-            if (selectedCategory == null)
-            {
-                categories.Add(new Category { ID = category, Count = value, Type = GetTypeFromCategory(category) });
-                return;
-            }
-
             selectedCategory.Count = value;
         }
 
         public static void SetName(this ObservableCollection<Category> categories, ExerciseCategory category, string value)
         {
-            if (categories == null)
-            {
-                return;
-            }
-
             var selectedCategory = categories.Where(c => c.ID == category).FirstOrDefault();
-
-            if (selectedCategory == null)
-            {
-                categories.Add(new Category { ID = category, Name = value, Type = GetTypeFromCategory(category) });
-                return;
-            }
-
             selectedCategory.Name = value;
-        }
-
-        private static ExerciseType GetTypeFromCategory(ExerciseCategory category)
-        {
-            switch (category)
-            {
-                case ExerciseCategory.WarmUp:
-                    return ExerciseType.WarmUp;
-                case ExerciseCategory.CoolDown:
-                    return ExerciseType.CoolDown;
-                default:
-                    return ExerciseType.Training;
-            }
         }
     }
 }
