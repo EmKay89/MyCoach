@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="35" 
              d:DesignWidth="460">
-    <StackPanel Orientation="Horizontal">
-        <TextBlock Text="{Binding Name}" Width="200"/>
+    <DockPanel>
+        <TextBlock Text="{Binding Name}" Width="200" DockPanel.Dock="Left"/>
         <Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox Text="{Binding Scores}" IsReadOnly="{Binding EditScoresDisabled}"/>
-                <TextBlock Text="{Binding AppendedGoalTag}"/>
-            </StackPanel>
             <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding Percentage, Mode=OneWay}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Text="{Binding Scores}" IsReadOnly="{Binding EditScoresDisabled}" Background="Transparent" BorderThickness="0" VerticalContentAlignment="Center"/>
+                <TextBlock Text="{Binding AppendedGoalTag}" VerticalAlignment="Center"/>
+            </StackPanel>
         </Grid>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

@@ -66,7 +66,7 @@ namespace MyCoach.ViewModel
             this.MonthCategoryDetailViewModels.Clear();
             foreach (var category in this.categories)
             {
-                if (category.Active)
+                if (category.Active && category.Type == ExerciseType.Training)
                 {
                     this.MonthCategoryDetailViewModels.Add(new MonthCategoryDetailViewModel(category, this.month));
                 }

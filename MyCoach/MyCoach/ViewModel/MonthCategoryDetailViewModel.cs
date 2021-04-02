@@ -18,6 +18,7 @@ namespace MyCoach.ViewModel
         {
             this.category = category;
             this.month = month;
+            this.month.PropertyChanged += this.OnMonthChanged;
         }
 
         public string Name => this.category.Name;
@@ -40,6 +41,14 @@ namespace MyCoach.ViewModel
         }
 
         public bool EditScoresDisabled { get; set; }
+
+        private void OnMonthChanged(object sender, EventArgs e)
+        {
+            this.InvokePropertiesChanged(
+                nameof(this.Scores),
+                nameof(this.AppendedGoalTag),
+                nameof(this.Percentage));
+        }
 
         private ushort GetScores()
         {
@@ -102,21 +111,21 @@ namespace MyCoach.ViewModel
             switch (this.category.ID)
             {
                 case ExerciseCategory.Category1:
-                    return this.month.Category1Goal == 0 ? string.Empty : $"von {this.month.Category1Goal}";
+                    return this.month.Category1Goal == 0 ? string.Empty : $" von {this.month.Category1Goal}";
                 case ExerciseCategory.Category2:
-                    return this.month.Category2Goal == 0 ? string.Empty : $"von {this.month.Category2Goal}";
+                    return this.month.Category2Goal == 0 ? string.Empty : $" von {this.month.Category2Goal}";
                 case ExerciseCategory.Category3:
-                    return this.month.Category3Goal == 0 ? string.Empty : $"von {this.month.Category3Goal}";
+                    return this.month.Category3Goal == 0 ? string.Empty : $" von {this.month.Category3Goal}";
                 case ExerciseCategory.Category4:
-                    return this.month.Category4Goal == 0 ? string.Empty : $"von {this.month.Category4Goal}";
+                    return this.month.Category4Goal == 0 ? string.Empty : $" von {this.month.Category4Goal}";
                 case ExerciseCategory.Category5:
-                    return this.month.Category5Goal == 0 ? string.Empty : $"von {this.month.Category5Goal}";
+                    return this.month.Category5Goal == 0 ? string.Empty : $" von {this.month.Category5Goal}";
                 case ExerciseCategory.Category6:
-                    return this.month.Category6Goal == 0 ? string.Empty : $"von {this.month.Category6Goal}";
+                    return this.month.Category6Goal == 0 ? string.Empty : $" von {this.month.Category6Goal}";
                 case ExerciseCategory.Category7:
-                    return this.month.Category7Goal == 0 ? string.Empty : $"von {this.month.Category7Goal}";
+                    return this.month.Category7Goal == 0 ? string.Empty : $" von {this.month.Category7Goal}";
                 case ExerciseCategory.Category8:
-                    return this.month.Category8Goal == 0 ? string.Empty : $"von {this.month.Category8Goal}";
+                    return this.month.Category8Goal == 0 ? string.Empty : $" von {this.month.Category8Goal}";
                 default:
                     return string.Empty;
             }
@@ -147,6 +156,6 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? scores / goal : 100;
+        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? scores * 100 / goal : 100;
     }
 }
