@@ -1,4 +1,5 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel
 {
-    public class MonthCategoryDetailViewModel
+    public class MonthCategoryDetailViewModel : BaseViewModel
     {
         private Category category;
         private Month month;

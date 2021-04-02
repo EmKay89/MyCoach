@@ -22,8 +22,9 @@ namespace MyCoach.ViewModel
             this.month = month;
             this.startDate = startDate;
             this.categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.categories.CollectionChanged += this.OnCategoriesChanged;
             this.MonthCategoryDetailViewModels = new ObservableCollection<MonthCategoryDetailViewModel>();
-            this.UpdateDetails();
+            this.OnCategoriesChanged(this, new EventArgs());
         }
 
         public string Description => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.startDate.Month) + " " + startDate.Year.ToString();
@@ -60,7 +61,7 @@ namespace MyCoach.ViewModel
 
         private int scoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
 
-        private void UpdateDetails()
+        private void OnCategoriesChanged(object sender, EventArgs e)
         {
             this.MonthCategoryDetailViewModels.Clear();
             foreach (var category in this.categories)
