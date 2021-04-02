@@ -21,7 +21,10 @@
         <DataTemplate DataType="{x:Type viewmodels:TrainingViewModel}">
             <views:TrainingView/>
         </DataTemplate>
-        
+        <DataTemplate DataType="{x:Type viewmodels:ViewTrainingScheduleViewModel}">
+            <views:ViewTrainingScheduleView/>
+        </DataTemplate>
+
         <!-- Control Templates -->
         <Style TargetType="Button" x:Key="DefaultButton">
             <Setter Property="Height" Value="30"/>

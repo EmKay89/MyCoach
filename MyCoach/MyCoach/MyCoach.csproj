@@ -133,6 +133,9 @@
     <Compile Include="View\UserControls\ExerciseUserControl.xaml.cs">
       <DependentUpon>ExerciseUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewTrainingScheduleView.xaml.cs">
+      <DependentUpon>ViewTrainingScheduleView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -196,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\ExerciseUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewTrainingScheduleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
