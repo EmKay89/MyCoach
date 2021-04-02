@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModelExtensions\CategoryExtensionMethods.cs" />
+    <Compile Include="ViewModel\MonthCategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\MonthViewModel.cs" />
     <Compile Include="ViewModel\Services\FileDialogService.cs" />
     <Compile Include="ViewModel\Services\IFileDialogService.cs" />
@@ -107,6 +108,9 @@
     <Compile Include="ViewModel\ViewTrainingScheduleViewModel.cs" />
     <Compile Include="View\ExercisesView.xaml.cs">
       <DependentUpon>ExercisesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MonthCategoryDetailView.xaml.cs">
+      <DependentUpon>MonthCategoryDetailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MonthView.xaml.cs">
       <DependentUpon>MonthView.xaml</DependentUpon>
@@ -160,6 +164,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="View\ExercisesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MonthCategoryDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -32,8 +32,12 @@ namespace MyCoach.ViewModel
 
         private void PopulateMonthViewModels()
         {
-            var currentMonth = this.Months.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
-            this.MonthViewModelCurrent = new MonthViewModel(this.CalculateStartDate(currentMonth), currentMonth);
+            var currentMonth = this.Months?.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
+
+            if (currentMonth != null)
+            {
+                this.MonthViewModelCurrent = new MonthViewModel(this.CalculateStartDate(currentMonth), currentMonth);
+            }
 
             this.MonthViewModelsInTimeBasedSchedule.Clear();
 
