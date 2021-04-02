@@ -104,7 +104,7 @@
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
-    <Compile Include="ViewModel\ViewTriainingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\ViewTrainingScheduleViewModel.cs" />
     <Compile Include="View\ExercisesView.xaml.cs">
       <DependentUpon>ExercisesView.xaml</DependentUpon>
     </Compile>

@@ -12,36 +12,36 @@ namespace MyCoach.ViewModel
     public class MonthViewModel : BaseViewModel
     {
         private Month month;
-        private ViewTriainingScheduleViewModel parent;
+        private ViewTrainingScheduleViewModel parent;
 
-        public MonthViewModel(ViewTriainingScheduleViewModel parent, Month month)
+        public MonthViewModel(ViewTrainingScheduleViewModel parent, Month month)
         {
             this.parent = parent;
             this.month = month;
         }
 
-        public string Description
-        {
-            get
-            {
-                int monthToInt;
-                int year;
+        //public string Description
+        //{
+        //    get
+        //    {
+        //        int monthToInt;
+        //        int year;
 
-                if (this.Number == MonthNumber.Current)
-                {
-                    monthToInt = DateTime.Now.Month;
-                    year = DateTime.Now.Year;
-                }
-                else
-                {
-                    var targetDate = this.parent.StartDate.AddMonths((int)this.Number);
-                    monthToInt = targetDate.Month;
-                    year = targetDate.Year;
-                }
+        //        if (this.Number == MonthNumber.Current)
+        //        {
+        //            monthToInt = DateTime.Now.Month;
+        //            year = DateTime.Now.Year;
+        //        }
+        //        else
+        //        {
+        //            var targetDate = this.parent.StartDate.AddMonths((int)this.Number);
+        //            monthToInt = targetDate.Month;
+        //            year = targetDate.Year;
+        //        }
 
-                return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthToInt) + " " + year.ToString();
-            }
-        }
+        //        return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthToInt) + " " + year.ToString();
+        //    }
+        //}
 
         public MonthNumber Number => this.month.Number;
 

@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,39 +12,56 @@ namespace MyCoach.ViewModel
 {
     public class TrainingScheduleViewModel : BaseViewModel
     {
+        private BaseViewModel selectedViewModel;
+
         public TrainingScheduleViewModel()
         {
-            this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
-            this.TrainingSchedule = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault();
-            this.Months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
-
-            this.BuildMonths();
-
             this.EditViewModel = new EditTrainingScheduleViewModel();
-            this.ViewViewModel = new ViewTriainingScheduleViewModel(this);
+            this.ViewViewModel = new ViewTrainingScheduleViewModel();
+            this.SelectedViewModel = this.ViewViewModel;
+            this.UpdateSelectedViewModelCommand = new RelayCommand(this.SelectViewModel);
         }
-
-#region Proerties
-
-        public ObservableCollection<Category> Categories { get; }
 
         public EditTrainingScheduleViewModel EditViewModel { get; }
 
-        public ObservableCollection<Month> Months { get; }
+        public ViewTrainingScheduleViewModel ViewViewModel { get; }
 
-        public TrainingSchedule TrainingSchedule { get; }
-
-        public ViewTriainingScheduleViewModel ViewViewModel { get; }
-
-#endregion
-
-#region Methods
-
-        private void BuildMonths()
+        public BaseViewModel SelectedViewModel
         {
-            // ToDo: Make sure, that there are always 13 months in the DataInterface Buffer.
+            get => this.selectedViewModel;
+
+            set
+            {
+                if (value == this.selectedViewModel)
+                {
+                    return;
+                }
+
+                this.selectedViewModel = value;
+                this.InvokePropertiesChanged(
+                    nameof(this.SelectedViewModel), 
+                    nameof(this.EditSelected), 
+                    nameof(this.ViewSelected));
+            }
         }
 
-#endregion
+        public bool EditSelected => this.SelectedViewModel == this.EditViewModel;
+
+        public bool ViewSelected => this.SelectedViewModel == this.ViewViewModel;
+
+        public RelayCommand UpdateSelectedViewModelCommand { get; }
+
+        private void SelectViewModel(object parameter)
+        {
+            switch (parameter.ToString())
+            {
+                case "Edit":
+                    this.SelectedViewModel = this.EditViewModel;
+                    break;
+                case "View":
+                    this.SelectedViewModel = this.ViewViewModel;
+                    break;
+            }
+        }
     }
 }

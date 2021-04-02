@@ -40,6 +40,15 @@
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="BorderBrush" Value="LightGray"/>
         </Style>
+        <Style TargetType="ToggleButton" x:Key="DefaultToggleButton">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Margin" Value="5,3,5,3"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+        </Style>
 
         <!-- ViewModel - View links -->
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>

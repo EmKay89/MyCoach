@@ -6,7 +6,19 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="TrainingSchedule"/>
-    </Grid>
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <ToggleButton Content="Einsehen"
+                          Style="{StaticResource DefaultToggleButton}"
+                          Command="{Binding UpdateSelectedViewModelCommand}"
+                          CommandParameter="View"
+                          IsChecked="{Binding ViewSelected, Mode=OneWay}"/>
+            <ToggleButton Content="Bearbeiten"
+                          Style="{StaticResource DefaultToggleButton}"                          
+                          Command="{Binding UpdateSelectedViewModelCommand}"
+                          CommandParameter="Edit"
+                          IsChecked="{Binding EditSelected, Mode=OneWay}"/>
+        </StackPanel>
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+    </DockPanel>
 </UserControl>
