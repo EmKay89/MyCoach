@@ -24,7 +24,7 @@
                 <TextBlock Text="Gesamt"/>
                 <Grid>
                     <TextBlock Text="{Binding TotalScores}"/>
-                    <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding TotalPercentage}"/>
+                    <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding TotalPercentage, Mode=OneWay}"/>
                 </Grid>
             </StackPanel>
         </StackPanel>

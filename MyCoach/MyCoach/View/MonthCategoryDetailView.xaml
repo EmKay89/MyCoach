@@ -14,7 +14,7 @@
                 <TextBox Text="{Binding Scores}" IsReadOnly="{Binding EditScoresDisabled}"/>
                 <TextBlock Text="{Binding AppendedGoalTag}"/>
             </StackPanel>
-            <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding Percentage}"/>
+            <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding Percentage, Mode=OneWay}"/>
         </Grid>
     </StackPanel>
 </UserControl>
