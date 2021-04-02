@@ -33,7 +33,7 @@ namespace MyCoach.ViewModel.Commands
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecuteCallback == null ? true : this.canExecuteCallback.Invoke();
+            return this.canExecuteCallback == null || this.canExecuteCallback.Invoke();
         }
 
         public void Execute(object parameter)

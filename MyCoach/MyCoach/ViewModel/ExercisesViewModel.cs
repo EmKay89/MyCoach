@@ -34,7 +34,7 @@ namespace MyCoach.ViewModel
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
             this.fileDialogService = fileDialogService ?? new FileDialogService();
 
-            this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory == null ? false : true);
+            this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory != null);
             this.ExportExercisesCommand = new RelayCommand(this.ExportExercises);
             this.ImportExercisesCommand = new RelayCommand(this.ImportExercises);
             this.ResetCategoriesCommand = new RelayCommand(this.LoadCategoryBuffer, () => this.HasUnsavedCategories);
