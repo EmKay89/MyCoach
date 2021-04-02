@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (trainingSchedules.Any() == false)
             {
-                trainingSchedules.Add(new TrainingSchedule());
+                trainingSchedules.Add(new TrainingSchedule { ScheduleType = ScheduleType.Generic });
             }
 
             var dublicates = trainingSchedules.Skip(1);

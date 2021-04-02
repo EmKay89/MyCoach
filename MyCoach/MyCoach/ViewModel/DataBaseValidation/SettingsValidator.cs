@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +23,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (settings.Any() == false)
             {
-                settings.Add(new Settings());
+                settings.Add(new Settings { Permission = ExerciseSchedulingRepetitionPermission.No });
             }
 
             var dublicates = settings.Skip(1);
