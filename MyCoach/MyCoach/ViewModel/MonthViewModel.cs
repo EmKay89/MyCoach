@@ -60,7 +60,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category1Visibility
+        public bool Category1Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category1 && c.Active) == true;
         }
@@ -97,7 +97,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category2Visibility
+        public bool Category2Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category2 && c.Active) == true;
         }
@@ -134,7 +134,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category3Visibility
+        public bool Category3Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category3 && c.Active) == true;
         }
@@ -171,7 +171,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category4Visibility
+        public bool Category4Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category4 && c.Active) == true;
         }
@@ -208,7 +208,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category5Visibility
+        public bool Category5Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category5 && c.Active) == true;
         }
@@ -245,7 +245,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category6Visibility
+        public bool Category6Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category6 && c.Active) == true;
         }
@@ -282,7 +282,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category7Visibility
+        public bool Category7Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category7 && c.Active) == true;
         }
@@ -319,9 +319,26 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category8Visibility
+        public bool Category8Visisble
         {
             get => this.categories?.Any(c => c.ID == ExerciseCategory.Category8 && c.Active) == true;
+        }
+
+        public uint TotalScores
+        {
+            get
+            {
+                uint totalScores = 0;
+                totalScores = this.Category1Visisble ? totalScores + Category1Scores : totalScores;
+                totalScores = this.Category2Visisble ? totalScores + Category2Scores : totalScores;
+                totalScores = this.Category3Visisble ? totalScores + Category3Scores : totalScores;
+                totalScores = this.Category4Visisble ? totalScores + Category4Scores : totalScores;
+                totalScores = this.Category5Visisble ? totalScores + Category5Scores : totalScores;
+                totalScores = this.Category6Visisble ? totalScores + Category6Scores : totalScores;
+                totalScores = this.Category7Visisble ? totalScores + Category7Scores : totalScores;
+                totalScores = this.Category8Visisble ? totalScores + Category8Scores : totalScores;
+                return totalScores;
+            }
         }
 
         public uint TotalGoal
