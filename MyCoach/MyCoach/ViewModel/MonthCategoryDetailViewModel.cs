@@ -104,6 +104,9 @@ namespace MyCoach.ViewModel
                     this.month.Category8Scores = value;
                     break;
             }
+
+            var months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+            DataInterface.GetInstance().SetDataTransferObjects(months);
         }
 
         private string GetAppendedGoalTag()

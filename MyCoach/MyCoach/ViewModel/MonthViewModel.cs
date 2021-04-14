@@ -4,6 +4,8 @@ using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -20,11 +22,12 @@ namespace MyCoach.ViewModel
         public MonthViewModel(DateTime startDate, Month month)
         {            
             this.month = month;
+            this.month.PropertyChanged += this.OnMonthChanged;
             this.startDate = startDate;
             this.categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
             this.categories.CollectionChanged += this.OnCategoriesChanged;
             this.MonthCategoryDetailViewModels = new ObservableCollection<MonthCategoryDetailViewModel>();
-            this.OnCategoriesChanged(this, new EventArgs());
+            this.UpdateMonthCategoryDetailViewModels();
         }
 
         public string Description => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.startDate.Month) + " " + startDate.Year.ToString();
@@ -36,8 +39,8 @@ namespace MyCoach.ViewModel
             get
             {
                 return this.month.TotalGoal > 0
-                    ? $"{this.scoresOfVisibleProperties} von {this.month.TotalGoal}"
-                    : this.scoresOfVisibleProperties.ToString();
+                    ? $"{this.ScoresOfVisibleProperties} von {this.month.TotalGoal}"
+                    : this.ScoresOfVisibleProperties.ToString();
             }
         }
 
@@ -50,18 +53,30 @@ namespace MyCoach.ViewModel
                     return 0;
                 }
 
-                if (this.scoresOfVisibleProperties < this.month.TotalGoal)
+                if (this.ScoresOfVisibleProperties < this.month.TotalGoal)
                 {
-                    return (uint)(this.scoresOfVisibleProperties * 100 / this.month.TotalGoal);
+                    return (uint)(this.ScoresOfVisibleProperties * 100 / this.month.TotalGoal);
                 }
 
                 return 100;
             }
         }
 
-        private int scoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
+        private int ScoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
 
-        private void OnCategoriesChanged(object sender, EventArgs e)
+        private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.InvokePropertiesChanged(
+                nameof(this.TotalPercentage),
+                nameof(this.TotalScores));
+        }
+
+        private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.UpdateMonthCategoryDetailViewModels();
+        }
+
+        private void UpdateMonthCategoryDetailViewModels()
         {
             this.MonthCategoryDetailViewModels.Clear();
             foreach (var category in this.categories)
