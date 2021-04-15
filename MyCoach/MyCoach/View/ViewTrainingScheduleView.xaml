@@ -14,8 +14,21 @@
             <Label Content="Punkte Gesamtzeitraum Trainingsplan"
                    FontWeight="Bold"
                    Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <StackPanel Orientation="Horizontal"
+                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <ToggleButton Content="Übersicht"
+                          Style="{StaticResource DefaultToggleButton}"
+                          Command="{Binding DisplayTimeBasedElementsCommand}"
+                          CommandParameter="Overview"
+                          IsChecked="{Binding OverviewElementsVisible, Mode=OneWay}"/>
+                <ToggleButton Content="Details"
+                          Style="{StaticResource DefaultToggleButton}"                          
+                          Command="{Binding DisplayTimeBasedElementsCommand}"
+                          CommandParameter="Details"
+                          IsChecked="{Binding DetailsElementsVisible, Mode=OneWay}"/>
+            </StackPanel>
             <ItemsControl ItemsSource="{Binding MonthViewModelsInTimeBasedSchedule}"
-                          Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                          Visibility="{Binding DetailsElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>

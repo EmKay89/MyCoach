@@ -19,13 +19,14 @@ namespace MyCoach.ViewModel
         private DateTime startDate;
         private ObservableCollection<Category> categories;
 
-        public MonthViewModel(DateTime startDate, Month month)
+        public MonthViewModel(Month month)
         {            
             this.month = month;
             this.month.PropertyChanged += this.OnMonthChanged;
-            this.startDate = startDate;
             this.categories = DataInterface.GetInstance().GetData<Category>();
             this.categories.CollectionChanged += this.OnCategoriesChanged;
+            var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
+            this.startDate = this.month.GetStartDateFromSchedule(schedule);
             this.MonthCategoryDetailViewModels = new ObservableCollection<MonthCategoryDetailViewModel>();
             this.UpdateMonthCategoryDetailViewModels();
         }

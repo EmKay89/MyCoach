@@ -1,9 +1,11 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
+using MyCoach.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,17 +16,18 @@ namespace MyCoach.ViewModel
     {
         private MonthViewModel currentMonthViewModel;
         private bool timeBasedScheduleElementsVisible;
+        private bool overviewElementsVisible = true;
+        private bool detailsElementsVisible;
 
         public ViewTrainingScheduleViewModel()
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
-            this.TrainingSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            this.UpdateMonthViewModels();
+            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault().PropertyChanged += this.OnTraininScheduleChanged;
+            this.DisplayTimeBasedElementsCommand = new RelayCommand(this.DisplayTimeBasedElements);
+            this.UpdateView();
         }
 
-        public TrainingSchedule TrainingSchedule { get; }
-
-        public DateTime StartDate => this.TrainingSchedule.StartMonth;
+        public RelayCommand DisplayTimeBasedElementsCommand { get; }
 
         public MonthViewModel CurrentMonthViewModel
         {
@@ -56,18 +59,60 @@ namespace MyCoach.ViewModel
                 }
 
                 this.timeBasedScheduleElementsVisible = value;
+                this.InvokePropertiesChanged(
+                    nameof(this.TimeBasedScheduleElementsVisible),
+                    nameof(this.OverviewElementsVisible),
+                    nameof(this.DetailsElementsVisible));
+            }
+        }
+
+        public bool OverviewElementsVisible
+        {
+            get => this.overviewElementsVisible && this.timeBasedScheduleElementsVisible;
+
+            set
+            {
+                if (this.overviewElementsVisible == value)
+                {
+                    return;
+                }
+
+                this.overviewElementsVisible = value;
                 this.InvokePropertyChanged();
             }
         }
 
-        private void UpdateMonthViewModels()
+        public bool DetailsElementsVisible
         {
-            var months = DataInterface.GetInstance().GetData<Month>();
-            this.UpdateCurrentMonthViewModel(months);
-            UpdateMonthViewModelsInTimeBasedSchedule(months);
+            get => this.detailsElementsVisible && this.timeBasedScheduleElementsVisible;
+
+            set
+            {
+                if (this.detailsElementsVisible == value)
+                {
+                    return;
+                }
+
+                this.detailsElementsVisible = value;
+                this.InvokePropertyChanged();
+            }
         }
 
-        private void UpdateCurrentMonthViewModel(ObservableCollection<Month> months)
+        private void OnTraininScheduleChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.UpdateView();
+        }
+
+        private void UpdateView()
+        {
+            var months = DataInterface.GetInstance().GetData<Month>();
+            var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
+            this.TimeBasedScheduleElementsVisible = schedule.ScheduleType == ScheduleType.TimeBased;
+            this.UpdateCurrentMonthViewModel(months, schedule);
+            this.UpdateMonthViewModelsInTimeBasedSchedule(months, schedule);
+        }
+
+        private void UpdateCurrentMonthViewModel(ObservableCollection<Month> months, TrainingSchedule schedule)
         {
             var currentMonth = months?.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
 
@@ -77,41 +122,45 @@ namespace MyCoach.ViewModel
             }
 
             var currentMonthInTimeBasedSchedule = months.Where(
-                m => this.GetStartDate(m) == this.GetStartDate(currentMonth) 
+                m => m.GetStartDateFromSchedule(schedule) == currentMonth.GetStartDateFromSchedule(schedule)
                     && m.Number != MonthNumber.Current).FirstOrDefault();
 
-            if (currentMonthInTimeBasedSchedule != null
-                && this.TrainingSchedule.ScheduleType == ScheduleType.TimeBased)
+            if (currentMonthInTimeBasedSchedule != null && schedule.ScheduleType == ScheduleType.TimeBased)
             {
                 currentMonth = currentMonthInTimeBasedSchedule;
             }
 
-            this.CurrentMonthViewModel = new MonthViewModel(this.GetStartDate(currentMonth), currentMonth);
+            this.CurrentMonthViewModel = new MonthViewModel(currentMonth);
         }
 
-        private void UpdateMonthViewModelsInTimeBasedSchedule(ObservableCollection<Month> months)
+        private void UpdateMonthViewModelsInTimeBasedSchedule(ObservableCollection<Month> months, TrainingSchedule schedule)
         {
             this.MonthViewModelsInTimeBasedSchedule.Clear();
 
             foreach (var month in months)
             {
-                if (month.Number == MonthNumber.Current || (int)month.Number > this.TrainingSchedule.Duration)
+                if (month.Number == MonthNumber.Current || (int)month.Number > schedule.Duration)
                 {
                     continue;
                 }
 
-                this.MonthViewModelsInTimeBasedSchedule.Add(new MonthViewModel(this.GetStartDate(month), month));
+                this.MonthViewModelsInTimeBasedSchedule.Add(new MonthViewModel(month));
             }
         }
 
-        private DateTime GetStartDate(Month month)
+        private void DisplayTimeBasedElements(object parameter)
         {
-            if (month.Number == MonthNumber.Current)
+            switch (parameter.ToString())
             {
-                return new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                case "Overview":
+                    this.OverviewElementsVisible = true;
+                    this.DetailsElementsVisible = false;
+                    break;
+                case "Details":
+                    this.OverviewElementsVisible = false;
+                    this.DetailsElementsVisible = true;
+                    break;
             }
-
-            return this.TrainingSchedule.StartMonth.AddMonths((int)month.Number - 1);
         }
     }
 }

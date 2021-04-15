@@ -1,4 +1,5 @@
 ﻿using MyCoach.Defines;
+using System;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
@@ -26,7 +27,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         private uint totalGoal;
 
         /// <summary>
-        ///     Ruft den Bezugsmonat auf, oder legt ihn fest.
+        ///     Ruft die Nummer des Monats im Trainingsplan auf, oder legt sie fest.
         /// </summary>
         public MonthNumber Number { get; set; }
 
@@ -334,6 +335,21 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 this.totalGoal = value;
                 this.InvokePropertyChanged();
             }
+        }
+
+        /// <summary>
+        ///     Gibt das Startdatum des Monats berechnet aus dem Startdatum eines Trainingsplans zurück.
+        /// </summary>
+        /// <param name="schedule">Der Trainingsplan, dessen Startdaum zur Berechnung verwendet wird.</param>
+        /// <returns>Das Startdatum des Monats (erster Tag um 0:00:00 Uhr).</returns>
+        public DateTime GetStartDateFromSchedule(TrainingSchedule schedule)
+        {
+            if (this.Number == MonthNumber.Current)
+            {
+                return new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            }
+
+            return schedule.StartMonth.AddMonths((int)this.Number - 1);
         }
     }
 }
