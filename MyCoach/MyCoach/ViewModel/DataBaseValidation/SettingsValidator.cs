@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
     {
         public static void Validate()
         {
-            var settings = DataInterface.GetInstance().GetDataTransferObjects<Settings>();
+            var settings = DataInterface.GetInstance().GetData<Settings>();
 
             if (settings == null)
             {
@@ -32,8 +32,8 @@ namespace MyCoach.ViewModel.DataBaseValidation
             {
                 settings.Remove(setting);
             }
-
-            DataInterface.GetInstance().SetDataTransferObjects(settings);
+            
+            DataInterface.GetInstance().SaveData<Settings>();
         }
     }
 }

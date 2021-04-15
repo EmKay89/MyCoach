@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
     {
         public static void Validate()
         {
-            var trainingSchedules = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>();
+            var trainingSchedules = DataInterface.GetInstance().GetData<TrainingSchedule>();
 
             if (trainingSchedules == null)
             {
@@ -33,7 +33,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
                 trainingSchedules.Remove(dublicate);
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects(trainingSchedules);
+            DataInterface.GetInstance().SaveData<TrainingSchedule>();
         }
     }
 }

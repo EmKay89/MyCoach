@@ -24,7 +24,7 @@ namespace MyCoach.ViewModel
             this.month = month;
             this.month.PropertyChanged += this.OnMonthChanged;
             this.startDate = startDate;
-            this.categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.categories = DataInterface.GetInstance().GetData<Category>();
             this.categories.CollectionChanged += this.OnCategoriesChanged;
             this.MonthCategoryDetailViewModels = new ObservableCollection<MonthCategoryDetailViewModel>();
             this.UpdateMonthCategoryDetailViewModels();

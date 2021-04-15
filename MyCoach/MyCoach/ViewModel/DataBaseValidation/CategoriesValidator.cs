@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
     {
         public static void Validate()
         {
-            var categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            var categories = DataInterface.GetInstance().GetData<Category>();
 
             if (categories == null)
             {
@@ -36,7 +36,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
                 }
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects(categories);
+            DataInterface.GetInstance().SaveData<Category>();
         }
 
         private static ExerciseType GetTypeFromCategory(ExerciseCategory category)

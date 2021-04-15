@@ -22,7 +22,7 @@ namespace MyCoach.ViewModel
 
         public TrainingViewModel()
         {
-            this.Categories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = this.TrainingActive ? false : true; });
         }

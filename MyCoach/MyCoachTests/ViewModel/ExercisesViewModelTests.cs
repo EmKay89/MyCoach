@@ -180,8 +180,8 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ImportExerciseCommandExecute_HappyPath_CallsImportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Category>()).Returns(DefaultDtos.Categories);
-            Mock.Get(this.dataManager).Setup(dm => dm.GetDataTransferObjects<Exercise>()).Returns(DefaultDtos.Exercises);
+            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
             this.sut.HasUnsavedCategories = true;
             this.sut.HasUnsavedExercises = true;
 
@@ -269,9 +269,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveCategoriesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(
-                dataManager => dataManager.SetDataTransferObjects(
-                    It.Is<ObservableCollection<Category>>(c => DtoUtilities.AreEqual(c, TestDtos.Categories))), Times.Once);
+            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
             Assert.AreEqual(1, this.propertyChangedEvents.Count);
             Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedCategory));
@@ -280,7 +278,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveCategoriesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedCategoriesToFalse()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.SetDataTransferObjects(It.IsAny<ObservableCollection<Category>>())).Returns(false);
+            Mock.Get(this.dataManager).Setup(dm => dm.SaveData<Category>()).Returns(false);
             this.sut.HasUnsavedCategories = true;
 
             this.sut.SaveCategoriesCommand.Execute(null);
@@ -312,16 +310,14 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveExercisesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(
-                dataManager => dataManager.SetDataTransferObjects(
-                    It.Is<ObservableCollection<Exercise>>(e => DtoUtilities.AreEqual(e, TestDtos.Exercises))), Times.Once);
+            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Exercise>(), Times.Once);
             this.sut.HasUnsavedExercises = false;
         }
 
         [TestMethod]
         public void SaveExercisesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedExercisesToFalse()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.SetDataTransferObjects(It.IsAny<ObservableCollection<Exercise>>())).Returns(false);
+            Mock.Get(this.dataManager).Setup(dm => dm.SaveData<Exercise>()).Returns(false);
             this.sut.HasUnsavedExercises = true;
 
             this.sut.SaveExercisesCommand.Execute(null);
@@ -345,8 +341,8 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SetDefaultsCommandCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndLoadsExerciseAndCategoryBuffer()
         {
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Category>()).Returns(DefaultDtos.Categories);
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Exercise>()).Returns(DefaultDtos.Exercises);
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
 
             this.sut.SetDefaultsCommand.Execute(null);
 
@@ -372,10 +368,10 @@ namespace MyCoachTests.ViewModel
         private void SetupDataManager()
         {
             this.dataManager = Mock.Of<IDataManager>(manager =>
-                manager.GetDataTransferObjects<Category>() == TestDtos.Categories &&
-                manager.SetDataTransferObjects(It.IsAny<ObservableCollection<Category>>()) == true &&
-                manager.GetDataTransferObjects<Exercise>() == TestDtos.Exercises &&
-                manager.SetDataTransferObjects(It.IsAny<ObservableCollection<Exercise>>()) == true &&
+                manager.GetData<Category>() == TestDtos.Categories &&
+                manager.SaveData<Category>() == true &&
+                manager.GetData<Exercise>() == TestDtos.Exercises &&
+                manager.SaveData<Exercise>() == true &&
                 manager.TryExportExerciseSet(validExportPath) == true &&
                 manager.TryImportExerciseSet(validImportPath) == true);
             DataInterface.SetDataManager(this.dataManager);

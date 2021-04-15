@@ -105,8 +105,7 @@ namespace MyCoach.ViewModel
                     break;
             }
 
-            var months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
-            DataInterface.GetInstance().SetDataTransferObjects(months);
+            DataInterface.GetInstance().SaveData<Month>();
         }
 
         private string GetAppendedGoalTag()

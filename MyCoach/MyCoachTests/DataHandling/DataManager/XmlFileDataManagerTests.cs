@@ -25,11 +25,11 @@ namespace MyCoachTests.DataHandling.DataManager
         [TestMethod]
         public void GetDataTransferObjects_AfterSuccessfullInitialization_ReturnsCorrectDataLoadedFromFile()
         {
-            var loadedCategories = this.sut.GetDataTransferObjects<Category>();
-            var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
-            var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
-            var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
+            var loadedCategories = this.sut.GetData<Category>();
+            var loadedExercises = this.sut.GetData<Exercise>();
+            var loadedSettings = this.sut.GetData<Settings>();
+            var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
+            var loadedTrainingScores = this.sut.GetData<Month>();
 
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, TestDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, TestDtos.Exercises));
@@ -44,11 +44,11 @@ namespace MyCoachTests.DataHandling.DataManager
             this.readerWriterMock.Exception = new Exception();
             this.sut = new XmlFileDataManager(this.readerWriterMock);
             
-            var loadedCategories = this.sut.GetDataTransferObjects<Category>();
-            var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
-            var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
-            var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
+            var loadedCategories = this.sut.GetData<Category>();
+            var loadedExercises = this.sut.GetData<Exercise>();
+            var loadedSettings = this.sut.GetData<Settings>();
+            var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
+            var loadedTrainingScores = this.sut.GetData<Month>();
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, DefaultDtos.Settings));
@@ -57,35 +57,14 @@ namespace MyCoachTests.DataHandling.DataManager
         }
 
         [TestMethod]
-        public void SetDataTransferObjects_HappyPath_SavesAllBufferDataToFile()
+        public void SaveData_HappyPath_SavesAllBufferDataToFile()
         {
             var innerXmlBeforeSaving = this.readerWriterMock.InnerXml;
             this.readerWriterMock.InnerXml = string.Empty;
 
-            this.sut.SetDataTransferObjects<Category>(TestDtos.Categories);
+            this.sut.SaveData<Category>();
 
             Assert.IsTrue(innerXmlBeforeSaving == readerWriterMock.InnerXml);
-        }
-
-        [TestMethod]
-        public void SetDataTransferObjects_HappyPath_UpdatesBuffer()
-        {
-            this.sut.SetDataTransferObjects<Category>(DefaultDtos.Categories);
-            this.sut.SetDataTransferObjects<Exercise>(DefaultDtos.Exercises);
-            this.sut.SetDataTransferObjects<Settings>(DefaultDtos.Settings);
-            this.sut.SetDataTransferObjects<TrainingSchedule>(DefaultDtos.TrainingSchedules);
-            this.sut.SetDataTransferObjects<Month>(DefaultDtos.TrainingScores);
-
-            var loadedCategories = this.sut.GetDataTransferObjects<Category>();
-            var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
-            var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
-            var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, DefaultDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingScores, DefaultDtos.TrainingScores));
         }
 
         [TestMethod]
@@ -101,11 +80,11 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.TryImportExerciseSet("path");
             this.sut = new XmlFileDataManager(this.readerWriterMock); // Create new instance to load Buffer from file
 
-            var loadedCategories = this.sut.GetDataTransferObjects<Category>();
-            var loadedExercises = this.sut.GetDataTransferObjects<Exercise>();
-            var loadedSettings = this.sut.GetDataTransferObjects<Settings>();
-            var loadedTrainingSchedules = this.sut.GetDataTransferObjects<TrainingSchedule>();
-            var loadedTrainingScores = this.sut.GetDataTransferObjects<Month>();
+            var loadedCategories = this.sut.GetData<Category>();
+            var loadedExercises = this.sut.GetData<Exercise>();
+            var loadedSettings = this.sut.GetData<Settings>();
+            var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
+            var loadedTrainingScores = this.sut.GetData<Month>();
             Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, TestDtos.Settings));

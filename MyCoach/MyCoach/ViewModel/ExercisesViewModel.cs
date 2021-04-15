@@ -544,7 +544,7 @@ namespace MyCoach.ViewModel
         private void LoadCategoryBuffer()
         {
             var savedSelectedCategoryId = this.SelectedCategory?.ID;
-            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            var savedCategories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.Clear();
 
             foreach (var category in savedCategories)
@@ -566,7 +566,7 @@ namespace MyCoach.ViewModel
 
         private void LoadExerciseBuffer()
         {
-            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            var savedExercises = DataInterface.GetInstance().GetData<Exercise>();
             this.Exercises.Clear();
 
             foreach (var exercise in savedExercises)
@@ -609,14 +609,14 @@ namespace MyCoach.ViewModel
 
         private void SaveCategories()
         {
-            var savedCategories = DataInterface.GetInstance().GetDataTransferObjects<Category>();
+            var savedCategories = DataInterface.GetInstance().GetData<Category>();
             savedCategories.Clear();
             foreach (var category in this.Categories)
             {
                 savedCategories.Add((Category)category.Clone());
             }
 
-            var result = DataInterface.GetInstance().SetDataTransferObjects<Category>(savedCategories);
+            var result = DataInterface.GetInstance().SaveData<Category>();
             if (result == false)
             {
                 this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
@@ -628,14 +628,14 @@ namespace MyCoach.ViewModel
 
         private void SaveExercises()
         {
-            var savedExercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            var savedExercises = DataInterface.GetInstance().GetData<Exercise>();
             savedExercises.Clear();
             foreach (var exercise in this.Exercises)
             {
                 savedExercises.Add((Exercise)exercise.Clone());
             }
 
-            var result = DataInterface.GetInstance().SetDataTransferObjects<Exercise>(savedExercises);
+            var result = DataInterface.GetInstance().SaveData<Exercise>();
             if (result == false)
             {
                 this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);

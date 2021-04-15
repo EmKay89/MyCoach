@@ -26,7 +26,7 @@ namespace MyCoach.DataHandling.DataManager
         /// </summary>
         /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
         /// <returns>Die ObservableCollection des gewählten Typs.</returns>
-        public ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject
+        public ObservableCollection<T> GetData<T>() where T : IDataTransferObject
         {
             switch (typeof(T).Name)
             {
@@ -57,33 +57,11 @@ namespace MyCoach.DataHandling.DataManager
         }
 
         /// <summary>
-        ///     Speichert eine ObservableCollection eines DataTransferObjects im Buffer und speichert dann den gesamten Buffer
-        ///     in die Speicherdatei.
+        ///     Speichert den gesamten Buffer in die Speicherdatei.
         /// </summary>
-        /// <typeparam name="T">Der Typ des DataTransferObjects.</typeparam>
-        /// <param name="dataTransferObjects">Die ObservableCollection des DataTransferObjects.</param>
         /// <returns>True, wenn das Speichern erfolgreich war, andernfalls false.</returns>
-        public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
+        public bool SaveData<T>() where T : IDataTransferObject
         {
-            switch (dataTransferObjects)
-            {
-                case ObservableCollection<Category> list:
-                    this.Buffer.Categories = list;
-                    break;
-                case ObservableCollection<Exercise> list:
-                    this.Buffer.Exercises = list;
-                    break;
-                case ObservableCollection<Settings> list:
-                    this.Buffer.Settings = list;
-                    break;
-                case ObservableCollection<TrainingSchedule> list:
-                    this.Buffer.TrainingSchedules = list;
-                    break;
-                case ObservableCollection<Month> list:
-                    this.Buffer.TrainingScores = list;
-                    break;
-            }
-
             return this.TrySaveBufferToFile();
         }
 

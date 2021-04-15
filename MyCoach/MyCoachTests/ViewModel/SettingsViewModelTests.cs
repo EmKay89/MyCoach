@@ -28,8 +28,8 @@ namespace MyCoachTests.ViewModel
         public void Init()
         {
             this.dataManager = Mock.Of<IDataManager>(manager =>
-                manager.GetDataTransferObjects<Settings>() == TestDtos.Settings &&
-                manager.SetDataTransferObjects<Settings>(It.IsAny<ObservableCollection<Settings>>()) == true);
+                manager.GetData<Settings>() == TestDtos.Settings &&
+                manager.SaveData<Settings>() == true);
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
             DataInterface.SetDataManager(dataManager);
@@ -50,7 +50,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_DataInterfaceSettingsIsNull_SetsBufferToDefaultSettings()
         {
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns((ObservableCollection<Settings>)null);
+            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns((ObservableCollection<Settings>)null);
 
             this.sut = new SettingsViewModel(this.messageBoxService);
 
@@ -61,7 +61,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_DataInterfaceSettingsIsEmpty_SetsBufferToDefaultSettings()
         {
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns(new ObservableCollection<Settings>());
+            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns(new ObservableCollection<Settings>());
 
             this.sut = new SettingsViewModel(this.messageBoxService);
 
@@ -181,8 +181,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveSettingsCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(
-                dataManager => dataManager.SetDataTransferObjects<Settings>(It.IsAny<ObservableCollection<Settings>>()), Times.Once);
+            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
@@ -195,15 +194,15 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SetDefaultsCommandExecute_HappyPath_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
         {
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetDataTransferObjects<Settings>()).Returns(DefaultDtos.Settings);
-            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Settings>(), Times.Never);
+            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns(DefaultDtos.Settings);
+            Mock.Get(this.dataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Never);
             Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
             Assert.IsTrue(this.sut.HasUnsavedChanges);
 
             this.sut.SetDefaultsCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Settings>(), Times.Once);
+            Mock.Get(this.dataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Once);
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }

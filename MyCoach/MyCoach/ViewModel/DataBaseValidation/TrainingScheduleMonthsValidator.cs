@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
     {
         public static void Validate()
         {
-            var months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+            var months = DataInterface.GetInstance().GetData<Month>();
 
             if (months == null)
             {
@@ -36,7 +36,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
                 }
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects(months);
+            DataInterface.GetInstance().SaveData<Month>();
         }
     }
 }

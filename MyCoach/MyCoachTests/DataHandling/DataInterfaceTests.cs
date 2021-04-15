@@ -22,8 +22,8 @@ namespace MyCoachTests.DataHandling
             this.exerciseList = new ObservableCollection<Exercise>();
             this.dataManager = Mock.Of<IDataManager>(manager => manager.TryExportExerciseSet("path") == true &&
                                                                 manager.TryImportExerciseSet("path") == true &&
-                                                                manager.GetDataTransferObjects<Exercise>() == this.exerciseList &&
-                                                                manager.SetDataTransferObjects<Exercise>(this.exerciseList) == true); 
+                                                                manager.GetData<Exercise>() == this.exerciseList &&
+                                                                manager.SaveData<Exercise>() == true); 
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace MyCoachTests.DataHandling
             this.dataInterface = DataInterface.GetInstance();
             DataInterface.SetDataManager(dataManager);
 
-            Assert.IsTrue(this.dataInterface.GetDataTransferObjects<Exercise>() == this.exerciseList);
+            Assert.IsTrue(this.dataInterface.GetData<Exercise>() == this.exerciseList);
         }
 
         [TestMethod]
@@ -76,7 +76,7 @@ namespace MyCoachTests.DataHandling
             this.dataInterface = DataInterface.GetInstance();
             DataInterface.SetDataManager(dataManager);
 
-            Assert.IsTrue(this.dataInterface.SetDataTransferObjects<Exercise>(this.exerciseList));
+            Assert.IsTrue(this.dataInterface.SaveData<Exercise>());
         }
     }
 }

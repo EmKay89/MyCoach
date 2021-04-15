@@ -211,7 +211,7 @@ namespace MyCoach.ViewModel
 
         private void LoadSettingsBuffer()
         {
-            var savedSettings = DataInterface.GetInstance().GetDataTransferObjects<Settings>()?.FirstOrDefault();
+            var savedSettings = DataInterface.GetInstance().GetData<Settings>()?.FirstOrDefault();
 
             this.Settings = savedSettings != null
                 ? (Settings)savedSettings.Clone()
@@ -235,7 +235,7 @@ namespace MyCoach.ViewModel
         private void SaveSettings()
         {
             ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
-            var result = DataInterface.GetInstance().SetDataTransferObjects<Settings>(settingsToSave);
+            var result = DataInterface.GetInstance().SaveData<Settings>();
             if (result == false)
             {
                 this.messageBoxService.ShowMessage("Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.",

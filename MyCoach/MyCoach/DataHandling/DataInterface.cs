@@ -38,9 +38,9 @@ namespace MyCoach.DataHandling
             dataManager = manager;
         }
 
-        public ObservableCollection<T> GetDataTransferObjects<T>() where T : IDataTransferObject
+        public ObservableCollection<T> GetData<T>() where T : IDataTransferObject
         {
-            return dataManager.GetDataTransferObjects<T>();
+            return dataManager.GetData<T>();
         }
 
         public void SetDefaults<T>() where T : IDataTransferObject
@@ -48,9 +48,9 @@ namespace MyCoach.DataHandling
             dataManager.SetDefaults<T>();
         }
 
-        public bool SetDataTransferObjects<T>(ObservableCollection<T> dataTransferObjects) where T : IDataTransferObject
+        public bool SaveData<T>() where T : IDataTransferObject
         {
-            return dataManager.SetDataTransferObjects<T>(dataTransferObjects);
+            return dataManager.SaveData<T>();
         }
 
         public bool ExportExerciseSet(string path)

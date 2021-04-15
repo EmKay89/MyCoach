@@ -13,14 +13,14 @@ namespace MyCoach.ViewModel.DataBaseValidation
     {
         public static void Validate()
         {
-            var exercises = DataInterface.GetInstance().GetDataTransferObjects<Exercise>();
+            var exercises = DataInterface.GetInstance().GetData<Exercise>();
 
             if (exercises == null)
             {
                 exercises = new ObservableCollection<Exercise>();
             }
 
-            DataInterface.GetInstance().SetDataTransferObjects(exercises);
+            DataInterface.GetInstance().SaveData<Exercise>();
         }
     }
 }

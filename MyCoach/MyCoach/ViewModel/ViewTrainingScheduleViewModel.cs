@@ -18,7 +18,7 @@ namespace MyCoach.ViewModel
         public ViewTrainingScheduleViewModel()
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
-            this.TrainingSchedule = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault();
+            this.TrainingSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             this.UpdateMonthViewModels();
         }
 
@@ -62,7 +62,7 @@ namespace MyCoach.ViewModel
 
         private void UpdateMonthViewModels()
         {
-            var months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+            var months = DataInterface.GetInstance().GetData<Month>();
             this.UpdateCurrentMonthViewModel(months);
             UpdateMonthViewModelsInTimeBasedSchedule(months);
         }
