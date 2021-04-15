@@ -18,7 +18,6 @@ namespace MyCoach.ViewModel
         public ViewTrainingScheduleViewModel()
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
-            this.Months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
             this.TrainingSchedule = DataInterface.GetInstance().GetDataTransferObjects<TrainingSchedule>().FirstOrDefault();
             this.UpdateMonthViewModels();
         }
@@ -26,8 +25,6 @@ namespace MyCoach.ViewModel
         public TrainingSchedule TrainingSchedule { get; }
 
         public DateTime StartDate => this.TrainingSchedule.StartMonth;
-
-        public ObservableCollection<Month> Months { get; }
 
         public MonthViewModel CurrentMonthViewModel
         {
@@ -65,30 +62,21 @@ namespace MyCoach.ViewModel
 
         private void UpdateMonthViewModels()
         {
-            this.UpdateCurrentMonthViewModel();
-            this.MonthViewModelsInTimeBasedSchedule.Clear();
-
-            foreach (var month in this.Months)
-            {
-                if (month.Number == MonthNumber.Current || (int)month.Number > this.TrainingSchedule.Duration)
-                {
-                    continue;
-                }
-
-                this.MonthViewModelsInTimeBasedSchedule.Add(new MonthViewModel(this.GetStartDate(month), month));
-            }
+            var months = DataInterface.GetInstance().GetDataTransferObjects<Month>();
+            this.UpdateCurrentMonthViewModel(months);
+            UpdateMonthViewModelsInTimeBasedSchedule(months);
         }
 
-        private void UpdateCurrentMonthViewModel()
+        private void UpdateCurrentMonthViewModel(ObservableCollection<Month> months)
         {
-            var currentMonth = this.Months?.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
+            var currentMonth = months?.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
 
             if (currentMonth == null)
             {
                 return;
             }
 
-            var currentMonthInTimeBasedSchedule = this.Months.Where(
+            var currentMonthInTimeBasedSchedule = months.Where(
                 m => this.GetStartDate(m) == this.GetStartDate(currentMonth) 
                     && m.Number != MonthNumber.Current).FirstOrDefault();
 
@@ -99,6 +87,21 @@ namespace MyCoach.ViewModel
             }
 
             this.CurrentMonthViewModel = new MonthViewModel(this.GetStartDate(currentMonth), currentMonth);
+        }
+
+        private void UpdateMonthViewModelsInTimeBasedSchedule(ObservableCollection<Month> months)
+        {
+            this.MonthViewModelsInTimeBasedSchedule.Clear();
+
+            foreach (var month in months)
+            {
+                if (month.Number == MonthNumber.Current || (int)month.Number > this.TrainingSchedule.Duration)
+                {
+                    continue;
+                }
+
+                this.MonthViewModelsInTimeBasedSchedule.Add(new MonthViewModel(this.GetStartDate(month), month));
+            }
         }
 
         private DateTime GetStartDate(Month month)
