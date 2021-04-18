@@ -46,6 +46,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category1Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -82,6 +83,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category2Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -118,6 +120,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category3Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -154,6 +157,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category4Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -190,6 +194,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category5Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -226,6 +231,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category6Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -262,6 +268,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category7Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -298,6 +305,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
                 this.category8Scores = value;
                 this.InvokePropertyChanged();
+                this.InvokePropertyChanged(nameof(this.TotalScores));
             }
         }
 
@@ -318,6 +326,18 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 this.InvokePropertyChanged();
             }
         }
+
+        /// <summary>
+        ///     Ruft die Summe der für alle Kategorien erreichten Punkte ab.
+        /// </summary>
+        public uint TotalScores => (uint)this.Category1Scores
+                    + this.Category2Scores
+                    + this.Category3Scores
+                    + this.Category4Scores
+                    + this.Category5Scores
+                    + this.Category6Scores
+                    + this.Category7Scores
+                    + this.Category8Scores;
 
         /// <summary>
         ///     Ruft das Punkteziel für alle Monate ab, oder legt es fest.
@@ -351,5 +371,135 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
             return schedule.StartMonth.AddMonths((int)this.Number - 1);
         }
+
+        /// <summary>
+        ///     Gibt das gespeicherte Punkteziel einer Übungskategorie zurück.
+        /// </summary>
+        /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
+        /// <returns>Das Punkteziel als positive Ganzzahl.</returns>
+        public ushort GetGoal(ExerciseCategory category)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.Category1:
+                    return this.Category1Goal;
+                case ExerciseCategory.Category2:
+                    return this.Category2Goal;
+                case ExerciseCategory.Category3:
+                    return this.Category3Goal;
+                case ExerciseCategory.Category4:
+                    return this.Category4Goal;
+                case ExerciseCategory.Category5:
+                    return this.Category5Goal;
+                case ExerciseCategory.Category6:
+                    return this.Category6Goal;
+                case ExerciseCategory.Category7:
+                    return this.Category7Goal;
+                case ExerciseCategory.Category8:
+                    return this.Category8Goal;
+                default:
+                    return 0;
+            }
+        }
+
+        /// <summary>
+        ///     Gibt die gespeicherten Trainingspunkte einer Übungskategorie zurück.
+        /// </summary>
+        /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
+        /// <returns>Die Trainingspunkte als positive Ganzzahl.</returns>
+        public ushort GetScores(ExerciseCategory category)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.Category1:
+                    return this.Category1Scores;
+                case ExerciseCategory.Category2:
+                    return this.Category2Scores;
+                case ExerciseCategory.Category3:
+                    return this.Category3Scores;
+                case ExerciseCategory.Category4:
+                    return this.Category4Scores;
+                case ExerciseCategory.Category5:
+                    return this.Category5Scores;
+                case ExerciseCategory.Category6:
+                    return this.Category6Scores;
+                case ExerciseCategory.Category7:
+                    return this.Category7Scores;
+                case ExerciseCategory.Category8:
+                    return this.Category8Scores;
+                default:
+                    return 0;
+            }
+        }
+
+        /// <summary>
+        ///     Setzt die Trainingspunkte für eine Übungskategorie.
+        /// </summary>
+        /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
+        /// <param name="value">Die Trainingspunkte als positive Ganzzahl.</param>
+        public void SetScores(ExerciseCategory category, ushort value)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.Category1:
+                    this.Category1Scores = value;
+                    break;
+                case ExerciseCategory.Category2:
+                    this.Category2Scores = value;
+                    break;
+                case ExerciseCategory.Category3:
+                    this.Category3Scores = value;
+                    break;
+                case ExerciseCategory.Category4:
+                    this.Category4Scores = value;
+                    break;
+                case ExerciseCategory.Category5:
+                    this.Category5Scores = value;
+                    break;
+                case ExerciseCategory.Category6:
+                    this.Category6Scores = value;
+                    break;
+                case ExerciseCategory.Category7:
+                    this.Category7Scores = value;
+                    break;
+                case ExerciseCategory.Category8:
+                    this.Category8Scores = value;
+                    break;
+            }
+        }
+
+        /// <summary>
+        ///     Gibt einen ganzzahligen Wert zwischen 0 und 100 zurück, der angibt wie viel Prozent 
+        ///     des Punkteziels für eine Kategorie bereits erreicht. Ist kein Punkteziel gegeben,
+        ///     ist der Rückgabewert 0.
+        /// </summary>
+        /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
+        /// <returns>Das Erreichen das Trainigspunkteziels für eine Kategorie in Prozent.</returns>
+        public int GetPercentage(ExerciseCategory category)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.Category1:
+                    return this.GetPercentageFromGoalAndScores(this.Category1Goal, this.Category1Scores);
+                case ExerciseCategory.Category2:
+                    return this.GetPercentageFromGoalAndScores(this.Category2Goal, this.Category2Scores);
+                case ExerciseCategory.Category3:
+                    return this.GetPercentageFromGoalAndScores(this.Category3Goal, this.Category3Scores);
+                case ExerciseCategory.Category4:
+                    return this.GetPercentageFromGoalAndScores(this.Category4Goal, this.Category4Scores);
+                case ExerciseCategory.Category5:
+                    return this.GetPercentageFromGoalAndScores(this.Category5Goal, this.Category5Scores);
+                case ExerciseCategory.Category6:
+                    return this.GetPercentageFromGoalAndScores(this.Category6Goal, this.Category6Scores);
+                case ExerciseCategory.Category7:
+                    return this.GetPercentageFromGoalAndScores(this.Category7Goal, this.Category7Scores);
+                case ExerciseCategory.Category8:
+                    return this.GetPercentageFromGoalAndScores(this.Category8Goal, this.Category8Scores);
+                default:
+                    return 0;
+            }
+        }
+
+        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? scores * 100 / goal : 100;
     }
 }

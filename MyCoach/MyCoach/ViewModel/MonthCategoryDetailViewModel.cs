@@ -25,7 +25,7 @@ namespace MyCoach.ViewModel
 
         public ushort Scores
         {
-            get => this.GetScores();
+            get => this.month.GetScores(this.category.ID);
 
             set => this.SetScores(value);
         }
@@ -36,7 +36,7 @@ namespace MyCoach.ViewModel
         {
             get
             {
-                return this.GetPercentage();
+                return this.month.GetPercentage(this.category.ID);
             }
         }
 
@@ -50,61 +50,9 @@ namespace MyCoach.ViewModel
                 nameof(this.Percentage));
         }
 
-        private ushort GetScores()
-        {
-            switch (this.category.ID)
-            {
-                case ExerciseCategory.Category1:
-                    return this.month.Category1Scores;
-                case ExerciseCategory.Category2:
-                    return this.month.Category2Scores;
-                case ExerciseCategory.Category3:
-                    return this.month.Category3Scores;
-                case ExerciseCategory.Category4:
-                    return this.month.Category4Scores;
-                case ExerciseCategory.Category5:
-                    return this.month.Category5Scores;
-                case ExerciseCategory.Category6:
-                    return this.month.Category6Scores;
-                case ExerciseCategory.Category7:
-                    return this.month.Category7Scores;
-                case ExerciseCategory.Category8:
-                    return this.month.Category8Scores;
-                default:
-                    return 0;
-            }
-        }
-
         private void SetScores(ushort value)
         {
-            switch (this.category.ID)
-            {
-                case ExerciseCategory.Category1:
-                    this.month.Category1Scores = value;
-                    break;
-                case ExerciseCategory.Category2:
-                    this.month.Category2Scores = value;
-                    break;
-                case ExerciseCategory.Category3:
-                    this.month.Category3Scores = value;
-                    break;
-                case ExerciseCategory.Category4:
-                    this.month.Category4Scores = value;
-                    break;
-                case ExerciseCategory.Category5:
-                    this.month.Category5Scores = value;
-                    break;
-                case ExerciseCategory.Category6:
-                    this.month.Category6Scores = value;
-                    break;
-                case ExerciseCategory.Category7:
-                    this.month.Category7Scores = value;
-                    break;
-                case ExerciseCategory.Category8:
-                    this.month.Category8Scores = value;
-                    break;
-            }
-
+            this.month.SetScores(this.category.ID, value);
             DataInterface.GetInstance().SaveData<Month>();
         }
 
@@ -132,32 +80,5 @@ namespace MyCoach.ViewModel
                     return string.Empty;
             }
         }
-
-        private int GetPercentage()
-        {
-            switch (this.category.ID)
-            {
-                case ExerciseCategory.Category1:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category1Goal, this.month.Category1Scores);
-                case ExerciseCategory.Category2:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category2Goal, this.month.Category2Scores);
-                case ExerciseCategory.Category3:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category3Goal, this.month.Category3Scores);
-                case ExerciseCategory.Category4:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category4Goal, this.month.Category4Scores);
-                case ExerciseCategory.Category5:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category5Goal, this.month.Category5Scores);
-                case ExerciseCategory.Category6:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category6Goal, this.month.Category6Scores);
-                case ExerciseCategory.Category7:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category7Goal, this.month.Category7Scores);
-                case ExerciseCategory.Category8:
-                    return this.GetPercentageFromGoalAndScores(this.month.Category8Goal, this.month.Category8Scores);
-                default:
-                    return 0;
-            }
-        }
-
-        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? scores * 100 / goal : 100;
     }
 }

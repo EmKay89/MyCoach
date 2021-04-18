@@ -101,13 +101,16 @@
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ModelExtensions\CategoryExtensionMethods.cs" />
+    <Compile Include="ViewModel\ModelExtensions\MonthExtensionMethods.cs" />
     <Compile Include="ViewModel\MonthCategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\MonthViewModel.cs" />
+    <Compile Include="ViewModel\OverviewElementViewModel.cs" />
     <Compile Include="ViewModel\Services\FileDialogService.cs" />
     <Compile Include="ViewModel\Services\IFileDialogService.cs" />
     <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
     <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
