@@ -43,18 +43,42 @@ namespace MyCoach.ViewModel
 
         public uint GoalPercentage
         {
-            get => this.MaxScoreOrGoal / this.month.GetGoal(this.category.ID) * 100;
+            get
+            {
+                var goal = this.category == null ? this.month.TotalGoal : this.month.GetGoal(this.category.ID);
+                if (goal != 0)
+                {
+                    return goal / this.MaxScoreOrGoal * 100;
+                }
+
+                return goal;
+            }
         }
 
         public uint ScoresPercentage
         {
-            get => this.MaxScoreOrGoal / this.month.GetScores(this.category.ID) * 100;
+            get
+            {
+                var scores = this.category == null ? this.month.TotalScores : this.month.GetScores(this.category.ID);
+                if (scores != 0)
+                {
+                    return scores / this.MaxScoreOrGoal * 100;
+                }
+
+                return scores;
+            }
         }
 
         public string ScoresString => this.GetScoresString();
 
         private string GetScoresString()
         {
+            if (this.category == null)
+            {
+                return this.month.TotalScores.ToString()
+                        + (this.month.TotalGoal == 0 ? string.Empty : $" von {this.month.TotalGoal}"); ;
+            }
+
             switch (this.category.ID)
             {
                 case ExerciseCategory.Category1:

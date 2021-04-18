@@ -15,6 +15,7 @@ namespace MyCoach.ViewModel
     public class TrainingScheduleOverviewViewModel : BaseViewModel
     {
         private Category selectedCategory;
+        private int selectedCategoryListElement;
         private uint maxScoreOrGoal;
         private ObservableCollection<Month> monthsInSchedule;
 
@@ -29,6 +30,8 @@ namespace MyCoach.ViewModel
         public ObservableCollection<OverviewElementViewModel> Elements { get; }
 
         public ObservableCollection<Category> AvailableCategories { get; }
+
+        public ObservableCollection<string> AvailableCategoryListElements { get; }
 
         public Category SelectedCategory
         {
@@ -49,7 +52,24 @@ namespace MyCoach.ViewModel
                 this.selectedCategory = value;
                 this.selectedCategory.PropertyChanged += this.OnSelectedCategoryChanged;
                 this.InvokePropertyChanged();
-                this.UpdateElements();
+                this.UpdateChart();
+            }
+        }
+
+        public int SelectedCategoryListElement
+        {
+            get => this.selectedCategoryListElement;
+
+            set
+            {
+                if (value == this.selectedCategoryListElement)
+                {
+                    return;
+                }
+
+                this.selectedCategoryListElement = value;
+                this.UpdateSelectedCategory();
+                this.InvokePropertyChanged();
             }
         }
 
@@ -70,8 +90,8 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private ObservableCollection<Month> MonthsInSchedule 
-        { 
+        private ObservableCollection<Month> MonthsInSchedule
+        {
             get => this.monthsInSchedule;
 
             set
@@ -96,20 +116,27 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            var categories = DataInterface.GetInstance().GetData<Category>();
+            this.AvailableCategoryListElements.Clear();
+            var allCategories = DataInterface.GetInstance().GetData<Category>();
 
-            foreach (var category in categories)
+            foreach (var category in allCategories)
             {
-                if (category.Active)
+                if (category.Active && category.Type == Defines.ExerciseType.Training)
                 {
                     this.AvailableCategories.Add(category);
                 }
             }
 
-            this.SelectedCategory = this.AvailableCategories.FirstOrDefault();
+            foreach (var category in this.AvailableCategories)
+            {
+                this.AvailableCategoryListElements.Add(category.Name);
+            }
+
+            this.AvailableCategoryListElements.Add("Gesamt");
+            this.UpdateSelectedCategory();
         }
 
-        private void UpdateElements()
+        private void UpdateChart()
         {
             this.Elements.Clear();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
@@ -119,6 +146,15 @@ namespace MyCoach.ViewModel
             foreach (var month in this.MonthsInSchedule)
             {
                 this.Elements.Add(new OverviewElementViewModel(month, this.SelectedCategory));
+            }
+
+            if (this.SelectedCategory == null)
+            {
+                this.MaxScoreOrGoal = 
+                    MonthsInSchedule.Select(m => m.TotalGoal)
+                    .Concat(MonthsInSchedule.Select(m => m.TotalScores))
+                    .Max();
+                return;
             }
 
             this.MaxScoreOrGoal = this.MonthsInSchedule.MaxScoreOrGoal(this.SelectedCategory.ID);
@@ -132,6 +168,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        private void UpdateSelectedCategory()
+        {
+            this.SelectedCategory = this.AvailableCategories.Where(c => (int)c.ID + 1 == this.SelectedCategoryListElement).FirstOrDefault();
+        }
+
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.UpdateAvailableCategories();
@@ -139,7 +180,7 @@ namespace MyCoach.ViewModel
 
         private void OnScheduleChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.UpdateElements();
+            this.UpdateChart();
         }
 
         private void OnMonthInScheduleChanged(object sender, PropertyChangedEventArgs e)
