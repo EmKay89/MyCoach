@@ -15,8 +15,14 @@
         <DataTemplate DataType="{x:Type viewmodels:MonthViewModel}">
             <views:MonthView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:OverviewElementViewModel}">
+            <views:OverviewElementView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
             <views:SettingsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleOverviewViewModel}">
+            <views:TrainingScheduleOverviewView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleViewModel}">
             <views:TrainingScheduleView/>
@@ -63,7 +69,8 @@
             <Setter Property="Maximum" Value="100"/>
         </Style>
 
-        <!-- ViewModel - View links -->
+        <!-- Converter -->
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter"/>
     </Application.Resources>
 </Application>

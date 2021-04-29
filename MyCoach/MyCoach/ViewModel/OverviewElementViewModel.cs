@@ -1,8 +1,11 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,46 +39,54 @@ namespace MyCoach.ViewModel
                 this.maxScoreOrGoal = value;
                 this.InvokePropertiesChanged(
                     nameof(this.MaxScoreOrGoal),
-                    nameof(this.GoalPercentage),
-                    nameof(this.ScoresPercentage));
+                    nameof(this.RelativeHeightGoal),
+                    nameof(this.RelativeHeightSpaceAboveGoal),
+                    nameof(this.RelativeHeightScores),
+                    nameof(this.RelativeHeightSpaceAboveScores));
             }
         }
 
-        public uint GoalPercentage
-        {
-            get
-            {
-                var goal = this.category == null ? this.month.TotalGoal : this.month.GetGoal(this.category.ID);
-                if (goal != 0)
-                {
-                    return goal / this.MaxScoreOrGoal * 100;
-                }
+        public uint RelativeHeightGoal => this.GetGoalPercentage();
 
-                return goal;
-            }
-        }
+        public uint RelativeHeightSpaceAboveGoal => (100 - this.GetGoalPercentage());
 
-        public uint ScoresPercentage
-        {
-            get
-            {
-                var scores = this.category == null ? this.month.TotalScores : this.month.GetScores(this.category.ID);
-                if (scores != 0)
-                {
-                    return scores / this.MaxScoreOrGoal * 100;
-                }
+        public uint RelativeHeightScores => this.GetScoresPercentage();
 
-                return scores;
-            }
-        }
+        public uint RelativeHeightSpaceAboveScores => (100 - this.GetScoresPercentage());
 
         public string ScoresString => this.GetScoresString();
+
+        public string Month => this.month.GetStartDateFromSchedule(
+            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault())
+                .ToString("y", CultureInfo.CurrentCulture);
+
+        private uint GetGoalPercentage()
+        {
+            var goal = this.category == null ? this.month.TotalGoal : this.month.GetGoal(this.category.ID);
+            if (goal != 0)
+            {
+                return (uint)((double)goal / (double)this.MaxScoreOrGoal * 100);
+            }
+
+            return goal;
+        }
+
+        private uint GetScoresPercentage()
+        {
+            var scores = this.category == null ? this.GetTotalScoresOfAllActiveCategories() : this.month.GetScores(this.category.ID);
+            if (scores != 0)
+            {
+                return (uint)((double)scores / (double)this.MaxScoreOrGoal * 100);
+            }
+
+            return scores;
+        }
 
         private string GetScoresString()
         {
             if (this.category == null)
             {
-                return this.month.TotalScores.ToString()
+                return this.GetTotalScoresOfAllActiveCategories().ToString()
                         + (this.month.TotalGoal == 0 ? string.Empty : $" von {this.month.TotalGoal}"); ;
             }
 
@@ -110,12 +121,28 @@ namespace MyCoach.ViewModel
             }
         }
 
+        private uint GetTotalScoresOfAllActiveCategories()
+        {
+            var activeCategories = DataInterface.GetInstance().GetData<Category>()
+                .Where(c => c.Active && c.Type == ExerciseType.Training);
+            uint scores = 0;
+
+            foreach (var category in activeCategories)
+            {
+                scores += this.month.GetScores(category.ID);
+            }
+
+            return scores;
+        }
+
         private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
             this.InvokePropertiesChanged(
                 nameof(this.ScoresString),
-                nameof(this.GoalPercentage),
-                nameof(this.ScoresPercentage));
+                nameof(this.RelativeHeightGoal),
+                nameof(this.RelativeHeightSpaceAboveGoal),
+                nameof(this.RelativeHeightScores),
+                nameof(this.RelativeHeightSpaceAboveScores));
         }
     }
 }

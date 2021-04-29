@@ -15,6 +15,7 @@ namespace MyCoach.ViewModel
     public class ViewTrainingScheduleViewModel : BaseViewModel
     {
         private MonthViewModel currentMonthViewModel;
+        private TrainingScheduleOverviewViewModel trainingScheduleOverviewViewModel;
         private bool timeBasedScheduleElementsVisible;
         private bool overviewElementsVisible = true;
         private bool detailsElementsVisible;
@@ -22,6 +23,7 @@ namespace MyCoach.ViewModel
         public ViewTrainingScheduleViewModel()
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
+            this.TrainingScheduleOverviewViewModel = new TrainingScheduleOverviewViewModel();
             DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault().PropertyChanged += this.OnTraininScheduleChanged;
             this.DisplayTimeBasedElementsCommand = new RelayCommand(this.DisplayTimeBasedElements);
             this.UpdateView();
@@ -46,6 +48,22 @@ namespace MyCoach.ViewModel
         }
 
         public ObservableCollection<MonthViewModel> MonthViewModelsInTimeBasedSchedule { get; }
+
+        public TrainingScheduleOverviewViewModel TrainingScheduleOverviewViewModel
+        {
+            get => this.trainingScheduleOverviewViewModel;
+
+            private set
+            {
+                if (this.trainingScheduleOverviewViewModel == value)
+                {
+                    return;
+                }
+
+                this.trainingScheduleOverviewViewModel = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         public bool TimeBasedScheduleElementsVisible
         {

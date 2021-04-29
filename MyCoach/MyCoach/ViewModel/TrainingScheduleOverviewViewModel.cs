@@ -15,13 +15,15 @@ namespace MyCoach.ViewModel
     public class TrainingScheduleOverviewViewModel : BaseViewModel
     {
         private Category selectedCategory;
-        private int selectedCategoryListElement;
+        private int selectedCategoryListIndex;
         private uint maxScoreOrGoal;
-        private ObservableCollection<Month> monthsInSchedule;
+        private List<Month> monthsInSchedule;
 
         public TrainingScheduleOverviewViewModel()
         {
             this.Elements = new ObservableCollection<OverviewElementViewModel>();
+            this.AvailableCategories = new ObservableCollection<Category>();
+            this.AvailableCategoryListItems = new ObservableCollection<string>();
             DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault().PropertyChanged += this.OnScheduleChanged;
             DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
             this.UpdateAvailableCategories();
@@ -31,7 +33,7 @@ namespace MyCoach.ViewModel
 
         public ObservableCollection<Category> AvailableCategories { get; }
 
-        public ObservableCollection<string> AvailableCategoryListElements { get; }
+        public ObservableCollection<string> AvailableCategoryListItems { get; }
 
         public Category SelectedCategory
         {
@@ -50,24 +52,37 @@ namespace MyCoach.ViewModel
                 }
 
                 this.selectedCategory = value;
-                this.selectedCategory.PropertyChanged += this.OnSelectedCategoryChanged;
+
+                if (this.selectedCategory != null)
+                {
+                    this.selectedCategory.PropertyChanged += this.OnSelectedCategoryChanged;
+                }
+
                 this.InvokePropertyChanged();
                 this.UpdateChart();
             }
         }
 
-        public int SelectedCategoryListElement
+        public int SelectedCategoryListIndex
         {
-            get => this.selectedCategoryListElement;
+            get => this.selectedCategoryListIndex;
 
             set
             {
-                if (value == this.selectedCategoryListElement)
+                if (value == this.selectedCategoryListIndex)
                 {
                     return;
                 }
 
-                this.selectedCategoryListElement = value;
+                if (value < 0)
+                {
+                    this.selectedCategoryListIndex = 0;
+                }
+                else
+                {
+                    this.selectedCategoryListIndex = value;
+                }
+
                 this.UpdateSelectedCategory();
                 this.InvokePropertyChanged();
             }
@@ -85,12 +100,22 @@ namespace MyCoach.ViewModel
                 }
 
                 this.maxScoreOrGoal = value;
-                this.InvokePropertyChanged();
+                this.InvokePropertiesChanged(
+                    nameof(this.MaxScoreOrGoal), 
+                    nameof(this.MaxScoreOrGoal75), 
+                    nameof(this.MaxScoreOrGoal50), 
+                    nameof(this.MaxScoreOrGoal25));
                 this.UpdateElementsMaxScores();
             }
         }
 
-        private ObservableCollection<Month> MonthsInSchedule
+        public uint MaxScoreOrGoal75 => (uint)(this.MaxScoreOrGoal * 0.75);
+
+        public uint MaxScoreOrGoal50 => (uint)(this.MaxScoreOrGoal * 0.5);
+
+        public uint MaxScoreOrGoal25 => (uint)(this.MaxScoreOrGoal * 0.25);
+
+        private List<Month> MonthsInSchedule
         {
             get => this.monthsInSchedule;
 
@@ -116,7 +141,7 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            this.AvailableCategoryListElements.Clear();
+            this.AvailableCategoryListItems.Clear();
             var allCategories = DataInterface.GetInstance().GetData<Category>();
 
             foreach (var category in allCategories)
@@ -129,10 +154,12 @@ namespace MyCoach.ViewModel
 
             foreach (var category in this.AvailableCategories)
             {
-                this.AvailableCategoryListElements.Add(category.Name);
+                this.AvailableCategoryListItems.Add(category.Name);
             }
 
-            this.AvailableCategoryListElements.Add("Gesamt");
+            this.AvailableCategoryListItems.Add("Gesamt");
+            this.AvailableCategories.Add(null);
+            this.SelectedCategoryListIndex = 0;
             this.UpdateSelectedCategory();
         }
 
@@ -140,24 +167,51 @@ namespace MyCoach.ViewModel
         {
             this.Elements.Clear();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            this.MonthsInSchedule = (ObservableCollection<Month>)DataInterface.GetInstance().GetData<Month>().Where(
-                m => (int)m.Number < schedule.Duration && m.Number != Defines.MonthNumber.Current);
+            this.MonthsInSchedule = DataInterface.GetInstance().GetData<Month>().Where(
+                m => (int)m.Number <= schedule.Duration && m.Number != Defines.MonthNumber.Current).ToList();
 
             foreach (var month in this.MonthsInSchedule)
             {
                 this.Elements.Add(new OverviewElementViewModel(month, this.SelectedCategory));
             }
 
+            this.UpdateMaxScoreOrGoal();
+        }
+
+        private void UpdateMaxScoreOrGoal()
+        {
             if (this.SelectedCategory == null)
             {
-                this.MaxScoreOrGoal = 
-                    MonthsInSchedule.Select(m => m.TotalGoal)
-                    .Concat(MonthsInSchedule.Select(m => m.TotalScores))
-                    .Max();
+                this.MaxScoreOrGoal = GetMaxTotalScoreOrTotalGoalValueOfMonthsInTrainingSchedule();
                 return;
             }
 
             this.MaxScoreOrGoal = this.MonthsInSchedule.MaxScoreOrGoal(this.SelectedCategory.ID);
+        }
+
+        private uint GetMaxTotalScoreOrTotalGoalValueOfMonthsInTrainingSchedule()
+        {
+            uint value = 0;
+
+            foreach (var month in this.MonthsInSchedule)
+            {
+                uint totalScoresForMonth = 0;
+
+                foreach (var category in this.AvailableCategories)
+                {
+                    if (category == null)
+                    {
+                        continue;
+                    }
+
+                    totalScoresForMonth += month.GetScores(category.ID);
+                }
+
+                value = value < totalScoresForMonth ? totalScoresForMonth : value;
+                value = value < month.TotalGoal ? month.TotalGoal : value;
+            }
+
+            return value;
         }
 
         private void UpdateElementsMaxScores()
@@ -170,7 +224,10 @@ namespace MyCoach.ViewModel
 
         private void UpdateSelectedCategory()
         {
-            this.SelectedCategory = this.AvailableCategories.Where(c => (int)c.ID + 1 == this.SelectedCategoryListElement).FirstOrDefault();
+            if (this.SelectedCategoryListIndex + 1 <= this.AvailableCategories.Count)
+            {
+                this.SelectedCategory = this.AvailableCategories[this.SelectedCategoryListIndex];
+            }
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -185,7 +242,7 @@ namespace MyCoach.ViewModel
 
         private void OnMonthInScheduleChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.MaxScoreOrGoal = this.MonthsInSchedule.MaxScoreOrGoal(this.SelectedCategory.ID);
+            this.UpdateMaxScoreOrGoal();
         }
 
         private void OnSelectedCategoryChanged(object sender, PropertyChangedEventArgs e)
