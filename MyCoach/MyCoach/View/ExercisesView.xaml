@@ -181,7 +181,7 @@
             <Label Content="Übungen bearbeiten"
                    FontWeight="Bold"/>
             <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
-            <ComboBox ItemsSource="{Binding Categories}"
+            <ComboBox ItemsSource="{Binding ActiveCategories}"
                       SelectedValue="{Binding SelectedCategory}"/>
             <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}">
                 <ItemsControl.ItemTemplate>

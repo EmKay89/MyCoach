@@ -263,7 +263,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SaveCategoriesCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndSetsUnsavedCategoriesToFalseAndRaisesPropertyChanged()
+        public void SaveCategoriesCommandExecute_HappyPath_CallsSetDataFromDataManagerAndSetsUnsavedCategoriesToFalseAndRaisesPropertyChanged()
         {
             this.sut.HasUnsavedCategories = true;
 
@@ -304,7 +304,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SaveExercisesCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndSetsUnsavedExercisesToFalse()
+        public void SaveExercisesCommandExecute_HappyPath_CallsSetDataFromDataManagerAndSetsUnsavedExercisesToFalse()
         {
             this.sut.HasUnsavedExercises = true;
 
@@ -339,7 +339,7 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SetDefaultsCommandCommandExecute_HappyPath_CallsSetDataTransferObjectsFromDataManagerAndLoadsExerciseAndCategoryBuffer()
+        public void SetDefaultsCommandCommandExecute_HappyPath_CallsSetDataFromDataManagerAndLoadsExerciseAndCategoryBuffer()
         {
             Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Category>()).Returns(DefaultDtos.Categories);
             Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Exercise>()).Returns(DefaultDtos.Exercises);

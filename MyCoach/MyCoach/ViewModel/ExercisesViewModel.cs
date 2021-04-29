@@ -6,6 +6,7 @@ using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.ModelExtensions;
 using MyCoach.ViewModel.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -52,6 +53,8 @@ namespace MyCoach.ViewModel
         public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
         public const string RESET_CAPTION = "Zurücksetzen";
 
+        public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
+        
         public ObservableCollection<Category> Categories { get; set; }
 
         public ObservableCollection<Exercise> Exercises { get; set; }
@@ -581,6 +584,7 @@ namespace MyCoach.ViewModel
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.InvokePropertiesChanged(
+                nameof(this.ActiveCategories),
                 nameof(this.Categories),
                 nameof(this.CategoryWarmUpActive),
                 nameof(this.CategoryWarmUpName),
@@ -622,7 +626,7 @@ namespace MyCoach.ViewModel
                 this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            this.InvokePropertyChanged(nameof(SelectedCategory));
+            this.InvokePropertiesChanged(nameof(this.SelectedCategory), nameof(this.ActiveCategories));
             this.HasUnsavedCategories = false;
         }
 
