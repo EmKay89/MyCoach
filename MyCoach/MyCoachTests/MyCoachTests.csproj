@@ -74,6 +74,7 @@
     <Compile Include="TestDtos.cs" />
     <Compile Include="ViewModel\ExercisesViewModelTests.cs" />
     <Compile Include="ViewModel\SettingsViewModelTests.cs" />
+    <Compile Include="ViewModel\TrainingScheduleViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

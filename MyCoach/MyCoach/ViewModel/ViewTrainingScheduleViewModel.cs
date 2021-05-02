@@ -24,7 +24,12 @@ namespace MyCoach.ViewModel
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
             this.TrainingScheduleOverviewViewModel = new TrainingScheduleOverviewViewModel();
-            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault().PropertyChanged += this.OnTraininScheduleChanged;
+            var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
+            if (schedule != null)
+            {
+                schedule.PropertyChanged += this.OnScheduleChanged;
+            }
+
             this.DisplayTimeBasedElementsCommand = new RelayCommand(this.DisplayTimeBasedElements);
             this.UpdateView();
         }
@@ -116,7 +121,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void OnTraininScheduleChanged(object sender, PropertyChangedEventArgs e)
+        private void OnScheduleChanged(object sender, PropertyChangedEventArgs e)
         {
             this.UpdateView();
         }
@@ -125,7 +130,11 @@ namespace MyCoach.ViewModel
         {
             var months = DataInterface.GetInstance().GetData<Month>();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            this.TimeBasedScheduleElementsVisible = schedule.ScheduleType == ScheduleType.TimeBased;
+            if (schedule != null)
+            {
+                this.TimeBasedScheduleElementsVisible = schedule.ScheduleType == ScheduleType.TimeBased;
+            }
+
             this.UpdateCurrentMonthViewModel(months, schedule);
             this.UpdateMonthViewModelsInTimeBasedSchedule(months, schedule);
         }

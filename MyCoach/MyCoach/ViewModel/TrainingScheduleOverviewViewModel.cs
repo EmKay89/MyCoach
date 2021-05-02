@@ -24,7 +24,12 @@ namespace MyCoach.ViewModel
             this.Elements = new ObservableCollection<OverviewElementViewModel>();
             this.AvailableCategories = new ObservableCollection<Category>();
             this.AvailableCategoryListItems = new ObservableCollection<string>();
-            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault().PropertyChanged += this.OnScheduleChanged;
+            var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
+            if (schedule != null)
+            {
+                schedule.PropertyChanged += this.OnScheduleChanged;
+            }
+
             DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
             this.UpdateAvailableCategories();
         }

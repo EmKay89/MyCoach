@@ -271,8 +271,9 @@ namespace MyCoachTests.ViewModel
 
             Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
+            Assert.AreEqual(2, this.propertyChangedEvents.Count);
             Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedCategory));
+            Assert.AreEqual(this.propertyChangedEvents[1], nameof(this.sut.ActiveCategories));
         }
 
         [TestMethod]
