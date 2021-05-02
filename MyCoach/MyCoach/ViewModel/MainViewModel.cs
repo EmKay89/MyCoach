@@ -1,4 +1,5 @@
-﻿using MyCoach.View;
+﻿using MyCoach.DataHandling;
+using MyCoach.View;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
 using System;
@@ -24,9 +25,12 @@ namespace MyCoach.ViewModel
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
             this.TrainingViewModel = new TrainingViewModel();
             this.UpdateMainViewCommand = new RelayCommand(
-                this.SelectViewModel, 
+                this.SelectViewModel,
                 () => this.SelectedViewModel != this.TrainingViewModel || this.TrainingViewModel.TrainingActive == false);
-            App.Current.Windows.OfType<MainWindow>().FirstOrDefault().Loaded += this.OnMainWindowLoaded;
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()) == false)
+            {
+                App.Current.Windows.OfType<MainWindow>().FirstOrDefault().Loaded += this.OnMainWindowLoaded;
+            }
         }
 
         public bool ExerciseViewSelected => this.SelectedViewModel == this.ExerciseViewModel;

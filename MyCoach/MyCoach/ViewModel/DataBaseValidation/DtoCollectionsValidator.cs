@@ -14,7 +14,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
             CategoriesValidator.Validate();
             ExercisesValidator.Validate();
             SettingsValidator.Validate();
-            TrainingScheduleMonthsValidator.Validate();
+            MonthsValidator.Validate();
             TrainingScheduleValidator.Validate();
         }
     }

@@ -94,7 +94,7 @@
     <Compile Include="ViewModel\DataBaseValidation\DtoCollectionsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\ExercisesValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\SettingsValidator.cs" />
-    <Compile Include="ViewModel\DataBaseValidation\TrainingScheduleMonthsValidator.cs" />
+    <Compile Include="ViewModel\DataBaseValidation\MonthsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\TrainingScheduleValidator.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />

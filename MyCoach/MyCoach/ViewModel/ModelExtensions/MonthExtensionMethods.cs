@@ -12,8 +12,8 @@ namespace MyCoach.ViewModel.ModelExtensions
     {
         public static uint MaxScoreOrGoal(this IEnumerable<Month> months, ExerciseCategory category)
         {
-            var highestScore = months.Max(m => m.GetScores(category));
-            var highestGoal = months.Max(m => m.GetGoal(category));
+            var highestScore = months.Any() ? months.Max(m => m.GetScores(category)) : (uint)0;
+            var highestGoal = months.Any() ? months.Max(m => m.GetGoal(category)): (uint)0;
             return highestScore > highestGoal ? highestScore : highestGoal;
         }
     }

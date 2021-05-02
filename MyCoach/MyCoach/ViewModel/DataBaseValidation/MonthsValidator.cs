@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel.DataBaseValidation
 {
-    public static class TrainingScheduleMonthsValidator
+    public static class MonthsValidator
     {
         public static void Validate()
         {
