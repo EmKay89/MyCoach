@@ -6,39 +6,37 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-        <StackPanel Orientation="Vertical">
-            <Label Content="Punkte aktueller Monat"
+    <StackPanel Orientation="Vertical">
+        <Label Content="Punkte aktueller Monat"
                    FontWeight="Bold"/>
-            <ContentControl Content="{Binding CurrentMonthViewModel}"/>
-            <Label Content="Punkte Gesamtzeitraum Trainingsplan"
+        <ContentControl Content="{Binding CurrentMonthViewModel}"/>
+        <Label Content="Punkte Gesamtzeitraum Trainingsplan"
                    FontWeight="Bold"
                    Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
-            <StackPanel Orientation="Horizontal"
+        <StackPanel Orientation="Horizontal"
                         Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <ToggleButton Content="Übersicht"
+            <ToggleButton Content="Übersicht"
                           Style="{StaticResource DefaultToggleButton}"
                           Command="{Binding DisplayTimeBasedElementsCommand}"
                           CommandParameter="Overview"
                           IsChecked="{Binding OverviewElementsVisible, Mode=OneWay}"/>
-                <ToggleButton Content="Details"
+            <ToggleButton Content="Details"
                           Style="{StaticResource DefaultToggleButton}"                          
                           Command="{Binding DisplayTimeBasedElementsCommand}"
                           CommandParameter="Details"
                           IsChecked="{Binding DetailsElementsVisible, Mode=OneWay}"/>
-            </StackPanel>
-            <ItemsControl ItemsSource="{Binding MonthViewModelsInTimeBasedSchedule}"
-                          Visibility="{Binding DetailsElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <local:MonthView/>
-                        </Grid>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ContentControl Content="{Binding TrainingScheduleOverviewViewModel}"
-                            Visibility="{Binding OverviewElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </StackPanel>
-    </ScrollViewer>
+        <ItemsControl ItemsSource="{Binding MonthViewModelsInTimeBasedSchedule}"
+                          Visibility="{Binding DetailsElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <local:MonthView/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ContentControl Content="{Binding TrainingScheduleOverviewViewModel}"
+                            Visibility="{Binding OverviewElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+    </StackPanel>
 </UserControl>
