@@ -21,8 +21,8 @@ namespace MyCoach.ViewModel
     public class ExercisesViewModel : BaseViewModel
     {
         private Category selectedCategory;
-        private IMessageBoxService messageBoxService;
-        private IFileDialogService fileDialogService;
+        private readonly IMessageBoxService messageBoxService;
+        private readonly IFileDialogService fileDialogService;
 
         public ExercisesViewModel(IMessageBoxService messageBoxService = null, IFileDialogService fileDialogService = null)
         {

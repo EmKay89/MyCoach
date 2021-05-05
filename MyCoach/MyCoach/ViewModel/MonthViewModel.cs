@@ -15,9 +15,9 @@ namespace MyCoach.ViewModel
 {
     public class MonthViewModel : BaseViewModel
     {
-        private Month month;
-        private DateTime startDate;
-        private ObservableCollection<Category> categories;
+        private readonly Month month;
+        private readonly DateTime startDate;
+        private readonly ObservableCollection<Category> categories;
 
         public MonthViewModel(Month month)
         {            
