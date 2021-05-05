@@ -21,7 +21,6 @@ namespace MyCoachTests.ViewModel
     {
         IMessageBoxService messageBoxService;
         SettingsViewModel sut;
-        List<string> propertyChangedEvents;
 
         [TestInitialize]
         public void Init()
@@ -31,9 +30,8 @@ namespace MyCoachTests.ViewModel
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
             DataInterface.SetDataManager(DataManager);
             this.sut = new SettingsViewModel(this.messageBoxService);
-            this.propertyChangedEvents = new List<string>();
             this.sut.PropertyChanged += 
-                (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };
+                (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
         }
 
         [TestMethod]
@@ -71,9 +69,9 @@ namespace MyCoachTests.ViewModel
         {            
             this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
 
-            Assert.AreEqual(2, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], "Permission");
-            Assert.AreEqual(this.propertyChangedEvents[1], "PermissionText");
+            Assert.AreEqual(2, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], "Permission");
+            Assert.AreEqual(this.PropertyChangedEvents[1], "PermissionText");
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -82,8 +80,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.RepeatsRound1));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound1));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -92,8 +90,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.RepeatsRound2 = ++this.sut.RepeatsRound2;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.RepeatsRound2));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound2));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -102,8 +100,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.RepeatsRound3 = ++this.sut.RepeatsRound3;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.RepeatsRound3));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound3));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -112,8 +110,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.RepeatsRound4 = ++this.sut.RepeatsRound4;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.RepeatsRound4));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound4));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -122,8 +120,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.ScoresRound1));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound1));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -132,8 +130,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.ScoresRound2 = ++this.sut.ScoresRound2;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.ScoresRound2));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound2));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -142,8 +140,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.ScoresRound3 = ++this.sut.ScoresRound3;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.ScoresRound3));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound3));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
@@ -152,8 +150,8 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.ScoresRound4 = ++this.sut.ScoresRound4;
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.ScoresRound4));
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound4));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 

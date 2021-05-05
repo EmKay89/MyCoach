@@ -23,9 +23,11 @@ namespace MyCoachTests.ViewModel
         protected Settings Settings => this.SettingsCollection.First();
         protected TrainingSchedule TrainingSchedule => this.TrainingSchedulesCollection.First();        
         protected IDataManager DataManager;
+        protected List<string> PropertyChangedEvents;
 
         protected void Initialize()
         {
+            this.PropertyChangedEvents = new List<string>();
             this.SetupDataManager();
         }
 

@@ -12,15 +12,13 @@ namespace MyCoachTests.ViewModel
         #region Initialization and Cleanup
 
         TrainingScheduleViewModel sut;
-        List<string> propertyChangedEvents;
 
         [TestInitialize]
         public void Init()
         {
             base.Initialize();
             this.sut = new TrainingScheduleViewModel();
-            this.propertyChangedEvents = new List<string>();
-            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
         }
 
         #endregion
@@ -40,10 +38,10 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.SelectedViewModel = this.sut.EditViewModel;
 
-            Assert.AreEqual(3, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedViewModel));
-            Assert.AreEqual(this.propertyChangedEvents[1], nameof(this.sut.EditSelected));
-            Assert.AreEqual(this.propertyChangedEvents[2], nameof(this.sut.ViewSelected));
+            Assert.AreEqual(3, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.SelectedViewModel));
+            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.EditSelected));
+            Assert.AreEqual(this.PropertyChangedEvents[2], nameof(this.sut.ViewSelected));
             Assert.IsTrue(this.sut.EditSelected);
             Assert.IsFalse(this.sut.ViewSelected);
         }

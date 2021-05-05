@@ -24,7 +24,6 @@ namespace MyCoachTests.ViewModel
         IMessageBoxService messageBoxService;
         IFileDialogService fileDialogService;
         ExercisesViewModel sut;
-        List<string> propertyChangedEvents;
 
         [TestInitialize]
         public void Init()
@@ -33,8 +32,7 @@ namespace MyCoachTests.ViewModel
             this.SetupDataManager();
             this.SetupServices();
             this.sut = new ExercisesViewModel(this.messageBoxService, this.fileDialogService);
-            this.propertyChangedEvents = new List<string>();
-            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
         }
 
         #endregion
@@ -88,8 +86,8 @@ namespace MyCoachTests.ViewModel
                     throw new NotImplementedException();
             }
 
-            Assert.AreEqual(1, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], propertyName);
+            Assert.AreEqual(1, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], propertyName);
             Assert.IsTrue(this.sut.HasUnsavedCategories);
         }
 
@@ -271,9 +269,9 @@ namespace MyCoachTests.ViewModel
 
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
-            Assert.AreEqual(2, this.propertyChangedEvents.Count);
-            Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedCategory));
-            Assert.AreEqual(this.propertyChangedEvents[1], nameof(this.sut.ActiveCategories));
+            Assert.AreEqual(2, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.SelectedCategory));
+            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.ActiveCategories));
         }
 
         [TestMethod]
