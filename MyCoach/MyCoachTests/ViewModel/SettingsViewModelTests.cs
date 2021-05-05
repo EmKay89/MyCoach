@@ -17,9 +17,8 @@ using System.Windows;
 namespace MyCoachTests.ViewModel
 {
     [TestClass]
-    public class SettingsViewModelTests
+    public class SettingsViewModelTests : ViewModelTestBase
     {
-        IDataManager dataManager;
         IMessageBoxService messageBoxService;
         SettingsViewModel sut;
         List<string> propertyChangedEvents;
@@ -27,12 +26,10 @@ namespace MyCoachTests.ViewModel
         [TestInitialize]
         public void Init()
         {
-            this.dataManager = Mock.Of<IDataManager>(manager =>
-                manager.GetData<Settings>() == TestDtos.Settings &&
-                manager.SaveData<Settings>() == true);
+            base.Initialize();
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
-            DataInterface.SetDataManager(dataManager);
+            DataInterface.SetDataManager(DataManager);
             this.sut = new SettingsViewModel(this.messageBoxService);
             this.propertyChangedEvents = new List<string>();
             this.sut.PropertyChanged += 
@@ -50,7 +47,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_DataInterfaceSettingsIsNull_SetsBufferToDefaultSettings()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns((ObservableCollection<Settings>)null);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns((ObservableCollection<Settings>)null);
 
             this.sut = new SettingsViewModel(this.messageBoxService);
 
@@ -61,7 +58,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_DataInterfaceSettingsIsEmpty_SetsBufferToDefaultSettings()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns(new ObservableCollection<Settings>());
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns(new ObservableCollection<Settings>());
 
             this.sut = new SettingsViewModel(this.messageBoxService);
 
@@ -181,7 +178,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveSettingsCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
@@ -194,15 +191,15 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SetDefaultsCommandExecute_HappyPath_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Settings>()).Returns(DefaultDtos.Settings);
-            Mock.Get(this.dataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Never);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns(DefaultDtos.Settings);
+            Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Never);
             Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
             Assert.IsTrue(this.sut.HasUnsavedChanges);
 
             this.sut.SetDefaultsCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Once);
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }

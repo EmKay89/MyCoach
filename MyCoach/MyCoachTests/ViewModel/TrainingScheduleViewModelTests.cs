@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace MyCoachTests.ViewModel
 {
     [TestClass]
-    public class TrainingScheduleViewModelTests
+    public class TrainingScheduleViewModelTests : ViewModelTestBase
     {
         #region Initialization and Cleanup
 
@@ -17,6 +17,7 @@ namespace MyCoachTests.ViewModel
         [TestInitialize]
         public void Init()
         {
+            base.Initialize();
             this.sut = new TrainingScheduleViewModel();
             this.propertyChangedEvents = new List<string>();
             this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.propertyChangedEvents.Add(e.PropertyName); };

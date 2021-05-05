@@ -15,13 +15,12 @@ using System.Windows;
 namespace MyCoachTests.ViewModel
 {
     [TestClass]
-    public class ExercisesViewModelTests
+    public class ExercisesViewModelTests : ViewModelTestBase
     {
         #region Initialization and Cleanup
 
         private const string validExportPath = "validExportPath";
         private const string validImportPath = "validImportPath";
-        IDataManager dataManager;
         IMessageBoxService messageBoxService;
         IFileDialogService fileDialogService;
         ExercisesViewModel sut;
@@ -30,6 +29,7 @@ namespace MyCoachTests.ViewModel
         [TestInitialize]
         public void Init()
         {
+            base.Initialize();
             this.SetupDataManager();
             this.SetupServices();
             this.sut = new ExercisesViewModel(this.messageBoxService, this.fileDialogService);
@@ -150,7 +150,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.ExportExercisesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dataManager => dataManager.TryExportExerciseSet(validExportPath), Times.Once);
+            Mock.Get(this.DataManager).Verify(DataManager => DataManager.TryExportExerciseSet(validExportPath), Times.Once);
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, TestDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
@@ -160,7 +160,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ExportExerciseCommandExecute_DataManagerReturnsFalse_ShowsSavingErrorMessage()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.TryExportExerciseSet(It.IsAny<string>())).Returns(false);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryExportExerciseSet(It.IsAny<string>())).Returns(false);
 
             this.sut.ExportExercisesCommand.Execute(null);
 
@@ -180,14 +180,14 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ImportExerciseCommandExecute_HappyPath_CallsImportExerciseSetOfDataManagerWithPathRetrievedFromDialogAndLoadsBuffer()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Category>()).Returns(DefaultDtos.Categories);
-            Mock.Get(this.dataManager).Setup(dm => dm.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
             this.sut.HasUnsavedCategories = true;
             this.sut.HasUnsavedExercises = true;
 
             this.sut.ImportExercisesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dm => dm.TryImportExerciseSet(validImportPath), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.TryImportExerciseSet(validImportPath), Times.Once);
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
@@ -197,7 +197,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ImportExerciseCommandExecute_DataManagerReturnsFalse_ShowsLoadingErrorMessage()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.TryImportExerciseSet(It.IsAny<string>())).Returns(false);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryImportExerciseSet(It.IsAny<string>())).Returns(false);
 
             this.sut.ImportExercisesCommand.Execute(null);
 
@@ -269,7 +269,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveCategoriesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
             Assert.AreEqual(2, this.propertyChangedEvents.Count);
             Assert.AreEqual(this.propertyChangedEvents[0], nameof(this.sut.SelectedCategory));
@@ -279,7 +279,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveCategoriesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedCategoriesToFalse()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.SaveData<Category>()).Returns(false);
+            Mock.Get(this.DataManager).Setup(dm => dm.SaveData<Category>()).Returns(false);
             this.sut.HasUnsavedCategories = true;
 
             this.sut.SaveCategoriesCommand.Execute(null);
@@ -311,14 +311,14 @@ namespace MyCoachTests.ViewModel
 
             this.sut.SaveExercisesCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dm => dm.SaveData<Exercise>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Exercise>(), Times.Once);
             this.sut.HasUnsavedExercises = false;
         }
 
         [TestMethod]
         public void SaveExercisesCommandExecute_SavingFails_ShowsErrorMessageAndSetsUnsavedExercisesToFalse()
         {
-            Mock.Get(this.dataManager).Setup(dm => dm.SaveData<Exercise>()).Returns(false);
+            Mock.Get(this.DataManager).Setup(dm => dm.SaveData<Exercise>()).Returns(false);
             this.sut.HasUnsavedExercises = true;
 
             this.sut.SaveExercisesCommand.Execute(null);
@@ -342,13 +342,13 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SetDefaultsCommandCommandExecute_HappyPath_CallsSetDataFromDataManagerAndLoadsExerciseAndCategoryBuffer()
         {
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Category>()).Returns(DefaultDtos.Categories);
-            Mock.Get(this.dataManager).Setup(dataManager => dataManager.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Category>()).Returns(DefaultDtos.Categories);
+            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Exercise>()).Returns(DefaultDtos.Exercises);
 
             this.sut.SetDefaultsCommand.Execute(null);
 
-            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Exercise>(), Times.Once);
-            Mock.Get(this.dataManager).Verify(dataManager => dataManager.SetDefaults<Category>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Exercise>(), Times.Once);
+            Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Category>(), Times.Once);
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
             Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
         }
@@ -368,14 +368,8 @@ namespace MyCoachTests.ViewModel
 
         private void SetupDataManager()
         {
-            this.dataManager = Mock.Of<IDataManager>(manager =>
-                manager.GetData<Category>() == TestDtos.Categories &&
-                manager.SaveData<Category>() == true &&
-                manager.GetData<Exercise>() == TestDtos.Exercises &&
-                manager.SaveData<Exercise>() == true &&
-                manager.TryExportExerciseSet(validExportPath) == true &&
-                manager.TryImportExerciseSet(validImportPath) == true);
-            DataInterface.SetDataManager(this.dataManager);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryExportExerciseSet(validExportPath)).Returns(true);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryImportExerciseSet(validImportPath)).Returns(true);
         }
 
         #endregion
