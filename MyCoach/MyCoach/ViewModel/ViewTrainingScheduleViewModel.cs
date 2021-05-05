@@ -24,12 +24,7 @@ namespace MyCoach.ViewModel
         {
             this.MonthViewModelsInTimeBasedSchedule = new ObservableCollection<MonthViewModel>();
             this.TrainingScheduleOverviewViewModel = new TrainingScheduleOverviewViewModel();
-            var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            if (schedule != null)
-            {
-                schedule.PropertyChanged += this.OnScheduleChanged;
-            }
-
+            DataInterface.GetInstance().GetData<TrainingSchedule>().First().PropertyChanged += this.OnScheduleChanged;
             this.DisplayTimeBasedElementsCommand = new RelayCommand(this.DisplayTimeBasedElements);
             this.UpdateView();
         }
@@ -130,23 +125,14 @@ namespace MyCoach.ViewModel
         {
             var months = DataInterface.GetInstance().GetData<Month>();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            if (schedule != null)
-            {
-                this.TimeBasedScheduleElementsVisible = schedule.ScheduleType == ScheduleType.TimeBased;
-            }
-
+            this.TimeBasedScheduleElementsVisible = schedule.ScheduleType == ScheduleType.TimeBased;
             this.UpdateCurrentMonthViewModel(months, schedule);
             this.UpdateMonthViewModelsInTimeBasedSchedule(months, schedule);
         }
 
         private void UpdateCurrentMonthViewModel(ObservableCollection<Month> months, TrainingSchedule schedule)
         {
-            var currentMonth = months?.Where(m => m.Number == MonthNumber.Current).FirstOrDefault();
-
-            if (currentMonth == null)
-            {
-                return;
-            }
+            var currentMonth = months.Where(m => m.Number == MonthNumber.Current).First();
 
             var currentMonthInTimeBasedSchedule = months.Where(
                 m => m.GetStartDateFromSchedule(schedule) == currentMonth.GetStartDateFromSchedule(schedule)
