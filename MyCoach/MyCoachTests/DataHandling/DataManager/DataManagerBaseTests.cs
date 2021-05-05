@@ -102,7 +102,7 @@ namespace MyCoachTests.DataHandling.DataManager
 
     public class TestDataManger : DataManagerBase
     {
-        private bool initialLoadingSuccess;
+        private readonly bool initialLoadingSuccess;
 
         public TestDataManger(bool initialLoadingSuccess, IXmlFileReaderWriter xmlFileReaderWriterMock) : base (xmlFileReaderWriterMock)
         {
