@@ -37,6 +37,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <ContentControl Content="{Binding TrainingScheduleOverviewViewModel}"
-                            Visibility="{Binding OverviewElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        Visibility="{Binding OverviewElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
     </StackPanel>
 </UserControl>

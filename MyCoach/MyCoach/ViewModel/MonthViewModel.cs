@@ -39,8 +39,8 @@ namespace MyCoach.ViewModel
         {
             get
             {
-                return this.month.TotalGoal > 0
-                    ? $"{this.ScoresOfVisibleProperties} von {this.month.TotalGoal}"
+                return this.Month.TotalGoal > 0
+                    ? $"{this.ScoresOfVisibleProperties} von {this.Month.TotalGoal}"
                     : this.ScoresOfVisibleProperties.ToString();
             }
         }
@@ -49,14 +49,14 @@ namespace MyCoach.ViewModel
         {
             get
             {
-                if (this.month.TotalGoal == 0)
+                if (this.Month.TotalGoal == 0)
                 {
                     return 0;
                 }
 
-                if (this.ScoresOfVisibleProperties < this.month.TotalGoal)
+                if (this.ScoresOfVisibleProperties < this.Month.TotalGoal)
                 {
-                    return (uint)(this.ScoresOfVisibleProperties * 100 / this.month.TotalGoal);
+                    return (uint)(this.ScoresOfVisibleProperties * 100 / this.Month.TotalGoal);
                 }
 
                 return 100;
@@ -64,6 +64,8 @@ namespace MyCoach.ViewModel
         }
 
         private int ScoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
+
+        public Month Month => this.month;
 
         private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -84,7 +86,7 @@ namespace MyCoach.ViewModel
             {
                 if (category.Active && category.Type == ExerciseType.Training)
                 {
-                    this.MonthCategoryDetailViewModels.Add(new MonthCategoryDetailViewModel(category, this.month));
+                    this.MonthCategoryDetailViewModels.Add(new MonthCategoryDetailViewModel(category, this.Month));
                 }
             }
         }

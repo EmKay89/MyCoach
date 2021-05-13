@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace MyCoachTests.ViewModel
 {
-    [TestClass]
     public abstract class ViewModelTestBase
     {
         protected ObservableCollection<Category> Categories => TestDtos.Categories;
@@ -21,7 +20,8 @@ namespace MyCoachTests.ViewModel
         protected ObservableCollection<Settings> SettingsCollection => TestDtos.Settings;
         protected ObservableCollection<TrainingSchedule> TrainingSchedulesCollection => TestDtos.TrainingSchedules;
         protected Settings Settings => this.SettingsCollection.First();
-        protected TrainingSchedule TrainingSchedule => this.TrainingSchedulesCollection.First();        
+        protected TrainingSchedule TrainingSchedule => this.TrainingSchedulesCollection.First();
+
         protected IDataManager DataManager;
         protected List<string> PropertyChangedEvents;
 
@@ -29,6 +29,12 @@ namespace MyCoachTests.ViewModel
         {
             this.PropertyChangedEvents = new List<string>();
             this.SetupDataManager();
+        }
+
+        protected void CleanupTestBase()
+        {
+            DataInterface.SetDataManager(null);
+            TestDtos.Reset();
         }
 
         private void SetupDataManager()
