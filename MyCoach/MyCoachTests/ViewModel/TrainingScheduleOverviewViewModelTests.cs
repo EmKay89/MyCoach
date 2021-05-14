@@ -221,6 +221,11 @@ namespace MyCoachTests.ViewModel
             this.Months.First(m => m.Number != MonthNumber.Current).Category1Scores = ushort.MaxValue;
 
             Assert.IsTrue(this.sut.MaxScoreOrGoal == ushort.MaxValue);
+
+            foreach (var element in this.sut.Elements)
+            {
+                Assert.IsTrue(element.MaxScoreOrGoal == ushort.MaxValue);
+            }
         }
 
         #endregion

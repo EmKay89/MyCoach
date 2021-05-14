@@ -88,7 +88,7 @@ namespace MyCoach.ViewModel
         {
             get => this.maxScoreOrGoal;
 
-            set
+            private set
             {
                 if (value == this.maxScoreOrGoal)
                 {
