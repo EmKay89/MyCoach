@@ -99,6 +99,28 @@ namespace MyCoachTests
 
                 new Exercise
                 {
+                    Category = ExerciseCategory.Category1,
+                    Count = 10,
+                    Name = "Hantelheben 20kg",
+                    RelatedCategory = ExerciseCategory.Category1,
+                    Scores = 10,
+                    Info = "Hier könnte Ihre Testbeschreibung stehen ... ",
+                    Active = false
+                },
+
+                new Exercise
+                {
+                    Category = ExerciseCategory.Category2,
+                    Count = 10,
+                    Name = "Situps",
+                    RelatedCategory = ExerciseCategory.Category2,
+                    Scores = 10,
+                    Info = "Schwabbel, Schwabbel und Schwabbel!",
+                    Active = true
+                },
+
+                new Exercise
+                {
                     Category = ExerciseCategory.CoolDown,
                     Count = 10,
                     Name = "Arme strecken",
@@ -137,7 +159,7 @@ namespace MyCoachTests
                 {
                     StartMonth = DateTime.MinValue,
                     ScheduleType = ScheduleType.TimeBased,
-                    Duration = 5
+                    Duration = 4
                 }
             };
         }
@@ -198,7 +220,7 @@ namespace MyCoachTests
                     Category3Goal = 120,
                     Category3Scores = 0,
                     Category4Goal = 120,
-                    Category4Scores = 70,
+                    Category4Scores = 0,
                     Category5Goal = 120,
                     Category5Scores = 0,
                     Category6Goal = 120,
@@ -219,7 +241,7 @@ namespace MyCoachTests
                     Category3Goal = 130,
                     Category3Scores = 0,
                     Category4Goal = 130,
-                    Category4Scores = 70,
+                    Category4Scores = 0,
                     Category5Goal = 130,
                     Category5Scores = 0,
                     Category6Goal = 130,
@@ -240,7 +262,7 @@ namespace MyCoachTests
                     Category3Goal = 140,
                     Category3Scores = 0,
                     Category4Goal = 140,
-                    Category4Scores = 70,
+                    Category4Scores = 0,
                     Category5Goal = 140,
                     Category5Scores = 0,
                     Category6Goal = 140,
@@ -248,6 +270,27 @@ namespace MyCoachTests
                     Category7Goal = 140,
                     Category7Scores = 0,
                     Category8Goal = 140,
+                    Category8Scores = 0
+                },
+
+                new Month
+                {
+                    Number = MonthNumber.Month5,
+                    Category1Goal = 150,
+                    Category1Scores = 0,
+                    Category2Goal = 150,
+                    Category2Scores = 0,
+                    Category3Goal = 150,
+                    Category3Scores = 0,
+                    Category4Goal = 150,
+                    Category4Scores = 0,
+                    Category5Goal = 150,
+                    Category5Scores = 0,
+                    Category6Goal = 150,
+                    Category6Scores = 0,
+                    Category7Goal = 150,
+                    Category7Scores = 0,
+                    Category8Goal = 150,
                     Category8Scores = 0
                 }
             };

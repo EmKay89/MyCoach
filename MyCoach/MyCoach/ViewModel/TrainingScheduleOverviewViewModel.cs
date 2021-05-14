@@ -21,21 +21,18 @@ namespace MyCoach.ViewModel
 
         public TrainingScheduleOverviewViewModel()
         {
-            this.Elements = new ObservableCollection<OverviewElementViewModel>();
-            this.AvailableCategories = new ObservableCollection<Category>();
-            this.AvailableCategoryListItems = new ObservableCollection<string>();
             DataInterface.GetInstance().GetData<TrainingSchedule>().First().PropertyChanged += this.OnScheduleChanged;
             DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
             this.UpdateAvailableCategories();
         }
 
-        public ObservableCollection<OverviewElementViewModel> Elements { get; }
+        public ObservableCollection<OverviewElementViewModel> Elements { get; } = new ObservableCollection<OverviewElementViewModel>();
 
-        public ObservableCollection<Category> AvailableCategories { get; }
+        public ObservableCollection<Category> AvailableCategories { get; } = new ObservableCollection<Category>();
 
-        public ObservableCollection<string> AvailableCategoryListItems { get; }
+        public ObservableCollection<string> AvailableCategoryListItems { get; } = new ObservableCollection<string>();
 
-        public Category SelectedCategory
+        private Category SelectedCategory
         {
             get => this.selectedCategory;
 
@@ -58,7 +55,6 @@ namespace MyCoach.ViewModel
                     this.selectedCategory.PropertyChanged += this.OnSelectedCategoryChanged;
                 }
 
-                this.InvokePropertyChanged();
                 this.UpdateChart();
             }
         }
@@ -168,7 +164,7 @@ namespace MyCoach.ViewModel
             this.Elements.Clear();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             this.MonthsInSchedule = DataInterface.GetInstance().GetData<Month>().Where(
-                m => (int)m.Number <= schedule.Duration && m.Number != Defines.MonthNumber.Current).ToList(); // asdfasdf
+                m => (int)m.Number <= schedule.Duration && m.Number != Defines.MonthNumber.Current).ToList();
 
             foreach (var month in this.MonthsInSchedule)
             {
@@ -247,14 +243,9 @@ namespace MyCoach.ViewModel
 
         private void OnSelectedCategoryChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch (e.PropertyName)
+            if (e.PropertyName == nameof(Category.Active))
             {
-                case nameof(Category.Name):
-                    this.InvokePropertyChanged(nameof(this.SelectedCategory));
-                    break;
-                case nameof(Category.Active):
-                    this.UpdateAvailableCategories();
-                    break;
+                this.UpdateAvailableCategories();
             }
         }
     }
