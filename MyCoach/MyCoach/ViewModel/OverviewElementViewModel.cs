@@ -14,8 +14,8 @@ namespace MyCoach.ViewModel
 {
     public class OverviewElementViewModel : BaseViewModel
     {
-        private Month month;
-        private Category category;
+        private readonly Month month;
+        private readonly Category category;
         private uint maxScoreOrGoal;
 
         public OverviewElementViewModel(Month month, Category category)
