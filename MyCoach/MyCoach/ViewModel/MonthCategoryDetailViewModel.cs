@@ -3,6 +3,7 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,8 @@ namespace MyCoach.ViewModel
 {
     public class MonthCategoryDetailViewModel : BaseViewModel
     {
-        private Category category;
-        private Month month;
+        private readonly Category category;
+        private readonly Month month;
 
         public MonthCategoryDetailViewModel(Category category, Month month)
         {
@@ -40,9 +41,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool EditScoresDisabled { get; set; }
-
-        private void OnMonthChanged(object sender, EventArgs e)
+        private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
             this.InvokePropertiesChanged(
                 nameof(this.Scores),

@@ -500,6 +500,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
             }
         }
 
-        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? scores * 100 / goal : 100;
+        private int GetPercentageFromGoalAndScores(ushort goal, ushort scores) => goal == 0 ? 0 : scores < goal ? (int)Math.Round(scores * 100.0 / goal, 0) : 100;
     }
 }

@@ -27,13 +27,13 @@ namespace MyCoach.ViewModel
             this.categories.CollectionChanged += this.OnCategoriesChanged;
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             this.startDate = this.month.GetStartDateFromSchedule(schedule);
-            this.MonthCategoryDetailViewModels = new ObservableCollection<MonthCategoryDetailViewModel>();
             this.UpdateMonthCategoryDetailViewModels();
         }
 
         public string Description => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(this.startDate.Month) + " " + startDate.Year.ToString();
 
-        public ObservableCollection<MonthCategoryDetailViewModel> MonthCategoryDetailViewModels { get; }
+        public ObservableCollection<MonthCategoryDetailViewModel> MonthCategoryDetailViewModels { get; } 
+            = new ObservableCollection<MonthCategoryDetailViewModel>();
 
         public string TotalScores
         {
@@ -63,19 +63,27 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private int ScoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
-
         public Month Month => this.month;
+
+        private int ScoresOfVisibleProperties => this.MonthCategoryDetailViewModels.Sum(d => d.Scores);
 
         private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.InvokePropertiesChanged(
-                nameof(this.TotalPercentage),
-                nameof(this.TotalScores));
+            if (e.PropertyName == nameof(Month.TotalScores) ||
+                e.PropertyName == nameof(Month.TotalGoal))
+            {
+                this.InvokePropertiesChanged(
+                    nameof(this.TotalPercentage),
+                    nameof(this.TotalScores));
+            }
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            // ToDo: Durch das Speichern der Categories wird die Liste der Categories im Buffer
+            // gelöscht und neu bestückt. Hier werden dabei unnötigerweise beim Hinzufügen einer
+            // neuen Category viele Viewmodels gelöscht und dann wieder geladen, was unperformant ist.
+            // -> Fixen
             this.UpdateMonthCategoryDetailViewModels();
         }
 
