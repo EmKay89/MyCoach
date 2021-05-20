@@ -51,5 +51,22 @@ namespace MyCoach.DataHandling.DataTransferObjects
         ///     Ruft den prozentualen Multiplikator für das Absolvieren einer Übung in Runde 4 ab, oder legt ihn fest.
         /// </summary>
         public ushort ScoresRound4 { get; set; }
+
+        /// <inheritdoc/>
+        public override void CopyValuesTo(DtoBase target)
+        {
+            if (target is Settings targetSettings)
+            {
+                targetSettings.Permission = this.Permission;
+                targetSettings.RepeatsRound1 = this.RepeatsRound1;
+                targetSettings.ScoresRound1 = this.ScoresRound1;
+                targetSettings.RepeatsRound2 = this.RepeatsRound2;
+                targetSettings.ScoresRound2 = this.ScoresRound2;
+                targetSettings.RepeatsRound3 = this.RepeatsRound3;
+                targetSettings.ScoresRound3 = this.ScoresRound3;
+                targetSettings.RepeatsRound4 = this.RepeatsRound4;
+                targetSettings.ScoresRound4 = this.ScoresRound4;
+            }          
+        }
     }
 }

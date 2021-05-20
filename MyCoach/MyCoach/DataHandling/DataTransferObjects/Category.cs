@@ -106,6 +106,18 @@ namespace MyCoach.DataHandling.DataTransferObjects
             }
         }
 
+        /// <inheritdoc/>
+        public override void CopyValuesTo(DtoBase target)
+        {
+            if (target is Category targetCategory)
+            {
+                targetCategory.ID = this.ID;
+                targetCategory.Name = this.Name;
+                targetCategory.Type = this.Type;
+                targetCategory.Count = this.Count;
+            }
+        }
+
         /// <summary>
         ///     <see cref="ToString"/> Methode ist überschrieben und gibt den Namen der Kategorie zurück.
         /// </summary>

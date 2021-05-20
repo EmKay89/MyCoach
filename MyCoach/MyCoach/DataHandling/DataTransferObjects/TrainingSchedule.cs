@@ -70,5 +70,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 this.InvokePropertyChanged();
             }
         }
+
+        /// <inheritdoc/>
+        public override void CopyValuesTo(DtoBase target)
+        {
+            if (target is TrainingSchedule targetSchedule)
+            {
+                targetSchedule.ScheduleType = this.ScheduleType;
+                targetSchedule.StartMonth = this.StartMonth;
+                targetSchedule.Duration = this.Duration;
+            }
+        }
     }
 }

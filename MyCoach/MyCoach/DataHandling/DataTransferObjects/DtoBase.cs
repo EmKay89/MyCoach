@@ -8,14 +8,22 @@ using System.Threading.Tasks;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
-    public class DtoBase : ICloneable, INotifyPropertyChanged
+    public abstract class DtoBase : ICloneable, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public object Clone()
+        /// <summary>
+        ///     Erzeugt eine neue Instanz des Objekts mit kopierten Werten.
+        /// </summary>
+        public virtual object Clone()
         {
             return this.MemberwiseClone();
         }
+
+        /// <summary>
+        ///     Kopiert die Werte des Objekts auf eine andere Objektinstanz desselben Typs.
+        /// </summary>
+        public abstract void CopyValuesTo(DtoBase target);
 
         protected void InvokePropertyChanged([CallerMemberName] string propertyName = "")
         {

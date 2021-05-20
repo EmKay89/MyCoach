@@ -357,6 +357,31 @@ namespace MyCoach.DataHandling.DataTransferObjects
             }
         }
 
+        /// <inheritdoc/>
+        public override void CopyValuesTo(DtoBase target)
+        {
+            if (target is Month targetMonth)
+            {
+                targetMonth.Category1Scores = this.Category1Scores;
+                targetMonth.Category1Goal = this.Category1Goal;
+                targetMonth.Category2Scores = this.Category2Scores;
+                targetMonth.Category2Goal = this.Category2Goal;
+                targetMonth.Category3Scores = this.Category3Scores;
+                targetMonth.Category3Goal = this.Category3Goal;
+                targetMonth.Category4Scores = this.Category4Scores;
+                targetMonth.Category4Goal = this.Category4Goal;
+                targetMonth.Category5Scores = this.Category5Scores;
+                targetMonth.Category5Goal = this.Category5Goal;
+                targetMonth.Category6Scores = this.Category6Scores;
+                targetMonth.Category6Goal = this.Category6Goal;
+                targetMonth.Category7Scores = this.Category7Scores;
+                targetMonth.Category7Goal = this.Category7Goal;
+                targetMonth.Category8Scores = this.Category8Scores;
+                targetMonth.Category8Goal = this.Category8Goal;
+                targetMonth.TotalGoal = this.TotalGoal;
+            }
+        }
+
         /// <summary>
         ///     Gibt das Startdatum des Monats berechnet aus dem Startdatum eines Trainingsplans zurück.
         /// </summary>
