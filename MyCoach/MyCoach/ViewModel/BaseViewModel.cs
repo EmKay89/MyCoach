@@ -12,6 +12,9 @@ namespace MyCoach.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public const string SAVING_ERROR_CAPTION = "Speichern fehlgeschlagen";
+        public const string SAVING_ERROR_TEXT = "Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.";
+
         protected void InvokePropertiesChanged(params string[] properties)
         {
             foreach (var property in properties)

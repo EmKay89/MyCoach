@@ -17,7 +17,7 @@ namespace MyCoach.ViewModel
     public class SettingsViewModel : BaseViewModel
     {
         private string permissionText;
-        private IMessageBoxService messageBoxService;
+        private readonly IMessageBoxService messageBoxService;
 
         public SettingsViewModel(IMessageBoxService messageBoxService = null)
         {
@@ -234,12 +234,12 @@ namespace MyCoach.ViewModel
 
         private void SaveSettings()
         {
-            ObservableCollection<Settings> settingsToSave = new ObservableCollection<Settings> { this.Settings };
+            this.Settings.CopyValuesTo(DataInterface.GetInstance().GetData<Settings>().First());
             var result = DataInterface.GetInstance().SaveData<Settings>();
             if (result == false)
             {
-                this.messageBoxService.ShowMessage("Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.",
-                    "Speichern",
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT,
+                    SAVING_ERROR_CAPTION,
                     MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }

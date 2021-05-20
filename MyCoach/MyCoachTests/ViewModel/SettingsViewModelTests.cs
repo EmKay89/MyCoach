@@ -170,12 +170,13 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SaveSettingsCommandExecute_HappyPath_CallsSetDataTransferObjectsOfDataManagerAndHasUnsavedChangesIsFalse()
+        public void SaveSettingsCommandExecute_HappyPath_CallsSaveDataOfDataManagerAndHasUnsavedChangesIsFalse()
         {
             this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
 
             this.sut.SaveSettingsCommand.Execute(null);
 
+            Assert.AreEqual(this.sut.Permission, DataInterface.GetInstance().GetData<Settings>().First().Permission);
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
