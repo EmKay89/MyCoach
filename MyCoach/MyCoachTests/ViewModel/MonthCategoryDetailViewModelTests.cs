@@ -17,8 +17,8 @@ namespace MyCoachTests.ViewModel
     {
         #region Initialization and Cleanup
 
-        MonthCategoryDetailViewModel sut;
-        Month month = new Month
+        private MonthCategoryDetailViewModel sut;
+        private readonly Month month = new Month
         {
             Number = MonthNumber.Month1,
             Category1Goal = 30,
@@ -40,7 +40,7 @@ namespace MyCoachTests.ViewModel
             TotalGoal = 3000
         };
 
-        Category category = new Category
+        private readonly Category category = new Category
         {
             ID = ExerciseCategory.Category1,
             Name = "Test-Kategorie",

@@ -16,8 +16,8 @@ namespace MyCoachTests.ViewModel
     {
         #region Initialization and Cleanup
 
-        MonthViewModel sut;
-        Month month = new Month
+        private MonthViewModel sut;
+        private readonly Month month = new Month
         {
             Number = MonthNumber.Month1,
             Category1Goal = 30,

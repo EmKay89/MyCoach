@@ -19,8 +19,8 @@ namespace MyCoachTests.ViewModel
     [TestClass]
     public class SettingsViewModelTests : ViewModelTestBase
     {
-        IMessageBoxService messageBoxService;
-        SettingsViewModel sut;
+        private IMessageBoxService messageBoxService;
+        private SettingsViewModel sut;
 
         [TestInitialize]
         public void Init()

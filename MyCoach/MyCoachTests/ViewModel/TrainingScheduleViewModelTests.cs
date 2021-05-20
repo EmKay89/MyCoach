@@ -11,7 +11,7 @@ namespace MyCoachTests.ViewModel
     {
         #region Initialization and Cleanup
 
-        TrainingScheduleViewModel sut;
+        private TrainingScheduleViewModel sut;
 
         [TestInitialize]
         public void Init()

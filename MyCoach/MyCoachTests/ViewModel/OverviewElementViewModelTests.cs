@@ -19,9 +19,9 @@ namespace MyCoachTests.ViewModel
     {
         #region Initialization and Cleanup
 
-        OverviewElementViewModel sut;
-        Category category;
-        Month month;
+        private OverviewElementViewModel sut;
+        private Category category;
+        private Month month;
 
         [TestInitialize]
         public void Init()

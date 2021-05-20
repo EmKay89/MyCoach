@@ -21,9 +21,9 @@ namespace MyCoachTests.ViewModel
 
         private const string validExportPath = "validExportPath";
         private const string validImportPath = "validImportPath";
-        IMessageBoxService messageBoxService;
-        IFileDialogService fileDialogService;
-        ExercisesViewModel sut;
+        private IMessageBoxService messageBoxService;
+        private IFileDialogService fileDialogService;
+        private ExercisesViewModel sut;
 
         [TestInitialize]
         public void Init()
