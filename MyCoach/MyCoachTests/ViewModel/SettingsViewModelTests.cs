@@ -35,6 +35,12 @@ namespace MyCoachTests.ViewModel
                 (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            base.CleanupTestBase();
+        }
+
         [TestMethod]
         public void Construction_HappyPath_LoadsBufferAndHasNoUnsavedChanges()
         {
@@ -173,6 +179,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveSettingsCommandExecute_HappyPath_CallsSaveDataOfDataManagerAndHasUnsavedChangesIsFalse()
         {
+            Assert.IsFalse(DtoUtilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
             this.sut.Settings = DefaultDtos.Settings.First();
 
             this.sut.SaveSettingsCommand.Execute(null);
