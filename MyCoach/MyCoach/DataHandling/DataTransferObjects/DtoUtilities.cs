@@ -40,7 +40,8 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
             for (int i = 0; i < list1.Count; i++)
             {
-                if (list1[i].Category != list2[i].Category ||
+                if (list1[i].ID != list2[i].ID ||
+                    list1[i].Category != list2[i].Category ||
                     list1[i].Count != list2[i].Count ||
                     list1[i].Name != list2[i].Name ||
                     list1[i].RelatedCategory != list2[i].RelatedCategory ||

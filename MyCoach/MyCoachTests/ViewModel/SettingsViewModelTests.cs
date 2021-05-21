@@ -3,6 +3,7 @@ using Moq;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
 using System;
@@ -67,7 +68,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Permission_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
         {            
-            this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             Assert.AreEqual(2, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], "Permission");
@@ -164,7 +165,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveSettingsCommandCanExecute_HasUnsavedChanges_ReturnsTrue()
         {
-            this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             Assert.IsTrue(this.sut.SaveSettingsCommand.CanExecute(null));
         }
@@ -172,11 +173,11 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveSettingsCommandExecute_HappyPath_CallsSaveDataOfDataManagerAndHasUnsavedChangesIsFalse()
         {
-            this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            this.sut.Settings = DefaultDtos.Settings.First();
 
             this.sut.SaveSettingsCommand.Execute(null);
 
-            Assert.AreEqual(this.sut.Permission, DataInterface.GetInstance().GetData<Settings>().First().Permission);
+            Assert.IsTrue(DtoUtilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
@@ -212,7 +213,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ResetSettingsCommandCanExecute_HasUnsavedChanges_ReturnsTrue()
         {
-            this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             Assert.IsTrue(this.sut.ResetSettingsCommand.CanExecute(null));
         }
@@ -222,7 +223,7 @@ namespace MyCoachTests.ViewModel
         {
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
-            this.sut.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.Yes;
+            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
             Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
 

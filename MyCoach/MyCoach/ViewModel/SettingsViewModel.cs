@@ -46,7 +46,7 @@ namespace MyCoach.ViewModel
 
         public RelayCommand ResetSettingsCommand { get; }
 
-        public Settings Settings { get; private set; }
+        public Settings Settings { get; set; }
 
         public ExerciseSchedulingRepetitionPermission Permission
         {

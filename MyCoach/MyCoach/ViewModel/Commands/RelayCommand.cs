@@ -9,9 +9,9 @@ namespace MyCoach.ViewModel.Commands
 {
     public class RelayCommand : ICommand
     {
-        private Func<bool> canExecuteCallback;
-        private Action executeCallback;
-        private Action<object> executeCallbackWithParameter;
+        private readonly Func<bool> canExecuteCallback;
+        private readonly Action executeCallback;
+        private readonly Action<object> executeCallbackWithParameter;
 
         public RelayCommand(Action executeCallback, Func<bool> canExecuteCallback = null)
         {

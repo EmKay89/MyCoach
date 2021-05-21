@@ -115,6 +115,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 targetCategory.Name = this.Name;
                 targetCategory.Type = this.Type;
                 targetCategory.Count = this.Count;
+                targetCategory.Active = this.Active;
             }
         }
 

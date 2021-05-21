@@ -678,12 +678,20 @@ namespace MyCoach.ViewModel
                 }
             }
 
+            var savedExercisesToRemove = new List<Exercise>();
+
             foreach (var savedExercise in savedExercises)
             {
-                if (this.Exercises.Any(e => e.ID == savedExercise.ID) == false)
+                if (this.Exercises.Any(e => e.ID == savedExercise.ID) == false
+                    && savedExercisesToRemove.Contains(savedExercise) == false)
                 {
-                    savedExercises.Remove(savedExercise);
+                    savedExercisesToRemove.Add(savedExercise);
                 }
+            }
+
+            foreach (var savedExercise in savedExercisesToRemove)
+            {
+                savedExercises.Remove(savedExercise);
             }
         }
 

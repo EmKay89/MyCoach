@@ -133,6 +133,37 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
+        public void AddExerciseCommandExecute_ExerciseID_SetupCorrectly()
+        {
+            this.sut.Exercises.Clear();
+            this.sut.SaveExercisesCommand.Execute(null);
+            Assert.AreEqual(0, this.Exercises.Count);
+
+            this.sut.AddExerciseCommand.Execute(null);
+
+            Assert.AreEqual((uint)0, this.sut.Exercises.First().ID);
+
+            this.sut.AddExerciseCommand.Execute(null);
+
+            Assert.AreEqual((uint)1, this.sut.Exercises.Skip(1).First().ID);
+
+            this.sut.SaveExercisesCommand.Execute(null);
+            Assert.AreEqual(2, this.Exercises.Count);
+            this.sut.Exercises.RemoveAt(1);
+
+            this.sut.AddExerciseCommand.Execute(null);
+
+            Assert.AreEqual((uint)2, this.sut.Exercises.Skip(1).First().ID);
+
+            this.sut.Exercises.RemoveAt(0);
+            this.Exercises.RemoveAt(0);
+
+            this.sut.AddExerciseCommand.Execute(null);
+
+            Assert.AreEqual((uint)0, this.sut.Exercises.Skip(1).First().ID);
+        }
+
+        [TestMethod]
         public void ExportExercisesCommandCanExecute_ReturnsTrue()
         {
             Assert.IsTrue(this.sut.ExportExercisesCommand.CanExecute(null));
@@ -261,13 +292,19 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SaveCategoriesCommandExecute_HappyPath_CallsSaveDataFromDataManagerAndSetsUnsavedCategoriesToFalseAndRaisesPropertyChanged()
-        {
+        public void SaveCategoriesCommandExecute_HappyPath_SavesDataCorrectlyAndSetsUnsavedCategoriesToFalseAndRaisesPropertyChanged()
+        {            
+            this.sut.Categories = DefaultDtos.Categories;
             this.sut.HasUnsavedCategories = true;
 
             this.sut.SaveCategoriesCommand.Execute(null);
 
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
+            foreach (var category in this.Categories)
+            {
+                Assert.IsTrue(DtoUtilities.AreEqual(category, DefaultDtos.Categories.Where(c => c.ID == category.ID).First()));
+            }
+
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
             Assert.AreEqual(2, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.SelectedCategory));
@@ -305,9 +342,15 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveExercisesCommandExecute_HappyPath_CallsSaveDataFromDataManagerAndSetsUnsavedExercisesToFalse()
         {
+            this.sut.Exercises = DefaultDtos.Exercises;
             this.sut.HasUnsavedExercises = true;
 
             this.sut.SaveExercisesCommand.Execute(null);
+
+            foreach (var exercise in this.Exercises)
+            {
+                Assert.IsTrue(DtoUtilities.AreEqual(exercise, DefaultDtos.Exercises.Where(c => c.ID == exercise.ID).First()));
+            }
 
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Exercise>(), Times.Once);
             this.sut.HasUnsavedExercises = false;

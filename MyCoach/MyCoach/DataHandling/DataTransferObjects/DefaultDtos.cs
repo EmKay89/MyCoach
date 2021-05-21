@@ -32,7 +32,56 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
         public static ObservableCollection<Exercise> Exercises
         {
-            get => new ObservableCollection<Exercise>();
+            get => new ObservableCollection<Exercise>()
+            {
+                new Exercise 
+                { 
+                    ID = 0, 
+                    Category = ExerciseCategory.WarmUp, 
+                    Count = 10,
+                    Name = "Hampelmann", 
+                    RelatedCategory = ExerciseCategory.Category5, 
+                    Scores = 0, 
+                    Info = "",
+                    Active = true
+                },
+
+                new Exercise
+                {
+                    ID = 1,
+                    Category = ExerciseCategory.Category1,
+                    Count = 20, 
+                    Name = "Hantelheben 5 kg",
+                    RelatedCategory = ExerciseCategory.Category1,
+                    Scores = 10,
+                    Info = "",
+                    Active = true
+                },
+
+                new Exercise
+                {
+                    ID = 2,
+                    Category = ExerciseCategory.Category2,
+                    Count = 30,
+                    Name = "Situps",
+                    RelatedCategory = ExerciseCategory.Category2,
+                    Scores = 10,
+                    Info = "",
+                    Active = true
+                },
+
+                new Exercise
+                {
+                    ID = 3,
+                    Category = ExerciseCategory.Category3,
+                    Count = 15,
+                    Name = "Seitstütze",
+                    RelatedCategory = ExerciseCategory.Category3,
+                    Scores = 10,
+                    Info = "",
+                    Active = true
+                },
+            };
         }
 
         public static ObservableCollection<Settings> Settings
