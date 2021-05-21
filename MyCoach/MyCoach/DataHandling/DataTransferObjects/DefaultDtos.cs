@@ -15,7 +15,19 @@ namespace MyCoach.DataHandling.DataTransferObjects
     {
         public static ObservableCollection<Category> Categories
         {
-            get => new ObservableCollection<Category>() { new Category { ID = ExerciseCategory.Category1, Name = "Arme", Count = 0, Active = true, Type = ExerciseType.Training } };
+            get => new ObservableCollection<Category>() 
+            {
+                new Category { ID = ExerciseCategory.WarmUp, Name = "Aufwärmübungen", Count = 3, Active = true, Type = ExerciseType.WarmUp },
+                new Category { ID = ExerciseCategory.Category1, Name = "Arme", Count = 0, Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category2, Name = "Bauch", Count = 0, Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category3, Name = "Seiten", Count = 0, Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category4, Name = "Rücken", Count = 0, Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category5, Name = "Beine", Count = 0, Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category6, Name = "", Count = 0, Active = false, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category7, Name = "", Count = 0, Active = false, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category8, Name = "", Count = 0, Active = false, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnübungen", Count = 3, Active = true, Type = ExerciseType.CoolDown }
+            };
         }
 
         public static ObservableCollection<Exercise> Exercises

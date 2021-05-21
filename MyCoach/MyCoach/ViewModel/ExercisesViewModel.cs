@@ -3,6 +3,7 @@ using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.DataBaseValidation;
 using MyCoach.ViewModel.ModelExtensions;
 using MyCoach.ViewModel.Services;
 using System;
@@ -21,19 +22,16 @@ namespace MyCoach.ViewModel
     public class ExercisesViewModel : BaseViewModel
     {
         private Category selectedCategory;
-        private readonly IMessageBoxService messageBoxService;
         private readonly IFileDialogService fileDialogService;
+        private readonly IMessageBoxService messageBoxService;
 
         public ExercisesViewModel(IMessageBoxService messageBoxService = null, IFileDialogService fileDialogService = null)
         {
-            this.ExercisesFilteredByCategory = new ObservableCollection<ExerciseViewModel>();
-            this.Categories = new ObservableCollection<Category>();
-            this.Exercises = new ObservableCollection<Exercise>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.LoadCategoryBuffer();
             this.LoadExerciseBuffer();
-            this.messageBoxService = messageBoxService ?? new MessageBoxService();
             this.fileDialogService = fileDialogService ?? new FileDialogService();
+            this.messageBoxService = messageBoxService ?? new MessageBoxService();
 
             this.AddExerciseCommand = new RelayCommand(this.AddExercise, () => this.SelectedCategory != null);
             this.ExportExercisesCommand = new RelayCommand(this.ExportExercises);
@@ -48,18 +46,16 @@ namespace MyCoach.ViewModel
         public const string NEW_EXERCISE_NAME = "Neue Übung";
         public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
-        public const string SAVING_ERROR_CAPTION = "Speichern fehlgeschlagen";
-        public const string SAVING_ERROR_TEXT = "Speichern fehlgeschlagen. Die Änderungen werden beim nächsten Neustart des Programms nicht mehr zur Verfügung stehen.";
         public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
         public const string RESET_CAPTION = "Zurücksetzen";
 
         public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
         
-        public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
 
-        public ObservableCollection<Exercise> Exercises { get; set; }
+        public ObservableCollection<Exercise> Exercises { get; set; } = new ObservableCollection<Exercise>();
 
-        public ObservableCollection<ExerciseViewModel> ExercisesFilteredByCategory { get; set; }
+        public ObservableCollection<ExerciseViewModel> ExercisesFilteredByCategory { get; set; } = new ObservableCollection<ExerciseViewModel>();
 
         public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
@@ -497,10 +493,25 @@ namespace MyCoach.ViewModel
 
         private void AddExercise()
         {
+            var id = GetLowestEmptyExerciseId();
             this.Exercises.Add(
-                new Exercise { Name = NEW_EXERCISE_NAME, Active = true, Scores = 10, Category = this.SelectedCategory.ID });
+                new Exercise { ID = id, Name = NEW_EXERCISE_NAME, Active = true, Scores = 10, Category = this.SelectedCategory.ID });
             this.RefreshExercisesFilteredByCategory();
             this.HasUnsavedExercises = true;
+        }
+
+        private uint GetLowestEmptyExerciseId()
+        {
+            for (uint i = 0; i <= uint.MaxValue; i++)
+            {
+                if (this.Exercises.Any(e => e.ID == i) == false
+                    && DataInterface.GetInstance().GetData<Exercise>().Any(e => e.ID == i) == false)
+                {
+                    return i;
+                }
+            }
+
+            throw new OverflowException("No more Exercise ID's available.");
         }
 
         private void ExportExercises()
@@ -536,6 +547,8 @@ namespace MyCoach.ViewModel
 
             if (DataInterface.GetInstance().ImportExerciseSet(path))
             {
+                CategoriesValidator.Validate();
+                ExercisesValidator.Validate();
                 this.LoadCategoryBuffer();
                 this.LoadExerciseBuffer();
                 return;
@@ -614,10 +627,14 @@ namespace MyCoach.ViewModel
         private void SaveCategories()
         {
             var savedCategories = DataInterface.GetInstance().GetData<Category>();
-            savedCategories.Clear();
+
             foreach (var category in this.Categories)
             {
-                savedCategories.Add((Category)category.Clone());
+                var savedCategory = savedCategories.Where(c => c.ID == category.ID).FirstOrDefault();
+                if (savedCategory != null)
+                {
+                    category.CopyValuesTo(savedCategory);
+                }                
             }
 
             var result = DataInterface.GetInstance().SaveData<Category>();
@@ -632,12 +649,7 @@ namespace MyCoach.ViewModel
 
         private void SaveExercises()
         {
-            var savedExercises = DataInterface.GetInstance().GetData<Exercise>();
-            savedExercises.Clear();
-            foreach (var exercise in this.Exercises)
-            {
-                savedExercises.Add((Exercise)exercise.Clone());
-            }
+            UpdateSavedExercises();
 
             var result = DataInterface.GetInstance().SaveData<Exercise>();
             if (result == false)
@@ -646,6 +658,33 @@ namespace MyCoach.ViewModel
             }
 
             this.HasUnsavedExercises = false;
+        }
+
+        private void UpdateSavedExercises()
+        {
+            var savedExercises = DataInterface.GetInstance().GetData<Exercise>();
+
+            foreach (var exercise in this.Exercises)
+            {
+                var savedExercise = savedExercises.Where(e => e.ID == exercise.ID).FirstOrDefault();
+                if (savedExercise != null)
+                {
+                    exercise.CopyValuesTo(savedExercise);
+                }
+
+                if (savedExercises.Any(e => e.ID == exercise.ID) == false)
+                {
+                    savedExercises.Add(exercise);
+                }
+            }
+
+            foreach (var savedExercise in savedExercises)
+            {
+                if (this.Exercises.Any(e => e.ID == savedExercise.ID) == false)
+                {
+                    savedExercises.Remove(savedExercise);
+                }
+            }
         }
 
         private void SetDefaults()

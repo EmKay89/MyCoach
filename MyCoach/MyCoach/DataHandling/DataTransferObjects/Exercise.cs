@@ -7,6 +7,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// </summary>
     public class Exercise : DtoBase, IDataTransferObject
     {
+        private uint iD;
         private ExerciseCategory category;
         private ushort count;
         private string name;
@@ -14,6 +15,24 @@ namespace MyCoach.DataHandling.DataTransferObjects
         private ushort scores;
         private string info;
         private bool active;
+
+        /// <summary>
+        ///     Eindeutiger Identifizierer der Übung.
+        /// </summary>
+        public uint ID
+        {
+            get => this.iD;
+            set
+            {
+                if (value == this.iD)
+                {
+                    return;
+                }
+
+                this.iD = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         /// <summary>
         ///     Ruft die Übungskategorie auf oder legt sie fest.

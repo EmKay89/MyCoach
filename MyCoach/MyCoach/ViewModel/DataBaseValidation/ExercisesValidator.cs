@@ -20,7 +20,32 @@ namespace MyCoach.ViewModel.DataBaseValidation
                 exercises = new ObservableCollection<Exercise>();
             }
 
+            RemoveDoublicates(exercises);
+
             DataInterface.GetInstance().SaveData<Exercise>();
+        }
+
+        private static void RemoveDoublicates(ObservableCollection<Exercise> exercises)
+        {
+            List<Exercise> exercisesWithDoublicateIds = new List<Exercise>();
+
+            foreach (var exercise in exercises)
+            {
+                if (exercisesWithDoublicateIds.Contains(exercise))
+                {
+                    continue;
+                }
+
+                var newDoublicates = exercises.Where(e => e.ID == exercise.ID 
+                    && exercisesWithDoublicateIds.Contains(e) == false
+                    && e.GetHashCode() != exercise.GetHashCode());
+                exercisesWithDoublicateIds.AddRange(newDoublicates);
+            }
+
+            foreach (var exercise in exercisesWithDoublicateIds)
+            {
+                exercises.Remove(exercise);
+            }
         }
     }
 }

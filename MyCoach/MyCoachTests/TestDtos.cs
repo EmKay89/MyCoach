@@ -58,16 +58,16 @@ namespace MyCoachTests
         {
             return new ObservableCollection<Category>
             {
-                new Category { ID = ExerciseCategory.WarmUp, Name = "Erwärmung", Count = 3, Active = true, Type = ExerciseType.WarmUp },
-                new Category { ID = ExerciseCategory.Category1, Name = "Arme", Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.WarmUp, Name = "Erwärmung", Count = 4, Active = true, Type = ExerciseType.WarmUp },
+                new Category { ID = ExerciseCategory.Category1, Name = "Bizeps", Active = true, Type = ExerciseType.Training },
                 new Category { ID = ExerciseCategory.Category2, Name = "Bauch", Active = true, Type = ExerciseType.Training },
                 new Category { ID = ExerciseCategory.Category3, Name = "Seiten", Active = true, Type = ExerciseType.Training },
                 new Category { ID = ExerciseCategory.Category4, Name = "Rücken", Active = true, Type = ExerciseType.Training },
-                new Category { ID = ExerciseCategory.Category5, Name = "Beine", Active = true, Type = ExerciseType.Training },
-                new Category { ID = ExerciseCategory.Category6, Name = "", Active = false, Type = ExerciseType.Training },
-                new Category { ID = ExerciseCategory.Category7, Name = "", Active = false, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category5, Name = "", Active = false, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category6, Name = "Po", Active = true, Type = ExerciseType.Training },
+                new Category { ID = ExerciseCategory.Category7, Name = "Waden", Active = true, Type = ExerciseType.Training },
                 new Category { ID = ExerciseCategory.Category8, Name = "", Active = false, Type = ExerciseType.Training },
-                new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnung", Count = 3, Active = false, Type = ExerciseType.CoolDown }
+                new Category { ID = ExerciseCategory.CoolDown, Name = "Dehnung", Count = 4, Active = false, Type = ExerciseType.CoolDown }
             };
         }
 
@@ -77,6 +77,7 @@ namespace MyCoachTests
             {
                 new Exercise
                 {
+                    ID = 0,
                     Category = ExerciseCategory.WarmUp,
                     Count = 10,
                     Name = "Armkreisen",
@@ -88,6 +89,7 @@ namespace MyCoachTests
 
                 new Exercise
                 {
+                    ID = 1,
                     Category = ExerciseCategory.Category1,
                     Count = 10,
                     Name = "Hantelheben 10kg",
@@ -99,6 +101,7 @@ namespace MyCoachTests
 
                 new Exercise
                 {
+                    ID = 3,
                     Category = ExerciseCategory.Category1,
                     Count = 10,
                     Name = "Hantelheben 20kg",
@@ -110,6 +113,7 @@ namespace MyCoachTests
 
                 new Exercise
                 {
+                    ID = 4,
                     Category = ExerciseCategory.Category2,
                     Count = 10,
                     Name = "Situps",
@@ -121,6 +125,7 @@ namespace MyCoachTests
 
                 new Exercise
                 {
+                    ID = 5,
                     Category = ExerciseCategory.CoolDown,
                     Count = 10,
                     Name = "Arme strecken",
