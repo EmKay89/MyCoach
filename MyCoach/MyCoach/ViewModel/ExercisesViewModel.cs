@@ -1,10 +1,10 @@
 ﻿using Microsoft.Win32;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
-using MyCoach.ViewModel.ModelExtensions;
 using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
@@ -561,6 +561,7 @@ namespace MyCoach.ViewModel
         {
             var savedSelectedCategoryId = this.SelectedCategory?.ID;
             var savedCategories = DataInterface.GetInstance().GetData<Category>();
+            this.Categories.ResetSubscriptions();
             this.Categories.Clear();
 
             foreach (var category in savedCategories)
@@ -583,6 +584,7 @@ namespace MyCoach.ViewModel
         private void LoadExerciseBuffer()
         {
             var savedExercises = DataInterface.GetInstance().GetData<Exercise>();
+            this.Exercises.ResetSubscriptions();
             this.Exercises.Clear();
 
             foreach (var exercise in savedExercises)

@@ -1,4 +1,5 @@
 ﻿using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -64,6 +65,7 @@ namespace MyCoach.DataHandling.DataManager
             switch (typeof(T).Name)
             {
                 case nameof(Category):
+                    this.Buffer.Categories.ResetSubscriptions();
                     this.Buffer.Categories.Clear();
                     foreach (var category in DefaultDtos.Categories)
                     {
@@ -72,6 +74,7 @@ namespace MyCoach.DataHandling.DataManager
 
                     break;
                 case nameof(Exercise):
+                    this.Buffer.Exercises.ResetSubscriptions();
                     this.Buffer.Exercises.Clear();
                     foreach (var exercise in DefaultDtos.Exercises)
                     {
@@ -80,6 +83,7 @@ namespace MyCoach.DataHandling.DataManager
 
                     break;
                 case nameof(Settings):
+                    this.Buffer.Settings.ResetSubscriptions();
                     this.Buffer.Settings.Clear();
                     foreach (var setting in DefaultDtos.Settings)
                     {
@@ -88,6 +92,7 @@ namespace MyCoach.DataHandling.DataManager
                     break;
 
                 case nameof(TrainingSchedule):
+                    this.Buffer.TrainingSchedules.ResetSubscriptions();
                     this.Buffer.TrainingSchedules.Clear();
                     foreach (var ts in DefaultDtos.TrainingSchedules)
                     {
@@ -96,6 +101,7 @@ namespace MyCoach.DataHandling.DataManager
 
                     break;
                 case nameof(Month):
+                    this.Buffer.TrainingScores.ResetSubscriptions();
                     this.Buffer.TrainingScores.Clear();
                     foreach (var ts in DefaultDtos.TrainingScores)
                     {
@@ -154,12 +160,14 @@ namespace MyCoach.DataHandling.DataManager
                 XmlSerializer serializer = new XmlSerializer(typeof(ExerciseSet));                
                 var exerciseSet = (ExerciseSet)(serializer.Deserialize(reader));
 
+                this.Buffer.Categories.ResetSubscriptions();
                 this.Buffer.Categories.Clear();
                 foreach (var category in exerciseSet.Categories)
                 {
                     this.Buffer.Categories.Add(category);
                 }
 
+                this.Buffer.Exercises.ResetSubscriptions();
                 this.Buffer.Exercises.Clear();
                 foreach (var exercise in exerciseSet.Exercises)
                 {

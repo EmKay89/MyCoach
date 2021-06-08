@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
     <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
     <Compile Include="Defines\ScheduleType.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
@@ -100,8 +101,8 @@
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\ModelExtensions\CategoryExtensionMethods.cs" />
-    <Compile Include="ViewModel\ModelExtensions\MonthExtensionMethods.cs" />
+    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\CategoryCollectionExtensions.cs" />
+    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\MonthCollectionExtensions.cs" />
     <Compile Include="ViewModel\MonthCategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\MonthViewModel.cs" />
     <Compile Include="ViewModel\OverviewElementViewModel.cs" />

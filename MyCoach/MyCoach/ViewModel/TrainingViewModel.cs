@@ -1,8 +1,8 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
-using MyCoach.ViewModel.ModelExtensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -13,17 +13,24 @@ namespace MyCoach.DataHandling.DataTransferObjects
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Erzeugt eine neue Instanz des Objekts mit kopierten Werten.
+        ///     Erzeugt eine neue Instanz des Objekts mit kopierten Werten, jedoch ohne Abonnenten auf Events.
         /// </summary>
         public virtual object Clone()
         {
-            return this.MemberwiseClone();
+            var clone = this.MemberwiseClone() as DtoBase;
+            clone.ResetSubscriptions();
+            return clone;
         }
 
         /// <summary>
         ///     Kopiert die Werte des Objekts auf eine andere Objektinstanz desselben Typs.
         /// </summary>
         public abstract void CopyValuesTo(DtoBase target);
+
+        /// <summary>
+        ///     Entfernt alle Abonnenten aller Events.
+        /// </summary>
+        public void ResetSubscriptions() => this.PropertyChanged = null;
 
         protected void InvokePropertyChanged([CallerMemberName] string propertyName = "")
         {

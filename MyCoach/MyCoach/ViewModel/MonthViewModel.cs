@@ -23,8 +23,14 @@ namespace MyCoach.ViewModel
         {            
             this.month = month;
             this.month.PropertyChanged += this.OnMonthChanged;
+
             this.categories = DataInterface.GetInstance().GetData<Category>();
             this.categories.CollectionChanged += this.OnCategoriesChanged;
+            foreach (var category in categories)
+            {
+                category.PropertyChanged += this.OnCategoryChanged;
+            }
+
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             this.startDate = this.month.GetStartDateFromSchedule(schedule);
             this.UpdateMonthCategoryDetailViewModels();
@@ -80,11 +86,31 @@ namespace MyCoach.ViewModel
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // ToDo: Durch das Speichern der Categories wird die Liste der Categories im Buffer
-            // gelöscht und neu bestückt. Hier werden dabei unnötigerweise beim Hinzufügen einer
-            // neuen Category viele Viewmodels gelöscht und dann wieder geladen, was unperformant ist.
-            // -> Fixen
+            if (e.OldItems != null)
+            {
+                foreach (var category in e.OldItems)
+                {
+                    ((Category)category).PropertyChanged -= this.OnCategoryChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (var category in e.NewItems)
+                {
+                    ((Category)category).PropertyChanged += this.OnCategoryChanged;
+                }
+            }
+
             this.UpdateMonthCategoryDetailViewModels();
+        }
+
+        private void OnCategoryChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Category.Active))
+            {
+                this.UpdateMonthCategoryDetailViewModels();
+            }
         }
 
         private void UpdateMonthCategoryDetailViewModels()

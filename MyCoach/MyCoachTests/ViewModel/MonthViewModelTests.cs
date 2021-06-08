@@ -108,15 +108,21 @@ namespace MyCoachTests.ViewModel
             this.AssertThatMonthCategoryDetailViewModelsAreUpdatedCorrectly();
 
             this.Categories.Add(
-                new Category { ID = ExerciseCategory.WarmUp, Active = true, Type = ExerciseType.WarmUp });
+                new Category { Name = "Aufwärmen", ID = ExerciseCategory.WarmUp, Active = true, Type = ExerciseType.WarmUp });
             this.Categories.Add(
-                new Category { ID = ExerciseCategory.Category1, Active = true, Type = ExerciseType.Training });
+                new Category { Name = "Übung 1", ID = ExerciseCategory.Category1, Active = true, Type = ExerciseType.Training });
             this.Categories.Add(
-                new Category { ID = ExerciseCategory.Category2, Active = false, Type = ExerciseType.Training });
+                new Category { Name = "Übung 2", ID = ExerciseCategory.Category2, Active = false, Type = ExerciseType.Training });
             this.Categories.Add(
-                new Category { ID = ExerciseCategory.Category3, Active = true, Type = ExerciseType.Training });
+                new Category { Name = "Übung 3", ID = ExerciseCategory.Category3, Active = true, Type = ExerciseType.Training });
             this.Categories.Add(
-                new Category { ID = ExerciseCategory.CoolDown, Active = true, Type = ExerciseType.CoolDown });
+                new Category { Name = "Abwärmen", ID = ExerciseCategory.CoolDown, Active = true, Type = ExerciseType.CoolDown });
+
+            this.AssertThatMonthCategoryDetailViewModelsAreUpdatedCorrectly();
+
+            this.Categories.Skip(3).First().Active = false;
+            this.Categories.Skip(2).First().Active = true;
+            this.Categories.Skip(1).First().Name = "neue Übung 1";
 
             this.AssertThatMonthCategoryDetailViewModelsAreUpdatedCorrectly();
         }

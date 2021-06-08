@@ -1,6 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.ViewModel.ModelExtensions;
+using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -127,9 +127,12 @@ namespace MyCoach.ViewModel
 
                 this.monthsInSchedule = value;
 
-                foreach (var month in monthsInSchedule)
+                if (this.monthsInSchedule != null)
                 {
-                    month.PropertyChanged += this.OnMonthInScheduleChanged;
+                    foreach (var month in monthsInSchedule)
+                    {
+                        month.PropertyChanged += this.OnMonthInScheduleChanged;
+                    }
                 }
             }
         }
