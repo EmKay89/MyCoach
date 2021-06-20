@@ -22,8 +22,16 @@ namespace MyCoach.ViewModel
         public TrainingScheduleOverviewViewModel()
         {
             DataInterface.GetInstance().GetData<TrainingSchedule>().First().PropertyChanged += this.OnScheduleChanged;
-            DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
+            var categories = DataInterface.GetInstance().GetData<Category>();
+            categories.CollectionChanged += this.OnCategoriesChanged;
+
+            foreach (var category in categories)
+            {
+                category.PropertyChanged += this.OnCategoryChanged;
+            }
+
             this.UpdateAvailableCategories();
+            this.UpdateSelectedCategory();
         }
 
         public ObservableCollection<OverviewElementViewModel> Elements { get; } = new ObservableCollection<OverviewElementViewModel>();
@@ -43,18 +51,7 @@ namespace MyCoach.ViewModel
                     return;
                 }
 
-                if (this.selectedCategory != null)
-                {
-                    this.selectedCategory.PropertyChanged -= this.OnSelectedCategoryChanged;
-                }
-
                 this.selectedCategory = value;
-
-                if (this.selectedCategory != null)
-                {
-                    this.selectedCategory.PropertyChanged += this.OnSelectedCategoryChanged;
-                }
-
                 this.UpdateChart();
             }
         }
@@ -140,7 +137,6 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            this.AvailableCategoryListItems.Clear();
             var allCategories = DataInterface.GetInstance().GetData<Category>();
 
             foreach (var category in allCategories)
@@ -151,15 +147,28 @@ namespace MyCoach.ViewModel
                 }
             }
 
+            this.AvailableCategories.Add(null);
+            UpdateAvailableCategoryListItems(true);
+        }
+
+        private void UpdateAvailableCategoryListItems(bool resetSelectedIndex)
+        {
+            this.AvailableCategoryListItems.Clear();
+
             foreach (var category in this.AvailableCategories)
             {
-                this.AvailableCategoryListItems.Add(category.Name);
+                if (category != null)
+                {
+                    this.AvailableCategoryListItems.Add(category.Name);
+                }
             }
 
             this.AvailableCategoryListItems.Add("Gesamt");
-            this.AvailableCategories.Add(null);
-            this.SelectedCategoryListIndex = 0;
-            this.UpdateSelectedCategory();
+
+            if (resetSelectedIndex)
+            {
+                this.SelectedCategoryListIndex = 0;
+            }
         }
 
         private void UpdateChart()
@@ -231,7 +240,35 @@ namespace MyCoach.ViewModel
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.OldItems != null)
+            {
+                foreach (var category in e.OldItems)
+                {
+                    ((Category)category).PropertyChanged -= this.OnCategoryChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (var category in e.NewItems)
+                {
+                    ((Category)category).PropertyChanged += this.OnCategoryChanged;
+                }
+            }
+
             this.UpdateAvailableCategories();
+        }
+
+        private void OnCategoryChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Category.Active))
+            {
+                this.UpdateAvailableCategories();
+            }
+            else if (e.PropertyName == nameof(Category.Name))
+            {
+                this.UpdateAvailableCategoryListItems(false);
+            }
         }
 
         private void OnScheduleChanged(object sender, PropertyChangedEventArgs e)
@@ -242,14 +279,6 @@ namespace MyCoach.ViewModel
         private void OnMonthInScheduleChanged(object sender, PropertyChangedEventArgs e)
         {
             this.UpdateMaxScoreOrGoal();
-        }
-
-        private void OnSelectedCategoryChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Category.Active))
-            {
-                this.UpdateAvailableCategories();
-            }
         }
     }
 }

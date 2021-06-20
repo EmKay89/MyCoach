@@ -160,18 +160,17 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SelectedCategoryChanges_Renamed_RaisesPropertyChangedEvent()
+        public void SelectedCategoryChanges_Renamed_NameInListUpdated()
         {
             var newName = "New Category Name";
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
-            cat1.PropertyChanged += 
-                (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
             Assert.IsTrue(cat1.Name != newName);
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == cat1.Name);
 
             cat1.Name = newName;
 
-            Assert.IsTrue(this.PropertyChangedEvents.Count == 1);
-            Assert.IsTrue(this.PropertyChangedEvents.First() == nameof(Category.Name));
+            this.AssertChartElementsCountAndType();
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == newName);
         }
 
         [TestMethod]
