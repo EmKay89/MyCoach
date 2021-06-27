@@ -45,7 +45,7 @@ namespace MyCoachTests.ViewModel
         public void Construction_HappyPath_LoadsBufferAndHasNoUnsavedChanges()
         {
             Assert.IsNotNull(this.sut.Settings);
-            Assert.IsTrue(DtoUtilities.AreEqual(sut.Settings, TestDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(Utilities.AreEqual(sut.Settings, TestDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
@@ -57,7 +57,7 @@ namespace MyCoachTests.ViewModel
             this.sut = new SettingsViewModel(this.messageBoxService);
 
             Assert.IsNotNull(this.sut.Settings);
-            Assert.IsTrue(DtoUtilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(Utilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace MyCoachTests.ViewModel
             this.sut = new SettingsViewModel(this.messageBoxService);
 
             Assert.IsNotNull(this.sut.Settings);
-            Assert.IsTrue(DtoUtilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(Utilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
         }
 
         [TestMethod]
@@ -179,12 +179,12 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void SaveSettingsCommandExecute_HappyPath_CallsSaveDataOfDataManagerAndHasUnsavedChangesIsFalse()
         {
-            Assert.IsFalse(DtoUtilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
+            Assert.IsFalse(Utilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
             this.sut.Settings = DefaultDtos.Settings.First();
 
             this.sut.SaveSettingsCommand.Execute(null);
 
-            Assert.IsTrue(DtoUtilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
+            Assert.IsTrue(Utilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
@@ -200,14 +200,14 @@ namespace MyCoachTests.ViewModel
         {
             Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns(DefaultDtos.Settings);
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Never);
-            Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            Assert.IsFalse(Utilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
             Assert.IsTrue(this.sut.HasUnsavedChanges);
 
             this.sut.SetDefaultsCommand.Execute(null);
 
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Once);
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
@@ -231,12 +231,12 @@ namespace MyCoachTests.ViewModel
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
             this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
-            Assert.IsFalse(DtoUtilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
+            Assert.IsFalse(Utilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
             Assert.IsTrue(this.sut.HasUnsavedChanges);
 
             this.sut.ResetSettingsCommand.Execute(null);
 
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
     }

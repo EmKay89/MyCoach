@@ -31,11 +31,11 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
             var loadedTrainingScores = this.sut.GetData<Month>();
 
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, TestDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, TestDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, TestDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingSchedules, TestDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingScores, TestDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(loadedCategories, TestDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(loadedExercises, TestDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(loadedSettings, TestDtos.Settings));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingSchedules, TestDtos.TrainingSchedules));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingScores, TestDtos.TrainingScores));
         }
 
         [TestMethod]
@@ -49,11 +49,11 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedSettings = this.sut.GetData<Settings>();
             var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
             var loadedTrainingScores = this.sut.GetData<Month>();
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, DefaultDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(loadedCategories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(loadedSettings, DefaultDtos.Settings));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingSchedules, DefaultDtos.TrainingSchedules));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingScores, DefaultDtos.TrainingScores));
         }
 
         [TestMethod]
@@ -85,11 +85,11 @@ namespace MyCoachTests.DataHandling.DataManager
             var loadedSettings = this.sut.GetData<Settings>();
             var loadedTrainingSchedules = this.sut.GetData<TrainingSchedule>();
             var loadedTrainingScores = this.sut.GetData<Month>();
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedCategories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedSettings, TestDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingSchedules, TestDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(loadedTrainingScores, TestDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(loadedCategories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(loadedSettings, TestDtos.Settings));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingSchedules, TestDtos.TrainingSchedules));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingScores, TestDtos.TrainingScores));
         }
 
         [TestMethod]

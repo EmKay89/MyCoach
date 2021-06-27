@@ -137,16 +137,7 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            var allCategories = DataInterface.GetInstance().GetData<Category>();
-
-            foreach (var category in allCategories)
-            {
-                if (category.Active && category.Type == Defines.ExerciseType.Training)
-                {
-                    this.AvailableCategories.Add(category);
-                }
-            }
-
+            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add((Category)c));
             this.AvailableCategories.Add(null);
             UpdateAvailableCategoryListItems(true);
         }

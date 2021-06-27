@@ -28,17 +28,16 @@ namespace MyCoach.ViewModel
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
             this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedChanges);
             this.PropertyChanged += delegate { this.HasUnsavedChanges = true; };
-            this.PremissionsWithCaption = new Dictionary<ExerciseSchedulingRepetitionPermission, string>
-            {
-                { ExerciseSchedulingRepetitionPermission.No, "Nein" },
-                { ExerciseSchedulingRepetitionPermission.NotPreferred, "Nicht bevorzugt" },
-                { ExerciseSchedulingRepetitionPermission.Yes, "Ja" }
-            };
         }
 
         public bool HasUnsavedChanges { get; private set; }
 
-        public Dictionary<ExerciseSchedulingRepetitionPermission, string> PremissionsWithCaption { get; }
+        public Dictionary<ExerciseSchedulingRepetitionPermission, string> PremissionsWithCaption { get; } = new Dictionary<ExerciseSchedulingRepetitionPermission, string>
+        {
+            { ExerciseSchedulingRepetitionPermission.No, "Nein" },
+            { ExerciseSchedulingRepetitionPermission.NotPreferred, "Nicht bevorzugt" },
+            { ExerciseSchedulingRepetitionPermission.Yes, "Ja" }
+        };
 
         public RelayCommand SaveSettingsCommand { get; }
 

@@ -50,11 +50,11 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.SetDefaults<TrainingSchedule>();
             this.sut.SetDefaults<Month>();
 
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
         }
 
         [TestMethod]
@@ -68,8 +68,8 @@ namespace MyCoachTests.DataHandling.DataManager
 
             Assert.IsTrue(successExport);
             Assert.IsTrue(successImport);
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Categories, TestDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Exercises, TestDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Categories, TestDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Exercises, TestDtos.Exercises));
         }
 
         [TestMethod]
@@ -92,11 +92,11 @@ namespace MyCoachTests.DataHandling.DataManager
                
         private void AssertThatSutBufferHasDefaultValues()
         {
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
         }
     }
 

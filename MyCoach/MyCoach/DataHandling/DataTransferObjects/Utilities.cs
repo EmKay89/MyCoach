@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.Defines;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyCoach.DataHandling.DataTransferObjects
 {
-    public static class DtoUtilities
+    public static class Utilities
     {
         public static bool AreEqual(ObservableCollection<Category> list1, ObservableCollection<Category> list2)
         {
@@ -189,6 +190,11 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 default:
                     return false;
             }
+        }
+
+        public static IEnumerable<Category> GetActiveTrainingCategories()
+        {
+            return DataInterface.GetInstance().GetData<Category>().Where(c => c.Active && c.Type == ExerciseType.Training);
         }
     }
 }

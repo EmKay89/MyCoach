@@ -79,7 +79,7 @@
     <Compile Include="DataHandling\DataManager\XmlFileReaderWriter.cs" />
     <Compile Include="DataHandling\DataTransferObjects\Category.cs" />
     <Compile Include="DataHandling\DataTransferObjects\DefaultDtos.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\DtoUtilities.cs" />
+    <Compile Include="DataHandling\DataTransferObjects\Utilities.cs" />
     <Compile Include="DataHandling\DataTransferObjects\Exercise.cs" />
     <Compile Include="DataHandling\DataTransferObjects\ExerciseSet.cs" />
     <Compile Include="DataHandling\DataTransferObjects\IDataTransferObject.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="ViewModel\DataBaseValidation\SettingsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\MonthsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\TrainingScheduleValidator.cs" />
+    <Compile Include="ViewModel\EditMonthViewModel.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />

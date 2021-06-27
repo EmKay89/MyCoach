@@ -43,11 +43,11 @@ namespace MyCoachTests.ViewModel
         public void Construction_HappyPath_LoadsBuffersAndHasNoUnsavedChanges()
         {
             Assert.IsNotNull(this.sut.Categories);
-            Assert.IsTrue(DtoUtilities.AreEqual(sut.Categories, TestDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(sut.Categories, TestDtos.Categories));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
 
             Assert.IsNotNull(this.sut.Exercises);
-            Assert.IsTrue(DtoUtilities.AreEqual(sut.Exercises, TestDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(sut.Exercises, TestDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedExercises);
         }
 
@@ -180,8 +180,8 @@ namespace MyCoachTests.ViewModel
             this.sut.ExportExercisesCommand.Execute(null);
 
             Mock.Get(this.DataManager).Verify(DataManager => DataManager.TryExportExerciseSet(validExportPath), Times.Once);
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, TestDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Categories, TestDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
             Assert.IsFalse(this.sut.HasUnsavedExercises);
         }
@@ -217,8 +217,8 @@ namespace MyCoachTests.ViewModel
             this.sut.ImportExercisesCommand.Execute(null);
 
             Mock.Get(this.DataManager).Verify(dm => dm.TryImportExerciseSet(validImportPath), Times.Once);
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
             Assert.IsFalse(this.sut.HasUnsavedExercises);
         }
@@ -255,7 +255,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.ResetCategoriesCommand.Execute(null);
 
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, TestDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Categories, TestDtos.Categories));
             Assert.IsFalse(this.sut.HasUnsavedCategories);
         }
 
@@ -277,7 +277,7 @@ namespace MyCoachTests.ViewModel
 
             this.sut.ResetExercisesCommand.Execute(null);
 
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Exercises, TestDtos.Exercises));
             Assert.IsFalse(this.sut.HasUnsavedExercises);
         }
 
@@ -302,7 +302,7 @@ namespace MyCoachTests.ViewModel
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Category>(), Times.Once);
             foreach (var category in this.Categories)
             {
-                Assert.IsTrue(DtoUtilities.AreEqual(category, DefaultDtos.Categories.Where(c => c.ID == category.ID).First()));
+                Assert.IsTrue(Utilities.AreEqual(category, DefaultDtos.Categories.Where(c => c.ID == category.ID).First()));
             }
 
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
@@ -349,7 +349,7 @@ namespace MyCoachTests.ViewModel
 
             foreach (var exercise in this.Exercises)
             {
-                Assert.IsTrue(DtoUtilities.AreEqual(exercise, DefaultDtos.Exercises.Where(c => c.ID == exercise.ID).First()));
+                Assert.IsTrue(Utilities.AreEqual(exercise, DefaultDtos.Exercises.Where(c => c.ID == exercise.ID).First()));
             }
 
             Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Exercise>(), Times.Once);
@@ -390,8 +390,8 @@ namespace MyCoachTests.ViewModel
 
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Exercise>(), Times.Once);
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Category>(), Times.Once);
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
-            Assert.IsTrue(DtoUtilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
         }
 
         #endregion

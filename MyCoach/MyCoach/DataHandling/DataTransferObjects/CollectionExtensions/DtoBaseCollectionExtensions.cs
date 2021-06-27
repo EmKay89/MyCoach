@@ -15,5 +15,13 @@ namespace MyCoach.DataHandling.DataTransferObjects.CollectionExtensions
                 dto.ResetSubscriptions();
             }
         }
+
+        public static void Foreach(this IEnumerable<DtoBase> dtos, Action<DtoBase> action)
+        {
+            foreach (var dto in dtos)
+            {
+                action(dto);
+            }
+        }
     }
 }
