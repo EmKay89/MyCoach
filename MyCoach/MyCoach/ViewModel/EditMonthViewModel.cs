@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.DataHandling.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace MyCoach.ViewModel
 {
     public class EditMonthViewModel : BaseViewModel
     {
+        public EditMonthViewModel(Month month)
+        {
+
+        }
     }
 }
