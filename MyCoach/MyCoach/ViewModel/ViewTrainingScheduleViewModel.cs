@@ -134,8 +134,7 @@ namespace MyCoach.ViewModel
         {
             var currentMonth = months.Where(m => m.Number == MonthNumber.Current).First();
 
-            var currentMonthInTimeBasedSchedule = months.Where(
-                m => m.GetStartDateFromSchedule(schedule) == currentMonth.GetStartDateFromSchedule(schedule)
+            var currentMonthInTimeBasedSchedule = months.Where(m => m.StartDate == currentMonth.StartDate
                     && m.Number != MonthNumber.Current).FirstOrDefault();
 
             if (currentMonthInTimeBasedSchedule != null && schedule.ScheduleType == ScheduleType.TimeBased)

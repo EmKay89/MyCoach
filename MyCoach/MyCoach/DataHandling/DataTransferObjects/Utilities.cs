@@ -113,6 +113,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
             for (int i = 0; i < list1.Count; i++)
             {
                 if (list1[i].Number != list2[i].Number ||
+                    list1[i].StartDate != list2[i].StartDate ||
                     list1[i].Category1Goal != list2[i].Category1Goal ||
                     list1[i].Category1Scores != list2[i].Category1Scores ||
                     list1[i].Category2Goal != list2[i].Category2Goal ||

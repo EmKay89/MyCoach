@@ -162,7 +162,7 @@ namespace MyCoachTests
             {
                 new TrainingSchedule
                 {
-                    StartMonth = DateTime.MinValue,
+                    StartMonth = DateTime.MinValue.AddYears(1),
                     ScheduleType = ScheduleType.TimeBased,
                     Duration = 4
                 }
@@ -176,6 +176,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Current,
+                    StartDate = DateTime.MinValue.AddYears(1),
                     Category1Goal = 100,
                     Category1Scores = 50,
                     Category2Goal = 100,
@@ -197,6 +198,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Month1,
+                    StartDate = DateTime.MinValue.AddYears(1),
                     Category1Goal = 110,
                     Category1Scores = 70,
                     Category2Goal = 110,
@@ -218,6 +220,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Month2,
+                    StartDate = DateTime.MinValue.AddYears(1).AddMonths(1),
                     Category1Goal = 120,
                     Category1Scores = 0,
                     Category2Goal = 120,
@@ -239,6 +242,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Month3,
+                    StartDate = DateTime.MinValue.AddYears(1).AddMonths(2),
                     Category1Goal = 130,
                     Category1Scores = 0,
                     Category2Goal = 130,
@@ -260,6 +264,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Month4,
+                    StartDate = DateTime.MinValue.AddYears(1).AddMonths(3),
                     Category1Goal = 140,
                     Category1Scores = 0,
                     Category2Goal = 140,
@@ -281,6 +286,7 @@ namespace MyCoachTests
                 new Month
                 {
                     Number = MonthNumber.Month5,
+                    StartDate = DateTime.MinValue.AddYears(1).AddMonths(4),
                     Category1Goal = 150,
                     Category1Scores = 0,
                     Category2Goal = 150,

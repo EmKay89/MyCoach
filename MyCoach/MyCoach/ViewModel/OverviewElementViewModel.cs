@@ -56,9 +56,7 @@ namespace MyCoach.ViewModel
 
         public string ScoresString => this.GetScoresString();
 
-        public string Month => this.month.GetStartDateFromSchedule(
-            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault())
-                .ToString("y", CultureInfo.CurrentCulture);
+        public string Month => this.month.StartDate.ToString("y", CultureInfo.CurrentCulture);
 
         private uint GetGoalPercentage()
         {

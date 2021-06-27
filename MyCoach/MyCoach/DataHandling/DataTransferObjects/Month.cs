@@ -8,6 +8,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     /// </summary>
     public class Month : DtoBase, IDataTransferObject
     {
+        private DateTime startMonth;
         private ushort category1Scores;
         private ushort category1Goal;
         private ushort category2Scores;
@@ -30,6 +31,25 @@ namespace MyCoach.DataHandling.DataTransferObjects
         ///     Ruft die Nummer des Monats im Trainingsplan auf, oder legt sie fest.
         /// </summary>
         public MonthNumber Number { get; set; }
+
+        /// <summary>
+        ///     Ruft den Startzeitpunkt des Monats auf, oder legt ihn fest.
+        /// </summary>
+        public DateTime StartDate
+        {
+            get => this.startMonth;
+
+            set
+            {
+                if (value == this.startMonth)
+                {
+                    return;
+                }
+
+                this.startMonth = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         /// <summary>
         ///     Ruft die für Kategorie 1 erreichten Punkte auf, oder legt sie fest.
@@ -383,21 +403,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         }
 
         /// <summary>
-        ///     Gibt das Startdatum des Monats berechnet aus dem Startdatum eines Trainingsplans zurück.
-        /// </summary>
-        /// <param name="schedule">Der Trainingsplan, dessen Startdaum zur Berechnung verwendet wird.</param>
-        /// <returns>Das Startdatum des Monats (erster Tag um 0:00:00 Uhr).</returns>
-        public DateTime GetStartDateFromSchedule(TrainingSchedule schedule)
-        {
-            if (this.Number == MonthNumber.Current)
-            {
-                return new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            }
-
-            return schedule.StartMonth.AddMonths((int)this.Number - 1);
-        }
-
-        /// <summary>
         ///     Gibt das gespeicherte Punkteziel einer Übungskategorie zurück.
         /// </summary>
         /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
@@ -455,6 +460,37 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 default:
                     return 0;
             }
+        }
+
+        /// <summary>
+        ///     Setzt die Punkteziele des Monats auf 0.
+        /// </summary>
+        public void ResetGoals()
+        {
+            this.Category1Goal = 0;
+            this.Category2Goal = 0;
+            this.Category3Goal = 0;
+            this.Category4Goal = 0;
+            this.Category5Goal = 0;
+            this.Category6Goal = 0;
+            this.Category7Goal = 0;
+            this.Category8Goal = 0;
+            this.TotalGoal = 0;
+        }
+
+        /// <summary>
+        ///     Setzt die erreichten Trainingspunkte des Monats auf 0.
+        /// </summary>
+        public void ResetScores()
+        {
+            this.Category1Scores = 0;
+            this.Category2Scores = 0;
+            this.Category3Scores = 0;
+            this.Category4Scores = 0;
+            this.Category5Scores = 0;
+            this.Category6Scores = 0;
+            this.Category7Scores = 0;
+            this.Category8Scores = 0;
         }
 
         /// <summary>

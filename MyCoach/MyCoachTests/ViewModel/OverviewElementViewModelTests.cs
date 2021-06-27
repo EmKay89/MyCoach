@@ -46,10 +46,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_WithCategory_PropertiesSetUpCorrectly()
         {
-            var monthString = this.month.GetStartDateFromSchedule(
-            DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault())
-                .ToString("y", CultureInfo.CurrentCulture);
-
+            var monthString = this.month.StartDate.ToString("y", CultureInfo.CurrentCulture);
             Assert.IsTrue(this.sut.MaxScoreOrGoal == 0);
             Assert.IsTrue(this.sut.Month == monthString);
             Assert.IsTrue(this.sut.ScoresString == $"{this.month.Category1Scores} von {this.month.Category1Goal}");

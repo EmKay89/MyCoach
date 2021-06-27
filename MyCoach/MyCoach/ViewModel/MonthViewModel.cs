@@ -32,7 +32,7 @@ namespace MyCoach.ViewModel
             }
 
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
-            this.startDate = this.month.GetStartDateFromSchedule(schedule);
+            this.startDate = this.month.StartDate;
             this.UpdateMonthCategoryDetailViewModels();
         }
 

@@ -47,9 +47,20 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void Construction_CurrentMonthViewModel_CorrectlySet()
+        public void Construction_CurrentMonthViewModel_CorrectlySetForGenericSchedule()
         {
+            this.TrainingSchedule.ScheduleType = ScheduleType.Generic;
+            this.sut = new ViewTrainingScheduleViewModel();
             var currentMonth = TestDtos.TrainingScores.Where(m => m.Number == MonthNumber.Current).First();
+            Assert.IsTrue(this.sut.CurrentMonthViewModel.Month == currentMonth);
+        }
+
+        [TestMethod]
+        public void Construction_CurrentMonthViewModel_CorrectlySetForTimeBasedSchedule()
+        {
+            this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
+            this.sut = new ViewTrainingScheduleViewModel();
+            var currentMonth = TestDtos.TrainingScores.Where(m => m.Number == MonthNumber.Month1).First();
             Assert.IsTrue(this.sut.CurrentMonthViewModel.Month == currentMonth);
         }
 

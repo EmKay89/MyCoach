@@ -311,8 +311,7 @@ namespace MyCoachTests.ViewModel
             {
                 Assert.AreEqual(
                     this.sut.Elements[i].Month,
-                    this.Months[i + 1].GetStartDateFromSchedule(this.TrainingSchedule)
-                        .ToString("y", CultureInfo.CurrentCulture));
+                    this.Months[i + 1].StartDate.ToString("y", CultureInfo.CurrentCulture));
             }
         }
 
