@@ -118,6 +118,9 @@
     <Compile Include="ViewModel\TypeConverter\UintToGridLenthConverter.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModel.cs" />
+    <Compile Include="View\EditMonthView.xaml.cs">
+      <DependentUpon>EditMonthView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ExercisesView.xaml.cs">
       <DependentUpon>ExercisesView.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="View\EditMonthView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ExercisesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
