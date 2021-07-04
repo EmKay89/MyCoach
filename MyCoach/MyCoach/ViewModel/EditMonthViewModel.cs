@@ -3,6 +3,9 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,12 +16,18 @@ namespace MyCoach.ViewModel
     public class EditMonthViewModel : BaseViewModel
     {
         private Month month;
-        private IReadOnlyCollection<Category> categories;
+        private ObservableCollection<Category> categories;
 
         public EditMonthViewModel(Month month)
         {
             this.month = month;
             this.categories = DataInterface.GetInstance().GetData<Category>();
+            foreach (var category in this.categories)
+            {
+                category.PropertyChanged += this.OnCategoryChanged;
+            }
+            
+            this.categories.CollectionChanged += this.OnCategoriesChanged;
         }
 
         public bool Category1ItemsVisible
@@ -122,6 +131,64 @@ namespace MyCoach.ViewModel
             get => this.month.Number == MonthNumber.Current 
                 ? string.Empty 
                 : this.month.StartDate.ToString("y", CultureInfo.CurrentCulture);
+        }
+
+        private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (Category category in e.OldItems)
+                {
+                    category.PropertyChanged -= this.OnCategoryChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (Category category in e.NewItems)
+                {
+                    category.PropertyChanged += this.OnCategoryChanged;
+                }
+            }
+        }
+
+        private void OnCategoryChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName != nameof(Category.Active))
+            {
+                return;
+            }
+
+            var category = (Category)sender;
+            switch (category.ID)
+            {
+                case ExerciseCategory.Category1:
+                    InvokePropertyChanged(nameof(this.Category1ItemsVisible));
+                    break;
+                case ExerciseCategory.Category2:
+                    InvokePropertyChanged(nameof(this.Category2ItemsVisible));
+                    break;
+                case ExerciseCategory.Category3:
+                    InvokePropertyChanged(nameof(this.Category3ItemsVisible));
+                    break;
+                case ExerciseCategory.Category4:
+                    InvokePropertyChanged(nameof(this.Category4ItemsVisible));
+                    break;
+                case ExerciseCategory.Category5:
+                    InvokePropertyChanged(nameof(this.Category5ItemsVisible));
+                    break;
+                case ExerciseCategory.Category6:
+                    InvokePropertyChanged(nameof(this.Category6ItemsVisible));
+                    break;
+                case ExerciseCategory.Category7:
+                    InvokePropertyChanged(nameof(this.Category7ItemsVisible));
+                    break;
+                case ExerciseCategory.Category8:
+                    InvokePropertyChanged(nameof(this.Category8ItemsVisible));
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -96,6 +96,70 @@ namespace MyCoachTests.ViewModel
 
         #endregion
 
+        #region Event Reactions
+
+        [TestMethod]
+        public void CategoryChanges_PropertyActiveSetToOppositeValue_VisibilityPropertiesUpdatedAndPropertyChangedEventsSent()
+        {
+            var initial1 = this.sut.Category1ItemsVisible;
+            var initial2 = this.sut.Category2ItemsVisible;
+            var initial3 = this.sut.Category3ItemsVisible;
+            var initial4 = this.sut.Category4ItemsVisible;
+            var initial5 = this.sut.Category5ItemsVisible;
+            var initial6 = this.sut.Category6ItemsVisible;
+            var initial7 = this.sut.Category7ItemsVisible;
+            var initial8 = this.sut.Category8ItemsVisible;
+
+            foreach (var category in this.Categories)
+            {
+                category.Active = !category.Active;
+            }
+
+            Assert.AreEqual(!initial1, this.sut.Category1ItemsVisible);
+            Assert.AreEqual(!initial2, this.sut.Category2ItemsVisible);
+            Assert.AreEqual(!initial3, this.sut.Category3ItemsVisible);
+            Assert.AreEqual(!initial4, this.sut.Category4ItemsVisible);
+            Assert.AreEqual(!initial5, this.sut.Category5ItemsVisible);
+            Assert.AreEqual(!initial6, this.sut.Category6ItemsVisible);
+            Assert.AreEqual(!initial7, this.sut.Category7ItemsVisible);
+            Assert.AreEqual(!initial8, this.sut.Category8ItemsVisible);
+
+            Assert.AreEqual(8, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category1ItemsVisible), this.PropertyChangedEvents[0]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category2ItemsVisible), this.PropertyChangedEvents[1]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category3ItemsVisible), this.PropertyChangedEvents[2]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category4ItemsVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category5ItemsVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category6ItemsVisible), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category7ItemsVisible), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(EditMonthViewModel.Category8ItemsVisible), this.PropertyChangedEvents[7]);
+        }
+
+        [TestMethod]
+        public void CategoryAdded_PropertyActiveSetToOppositeValue_PropertyChangedEventsSentForNewCategory()
+        {
+            this.Categories.Remove(this.Categories.Where(c => c.ID == ExerciseCategory.Category8).First());
+
+            foreach (var category in this.Categories)
+            {
+                category.Active = !category.Active;
+            }
+
+            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
+            this.PropertyChangedEvents.Clear();
+
+            this.Categories.Add(new Category() { Type = ExerciseType.Training, ID = ExerciseCategory.Category8 });
+
+            foreach (var category in this.Categories)
+            {
+                category.Active = !category.Active;
+            }
+
+            Assert.AreEqual(8, this.PropertyChangedEvents.Count);
+        }
+
+        #endregion
+
         #region Helper Methods
 
         private void SetupMonth()
