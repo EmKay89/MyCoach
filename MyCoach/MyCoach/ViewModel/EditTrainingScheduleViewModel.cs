@@ -57,10 +57,18 @@ namespace MyCoach.ViewModel
                     return;
                 }
 
-                this.schedule.PropertyChanged -= this.OnScheduleBufferChanged;
+                if (this.schedule != null)
+                {
+                    this.schedule.PropertyChanged -= this.OnScheduleBufferChanged;
+                }
+
                 this.schedule = value;
                 this.InvokePropertyChanged();
-                this.schedule.PropertyChanged += this.OnScheduleBufferChanged;
+
+                if (this.schedule != null)
+                {
+                    this.schedule.PropertyChanged += this.OnScheduleBufferChanged;
+                }                
             }
         }
 
