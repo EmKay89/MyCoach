@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="MyCoach.View.EditTrainingScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyCoach.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Typ: "
+                       Grid.Column="0"
+                       Grid.Row="0"/>
+            <ComboBox ItemsSource="{Binding ScheduleTypesWithCaption}"
+                      SelectedValue="{Binding Type}"
+                      DisplayMemberPath="Value" 
+                      SelectedValuePath="Key"
+                      Grid.Column="1"
+                      Grid.Row="0"/>
+            <TextBlock Text="Startdatum: "
+                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                       Grid.Column="0"
+                       Grid.Row="1"/>
+            <DatePicker local:DatePickerCalendar.IsMonthYear="True" 
+                        local:DatePickerDateFormat.DateFormat="MMM-yyyy"
+                        Text="MMM-yyyy"
+                        SelectedDate="{Binding StartMonth}"
+                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Grid.Column="1"
+                        Grid.Row="1"/>
+            <TextBlock Text="Dauer: "
+                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                       Grid.Column="0"
+                       Grid.Row="2"/>
+            <ComboBox ItemsSource="{Binding NumbersOneToTwelveWithCaption}"
+                      SelectedValue="{Binding Duration}"
+                      DisplayMemberPath="Value" 
+                      SelectedValuePath="Key"
+                      Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                      Grid.Column="1"
+                      Grid.Row="2"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

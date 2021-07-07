@@ -78,8 +78,21 @@ namespace MyCoach.ViewModel
 
         public ObservableCollection<EditMonthViewModel> EditMonthViewModels { get; } = new ObservableCollection<EditMonthViewModel>();
 
-        public ObservableCollection<ushort> NumbersOneToTwelve { get; } = new ObservableCollection<ushort>
-        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+        public Dictionary<ushort, string> NumbersOneToTwelveWithCaption { get; } = new Dictionary<ushort, string>
+        {
+            { 1, "1 Monat" },
+            { 2, "2 Monate" },
+            { 3, "3 Monate" },
+            { 4, "4 Monate" },
+            { 5, "5 Monate" },
+            { 6, "6 Monate" },
+            { 7, "7 Monate" },
+            { 8, "8 Monate" },
+            { 9, "9 Monate" },
+            { 10, "10 Monate" },
+            { 11, "11 Monate" },
+            { 12, "12 Monate" },
+        };
 
         public Dictionary<ScheduleType, string> ScheduleTypesWithCaption { get; } = new Dictionary<ScheduleType, string>
         {
@@ -95,20 +108,58 @@ namespace MyCoach.ViewModel
 
         public RelayCommand SaveCommand { get; }
 
-        public ScheduleType Type
+        public ushort Duration
         {
-            get => this.type;
+            get => this.Schedule.Duration;
 
             set
             {
-                if (value == this.type)
+                if (value == this.Schedule.Duration)
                 {
                     return;
                 }
 
-                this.type = value;
-                this.InvokePropertyChanged();
+                this.Schedule.Duration = value;
+                this.HasUnsavedChanges = true;
             }
+        }
+
+        public ScheduleType Type
+        {
+            get => this.Schedule.ScheduleType;
+
+            set
+            {
+                if (value == this.Schedule.ScheduleType)
+                {
+                    return;
+                }
+
+                this.Schedule.ScheduleType = value;
+                this.HasUnsavedChanges = true;
+                this.InvokePropertyChanged("TimeBasedScheduleElementsVisible");
+            }
+        }
+
+        public DateTime StartMonth
+        {
+            get => this.Schedule.StartMonth;
+
+            set
+            {
+                if (value == this.Schedule.StartMonth)
+                {
+                    return;
+                }
+
+                this.Schedule.StartMonth = value;
+                this.HasUnsavedChanges = true;
+            }
+        }
+
+        public bool TimeBasedScheduleElementsVisible
+        {
+            get => this.Type == ScheduleType.TimeBased;
         }
 
         public bool HasUnsavedChanges
@@ -199,12 +250,12 @@ namespace MyCoach.ViewModel
         private void LoadBuffers()
         {
             this.Schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
+
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
+            this.Months.Foreach(m => m.PropertyChanged -= this.OnMonthChanged);
             this.Months.Clear();
-            foreach (var month in savedMonths)
-            {
-                this.Months.Add((Month)month.Clone());
-            }
+            savedMonths.Foreach(m => this.Months.Add((Month)m.Clone()));
+            this.Months.Foreach(m => m.PropertyChanged += this.OnMonthChanged);
 
             this.HasUnsavedChanges = false;
             this.UpdateEditMonthViewModels();
@@ -293,6 +344,11 @@ namespace MyCoach.ViewModel
             }
         }
 
+        private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.HasUnsavedChanges = true;
+        }
+
         private void OnScheduleBufferChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(TrainingSchedule.StartMonth))
@@ -316,7 +372,6 @@ namespace MyCoach.ViewModel
                 this.EditMonthViewModels.Add(
                     new EditMonthViewModel(
                         this.Months.Where(m => m.Number == MonthNumber.Current).FirstOrDefault()));
-                return;
             }
 
             for (int i = 1; i <= this.Schedule.Duration; i++)
