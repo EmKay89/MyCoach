@@ -13,7 +13,8 @@
         </Style>
     </UserControl.Resources>
     <StackPanel Width="100">
-        <TextBlock Text="{Binding MonthName}"/>
+        <TextBlock Text="{Binding MonthName}" 
+                   HorizontalAlignment="Center"/>
         <TextBox Text="{Binding Category1Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
                  Visibility="{Binding Category1ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
