@@ -203,7 +203,7 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            DataInterface.GetInstance().GetData<Month>().Foreach(m => ((Month)m).ResetScores());
+            DataInterface.GetInstance().GetData<Month>().Foreach(m => m.ResetScores());
 
             var resultSaving = DataInterface.GetInstance().SaveData<Month>();
             if (resultSaving == false)
@@ -232,7 +232,10 @@ namespace MyCoach.ViewModel
             }
 
             DataInterface.GetInstance().SetDefaults<TrainingSchedule>();
-            DataInterface.GetInstance().GetData<Month>().Foreach(m => ((Month)m).ResetGoals());
+            var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
+            var savedMonths = DataInterface.GetInstance().GetData<Month>();
+            savedMonths.Foreach(m => m.ResetGoals());
+            savedMonths.UpdateStartDatesBySchedule(savedSchedule);
 
             var resultSaving = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
             if (resultSaving == false)
@@ -250,11 +253,15 @@ namespace MyCoach.ViewModel
         private void LoadBuffers()
         {
             this.Schedule = (TrainingSchedule)DataInterface.GetInstance().GetData<TrainingSchedule>().First().Clone();
+            this.InvokePropertiesChanged(
+                nameof(this.TimeBasedScheduleElementsVisible),
+                nameof(this.Type));
 
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
             this.Months.Foreach(m => m.PropertyChanged -= this.OnMonthChanged);
             this.Months.Clear();
             savedMonths.Foreach(m => this.Months.Add((Month)m.Clone()));
+            this.Months.UpdateStartDatesBySchedule(this.Schedule);
             this.Months.Foreach(m => m.PropertyChanged += this.OnMonthChanged);
 
             this.HasUnsavedChanges = false;
@@ -279,7 +286,8 @@ namespace MyCoach.ViewModel
                 }
             }
 
-            this.UpdateStartDatesOfMonths();
+            this.UpdateScoresOfMonths();
+            this.Months.UpdateStartDatesBySchedule(this.Schedule);
             var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
             this.Schedule.CopyValuesTo(savedSchedule);
 
@@ -296,7 +304,7 @@ namespace MyCoach.ViewModel
 
             if (changesWillDeleteScores)
             {
-                savedMonths.Foreach(m => ((Month)m).ResetScores());
+                savedMonths.Foreach(m => m.ResetScores());
             }
 
             var result = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
@@ -360,7 +368,7 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add((Category)c));
+            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
         }
 
         private void UpdateEditMonthViewModels()
@@ -372,6 +380,7 @@ namespace MyCoach.ViewModel
                 this.EditMonthViewModels.Add(
                     new EditMonthViewModel(
                         this.Months.Where(m => m.Number == MonthNumber.Current).FirstOrDefault()));
+                return;
             }
 
             for (int i = 1; i <= this.Schedule.Duration; i++)
@@ -382,24 +391,10 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void UpdateStartDatesOfMonths()
+        private void UpdateScoresOfMonths()
         {
-            foreach (var month in this.Months)
-            {
-                if (month.Number == MonthNumber.Current)
-                {
-                    continue;
-                }
-
-                if ((int)month.Number <= this.Schedule.Duration)
-                {
-                    month.StartDate = this.Schedule.StartMonth.AddMonths((int)month.Number - 1);
-                }
-                else
-                {
-                    month.StartDate = DateTime.MinValue;
-                }
-            }
+            var savedMonths = DataInterface.GetInstance().GetData<Month>();
+            savedMonths.Foreach(sm => sm.CopyScoresTo(this.Months.Where(m => m.Number == sm.Number).First()));
         }
     }
 }

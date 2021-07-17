@@ -377,6 +377,22 @@ namespace MyCoach.DataHandling.DataTransferObjects
             }
         }
 
+        /// <summary>
+        ///     Kopierte die Trainingspunkte für alle Kategorien in einen anderen Monat.
+        /// </summary>
+        /// <param name="targetMonth">Der Monat, dessen Trainingspunkte aktualisiert werden sollen.</param>
+        public void CopyScoresTo(Month targetMonth)
+        {
+            targetMonth.Category1Scores = this.Category1Scores;
+            targetMonth.Category2Scores = this.Category2Scores;
+            targetMonth.Category3Scores = this.Category3Scores;
+            targetMonth.Category4Scores = this.Category4Scores;
+            targetMonth.Category5Scores = this.Category5Scores;
+            targetMonth.Category6Scores = this.Category6Scores;
+            targetMonth.Category7Scores = this.Category7Scores;
+            targetMonth.Category8Scores = this.Category8Scores;
+        }
+
         /// <inheritdoc/>
         public override void CopyValuesTo(DtoBase target)
         {

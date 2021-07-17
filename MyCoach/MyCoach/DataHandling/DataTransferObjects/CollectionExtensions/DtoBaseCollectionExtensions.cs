@@ -16,7 +16,7 @@ namespace MyCoach.DataHandling.DataTransferObjects.CollectionExtensions
             }
         }
 
-        public static void Foreach(this IEnumerable<DtoBase> dtos, Action<DtoBase> action)
+        public static void Foreach<T>(this IEnumerable<T> dtos, Action<T> action)
         {
             foreach (var dto in dtos)
             {
