@@ -33,6 +33,7 @@ namespace MyCoach.ViewModel
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
 
             DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
+            DataInterface.GetInstance().GetData<Category>().Foreach(c => c.PropertyChanged += this.OnCategoryChanged);
 
             this.DeleteScheduleCommand = new RelayCommand(() => this.DeleteSchedule());
             this.DeleteScoresCommand = new RelayCommand(() => this.DeleteScores());
@@ -346,10 +347,7 @@ namespace MyCoach.ViewModel
 
         private void OnCategoryChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Category.Active))
-            {
-                this.UpdateAvailableCategories();
-            }
+            this.UpdateAvailableCategories();
         }
 
         private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
@@ -369,7 +367,7 @@ namespace MyCoach.ViewModel
         {
             this.AvailableCategories.Clear();
             Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c.Name));
-            this.AvailableCategories.Add("Gesmt");
+            this.AvailableCategories.Add("Gesamt");
         }
 
         private void UpdateEditMonthViewModels()
