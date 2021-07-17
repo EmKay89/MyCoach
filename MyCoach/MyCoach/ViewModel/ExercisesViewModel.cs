@@ -517,7 +517,15 @@ namespace MyCoach.ViewModel
         private void ExportExercises()
         {
             var path = this.fileDialogService.SaveFile(
-                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
+                System.AppDomain.CurrentDomain.BaseDirectory,
+                "XML files (*.xml)|*.xml",
+                1,
+                out bool okClicked);
+
+            if (okClicked == false)
+            {
+                return;
+            }
 
             if (path == null)
             {
@@ -537,7 +545,15 @@ namespace MyCoach.ViewModel
         private void ImportExercises()
         {
             var path = this.fileDialogService.OpenFile(
-                System.AppDomain.CurrentDomain.BaseDirectory, "XML files (*.xml)|*.xml", 1);
+                System.AppDomain.CurrentDomain.BaseDirectory, 
+                "XML files (*.xml)|*.xml", 
+                1,
+                out bool okClicked);
+
+            if (okClicked == false)
+            {
+                return;
+            }
 
             if (path == null)
             {

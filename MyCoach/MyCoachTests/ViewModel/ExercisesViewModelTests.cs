@@ -400,11 +400,12 @@ namespace MyCoachTests.ViewModel
 
         private void SetupServices()
         {
+            var okClicked = true;
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
             this.fileDialogService = Mock.Of<IFileDialogService>(service =>
-                service.OpenFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()) == validImportPath &&
-                service.SaveFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>()) == validExportPath);
+                service.OpenFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked) == validImportPath &&
+                service.SaveFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked) == validExportPath);
         }
 
         private void SetupDataManager()

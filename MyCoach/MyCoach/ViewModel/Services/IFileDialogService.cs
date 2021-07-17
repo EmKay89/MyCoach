@@ -8,7 +8,7 @@ namespace MyCoach.ViewModel.Services
 {
     public interface IFileDialogService
     {
-        string OpenFile(string initialDirectory, string filter, int filterIndex);
-        string SaveFile(string initialDirectory, string filter, int filterIndex);
+        string OpenFile(string initialDirectory, string filter, int filterIndex, out bool okClicked);
+        string SaveFile(string initialDirectory, string filter, int filterIndex, out bool okClicked);
     }
 }

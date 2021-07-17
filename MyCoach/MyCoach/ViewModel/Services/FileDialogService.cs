@@ -9,29 +9,39 @@ namespace MyCoach.ViewModel.Services
 {
     public class FileDialogService : IFileDialogService
     {
-        public string OpenFile(string initialDirectory, string filter, int filterIndex)
+        public string OpenFile(string initialDirectory, string filter, int filterIndex, out bool okSelected)
         {
-            string result = null;
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = initialDirectory;
-            openFileDialog.Filter = filter;
-            openFileDialog.FilterIndex = filterIndex;
-            if (openFileDialog.ShowDialog() == true)
+            string path = null;
+            var openFileDialog = new OpenFileDialog
             {
-                result = openFileDialog.FileName;
+                InitialDirectory = initialDirectory,
+                Filter = filter,
+                FilterIndex = filterIndex
+            };
+
+            okSelected = openFileDialog.ShowDialog() == true;
+
+            if (okSelected)
+            {
+                path = openFileDialog.FileName;
             }
 
-            return result;
+            return path;
         }
 
-        public string SaveFile(string initialDirectory, string filter, int filterIndex)
+        public string SaveFile(string initialDirectory, string filter, int filterIndex, out bool okSelected)
         {
             string result = null;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = initialDirectory;
-            saveFileDialog.Filter = filter;
-            saveFileDialog.FilterIndex = filterIndex;
-            if (saveFileDialog.ShowDialog() == true)
+            var saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = initialDirectory,
+                Filter = filter,
+                FilterIndex = filterIndex
+            };
+
+            okSelected = saveFileDialog.ShowDialog() == true;
+
+            if (okSelected)
             {
                 result = saveFileDialog.FileName;
             }
