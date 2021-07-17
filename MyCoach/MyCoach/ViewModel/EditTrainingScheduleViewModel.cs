@@ -74,7 +74,7 @@ namespace MyCoach.ViewModel
 
         public ObservableCollection<Month> Months { get; } = new ObservableCollection<Month>();
 
-        public ObservableCollection<Category> AvailableCategories { get; } = new ObservableCollection<Category>();
+        public ObservableCollection<string> AvailableCategories { get; } = new ObservableCollection<string>();
 
         public ObservableCollection<EditMonthViewModel> EditMonthViewModels { get; } = new ObservableCollection<EditMonthViewModel>();
 
@@ -368,8 +368,8 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
-            this.AvailableCategories.Add(new Category { Name = "Gesamt" });
+            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c.Name));
+            this.AvailableCategories.Add("Gesmt");
         }
 
         private void UpdateEditMonthViewModels()

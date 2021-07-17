@@ -62,7 +62,7 @@
                           DockPanel.Dock="Left">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
+                            <TextBlock Text="{Binding}"
                                    Margin="0,12,0,0"/>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
