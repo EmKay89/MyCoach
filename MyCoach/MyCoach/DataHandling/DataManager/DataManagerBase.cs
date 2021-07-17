@@ -83,23 +83,13 @@ namespace MyCoach.DataHandling.DataManager
 
                     break;
                 case nameof(Settings):
-                    this.Buffer.Settings.ResetSubscriptions();
-                    this.Buffer.Settings.Clear();
-                    foreach (var setting in DefaultDtos.Settings)
-                    {
-                        this.Buffer.Settings.Add(setting);
-                    }
+                    DefaultDtos.Settings.First().CopyValuesTo(this.Buffer.Settings.First());
                     break;
 
                 case nameof(TrainingSchedule):
-                    this.Buffer.TrainingSchedules.ResetSubscriptions();
-                    this.Buffer.TrainingSchedules.Clear();
-                    foreach (var ts in DefaultDtos.TrainingSchedules)
-                    {
-                        this.Buffer.TrainingSchedules.Add(ts);
-                    }
-
+                    DefaultDtos.TrainingSchedules.First().CopyValuesTo(this.Buffer.TrainingSchedules.First());
                     break;
+
                 case nameof(Month):
                     this.Buffer.TrainingScores.ResetSubscriptions();
                     this.Buffer.TrainingScores.Clear();

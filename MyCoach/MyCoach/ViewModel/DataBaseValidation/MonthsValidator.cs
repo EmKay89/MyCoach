@@ -18,7 +18,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (months == null)
             {
-                months = new ObservableCollection<Month>();
+                months = DefaultDtos.TrainingScores;
             }
 
             foreach (var monthNumber in Enum.GetValues(typeof(MonthNumber)).Cast<MonthNumber>())

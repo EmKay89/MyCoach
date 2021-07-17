@@ -23,7 +23,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (settings.Any() == false)
             {
-                settings.Add(new Settings { Permission = ExerciseSchedulingRepetitionPermission.No });
+                settings.Add(DefaultDtos.Settings.First());
             }
 
             var dublicates = settings.Skip(1);

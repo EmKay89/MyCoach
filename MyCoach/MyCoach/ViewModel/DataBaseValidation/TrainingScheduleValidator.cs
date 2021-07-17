@@ -23,7 +23,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (trainingSchedules.Any() == false)
             {
-                trainingSchedules.Add(new TrainingSchedule { ScheduleType = ScheduleType.Generic });
+                trainingSchedules.Add(DefaultDtos.TrainingSchedules.First());
             }
 
             var dublicates = trainingSchedules.Skip(1);

@@ -17,7 +17,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (exercises == null)
             {
-                exercises = new ObservableCollection<Exercise>();
+                exercises = DefaultDtos.Exercises;
             }
 
             RemoveDoublicates(exercises);

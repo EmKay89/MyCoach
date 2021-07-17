@@ -18,7 +18,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
 
             if (categories == null)
             {
-                categories = new ObservableCollection<Category>();
+                categories = DefaultDtos.Categories;
             }
 
             foreach (var category in Enum.GetValues(typeof(ExerciseCategory)).Cast<ExerciseCategory>())
