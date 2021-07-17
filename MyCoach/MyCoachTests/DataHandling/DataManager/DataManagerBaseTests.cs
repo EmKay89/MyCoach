@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
@@ -40,8 +41,8 @@ namespace MyCoachTests.DataHandling.DataManager
         {
             this.sut.GetBuffer().Categories.Clear();
             this.sut.GetBuffer().Exercises.Clear();
-            this.sut.GetBuffer().Settings.Clear();
-            this.sut.GetBuffer().TrainingSchedules.Clear();
+            this.sut.GetBuffer().Settings.First().RepeatsRound1 = 111;
+            this.sut.GetBuffer().TrainingSchedules.First().StartMonth = new DateTime(1989, 11, 14);
             this.sut.GetBuffer().TrainingScores.Clear();
 
             this.sut.SetDefaults<Category>();
