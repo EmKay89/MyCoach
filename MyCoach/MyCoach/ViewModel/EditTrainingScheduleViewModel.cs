@@ -369,6 +369,7 @@ namespace MyCoach.ViewModel
         {
             this.AvailableCategories.Clear();
             Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
+            this.AvailableCategories.Add(new Category { Name = "Gesamt" });
         }
 
         private void UpdateEditMonthViewModels()

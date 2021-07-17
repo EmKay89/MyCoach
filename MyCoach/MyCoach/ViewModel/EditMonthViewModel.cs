@@ -126,6 +126,13 @@ namespace MyCoach.ViewModel
             set => this.month.Category8Goal = value;
         }
 
+        public uint TotalGoal
+        {
+            get => this.month.TotalGoal;
+
+            set => this.month.TotalGoal = value;
+        }
+
         public string MonthName
         {
             get => this.month.Number == MonthNumber.Current 
