@@ -561,7 +561,7 @@ namespace MyCoach.ViewModel
         {
             var savedSelectedCategoryId = this.SelectedCategory?.ID;
             var savedCategories = DataInterface.GetInstance().GetData<Category>();
-            this.Categories.ResetSubscriptions();
+            this.Categories.ResetSubscriptions(); // fraglich
             this.Categories.Clear();
 
             foreach (var category in savedCategories)

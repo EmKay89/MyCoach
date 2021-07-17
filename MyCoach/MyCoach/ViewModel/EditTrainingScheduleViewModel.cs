@@ -43,8 +43,8 @@ namespace MyCoach.ViewModel
         public const string CHANGE_SCHEDULE_TEXT = "Achtung, Änderungen an Typ oder Startdatum des Trainingsplans löschen alle gespeicherten Trainingspunkte. Möchten Sie fortfahren?";
         public const string RESET_SCHEDULE_CAPTION = "Trainingsplan löschen";
         public const string RESET_SCORES_CAPTION = "Trainingspunkte löschen";
-        public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchten Sie fortfahren?";
-        public const string RESET_SCORES_TEXT = "Achtung, hierdurch wird ihr Trainingsplan gelöscht. Möchten Sie fortfahren?";
+        public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch wird ihr Trainingsplan gelöscht. Möchten Sie fortfahren?";
+        public const string RESET_SCORES_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchten Sie fortfahren?";
         
         public TrainingSchedule Schedule
         {
@@ -74,7 +74,7 @@ namespace MyCoach.ViewModel
 
         public ObservableCollection<Month> Months { get; } = new ObservableCollection<Month>();
 
-        public ObservableCollection<Category> AvaiableCategories { get; } = new ObservableCollection<Category>();
+        public ObservableCollection<Category> AvailableCategories { get; } = new ObservableCollection<Category>();
 
         public ObservableCollection<EditMonthViewModel> EditMonthViewModels { get; } = new ObservableCollection<EditMonthViewModel>();
 
@@ -249,7 +249,7 @@ namespace MyCoach.ViewModel
 
         private void LoadBuffers()
         {
-            this.Schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
+            this.Schedule = (TrainingSchedule)DataInterface.GetInstance().GetData<TrainingSchedule>().First().Clone();
 
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
             this.Months.Foreach(m => m.PropertyChanged -= this.OnMonthChanged);
@@ -359,8 +359,8 @@ namespace MyCoach.ViewModel
 
         private void UpdateAvailableCategories()
         {
-            this.AvaiableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvaiableCategories.Add((Category)c));
+            this.AvailableCategories.Clear();
+            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add((Category)c));
         }
 
         private void UpdateEditMonthViewModels()
