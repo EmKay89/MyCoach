@@ -24,7 +24,7 @@ namespace MyCoach.ViewModel
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
-            this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = this.TrainingActive ? false : true; });
+            this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = !this.TrainingActive; });
         }
 
         public List<Category> ActiveCategories

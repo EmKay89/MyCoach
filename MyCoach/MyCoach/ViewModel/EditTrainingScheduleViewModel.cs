@@ -19,7 +19,6 @@ namespace MyCoach.ViewModel
     public class EditTrainingScheduleViewModel : BaseViewModel
     {
         private readonly IMessageBoxService messageBoxService;
-        private ScheduleType type;
         private bool hasUnsavedChanges;
         private TrainingSchedule schedule;
 
