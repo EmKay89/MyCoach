@@ -105,7 +105,15 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
         public static ObservableCollection<TrainingSchedule> TrainingSchedules
         {
-            get => new ObservableCollection<TrainingSchedule>();
+            get => new ObservableCollection<TrainingSchedule>() 
+            {
+                new TrainingSchedule
+                {
+                    ScheduleType = ScheduleType.Generic,
+                    StartMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1),
+                    Duration = 1
+                }
+            };
         }
 
         public static ObservableCollection<Month> TrainingScores
