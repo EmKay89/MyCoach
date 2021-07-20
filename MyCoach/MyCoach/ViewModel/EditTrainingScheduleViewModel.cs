@@ -20,7 +20,6 @@ namespace MyCoach.ViewModel
     {
         private readonly IMessageBoxService messageBoxService;
         private bool hasUnsavedChanges;
-        private TrainingSchedule schedule;
 
         public EditTrainingScheduleViewModel(
             IMessageBoxService messageBoxService = null)
@@ -46,31 +45,7 @@ namespace MyCoach.ViewModel
         public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch wird ihr Trainingsplan gelöscht. Möchten Sie fortfahren?";
         public const string RESET_SCORES_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchten Sie fortfahren?";
         
-        public TrainingSchedule Schedule
-        {
-            get => this.schedule; 
-            
-            set
-            {
-                if (this.schedule == value)
-                {
-                    return;
-                }
-
-                if (this.schedule != null)
-                {
-                    this.schedule.PropertyChanged -= this.OnScheduleBufferChanged;
-                }
-
-                this.schedule = value;
-                this.InvokePropertyChanged();
-
-                if (this.schedule != null)
-                {
-                    this.schedule.PropertyChanged += this.OnScheduleBufferChanged;
-                }                
-            }
-        }
+        public TrainingSchedule Schedule { get; private set; }
 
         public ObservableCollection<Month> Months { get; } = new ObservableCollection<Month>();
 
@@ -120,6 +95,7 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Schedule.Duration = value;
+                this.UpdateEditMonthViewModels();
                 this.HasUnsavedChanges = true;
             }
         }
@@ -136,8 +112,9 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Schedule.ScheduleType = value;
-                this.HasUnsavedChanges = true;
                 this.InvokePropertyChanged("TimeBasedScheduleElementsVisible");
+                this.UpdateEditMonthViewModels();
+                this.HasUnsavedChanges = true;                
             }
         }
 
@@ -153,6 +130,8 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Schedule.StartMonth = value;
+                this.Months.UpdateStartDatesBySchedule(this.Schedule);
+                this.UpdateEditMonthViewModels();
                 this.HasUnsavedChanges = true;
             }
         }
@@ -166,7 +145,7 @@ namespace MyCoach.ViewModel
         {
             get => this.hasUnsavedChanges;
 
-            set
+            private set
             {
                 if (value == this.hasUnsavedChanges)
                 {
@@ -291,8 +270,12 @@ namespace MyCoach.ViewModel
             var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
             this.Schedule.CopyValuesTo(savedSchedule);
 
-            var savedMonths = DataInterface.GetInstance().GetData<Month>();
+            if (changesWillDeleteScores)
+            {
+                this.Months.Foreach(m => m.ResetScores());
+            }
 
+            var savedMonths = DataInterface.GetInstance().GetData<Month>();
             foreach (var month in this.Months)
             {
                 var savedMonth = savedMonths.Where(m => m.Number == month.Number).FirstOrDefault();
@@ -300,11 +283,6 @@ namespace MyCoach.ViewModel
                 {
                     month.CopyValuesTo(savedMonth);
                 }
-            }
-
-            if (changesWillDeleteScores)
-            {
-                savedMonths.Foreach(m => m.ResetScores());
             }
 
             var result = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
@@ -352,14 +330,6 @@ namespace MyCoach.ViewModel
         private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
             this.HasUnsavedChanges = true;
-        }
-
-        private void OnScheduleBufferChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName != nameof(TrainingSchedule.StartMonth))
-            {
-                this.UpdateEditMonthViewModels();
-            }
         }
 
         private void UpdateAvailableCategories()

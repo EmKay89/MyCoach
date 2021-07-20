@@ -398,6 +398,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is Month targetMonth)
             {
+                targetMonth.StartDate = this.StartDate;
                 targetMonth.Category1Scores = this.Category1Scores;
                 targetMonth.Category1Goal = this.Category1Goal;
                 targetMonth.Category2Scores = this.Category2Scores;
