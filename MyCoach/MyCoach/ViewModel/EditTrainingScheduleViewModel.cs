@@ -265,10 +265,25 @@ namespace MyCoach.ViewModel
                 }
             }
 
+            // Note that order of saving matters at here: Correct update of MonthViewModels in
+            // ViewTrainingScheduleViewModel requires update of saved schedule after update of saved months.
+            // ToDo: Stabiler bauen.
+            this.SaveMonths(changesWillDeleteScores);
+            this.SaveSchedule();
+
+            var result = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
+            if (result == false)
+            {
+                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            this.HasUnsavedChanges = false;
+        }
+
+        private void SaveMonths(bool changesWillDeleteScores)
+        {
             this.UpdateScoresOfMonths();
             this.Months.UpdateStartDatesBySchedule(this.Schedule);
-            var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
-            this.Schedule.CopyValuesTo(savedSchedule);
 
             if (changesWillDeleteScores)
             {
@@ -284,14 +299,12 @@ namespace MyCoach.ViewModel
                     month.CopyValuesTo(savedMonth);
                 }
             }
+        }
 
-            var result = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
-            if (result == false)
-            {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            this.HasUnsavedChanges = false;
+        private void SaveSchedule()
+        {
+            var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().First();
+            this.Schedule.CopyValuesTo(savedSchedule);
         }
 
         private bool GetIfChangesWillDeleteScores()
