@@ -18,6 +18,13 @@ namespace MyCoach.ViewModel
             this.PropertyChanged += delegate { this.Parent.HasUnsavedExercises = true; };
         }
 
+        public List<string> SelectableUnits { get; } = new List<string>
+        {
+            "Wiederholungen",
+            "Minuten",
+            "Sekunden"
+        };
+
         public Exercise Exercise { get; set; }
 
         public ExercisesViewModel Parent { get; set; }
@@ -100,6 +107,22 @@ namespace MyCoach.ViewModel
                 }
 
                 this.Exercise.Name = value;
+                this.InvokePropertyChanged();
+            }
+        }
+
+        public string Unit
+        {
+            get => this.Exercise.Unit;
+
+            set
+            {
+                if (this.Exercise.Unit == value)
+                {
+                    return;
+                }
+
+                this.Exercise.Unit = value;
                 this.InvokePropertyChanged();
             }
         }

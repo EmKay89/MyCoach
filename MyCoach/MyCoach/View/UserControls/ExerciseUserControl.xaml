@@ -70,6 +70,14 @@
                 <ComboBox Grid.Row="2"
                           Grid.Column="1"
                           SelectedValue="{Binding Category}"/>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="2"
+                           Text="Einheit"/>
+                <ComboBox Grid.Row="2"
+                          Grid.Column="3"
+                          ItemsSource="{Binding SelectableUnits}"
+                          Text="{Binding Unit}"
+                          IsEditable="True"/>
                 <TextBlock Grid.Row="3"
                            Grid.Column="0"
                            Text="Beschreibung"/>

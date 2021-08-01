@@ -45,6 +45,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     list1[i].Category != list2[i].Category ||
                     list1[i].Count != list2[i].Count ||
                     list1[i].Name != list2[i].Name ||
+                    list1[i].Unit != list2[i].Unit ||
                     list1[i].RelatedCategory != list2[i].RelatedCategory ||
                     list1[i].Scores != list2[i].Scores ||
                     list1[i].Info != list2[i].Info ||

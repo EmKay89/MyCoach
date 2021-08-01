@@ -11,6 +11,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         private ExerciseCategory category;
         private ushort count;
         private string name;
+        private string unit;
         private ExerciseCategory relatedCategory;
         private ushort scores;
         private string info;
@@ -86,6 +87,25 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 }
 
                 this.name = value;
+                this.InvokePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     Ruft die Einheit der Übung auf, oder legt sie fest.
+        /// </summary>
+        public string Unit
+        {
+            get => this.unit;
+
+            set
+            {
+                if (value == this.unit)
+                {
+                    return;
+                }
+
+                this.unit = value;
                 this.InvokePropertyChanged();
             }
         }
@@ -175,6 +195,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 targetExercise.Category = this.Category;
                 targetExercise.Count = this.Count;
                 targetExercise.Name = this.Name;
+                targetExercise.Unit = this.Unit;
                 targetExercise.RelatedCategory = this.RelatedCategory;
                 targetExercise.Scores = this.Scores;
                 targetExercise.Info = this.Info;
