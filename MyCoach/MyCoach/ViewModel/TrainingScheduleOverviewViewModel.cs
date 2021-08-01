@@ -88,7 +88,7 @@ namespace MyCoach.ViewModel
             private set
             {
                 // Elements must be updated before equality check, because they may have been
-                // cleared and reloaded and this MaxScoreOrGoal may have been unchanged.
+                // cleared and reloaded while this MaxScoreOrGoal may have been unchanged.
                 this.UpdateElementsMaxScores();
 
                 if (value == this.maxScoreOrGoal)
