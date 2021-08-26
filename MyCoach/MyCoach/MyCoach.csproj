@@ -112,6 +112,10 @@
     <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
     <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\TrainingGeneration\Training.cs" />
+    <Compile Include="ViewModel\TrainingGeneration\TrainingExerciseViewModel.cs" />
+    <Compile Include="ViewModel\TrainingGeneration\TrainingGenerator.cs" />
+    <Compile Include="ViewModel\TrainingGeneration\TrainingSettings.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
