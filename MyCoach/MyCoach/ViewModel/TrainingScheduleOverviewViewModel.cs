@@ -87,10 +87,6 @@ namespace MyCoach.ViewModel
 
             private set
             {
-                // Elements must be updated before equality check, because they may have been
-                // cleared and reloaded while this MaxScoreOrGoal may have been unchanged.
-                this.UpdateElementsMaxScores();
-
                 if (value == this.maxScoreOrGoal)
                 {
                     return;
@@ -101,7 +97,7 @@ namespace MyCoach.ViewModel
                     nameof(this.MaxScoreOrGoal),
                     nameof(this.MaxScoreOrGoal75),
                     nameof(this.MaxScoreOrGoal50),
-                    nameof(this.MaxScoreOrGoal25));
+                    nameof(this.MaxScoreOrGoal25));                
             }
         }
 
@@ -185,10 +181,16 @@ namespace MyCoach.ViewModel
             if (this.SelectedCategory == null)
             {
                 this.MaxScoreOrGoal = GetMaxTotalScoreOrTotalGoalValueOfMonthsInTrainingSchedule();
-                return;
             }
+            else
+            {
+                this.MaxScoreOrGoal = this.MonthsInSchedule.MaxScoreOrGoal(this.SelectedCategory.ID);
+            }            
 
-            this.MaxScoreOrGoal = this.MonthsInSchedule.MaxScoreOrGoal(this.SelectedCategory.ID);
+            foreach (var element in this.Elements)
+            {
+                element.MaxScoreOrGoal = this.MaxScoreOrGoal;
+            }
         }
 
         private uint GetMaxTotalScoreOrTotalGoalValueOfMonthsInTrainingSchedule()
@@ -214,14 +216,6 @@ namespace MyCoach.ViewModel
             }
 
             return value;
-        }
-
-        private void UpdateElementsMaxScores()
-        {
-            foreach (var element in this.Elements)
-            {
-                element.MaxScoreOrGoal = this.MaxScoreOrGoal;
-            }
         }
 
         private void UpdateSelectedCategory()
