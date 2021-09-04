@@ -68,7 +68,7 @@ namespace MyCoach.ViewModel
             { TrainingMode.UserDefinedTraining, "Benutzerdefiniertes Training" }
         };
 
-        public Training Training { get; } = new Training();
+        public Training Training { get; private set; } = new Training();
 
         public TrainingMode TrainingMode
         {
@@ -241,6 +241,26 @@ namespace MyCoach.ViewModel
 
         private void StartTraining()
         {
+            if (this.TrainingActive)
+            {
+                this.Training.Finish();
+            }
+            else
+            {
+                if (this.Training.Any() == false)
+                {
+                    this.Training = TrainingGenerator.CreateTraining(
+                        new TrainingSettings(
+                            this.TrainingMode,
+                            this.LapCount,
+                            this.ExercisesPerLap,
+                            this.CategoryInFocus,
+                            this.GetCategoriesEnabledForTraining()));
+                }
+
+                this.Training.Start();
+            }
+
             this.TrainingActive = !this.TrainingActive;
         }
         

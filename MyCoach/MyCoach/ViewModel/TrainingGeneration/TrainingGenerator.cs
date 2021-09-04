@@ -14,9 +14,6 @@ namespace MyCoach.ViewModel.TrainingGeneration
         {
             var training = new Training();
             var globalSettings = DataInterface.GetInstance().GetData<Settings>().FirstOrDefault();
-
-
-
             return training;
         }
 

@@ -113,6 +113,7 @@
     <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
     <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\TrainingEvaluation\TrainingEvaluator.cs" />
     <Compile Include="ViewModel\TrainingGeneration\Training.cs" />
     <Compile Include="ViewModel\TrainingGeneration\TrainingExerciseViewModel.cs" />
     <Compile Include="ViewModel\TrainingGeneration\TrainingGenerator.cs" />

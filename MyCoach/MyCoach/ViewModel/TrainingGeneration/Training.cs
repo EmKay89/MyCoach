@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.ViewModel.TrainingEvaluation;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -16,11 +17,8 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
         public void Finish()
         {
-
+            TrainingEvaluator.Evaluate(this);
+            this.Clear();
         }
-
-
-
-
     }
 }
