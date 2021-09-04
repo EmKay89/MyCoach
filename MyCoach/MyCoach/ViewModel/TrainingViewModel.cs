@@ -3,6 +3,7 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.TrainingGeneration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,12 +28,12 @@ namespace MyCoach.ViewModel
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
-            this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = !this.TrainingActive; });
+            this.StartTrainingCommand = new RelayCommand(this.StartTraining, this.CanStartTraining);
             this.TrainingMode = TrainingMode.CircleTraining;
         }
 
         public const string DESCRIPTION_CIRCLETRAINING = "In diesem Modus wird pro Runde je eine Übung der als aktiv markierten Kategorien ins Training eingeplant. " +
-            "Vor und nach dem eigentlichen Zirkeltraining folgt ein Block Auf- und Abwärmübungen.";
+            "Vor und nach dem eigentlichen Zirkeltraining folgt je ein Block Auf- und Abwärmübungen.";
         public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
         public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
             "zusammengestellt werden.";
@@ -44,6 +45,11 @@ namespace MyCoach.ViewModel
                 List<Category> categories = new List<Category>();
 
                 categories.AddRange(this.Categories.Where(c => c.Active));
+
+                if (this.CategoryInFocus != null && categories.Where(c => c.ID == CategoryInFocus.ID).Any() == false)
+                {
+                    this.CategoryInFocus = null;
+                }
 
                 return categories;
             }
@@ -61,6 +67,8 @@ namespace MyCoach.ViewModel
             { TrainingMode.FocusTraining, "Fokustraining" },
             { TrainingMode.UserDefinedTraining, "Benutzerdefiniertes Training" }
         };
+
+        public Training Training { get; } = new Training();
 
         public TrainingMode TrainingMode
         {
@@ -172,7 +180,7 @@ namespace MyCoach.ViewModel
         public bool CategoryCoolDownActive => this.Categories.IsActive(ExerciseCategory.CoolDown);
 
         public bool CategoryCoolDownEnabledForTraining { get; set; } = true;
-
+        
         public ushort SelectedLapCount
         {
             get => this.selectedLapCount;
@@ -230,6 +238,88 @@ namespace MyCoach.ViewModel
         public bool FocusTrainingElementsVisible => this.TrainingMode == TrainingMode.FocusTraining;
 
         public bool CircleOrFocusTrainingElementsVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
+
+        private void StartTraining()
+        {
+            this.TrainingActive = !this.TrainingActive;
+        }
+        
+        private bool CanStartTraining()
+        {
+            if (this.Training.Count > 0)
+            {
+                return true;
+            }
+
+            if (this.TrainingMode == TrainingMode.CircleTraining && this.GetCategoriesEnabledForTraining().Any())
+            {
+                return true;
+            }
+
+            if (this.TrainingMode == TrainingMode.FocusTraining && this.CategoryInFocus != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private List<Category> GetCategoriesEnabledForTraining()
+        {
+            var categories = new List<Category>();
+
+            if (this.CategoryWarmUpActive && this.CategoryWarmUpEnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.WarmUp).First());
+            }
+
+            if (this.Category1Active && this.Category1EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First());
+            }
+
+            if (this.Category2Active && this.Category2EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category2).First());
+            }
+
+            if (this.Category3Active && this.Category3EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category3).First());
+            }
+
+            if (this.Category4Active && this.Category4EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category4).First());
+            }
+
+            if (this.Category5Active && this.Category5EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category5).First());
+            }
+
+            if (this.Category6Active && this.Category6EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category6).First());
+            }
+
+            if (this.Category7Active && this.Category7EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category7).First());
+            }
+
+            if (this.Category8Active && this.Category8EnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category8).First());
+            }
+
+            if (this.CategoryCoolDownActive && this.CategoryCoolDownEnabledForTraining)
+            {
+                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).First());
+            }
+
+            return categories;
+        }
 
         private void OnCategoriesChanged(object sender, EventArgs e)
         {
