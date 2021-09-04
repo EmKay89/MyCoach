@@ -18,8 +18,8 @@ namespace MyCoach.ViewModel
     public class TrainingViewModel : BaseViewModel
     {
         private Category categoryInFocus;
-        private ushort selectedLapCount = 2;
-        private ushort selectedExercisesPerLapCount = 2;
+        private ushort lapCount = 2;
+        private ushort exercisesPerLap = 2;
         private bool trainingActive;
         private TrainingMode trainingMode;
         private string modeExplanation;
@@ -181,32 +181,32 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownEnabledForTraining { get; set; } = true;
         
-        public ushort SelectedLapCount
+        public ushort LapCount
         {
-            get => this.selectedLapCount;
+            get => this.lapCount;
             set
             {
-                if (this.selectedLapCount == value)
+                if (this.lapCount == value)
                 {
                     return;
                 }
 
-                this.selectedLapCount = value;
+                this.lapCount = value;
                 this.InvokePropertyChanged();
             }
         }
 
-        public ushort SelectedExercisesPerLapCount
+        public ushort ExercisesPerLap
         {
-            get => this.selectedExercisesPerLapCount;
+            get => this.exercisesPerLap;
             set
             {
-                if (this.selectedExercisesPerLapCount == value)
+                if (this.exercisesPerLap == value)
                 {
                     return;
                 }
 
-                this.selectedExercisesPerLapCount = value;
+                this.exercisesPerLap = value;
                 this.InvokePropertyChanged();
             }
         }

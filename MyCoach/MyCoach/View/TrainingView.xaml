@@ -90,13 +90,13 @@
             <StackPanel Visibility="{Binding CircleOrFocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Runden" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding NumbersOneToFour}"
-                          SelectedValue="{Binding SelectedLapCount}"
+                          SelectedValue="{Binding LapCount}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
             <StackPanel Visibility="{Binding FocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Anzahl Übungen je Runde" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding NumbersOneToTen}"
-                          SelectedValue="{Binding SelectedExercisesPerLapCount}"
+                          SelectedValue="{Binding ExercisesPerLap}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
         </StackPanel>
