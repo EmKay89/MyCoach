@@ -64,6 +64,7 @@
     <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
     <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
     <Compile Include="Defines\ScheduleType.cs" />
+    <Compile Include="Defines\TrainingMode.cs" />
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
     <Compile Include="Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">

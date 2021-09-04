@@ -16,34 +16,86 @@ namespace MyCoach.ViewModel
 {
     public class TrainingViewModel : BaseViewModel
     {
-        private Category categoryInFocus = new Category { ID = 0, Name = "- keine Auswahl -" };
-        private int selectedLapCount = 2;
+        private Category categoryInFocus;
+        private ushort selectedLapCount = 2;
+        private ushort selectedExercisesPerLapCount = 2;
         private bool trainingActive;
-
+        private TrainingMode trainingMode;
+        private string modeExplanation;
+        
         public TrainingViewModel()
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.StartTrainingCommand = new RelayCommand(() => { this.TrainingActive = !this.TrainingActive; });
+            this.TrainingMode = TrainingMode.CircleTraining;
         }
+
+        public const string DESCRIPTION_CIRCLETRAINING = "In diesem Modus wird pro Runde je eine Übung der als aktiv markierten Kategorien ins Training eingeplant. " +
+            "Vor und nach dem eigentlichen Zirkeltraining folgt ein Block Auf- und Abwärmübungen.";
+        public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
+        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
+            "zusammengestellt werden.";
 
         public List<Category> ActiveCategories
         {
             get
             {
-                List<Category> categories = new List<Category>
-                {
-                    new Category { ID = 0, Name = "- keine Auswahl -" }
-                };
+                List<Category> categories = new List<Category>();
 
-                categories.AddRange(this.Categories.Where(
-                    c => c.Active && c.Type == ExerciseType.Training));
+                categories.AddRange(this.Categories.Where(c => c.Active));
 
                 return categories;
             }
         }
 
         public ObservableCollection<Category> Categories { get; }
+
+        public ObservableCollection<ushort> NumbersOneToTen { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        public ObservableCollection<ushort> NumbersOneToFour { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4 };
+
+        public Dictionary<TrainingMode, string> ModesWithCaption { get; } = new Dictionary<TrainingMode, string>
+        {
+            { TrainingMode.CircleTraining, "Zirkeltraining" },
+            { TrainingMode.FocusTraining, "Fokustraining" },
+            { TrainingMode.UserDefinedTraining, "Benutzerdefiniertes Training" }
+        };
+
+        public TrainingMode TrainingMode
+        {
+            get { return this.trainingMode; }
+            set
+            {
+                if (value == this.trainingMode)
+                {
+                    return;
+                }
+
+                this.trainingMode = value;
+                this.InvokePropertiesChanged(
+                    nameof(this.TrainingMode),
+                    nameof(this.CircleTrainingElementsVisible),
+                    nameof(this.FocusTrainingElementsVisible),
+                    nameof(this.CircleOrFocusTrainingElementsVisible));
+                this.OnTrainingModeChanged();
+            }
+        }
+
+        public string ModeExplanation
+        {
+            get { return this.modeExplanation; }
+            set
+            {
+                if (value == this.modeExplanation)
+                {
+                    return;
+                }
+
+                this.modeExplanation = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         public Category CategoryInFocus
         {
@@ -57,8 +109,7 @@ namespace MyCoach.ViewModel
 
                 this.categoryInFocus = value;
                 this.InvokePropertiesChanged(
-                    "CategoryInFocus",
-                    "TrainingSettingsFocusEnabled");
+                    "CategoryInFocus");
             }
         }
 
@@ -122,9 +173,7 @@ namespace MyCoach.ViewModel
 
         public bool CategoryCoolDownEnabledForTraining { get; set; } = true;
 
-        public ObservableCollection<int> Laps { get; } = new ObservableCollection<int>() { 1, 2, 3, 4 };
-
-        public int SelectedLapCount
+        public ushort SelectedLapCount
         {
             get => this.selectedLapCount;
             set
@@ -135,6 +184,21 @@ namespace MyCoach.ViewModel
                 }
 
                 this.selectedLapCount = value;
+                this.InvokePropertyChanged();
+            }
+        }
+
+        public ushort SelectedExercisesPerLapCount
+        {
+            get => this.selectedExercisesPerLapCount;
+            set
+            {
+                if (this.selectedExercisesPerLapCount == value)
+                {
+                    return;
+                }
+
+                this.selectedExercisesPerLapCount = value;
                 this.InvokePropertyChanged();
             }
         }
@@ -155,14 +219,17 @@ namespace MyCoach.ViewModel
                 this.trainingActive = value;
                 this.InvokePropertiesChanged(
                     "TrainingActive",
-                    "TrainingSettingsEnabled",
-                    "TrainingSettingsFocusEnabled");
+                    "TrainingSettingsEnabled");
             }
         }
 
         public bool TrainingSettingsEnabled => !this.TrainingActive;
 
-        public bool TrainingSettingsFocusEnabled => this.TrainingSettingsEnabled && this.CategoryInFocus.ToString() != "- keine Auswahl -";
+        public bool CircleTrainingElementsVisible => this.TrainingMode == TrainingMode.CircleTraining;
+
+        public bool FocusTrainingElementsVisible => this.TrainingMode == TrainingMode.FocusTraining;
+
+        public bool CircleOrFocusTrainingElementsVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
 
         private void OnCategoriesChanged(object sender, EventArgs e)
         {
@@ -189,6 +256,22 @@ namespace MyCoach.ViewModel
                 "CategoryCoolDownName",
                 "CategoryCoolDownActive"
                 );
+        }
+
+        private void OnTrainingModeChanged()
+        {
+            switch (this.TrainingMode)
+            {
+                case TrainingMode.CircleTraining:
+                    this.ModeExplanation = DESCRIPTION_CIRCLETRAINING;
+                    break;
+                case TrainingMode.FocusTraining:
+                    this.ModeExplanation = DESCRIPTION_FOCUSTRAINING;
+                    break;
+                case TrainingMode.UserDefinedTraining:
+                    this.ModeExplanation = DESCRIPTION_USERDEFINEDTRAINING;
+                    break;
+            }
         }
     }
 }
