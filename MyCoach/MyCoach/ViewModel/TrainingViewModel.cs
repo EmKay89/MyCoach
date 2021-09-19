@@ -20,16 +20,17 @@ namespace MyCoach.ViewModel
         private Category categoryInFocus;
         private ushort lapCount = 2;
         private ushort exercisesPerLap = 2;
-        private bool trainingActive;
         private TrainingMode trainingMode;
         private string modeExplanation;
-        
+        private Training training;
+
         public TrainingViewModel()
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.StartTrainingCommand = new RelayCommand(this.StartTraining, this.CanStartTraining);
             this.TrainingMode = TrainingMode.CircleTraining;
+            this.Training = new Training();
         }
 
         public const string DESCRIPTION_CIRCLETRAINING = "In diesem Modus wird pro Runde je eine Übung der als aktiv markierten Kategorien ins Training eingeplant. " +
@@ -68,7 +69,21 @@ namespace MyCoach.ViewModel
             { TrainingMode.UserDefinedTraining, "Benutzerdefiniertes Training" }
         };
 
-        public Training Training { get; private set; } = new Training();
+        public Training Training
+        {
+            get => this.training;
+            
+            private set
+            {
+                if (value == this.training)
+                {
+                    return;
+                }
+
+                this.training = value;
+                this.training.TrainingActiveChanged += this.OnTrainingActiveChanged;
+            }
+        }
 
         public TrainingMode TrainingMode
         {
@@ -108,7 +123,7 @@ namespace MyCoach.ViewModel
         public Category CategoryInFocus
         {
             get { return this.categoryInFocus; }
-            set 
+            set
             {
                 if (value == this.categoryInFocus)
                 {
@@ -180,7 +195,7 @@ namespace MyCoach.ViewModel
         public bool CategoryCoolDownActive => this.Categories.IsActive(ExerciseCategory.CoolDown);
 
         public bool CategoryCoolDownEnabledForTraining { get; set; } = true;
-        
+
         public ushort LapCount
         {
             get => this.lapCount;
@@ -213,23 +228,7 @@ namespace MyCoach.ViewModel
 
         public RelayCommand StartTrainingCommand { get; }
 
-        public bool TrainingActive
-        {
-            get => this.trainingActive;
-
-            set
-            {
-                if (this.trainingActive == value)
-                {
-                    return;
-                }
-
-                this.trainingActive = value;
-                this.InvokePropertiesChanged(
-                    "TrainingActive",
-                    "TrainingSettingsEnabled");
-            }
-        }
+        public bool TrainingActive => this.Training?.IsActive == true;
 
         public bool TrainingSettingsEnabled => !this.TrainingActive;
 
@@ -260,10 +259,8 @@ namespace MyCoach.ViewModel
 
                 this.Training.Start();
             }
-
-            this.TrainingActive = !this.TrainingActive;
         }
-        
+
         private bool CanStartTraining()
         {
             if (this.Training.Count > 0)
@@ -382,6 +379,13 @@ namespace MyCoach.ViewModel
                     this.ModeExplanation = DESCRIPTION_USERDEFINEDTRAINING;
                     break;
             }
+        }
+
+        private void OnTrainingActiveChanged(object sender, EventArgs e)
+        {
+            this.InvokePropertiesChanged(
+                nameof(this.TrainingActive),
+                nameof(this.TrainingSettingsEnabled));
         }
     }
 }
