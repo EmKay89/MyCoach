@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,11 @@ namespace MyCoach.ViewModel.TrainingGeneration
     public class Training : ObservableCollection<ITrainingElement>
     {
         private bool isActive;
+
+        public Training()
+        {
+            base.CollectionChanged += this.OnBaseCollectionChanged;
+        }
 
         public event EventHandler TrainingActiveChanged;
 
@@ -43,6 +50,31 @@ namespace MyCoach.ViewModel.TrainingGeneration
             this.IsActive = false;
             TrainingEvaluator.Evaluate(this);
             this.Clear();
+        }
+
+        private void OnBaseCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action != NotifyCollectionChangedAction.Add)
+            {
+                return;
+            }
+
+            foreach (var item in e.NewItems)
+            {
+                if (item is TrainingExerciseViewModel vm)
+                {
+                    vm.PropertyChanged += this.OnTrainingExerciseChanged;
+                }
+            }
+        }
+
+        private void OnTrainingExerciseChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(TrainingExerciseViewModel.Completed)
+                && this.All(element => element.Completed))
+            {
+                this.Finish();
+            }
         }
     }
 }

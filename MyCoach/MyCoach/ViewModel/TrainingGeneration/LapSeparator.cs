@@ -3,7 +3,8 @@
     /// <summary>
     /// This class is used to indicate lap transitions within a <see cref="Training"/>.
     /// </summary>
-    public class LapSeparator
+    public class LapSeparator : ITrainingElement
     {
+        public bool Completed => true;
     }
 }

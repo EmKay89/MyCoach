@@ -5,5 +5,6 @@
     /// </summary>
     public interface ITrainingElement
     {
+        bool Completed { get; }
     }
 }
