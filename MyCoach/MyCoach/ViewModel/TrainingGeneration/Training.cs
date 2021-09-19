@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel.TrainingGeneration
 {
-    public class Training : ObservableCollection<TrainingExerciseViewModel>
+    /// <summary>
+    /// Collection of training elements that may be of type <see cref="TrainingExerciseViewModel"/> or see <see cref="LapSeparator"/>.
+    /// </summary>
+    public class Training : ObservableCollection<ITrainingElement>
     {
         private bool isActive;
 

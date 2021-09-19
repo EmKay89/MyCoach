@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel.TrainingGeneration
 {
-    public class TrainingExerciseViewModel : BaseViewModel
+    public class TrainingExerciseViewModel : BaseViewModel, ITrainingElement
     {        
         private readonly Exercise exercise;
         private bool completed;
