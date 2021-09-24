@@ -4,6 +4,7 @@ using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Services;
+using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
