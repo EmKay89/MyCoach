@@ -253,7 +253,7 @@ namespace MyCoach.ViewModel
                             this.TrainingMode,
                             this.LapCount,
                             this.ExercisesPerLap,
-                            this.CategoryInFocus,
+                            this.CategoryInFocus.ID,
                             this.GetCategoriesEnabledForTraining()));
                 }
 
@@ -281,58 +281,58 @@ namespace MyCoach.ViewModel
             return false;
         }
 
-        private List<Category> GetCategoriesEnabledForTraining()
+        private List<ExerciseCategory> GetCategoriesEnabledForTraining()
         {
-            var categories = new List<Category>();
+            var categories = new List<ExerciseCategory>();
 
             if (this.CategoryWarmUpActive && this.CategoryWarmUpEnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.WarmUp).First());
+                categories.Add(ExerciseCategory.WarmUp);
             }
 
             if (this.Category1Active && this.Category1EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First());
+                categories.Add(ExerciseCategory.Category1);
             }
 
             if (this.Category2Active && this.Category2EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category2).First());
+                categories.Add(ExerciseCategory.Category2);
             }
 
             if (this.Category3Active && this.Category3EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category3).First());
+                categories.Add(ExerciseCategory.Category3);
             }
 
             if (this.Category4Active && this.Category4EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category4).First());
+                categories.Add(ExerciseCategory.Category4);
             }
 
             if (this.Category5Active && this.Category5EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category5).First());
+                categories.Add(ExerciseCategory.Category5);
             }
 
             if (this.Category6Active && this.Category6EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category6).First());
+                categories.Add(ExerciseCategory.Category6);
             }
 
             if (this.Category7Active && this.Category7EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category7).First());
+                categories.Add(ExerciseCategory.Category7);
             }
 
             if (this.Category8Active && this.Category8EnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.Category8).First());
+                categories.Add(ExerciseCategory.Category8);
             }
 
             if (this.CategoryCoolDownActive && this.CategoryCoolDownEnabledForTraining)
             {
-                categories.Add(this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).First());
+                categories.Add(ExerciseCategory.CoolDown);
             }
 
             return categories;

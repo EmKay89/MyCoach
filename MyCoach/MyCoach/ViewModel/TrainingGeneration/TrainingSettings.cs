@@ -16,9 +16,9 @@ namespace MyCoach.ViewModel.TrainingGeneration
         public TrainingSettings(
             TrainingMode trainingMode,
             ushort lapCount,
-            ushort exercisesPerLap, Category
-            categoryInFocus,
-            List<Category> categoriesEnabledForTraining)
+            ushort exercisesPerLap,
+            ExerciseCategory categoryInFocus,
+            List<ExerciseCategory> categoriesEnabledForTraining)
         {
             this.TrainingMode = trainingMode;
             this.LapCount = lapCount;
@@ -33,8 +33,8 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
         public ushort ExercisesPerLap { get; }
 
-        public Category CategoryInFocus { get; }
+        public ExerciseCategory CategoryInFocus { get; }
 
-        public List<Category> CategoriesEnabledForTraining { get; }
+        public List<ExerciseCategory> CategoriesEnabledForTraining { get; }
     }
 }

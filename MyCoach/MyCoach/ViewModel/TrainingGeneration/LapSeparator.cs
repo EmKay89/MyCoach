@@ -6,5 +6,6 @@
     public class LapSeparator : ITrainingElement
     {
         public bool Completed => true;
+        public string Headline;
     }
 }
