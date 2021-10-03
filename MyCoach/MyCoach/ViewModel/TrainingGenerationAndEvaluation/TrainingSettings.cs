@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModel.TrainingGeneration
+namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
     ///     DTO that holds all information to create a <see cref="Training"/> using the <see cref="TrainingGenerator"/>.
@@ -20,11 +20,11 @@ namespace MyCoach.ViewModel.TrainingGeneration
             ExerciseCategory categoryInFocus,
             List<ExerciseCategory> categoriesEnabledForTraining)
         {
-            this.TrainingMode = trainingMode;
-            this.LapCount = lapCount;
-            this.ExercisesPerLap = exercisesPerLap;
-            this.CategoryInFocus = categoryInFocus;
-            this.CategoriesEnabledForTraining = categoriesEnabledForTraining;
+            TrainingMode = trainingMode;
+            LapCount = lapCount;
+            ExercisesPerLap = exercisesPerLap;
+            CategoryInFocus = categoryInFocus;
+            CategoriesEnabledForTraining = categoriesEnabledForTraining;
         }
 
         public TrainingMode TrainingMode { get; }

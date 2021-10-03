@@ -1,4 +1,4 @@
-﻿namespace MyCoach.ViewModel.TrainingGeneration
+﻿namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
     /// This class is used to indicate lap transitions within a <see cref="Training"/>.

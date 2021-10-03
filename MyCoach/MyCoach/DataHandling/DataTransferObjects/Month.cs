@@ -543,6 +543,8 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 case ExerciseCategory.Category8:
                     this.Category8Scores = value;
                     break;
+                default:
+                    return;
             }
         }
 

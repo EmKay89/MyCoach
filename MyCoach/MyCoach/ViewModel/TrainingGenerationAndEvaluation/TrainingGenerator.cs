@@ -8,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModel.TrainingGeneration
+namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     public static class TrainingGenerator
     {
-        private static readonly Dictionary<ExerciseCategory, List<Exercise>> pool 
+        private static readonly Dictionary<ExerciseCategory, List<Exercise>> pool
             = new Dictionary<ExerciseCategory, List<Exercise>>();
         private static TrainingSettings trainingSettings;
         private static Settings globalSettings;
@@ -36,11 +36,11 @@ namespace MyCoach.ViewModel.TrainingGeneration
             // Actually create the training
             switch (trainingSettings.TrainingMode)
             {
-                case Defines.TrainingMode.CircleTraining:
+                case TrainingMode.CircleTraining:
                     return CreateCircleTraining();
-                case Defines.TrainingMode.FocusTraining:
+                case TrainingMode.FocusTraining:
                     return CreateFocusTraining();
-                case Defines.TrainingMode.UserDefinedTraining:
+                case TrainingMode.UserDefinedTraining:
                 default:
                     return null;
             }
@@ -84,7 +84,7 @@ namespace MyCoach.ViewModel.TrainingGeneration
                 {
                     continue;
                 }
-                                
+
                 var exercise = GetExerciseFromPool(category);
 
                 if (exercise != null)
@@ -102,8 +102,8 @@ namespace MyCoach.ViewModel.TrainingGeneration
             var savedCategoryDto = DataInterface.GetInstance().GetData<Category>()
                 .Where(c => c.ID == category).FirstOrDefault();
 
-            if (savedCategoryDto == null 
-                || category != ExerciseCategory.WarmUp 
+            if (savedCategoryDto == null
+                || category != ExerciseCategory.WarmUp
                 || category != ExerciseCategory.CoolDown
                 || trainingSettings.CategoriesEnabledForTraining.Any(ec => ec == category) == false)
             {
@@ -161,13 +161,34 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
             foreach (var exercise in exercises)
             {
-                var vm = new TrainingExerciseViewModel(exercise);
-                vm.Multiplier = DetermineMultiplierForLap(lap);
+                var vm = new TrainingExerciseViewModel(exercise)
+                {
+                    RepeatsMultiplier = DetermineRepeatsMultiplierForLap(lap),
+                    ScoresMultiplier = DetermineScoresMultiplierForLap(lap)                    
+                };
+
                 training.Add(vm);
             }
         }
 
-        private static double DetermineMultiplierForLap(int lap)
+        private static double DetermineRepeatsMultiplierForLap(int lap)
+        {
+            switch (lap)
+            {
+                case 1:
+                    return globalSettings.RepeatsRound1 / 100;
+                case 2:
+                    return globalSettings.RepeatsRound2 / 100;
+                case 3:
+                    return globalSettings.RepeatsRound3 / 100;
+                case 4:
+                    return globalSettings.RepeatsRound4 / 100;
+                default:
+                    return 1.0;
+            }
+        }
+
+        private static double DetermineScoresMultiplierForLap(int lap)
         {
             switch (lap)
             {
@@ -200,9 +221,9 @@ namespace MyCoach.ViewModel.TrainingGeneration
             if (pool.TryGetValue(category, out var subPool) == false)
             {
                 return null;
-            }            
+            }
 
-            if (subPool.Any() == false 
+            if (subPool.Any() == false
                 && globalSettings.Permission == ExerciseSchedulingRepetitionPermission.NotPreferred)
             {
                 subPool = RefreshSubPool(category);
@@ -212,7 +233,7 @@ namespace MyCoach.ViewModel.TrainingGeneration
             {
                 return null;
             }
-            
+
             switch (globalSettings.Permission)
             {
                 case ExerciseSchedulingRepetitionPermission.Yes:

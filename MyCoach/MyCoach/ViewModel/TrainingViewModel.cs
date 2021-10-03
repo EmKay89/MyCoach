@@ -3,7 +3,7 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
-using MyCoach.ViewModel.TrainingGeneration;
+using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

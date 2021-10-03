@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModel.TrainingGeneration
+namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     public class TrainingExerciseViewModel : BaseViewModel, ITrainingElement
-    {        
+    {
         private readonly Exercise exercise;
         private bool completed;
 
@@ -28,44 +28,48 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
         public bool Completed
         {
-            get => this.completed;
+            get => completed;
 
             set
             {
-                if (value == this.completed)
+                if (value == completed)
                 {
                     return;
                 }
 
-                this.completed = value;
-                this.InvokePropertyChanged();
+                completed = value;
+                InvokePropertyChanged();
             }
         }
 
         public string Info
         {
-            get => this.exercise.Info;
+            get => this.Exercise.Info;
         }
 
-        public double Multiplier { get; set; } = 1.0;
+        public double RepeatsMultiplier { get; set; } = 1.0;
+
+        public double ScoresMultiplier { get; set; } = 1.0;
+
+        public Exercise Exercise => exercise;
 
         public uint GetScores()
         {
-            return this.completed ? (uint)Math.Round(this.exercise.Scores * this.Multiplier) : 0;
+            return completed ? (uint)Math.Round(Exercise.Scores * ScoresMultiplier) : 0;
         }
 
         private string GetText()
         {
-            var text = ((uint)(this.exercise.Count * Multiplier)).ToString();
+            var text = ((uint)(this.Exercise.Count * RepeatsMultiplier)).ToString();
 
-            if (this.exercise.Unit != null && this.exercise.Unit != string.Empty)
+            if (this.Exercise.Unit != null && this.Exercise.Unit != string.Empty)
             {
-                text = string.Concat(text, " ", this.exercise.Unit);
+                text = string.Concat(text, " ", this.Exercise.Unit);
             }
 
-            text = this.exercise.Name != null && this.exercise.Name != string.Empty
-                ? string.Concat(text, " ", this.exercise.Name)
-                : string.Concat(text, " ", UNKNOWN_EXERCISE_NAME);            
+            text = this.Exercise.Name != null && this.Exercise.Name != string.Empty
+                ? string.Concat(text, " ", this.Exercise.Name)
+                : string.Concat(text, " ", UNKNOWN_EXERCISE_NAME);
 
             return text;
         }

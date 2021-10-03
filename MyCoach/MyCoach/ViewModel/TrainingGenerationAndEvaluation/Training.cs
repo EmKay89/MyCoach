@@ -1,5 +1,4 @@
-﻿using MyCoach.ViewModel.TrainingEvaluation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModel.TrainingGeneration
+namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
     /// Collection of training elements that may be of type <see cref="TrainingExerciseViewModel"/> or see <see cref="LapSeparator"/>.
@@ -19,7 +18,7 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
         public Training()
         {
-            base.CollectionChanged += this.OnBaseCollectionChanged;
+            base.CollectionChanged += OnBaseCollectionChanged;
         }
 
         public event EventHandler TrainingActiveChanged;
@@ -30,26 +29,26 @@ namespace MyCoach.ViewModel.TrainingGeneration
 
             private set
             {
-                if (value == this.isActive)
+                if (value == isActive)
                 {
                     return;
                 }
 
                 isActive = value;
-                this.TrainingActiveChanged.Invoke(this, new EventArgs());
+                TrainingActiveChanged.Invoke(this, new EventArgs());
             }
         }
 
         public void Start()
         {
-            this.IsActive = true;
+            IsActive = true;
         }
 
         public void Finish()
         {
-            this.IsActive = false;
+            IsActive = false;
             TrainingEvaluator.Evaluate(this);
-            this.Clear();
+            Clear();
         }
 
         private void OnBaseCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -63,7 +62,7 @@ namespace MyCoach.ViewModel.TrainingGeneration
             {
                 if (item is TrainingExerciseViewModel vm)
                 {
-                    vm.PropertyChanged += this.OnTrainingExerciseChanged;
+                    vm.PropertyChanged += OnTrainingExerciseChanged;
                 }
             }
         }
@@ -73,7 +72,7 @@ namespace MyCoach.ViewModel.TrainingGeneration
             if (e.PropertyName == nameof(TrainingExerciseViewModel.Completed)
                 && this.All(element => element.Completed))
             {
-                this.Finish();
+                Finish();
             }
         }
     }

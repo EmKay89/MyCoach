@@ -1,4 +1,4 @@
-﻿namespace MyCoach.ViewModel.TrainingGeneration
+﻿namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
     /// This interface can be used to mark types as possible items to add to a <see cref="Training"/>.
