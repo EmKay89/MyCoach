@@ -33,8 +33,7 @@ namespace MyCoachTests.ViewModel
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
             DataInterface.SetDataManager(DataManager);
             this.sut = new SettingsViewModel(this.messageBoxService);
-            this.sut.PropertyChanged += 
-                (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
 
         [TestCleanup]

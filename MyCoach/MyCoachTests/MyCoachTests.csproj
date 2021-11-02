@@ -77,12 +77,14 @@
     <Compile Include="ViewModel\MonthViewModelTests.cs" />
     <Compile Include="ViewModel\OverviewElementViewModelTests.cs" />
     <Compile Include="ViewModel\SettingsViewModelTests.cs" />
+    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingGeneratorTests.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModelTests.cs" />
     <Compile Include="ViewModel\EditMonthViewModelTest.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModelTests.cs" />
     <Compile Include="ViewModel\TrainingViewModelTests.cs" />
-    <Compile Include="ViewModel\ViewModelTestBase.cs" />
+    <Compile Include="ViewModel\DataManagerTestBase.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModelTests.cs" />
+    <Compile Include="ViewModel\ViewModelTestBase.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@ namespace MyCoachTests.ViewModel
             base.Initialize();
             this.SetupServices();
             this.sut = new EditTrainingScheduleViewModel(this.messageBoxService);
-            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
 
         [TestCleanup]

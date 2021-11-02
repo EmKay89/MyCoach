@@ -54,8 +54,7 @@ namespace MyCoachTests.ViewModel
         {
             base.Initialize();
             this.sut = new MonthCategoryDetailViewModel(this.category, this.month);
-            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) 
-                => { this.PropertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
 
         [TestCleanup]

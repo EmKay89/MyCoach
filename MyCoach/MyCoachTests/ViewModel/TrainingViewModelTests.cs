@@ -25,7 +25,7 @@ namespace MyCoachTests.ViewModel
         {
             base.Initialize();
             this.sut = new TrainingViewModel();
-            this.sut.PropertyChanged += (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
 
         [TestCleanup]

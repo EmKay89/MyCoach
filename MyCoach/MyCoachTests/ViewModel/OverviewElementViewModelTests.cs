@@ -29,8 +29,7 @@ namespace MyCoachTests.ViewModel
             base.Initialize();
             this.SetupCategoryAndMonth();
             this.sut = new OverviewElementViewModel(month, category);
-            this.sut.PropertyChanged += 
-                (object sender, PropertyChangedEventArgs e) => { this.PropertyChangedEvents.Add(e.PropertyName); };
+            this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
 
         [TestCleanup]
