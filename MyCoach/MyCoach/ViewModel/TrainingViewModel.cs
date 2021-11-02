@@ -131,8 +131,7 @@ namespace MyCoach.ViewModel
                 }
 
                 this.categoryInFocus = value;
-                this.InvokePropertiesChanged(
-                    "CategoryInFocus");
+                this.InvokePropertyChanged();
             }
         }
 
@@ -243,22 +242,21 @@ namespace MyCoach.ViewModel
             if (this.TrainingActive)
             {
                 this.Training.Finish();
+                return;
             }
-            else
-            {
-                if (this.Training.Any() == false)
-                {
-                    this.Training = TrainingGenerator.CreateTraining(
-                        new TrainingSettings(
-                            this.TrainingMode,
-                            this.LapCount,
-                            this.ExercisesPerLap,
-                            this.CategoryInFocus.ID,
-                            this.GetCategoriesEnabledForTraining()));
-                }
 
-                this.Training.Start();
+            if (this.Training.Any() == false)
+            {
+                this.Training = TrainingGenerator.CreateTraining(
+                    new TrainingSettings(
+                        this.TrainingMode,
+                        this.LapCount,
+                        this.ExercisesPerLap,
+                        this.CategoryInFocus.ID,
+                        this.GetCategoriesEnabledForTraining()));
             }
+
+            this.Training.Start();
         }
 
         private bool CanStartTraining()
@@ -341,27 +339,27 @@ namespace MyCoach.ViewModel
         private void OnCategoriesChanged(object sender, EventArgs e)
         {
             this.InvokePropertiesChanged(
-                "ActiveCategories",
-                "CategoryWarmUpName",
-                "CategoryWarmUpActive",
-                "Category1Name",
-                "Category1Active",
-                "Category2Name",
-                "Category2Active",
-                "Category3Name",
-                "Category3Active",
-                "Category4Name",
-                "Category4Active",
-                "Category5Name",
-                "Category5Active",
-                "Category6Name",
-                "Category6Active",
-                "Category7Name",
-                "Category7Active",
-                "Category8Name",
-                "Category8Active",
-                "CategoryCoolDownName",
-                "CategoryCoolDownActive"
+                nameof(this.ActiveCategories),
+                nameof(this.CategoryWarmUpName),
+                nameof(this.CategoryWarmUpActive),
+                nameof(this.Category1Name),
+                nameof(this.Category1Active),
+                nameof(this.Category2Name),
+                nameof(this.Category2Active),
+                nameof(this.Category3Name),
+                nameof(this.Category3Active),
+                nameof(this.Category4Name),
+                nameof(this.Category4Active),
+                nameof(this.Category5Name),
+                nameof(this.Category5Active),
+                nameof(this.Category6Name),
+                nameof(this.Category6Active),
+                nameof(this.Category7Name),
+                nameof(this.Category7Active),
+                nameof(this.Category8Name),
+                nameof(this.Category8Active),
+                nameof(this.CategoryCoolDownName),
+                nameof(this.CategoryCoolDownActive)
                 );
         }
 

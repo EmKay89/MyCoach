@@ -80,6 +80,7 @@
     <Compile Include="ViewModel\TrainingScheduleViewModelTests.cs" />
     <Compile Include="ViewModel\EditMonthViewModelTest.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModelTests.cs" />
+    <Compile Include="ViewModel\TrainingViewModelTests.cs" />
     <Compile Include="ViewModel\ViewModelTestBase.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModelTests.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModelTests.cs" />
@@ -88,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DLLs\MyExtensions\MyExtensions\MyExtensions.csproj">
+      <Project>{7f9f2579-d9ae-405c-9ed2-ab914ad4f59d}</Project>
+      <Name>MyExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyCoach\MyCoach.csproj">
       <Project>{CB320E44-FEDC-42BC-A884-B540A0DFB32A}</Project>
       <Name>MyCoach</Name>

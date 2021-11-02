@@ -20,6 +20,8 @@ namespace MyCoachTests.ViewModel
     [TestClass]
     public class SettingsViewModelTests : ViewModelTestBase
     {
+        #region Initialization and Cleanup
+
         private IMessageBoxService messageBoxService;
         private SettingsViewModel sut;
 
@@ -40,6 +42,10 @@ namespace MyCoachTests.ViewModel
         {
             base.CleanupTestBase();
         }
+
+        #endregion
+
+        #region Construction and Properties Tests
 
         [TestMethod]
         public void Construction_HappyPath_LoadsBufferAndHasNoUnsavedChanges()
@@ -162,6 +168,10 @@ namespace MyCoachTests.ViewModel
             Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
+        #endregion
+
+        #region Command Tests
+
         [TestMethod]
         public void SaveSettingsCommandCanExecute_NoUnsavedChanges_ReturnsFalse()
         {
@@ -239,5 +249,7 @@ namespace MyCoachTests.ViewModel
             Assert.IsTrue(Utilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
             Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
+
+        #endregion
     }
 }
