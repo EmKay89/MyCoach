@@ -77,6 +77,8 @@
     <Compile Include="ViewModel\MonthViewModelTests.cs" />
     <Compile Include="ViewModel\OverviewElementViewModelTests.cs" />
     <Compile Include="ViewModel\SettingsViewModelTests.cs" />
+    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TestCategories.cs" />
+    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TestExercises.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingGeneratorTests.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModelTests.cs" />
     <Compile Include="ViewModel\EditMonthViewModelTest.cs" />

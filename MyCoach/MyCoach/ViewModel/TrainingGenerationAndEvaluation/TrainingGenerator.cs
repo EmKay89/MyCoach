@@ -103,8 +103,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 .Where(c => c.ID == category).FirstOrDefault();
 
             if (savedCategoryDto == null
-                || category != ExerciseCategory.WarmUp
-                || category != ExerciseCategory.CoolDown
+                || (category != ExerciseCategory.WarmUp && category != ExerciseCategory.CoolDown)
                 || trainingSettings.CategoriesEnabledForTraining.Any(ec => ec == category) == false)
             {
                 return;
@@ -157,7 +156,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new LapSeparator { Headline = "Runde " + lap.ToString() });
+            training.Add(new LapSeparator { Headline = LapSeparator.LapName + " " + lap.ToString() });
 
             foreach (var exercise in exercises)
             {
@@ -176,13 +175,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return globalSettings.RepeatsRound1 / 100;
+                    return (double)globalSettings.RepeatsRound1 / (double)100;
                 case 2:
-                    return globalSettings.RepeatsRound2 / 100;
+                    return (double)globalSettings.RepeatsRound2 / (double)100;
                 case 3:
-                    return globalSettings.RepeatsRound3 / 100;
+                    return (double)globalSettings.RepeatsRound3 / (double)100;
                 case 4:
-                    return globalSettings.RepeatsRound4 / 100;
+                    return (double)globalSettings.RepeatsRound4 / (double)100;
                 default:
                     return 1.0;
             }
@@ -193,13 +192,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return globalSettings.ScoresRound1 / 100;
+                    return (double)globalSettings.ScoresRound1 / (double)100;
                 case 2:
-                    return globalSettings.ScoresRound2 / 100;
+                    return (double)globalSettings.ScoresRound2 / (double)100;
                 case 3:
-                    return globalSettings.ScoresRound3 / 100;
+                    return (double)globalSettings.ScoresRound3 / (double)100;
                 case 4:
-                    return globalSettings.ScoresRound4 / 100;
+                    return (double)globalSettings.ScoresRound4 / (double)100;
                 default:
                     return 1.0;
             }
@@ -250,7 +249,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         private static List<Exercise> RefreshSubPool(ExerciseCategory category)
         {
-            return DataInterface.GetInstance().GetData<Exercise>().Where(e => e.Category == category).ToList();
+            return DataInterface.GetInstance().GetData<Exercise>().Where(e => e.Category == category && e.Active).ToList();
         }
     }
 }
