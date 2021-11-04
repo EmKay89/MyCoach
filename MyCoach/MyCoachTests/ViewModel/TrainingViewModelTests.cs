@@ -242,6 +242,25 @@ namespace MyCoachTests.ViewModel
             this.AssertThatCategoryNamesAndActivitiyValuesAreCorrect();
         }
 
+        [TestMethod]
+        public void TrainingElements_AllCompleted_TrainingDeactivated()
+        {
+            // Actually belongs to a separate unit test class for Training class ... 
+            var exercise1 = new Exercise();
+            var exercise2 = new Exercise();
+            this.sut.Training.Add(new TrainingExerciseViewModel(exercise1));
+            this.sut.Training.Add(new TrainingExerciseViewModel(exercise2));
+            this.sut.StartTrainingCommand.Execute(null);
+
+            (this.sut.Training.First() as TrainingExerciseViewModel).Completed = true;
+
+            Assert.IsTrue(this.sut.TrainingActive);
+
+            (this.sut.Training.Last() as TrainingExerciseViewModel).Completed = true;
+
+            Assert.IsFalse(this.sut.TrainingActive);
+        }
+
         #endregion
 
         #region Helper Methods

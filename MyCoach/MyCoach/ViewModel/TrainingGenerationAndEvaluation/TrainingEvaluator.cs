@@ -30,10 +30,8 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         private static void CalculateAndSetScores(ITrainingElement trainingElement)
         {
-            var vm = trainingElement as TrainingExerciseViewModel;
-
-            if (vm == null 
-                || vm.Exercise.Category == ExerciseCategory.WarmUp 
+            if (!(trainingElement is TrainingExerciseViewModel vm)
+                || vm.Exercise.Category == ExerciseCategory.WarmUp
                 || vm.Exercise.Category == ExerciseCategory.CoolDown
                 || vm.Completed == false)
             {
