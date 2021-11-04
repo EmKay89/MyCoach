@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyCoachTests.ViewModel
 {
-    public abstract class DataManagerTestBase
+    public abstract class DataInterfaceTestBase
     {
         protected ObservableCollection<Category> Categories => TestDtos.Categories;
         protected ObservableCollection<Exercise> Exercises => TestDtos.Exercises;
@@ -33,6 +33,16 @@ namespace MyCoachTests.ViewModel
         {
             DataInterface.SetDataManager(null);
             TestDtos.Reset();
+        }
+
+        protected void SetupData<T>(List<T> newElements) where T : IDataTransferObject
+        {
+            var data = this.DataManager.GetData<T>();
+            data.Clear();
+            foreach (var element in newElements)
+            {
+                data.Add(element);
+            }
         }
 
         private void SetupDataManager()

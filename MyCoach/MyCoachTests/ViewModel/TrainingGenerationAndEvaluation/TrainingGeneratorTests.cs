@@ -8,7 +8,7 @@ using System.Linq;
 namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 {
     [TestClass]
-    public class TrainingGeneratorTests : DataManagerTestBase
+    public class TrainingGeneratorTests : DataInterfaceTestBase
     {
         private List<ExerciseCategory> activeCategoriesForTrainingSettings;
 
@@ -16,8 +16,8 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         public void Init()
         {
             base.Initialize();
-            this.SetUpCategories(TestCategories.AllCategoriesActive);
-            this.SetUpExercises(TestExercises.SixOfEachCategory);
+            this.SetupData(TestCategories.AllCategoriesActive);
+            this.SetupData(TestExercises.SixOfEachCategory);
             this.Settings.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.No;
         }
 
@@ -77,7 +77,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         public void CreateTraining_CircleTrainingLimitedByExerciseAvailabilityAndRepetitionPermission()
         {
             var settings = this.GetTrainingSettings(TrainingMode.CircleTraining, 4);
-            this.SetUpExercises(TestExercises.TwoOfEachCategoryWithCategory2Inactive);
+            this.SetupData(TestExercises.TwoOfEachCategoryWithCategory2Inactive);
 
             var training = TrainingGenerator.CreateTraining(settings);
 
@@ -98,7 +98,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         public void CreateTraining_CircleTrainingWithRepeatsNotPreferred()
         {
             var settings = this.GetTrainingSettings(TrainingMode.CircleTraining, 3);
-            this.SetUpExercises(TestExercises.TwoOfEachCategory);
+            this.SetupData(TestExercises.TwoOfEachCategory);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.NotPreferred;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -120,7 +120,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         public void CreateTraining_CircleTrainingWithRepeats()
         {
             var settings = this.GetTrainingSettings(TrainingMode.CircleTraining, 3);
-            this.SetUpExercises(TestExercises.TwoOfEachCategory);
+            this.SetupData(TestExercises.TwoOfEachCategory);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -232,7 +232,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.Settings.ScoresRound2 = 150;
             this.Settings.ScoresRound3 = 75;
             this.Settings.ScoresRound4 = 40;
-            this.SetUpExercises(TestExercises.TwoOfEachCategory);
+            this.SetupData(TestExercises.TwoOfEachCategory);
             this.Exercises.Where(e => e.Category == ExerciseCategory.Category1).Last().Active = false;
             var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 1, ExerciseCategory.Category1);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
@@ -251,24 +251,6 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             Assert.AreEqual(viewModels[2].ScoresMultiplier, 0.75);
             Assert.AreEqual(viewModels[3].ScoresMultiplier, 0.4);
 
-        }
-
-        private void SetUpCategories(List<Category> categories)
-        {
-            this.Categories.Clear();
-            foreach (var category in categories)
-            {
-                this.Categories.Add(category);
-            }
-        }
-
-        private void SetUpExercises(List<Exercise> exercises)
-        {
-            this.Exercises.Clear();
-            foreach (var exercise in exercises)
-            {
-                this.Exercises.Add(exercise);
-            }
         }
 
         private TrainingSettings GetTrainingSettings(

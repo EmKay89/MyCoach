@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyCoachTests.ViewModel
 {
-    public abstract class ViewModelTestBase : DataManagerTestBase
+    public abstract class ViewModelTestBase : DataInterfaceTestBase
     {
         protected List<string> PropertyChangedEvents;
 

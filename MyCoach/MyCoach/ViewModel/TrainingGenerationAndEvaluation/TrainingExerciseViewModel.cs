@@ -19,8 +19,6 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         public const string UNKNOWN_EXERCISE_NAME = "unbekannte Übung";
 
-        public event EventHandler TrainingExerciseCompleted;
-
         public string Text
         {
             get => GetText();

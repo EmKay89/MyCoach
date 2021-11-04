@@ -48,7 +48,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
         {
             IsActive = false;
             TrainingEvaluator.Evaluate(this);
-            Clear();
+            this.Clear();
         }
 
         private void OnBaseCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
