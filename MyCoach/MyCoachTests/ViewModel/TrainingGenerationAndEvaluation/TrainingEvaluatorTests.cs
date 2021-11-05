@@ -2,6 +2,7 @@
 using Moq;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
+using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;

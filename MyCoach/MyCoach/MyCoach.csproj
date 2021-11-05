@@ -117,7 +117,7 @@
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\ITrainingElement.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\LapSeparator.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\Training.cs" />
-    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingExerciseViewModel.cs" />
+    <Compile Include="ViewModel\TrainingExerciseViewModel.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingGenerator.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingSettings.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />

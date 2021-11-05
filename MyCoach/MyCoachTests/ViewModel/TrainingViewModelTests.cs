@@ -2,7 +2,6 @@
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel;
-using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;

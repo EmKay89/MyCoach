@@ -1,11 +1,12 @@
 ﻿using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
+namespace MyCoach.ViewModel
 {
     public class TrainingExerciseViewModel : BaseViewModel, ITrainingElement
     {
@@ -42,7 +43,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         public string Info
         {
-            get => this.Exercise.Info;
+            get => Exercise.Info;
         }
 
         public double RepeatsMultiplier { get; set; } = 1.0;
@@ -58,15 +59,15 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         private string GetText()
         {
-            var text = ((uint)(this.Exercise.Count * RepeatsMultiplier)).ToString();
+            var text = ((uint)(Exercise.Count * RepeatsMultiplier)).ToString();
 
-            if (this.Exercise.Unit != null && this.Exercise.Unit != string.Empty)
+            if (Exercise.Unit != null && Exercise.Unit != string.Empty)
             {
-                text = string.Concat(text, " ", this.Exercise.Unit);
+                text = string.Concat(text, " ", Exercise.Unit);
             }
 
-            text = this.Exercise.Name != null && this.Exercise.Name != string.Empty
-                ? string.Concat(text, " ", this.Exercise.Name)
+            text = Exercise.Name != null && Exercise.Name != string.Empty
+                ? string.Concat(text, " ", Exercise.Name)
                 : string.Concat(text, " ", UNKNOWN_EXERCISE_NAME);
 
             return text;
