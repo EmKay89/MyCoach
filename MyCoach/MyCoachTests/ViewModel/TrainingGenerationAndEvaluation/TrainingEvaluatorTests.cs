@@ -7,8 +7,6 @@ using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 {
@@ -140,8 +138,11 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.TrainingSchedule.ScheduleType = ScheduleType.Generic;
             this.training.Clear();
             var exercise = new Exercise { ID = 0, Category = ExerciseCategory.Category1, Scores = 10 };
-            var vm = new TrainingExerciseViewModel(exercise);
-            vm.ScoresMultiplier = 0.55;
+            var vm = new TrainingExerciseViewModel(exercise)
+            {
+                ScoresMultiplier = 0.55
+            };
+
             this.training.Add(vm);
             var scoresCategory1BeforeCompletion = this.Months.First().Category1Scores;
 
