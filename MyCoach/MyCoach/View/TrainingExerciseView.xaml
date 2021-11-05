@@ -1,0 +1,24 @@
+﻿<Page x:Class="MyCoach.View.TrainingExerciseView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyCoach.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="20" d:DesignWidth="550"
+      Title="TrainingExerciseView">
+    <DockPanel>
+        <CheckBox IsChecked="{Binding Completed}" 
+                  VerticalAlignment="Center"
+                  DockPanel.Dock="Left"/>
+        <Image Source="/Resources/InfoIcon.jpg" 
+               Height="15"
+               DockPanel.Dock="Right"
+               ToolTipService.ShowDuration="2000">
+            <Image.ToolTip>
+                <TextBlock Text="{Binding Info}"/>
+            </Image.ToolTip>          
+        </Image>
+        <TextBlock Text="{Binding Text}"/>
+    </DockPanel>
+</Page>

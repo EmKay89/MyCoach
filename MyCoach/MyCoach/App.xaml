@@ -39,6 +39,9 @@
         <DataTemplate DataType="{x:Type viewmodels:EditTrainingScheduleViewModel}">
             <views:EditTrainingScheduleView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TrainingExerciseViewModel}">
+            <views:TrainingExerciseView/>
+        </DataTemplate>
 
         <!-- Control Templates -->
         <Style TargetType="Button" x:Key="DefaultButton">
