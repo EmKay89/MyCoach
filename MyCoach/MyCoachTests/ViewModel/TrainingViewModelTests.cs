@@ -2,6 +2,7 @@
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
@@ -170,7 +171,7 @@ namespace MyCoachTests.ViewModel
         public void StartCommandCanExecute_UserDefinedTrainingWithExercises_True()
         {
             var exercise = new Exercise();
-            this.sut.Training.Add(new TrainingExerciseViewModel(exercise));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
             this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
 
             Assert.IsTrue(this.sut.StartTrainingCommand.CanExecute(null));
@@ -189,7 +190,7 @@ namespace MyCoachTests.ViewModel
         public void StartCommandExecute_ActivatesAndDeactivatesTraining()
         {
             var exercise = new Exercise();
-            this.sut.Training.Add(new TrainingExerciseViewModel(exercise));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
             this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
             this.PropertyChangedEvents.Clear();
 
@@ -242,20 +243,20 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void TrainingElements_AllCompleted_TrainingDeactivated()
+        public void TrainingExercises_AllCompleted_TrainingDeactivated()
         {
             // Actually belongs to a separate unit test class for Training class ... 
-            var exercise1 = new Exercise();
-            var exercise2 = new Exercise();
-            this.sut.Training.Add(new TrainingExerciseViewModel(exercise1));
-            this.sut.Training.Add(new TrainingExerciseViewModel(exercise2));
+            var exercise1 = new Exercise() { Name = "Test1" };
+            var exercise2 = new Exercise() { Name = "Test2" }; ;
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise1));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise2));
             this.sut.StartTrainingCommand.Execute(null);
 
-            (this.sut.Training.First() as TrainingExerciseViewModel).Completed = true;
+            (this.sut.Training.First() as TrainingElementViewModel).Completed = true;
 
             Assert.IsTrue(this.sut.TrainingActive);
 
-            (this.sut.Training.Last() as TrainingExerciseViewModel).Completed = true;
+            (this.sut.Training.Last() as TrainingElementViewModel).Completed = true;
 
             Assert.IsFalse(this.sut.TrainingActive);
         }

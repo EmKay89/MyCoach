@@ -28,18 +28,18 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             DataInterface.GetInstance().SaveData<Month>();
         }
 
-        private static void CalculateAndSetScores(ITrainingElement trainingElement)
+        private static void CalculateAndSetScores(TrainingElementViewModel trainingElement)
         {
-            if (!(trainingElement is TrainingExerciseViewModel vm)
-                || vm.Exercise.Category == ExerciseCategory.WarmUp
-                || vm.Exercise.Category == ExerciseCategory.CoolDown
-                || vm.Completed == false)
+            if ((trainingElement.Type != TrainingElementType.exercise)
+                || trainingElement.Exercise.Category == ExerciseCategory.WarmUp
+                || trainingElement.Exercise.Category == ExerciseCategory.CoolDown
+                || trainingElement.Completed == false)
             {
                 return;
             }
 
-            var category = vm.Exercise.Category;
-            var scores = (ushort)Math.Round(vm.ScoresMultiplier * vm.Exercise.Scores);
+            var category = trainingElement.Exercise.Category;
+            var scores = (ushort)Math.Round(trainingElement.ScoresMultiplier * trainingElement.Exercise.Scores);
             
             SetScoresForCategory(scores, category);
         }

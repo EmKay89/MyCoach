@@ -241,7 +241,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             this.AssertLapSeparatorsPresenceAndName(training, false, 4, false);
             this.AssertExercisesOfCategory(training, ExerciseCategory.Category1, 4, true, 1, 1, 1, 1);
-            var viewModels = training.Where(e => e is TrainingExerciseViewModel model).Select(e => e as TrainingExerciseViewModel).ToList();
+            var viewModels = training.Where(e => e.Type == TrainingElementType.exercise).ToList();
             Assert.AreEqual(viewModels[0].RepeatsMultiplier, 2.0);
             Assert.AreEqual(viewModels[1].RepeatsMultiplier, 1.0);
             Assert.AreEqual(viewModels[2].RepeatsMultiplier, 0.5);
@@ -280,32 +280,32 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             Training training,
             bool expectedWarmUp,
             uint expectedLapCount,
-            bool expectedCoolDownUsed)
+            bool expectedCoolDown)
         {
             if (expectedWarmUp)
             {
-                var warmUpSeparator = training.First() as LapSeparator;
-                Assert.AreEqual(this.Categories.Where(c => c.ID == ExerciseCategory.WarmUp).First().Name, warmUpSeparator.Headline);
+                var warmUpSeparator = training.First();
+                Assert.AreEqual(this.Categories.Where(c => c.ID == ExerciseCategory.WarmUp).First().Name, warmUpSeparator.LapHeadline);
             }
 
-            if (expectedCoolDownUsed)
+            if (expectedCoolDown)
             {
-                var coolDownSeparator = training.Where(e => e.GetType() == typeof(LapSeparator)).Last() as LapSeparator;
-                Assert.AreEqual(this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).First().Name, coolDownSeparator.Headline);
+                var coolDownSeparator = training.Where(e => e.Type == TrainingElementType.lapSeparator).Last();
+                Assert.AreEqual(this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).First().Name, coolDownSeparator.LapHeadline);
             }
 
             var lapCountOffset = expectedWarmUp ? 1 : 0;
 
             for (int i = lapCountOffset; i < expectedLapCount + lapCountOffset; i++)
             {
-                var lapSeparator = training.Where(e => e.GetType() == typeof(LapSeparator)).ToArray()[i] as LapSeparator;
-                Assert.AreEqual(LapSeparator.LapName + " " + (i + 1 - lapCountOffset).ToString(), lapSeparator.Headline);
+                var lapSeparator = training.Where(e => e.Type == TrainingElementType.lapSeparator).ToArray()[i];
+                Assert.AreEqual(TrainingElementViewModel.LAPDESIGNATION + " " + (i + 1 - lapCountOffset).ToString(), lapSeparator.LapHeadline);
                 
                 if (i == expectedLapCount + lapCountOffset - 1 
                     && training.Any(
-                        e => e is LapSeparator nextSeparator
+                        e => e.Type == TrainingElementType.lapSeparator
                         && training.IndexOf(e) > training.IndexOf(lapSeparator) 
-                        && nextSeparator.Headline.StartsWith(LapSeparator.LapName)))
+                        && e.LapHeadline.StartsWith(TrainingElementViewModel.LAPDESIGNATION)))
                 {
                     throw new AssertFailedException("More laps detected that expected.");
                 }
@@ -322,7 +322,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             int? expectedCountLap3 = null,
             int? expectedCountLap4 = null)
         {
-            var allExercisesOfCategory = training.Where(e => e is TrainingExerciseViewModel model && model.Exercise.Category == category).ToList();
+            var allExercisesOfCategory = training.Where(e => e.Type == TrainingElementType.exercise && e.Exercise.Category == category).ToList();
 
             Assert.AreEqual(expectedTotalCount, allExercisesOfCategory.Count);
 
@@ -330,7 +330,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             {
                 var repeatsFound = allExercisesOfCategory.Any(
                     e1 => allExercisesOfCategory.Any(
-                        e2 => (e2 as TrainingExerciseViewModel).Exercise.ID == (e1 as TrainingExerciseViewModel).Exercise.ID 
+                        e2 => e2.Exercise.ID == e1.Exercise.ID 
                             && ReferenceEquals(e1, e2) == false));
 
                 Assert.AreEqual(repeatsExpected, repeatsFound);
@@ -363,7 +363,10 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             int expectedCountLap,
             int lap)
         {
-            var previousSeparator = training.Where(e => e is LapSeparator separator && separator.Headline == LapSeparator.LapName + " " + lap).FirstOrDefault();
+            var previousSeparator = training.Where(
+                e => e.Type == TrainingElementType.lapSeparator 
+                && e.LapHeadline == TrainingElementViewModel.LAPDESIGNATION + " " + lap).FirstOrDefault();
+
             if (previousSeparator == null)
             {
                 if (expectedCountLap == 0)
@@ -376,12 +379,15 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 }
             }
 
-            var nextSeparator = training.Where(e => e is LapSeparator separator && training.IndexOf(e) > training.IndexOf(previousSeparator)).FirstOrDefault();
+            var nextSeparator = training.Where(
+                e => e.Type == TrainingElementType.lapSeparator 
+                && training.IndexOf(e) > training.IndexOf(previousSeparator)).FirstOrDefault();
+
             var exercisesLap1 = nextSeparator == null
                 ? training.Where(e => training.IndexOf(e) > training.IndexOf(previousSeparator)).ToList()
                 : training.Where(e => training.IndexOf(e) > training.IndexOf(previousSeparator)
                 && training.IndexOf(e) < training.IndexOf(nextSeparator)).ToList();
-            var actualCountLap1 = exercisesLap1.Count(e => e is TrainingExerciseViewModel model && model.Exercise.Category == category);
+            var actualCountLap1 = exercisesLap1.Count(e => e is TrainingElementViewModel model && model.Exercise.Category == category);
 
             Assert.AreEqual(expectedCountLap, actualCountLap1);
         }

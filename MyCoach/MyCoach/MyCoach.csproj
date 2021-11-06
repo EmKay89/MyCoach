@@ -119,11 +119,10 @@
     <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
     <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingElementType.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingEvaluator.cs" />
-    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\ITrainingElement.cs" />
-    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\LapSeparator.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\Training.cs" />
-    <Compile Include="ViewModel\TrainingExerciseViewModel.cs" />
+    <Compile Include="ViewModel\TrainingElementViewModel.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingGenerator.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingSettings.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />
@@ -157,8 +156,8 @@
     <Compile Include="View\TimerWindow.xaml.cs">
       <DependentUpon>TimerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\TrainingExerciseView.xaml.cs">
-      <DependentUpon>TrainingExerciseView.xaml</DependentUpon>
+    <Compile Include="View\TrainingElementView.xaml.cs">
+      <DependentUpon>TrainingElementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrainingScheduleOverviewView.xaml.cs">
       <DependentUpon>TrainingScheduleOverviewView.xaml</DependentUpon>
@@ -240,7 +239,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\TrainingExerciseView.xaml">
+    <Page Include="View\TrainingElementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

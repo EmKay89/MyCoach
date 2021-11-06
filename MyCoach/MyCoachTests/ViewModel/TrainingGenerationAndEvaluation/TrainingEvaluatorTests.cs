@@ -30,7 +30,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.training = new Training();
             foreach (var exercise in this.Exercises)
             {
-                this.training.Add(new TrainingExerciseViewModel(exercise));
+                this.training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
             }
         }
 
@@ -138,7 +138,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.TrainingSchedule.ScheduleType = ScheduleType.Generic;
             this.training.Clear();
             var exercise = new Exercise { ID = 0, Category = ExerciseCategory.Category1, Scores = 10 };
-            var vm = new TrainingExerciseViewModel(exercise)
+            var vm = new TrainingElementViewModel(TrainingElementType.exercise, exercise)
             {
                 ScoresMultiplier = 0.55
             };
@@ -155,8 +155,8 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         private void CompleteTraining()
         {
             // Cannot iterate over complete collection and set to completed, because collection will clear itself on last vm completed.
-            this.training.Skip(1).All(e => (e as TrainingExerciseViewModel).Completed = true);
-            (this.training.First() as TrainingExerciseViewModel).Completed = true;
+            this.training.Skip(1).All(e => (e as TrainingElementViewModel).Completed = true);
+            (this.training.First() as TrainingElementViewModel).Completed = true;
         }
 
         private void AssertThatScoresForMonthsAreEqual(Month month1, Month month2)

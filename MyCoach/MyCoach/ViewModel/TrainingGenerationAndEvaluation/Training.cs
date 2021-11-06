@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
-    /// Collection of training elements that may be of type <see cref="TrainingExerciseViewModel"/> or see <see cref="LapSeparator"/>.
+    ///     Collection of training elements of type <see cref="TrainingElementViewModel"/> that either represent a lap separator
+    ///     or exercise.
     /// </summary>
-    public class Training : ObservableCollection<ITrainingElement>
+    public class Training : ObservableCollection<TrainingElementViewModel>
     {
         private bool isActive;
 
@@ -60,7 +61,9 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
             foreach (var item in e.NewItems)
             {
-                if (item is TrainingExerciseViewModel vm)
+                var vm = item as TrainingElementViewModel;
+
+                if (vm.Type == TrainingElementType.exercise)
                 {
                     vm.PropertyChanged += OnTrainingExerciseChanged;
                 }
@@ -69,8 +72,8 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         private void OnTrainingExerciseChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(TrainingExerciseViewModel.Completed)
-                && this.All(element => element.Completed))
+            if (e.PropertyName == nameof(TrainingElementViewModel.Completed)
+                && this.Where(element => element.Type == TrainingElementType.exercise).All(element => element.Completed))
             {
                 Finish();
             }

@@ -124,11 +124,14 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new LapSeparator { Headline = savedCategoryDto.Name });
+            training.Add(new TrainingElementViewModel(TrainingElementType.lapSeparator, null) 
+            {
+                LapHeadline = savedCategoryDto.Name 
+            });
 
             foreach (var exercise in exercises)
             {
-                training.Add(new TrainingExerciseViewModel(exercise));
+                training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
             }
         }
 
@@ -156,11 +159,14 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new LapSeparator { Headline = LapSeparator.LapName + " " + lap.ToString() });
+            training.Add(new TrainingElementViewModel (TrainingElementType.lapSeparator, null) 
+            { 
+                LapHeadline = TrainingElementViewModel.LAPDESIGNATION + " " + lap.ToString() 
+            });
 
             foreach (var exercise in exercises)
             {
-                var vm = new TrainingExerciseViewModel(exercise)
+                var vm = new TrainingElementViewModel(TrainingElementType.exercise, exercise)
                 {
                     RepeatsMultiplier = DetermineRepeatsMultiplierForLap(lap),
                     ScoresMultiplier = DetermineScoresMultiplierForLap(lap)                    

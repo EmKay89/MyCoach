@@ -39,8 +39,8 @@
         <DataTemplate DataType="{x:Type viewmodels:EditTrainingScheduleViewModel}">
             <views:EditTrainingScheduleView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TrainingExerciseViewModel}">
-            <views:TrainingExerciseView/>
+        <DataTemplate DataType="{x:Type viewmodels:TrainingElementViewModel}">
+            <views:TrainingElementView/>
         </DataTemplate>
 
         <!-- Control Templates -->

@@ -107,7 +107,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <local:TrainingExerciseView/>
+                        <local:TrainingElementView/>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
