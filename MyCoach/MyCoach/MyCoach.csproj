@@ -269,7 +269,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\InfoIcon.jpg" />
+    <Resource Include="Resources\InfoIcon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

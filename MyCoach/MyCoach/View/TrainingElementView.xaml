@@ -5,19 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MyCoach.View"
       mc:Ignorable="d" 
-      d:DesignHeight="20" d:DesignWidth="550">
-    <DockPanel>
-        <CheckBox IsChecked="{Binding Completed}" 
+      d:DesignHeight="40" d:DesignWidth="550">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{Binding LapHeadline}" 
+                   Visibility="{Binding LapSeparatorElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Grid.Row="0"/>
+        <DockPanel Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Grid.Row="1">
+            <CheckBox IsChecked="{Binding Completed}" 
                   VerticalAlignment="Center"
                   DockPanel.Dock="Left"/>
-        <Image Source="/Resources/InfoIcon.jpg" 
+            <Image Source="/Resources/InfoIcon.jpg" 
                Height="15"
-               DockPanel.Dock="Right"
-               ToolTipService.ShowDuration="2000">
-            <Image.ToolTip>
-                <TextBlock Text="{Binding Info}"/>
-            </Image.ToolTip>          
-        </Image>
-        <TextBlock Text="{Binding Text}"/>
-    </DockPanel>
+               Width="20"
+               DockPanel.Dock="Right">
+                <Image.ToolTip>
+                    <TextBlock Text="Hier klicken für Übungsbeschreibung ... "
+                               FontStyle="Italic"/>
+                </Image.ToolTip>
+            </Image>
+            <TextBlock Text="{Binding ExerciseText}"/>
+        </DockPanel>
+    </Grid>
+
 </UserControl>
