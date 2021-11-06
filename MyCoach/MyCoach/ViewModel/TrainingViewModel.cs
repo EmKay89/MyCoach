@@ -72,7 +72,7 @@ namespace MyCoach.ViewModel
         public Training Training
         {
             get => this.training;
-            
+
             private set
             {
                 if (value == this.training)
@@ -82,6 +82,7 @@ namespace MyCoach.ViewModel
 
                 this.training = value;
                 this.training.TrainingActiveChanged += this.OnTrainingActiveChanged;
+                this.InvokePropertyChanged();
             }
         }
 

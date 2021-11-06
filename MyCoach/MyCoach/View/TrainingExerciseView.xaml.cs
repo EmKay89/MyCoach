@@ -18,7 +18,7 @@ namespace MyCoach.View
     /// <summary>
     /// Interaction logic for TrainingExerciseView.xaml
     /// </summary>
-    public partial class TrainingExerciseView : Page
+    public partial class TrainingExerciseView : UserControl
     {
         public TrainingExerciseView()
         {
