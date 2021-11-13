@@ -41,7 +41,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     Count = 10,
                     Name = "Hampelmann",
                     Unit = "Wiederholungen",
-                    RelatedCategory = ExerciseCategory.Category5, 
                     Scores = 0, 
                     Info = "",
                     Active = true
@@ -54,7 +53,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     Count = 20, 
                     Name = "Hantelheben 5 kg",
                     Unit = "Wiederholungen",
-                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 10,
                     Info = "",
                     Active = true
@@ -67,7 +65,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     Count = 30,
                     Name = "Situps",
                     Unit = "Wiederholungen",
-                    RelatedCategory = ExerciseCategory.Category2,
                     Scores = 10,
                     Info = "",
                     Active = true
@@ -80,7 +77,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
                     Count = 15,
                     Name = "Seitstütze",
                     Unit = "Wiederholungen",
-                    RelatedCategory = ExerciseCategory.Category3,
                     Scores = 10,
                     Info = "",
                     Active = true

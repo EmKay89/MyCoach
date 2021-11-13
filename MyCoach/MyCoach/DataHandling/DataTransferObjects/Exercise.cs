@@ -12,7 +12,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         private ushort count;
         private string name;
         private string unit;
-        private ExerciseCategory relatedCategory;
         private ushort scores;
         private string info;
         private bool active;
@@ -111,26 +110,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
         }
 
         /// <summary>
-        ///     Ruft die Übungskategorie, auf die sich die Übung bezieht, auf, oder legt sie fest. Übungen der Kategorien 
-        ///     WarmUp oder CoolDown können sich auf eine Kategorie des Typs Training beziehen. Übungen des Typs Training
-        ///     können sich nur auf ihre eigene Kategorie beziehen.
-        /// </summary>
-        public ExerciseCategory RelatedCategory
-        {
-            get => this.relatedCategory;
-            set
-            {
-                if (value == this.relatedCategory)
-                {
-                    return;
-                }
-
-                this.relatedCategory = value;
-                this.InvokePropertyChanged();
-            }
-        }
-
-        /// <summary>
         ///     Ruft die standardmäßige Anzahl an Punkten auf, die für das Absolvieren einer Übung vergeben wird, oder legt sie fest.
         /// </summary>
         public ushort Scores
@@ -196,7 +175,6 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 targetExercise.Count = this.Count;
                 targetExercise.Name = this.Name;
                 targetExercise.Unit = this.Unit;
-                targetExercise.RelatedCategory = this.RelatedCategory;
                 targetExercise.Scores = this.Scores;
                 targetExercise.Info = this.Info;
                 targetExercise.Active = this.Active;

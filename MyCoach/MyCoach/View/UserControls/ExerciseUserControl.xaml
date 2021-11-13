@@ -65,12 +65,6 @@
                              HorizontalAlignment="Stretch"/>
                 </DockPanel>
                 <TextBlock Grid.Row="2"
-                           Grid.Column="0"
-                           Text="Kategorie"/>
-                <ComboBox Grid.Row="2"
-                          Grid.Column="1"
-                          SelectedValue="{Binding Category}"/>
-                <TextBlock Grid.Row="2"
                            Grid.Column="2"
                            Text="Einheit"/>
                 <ComboBox Grid.Row="2"

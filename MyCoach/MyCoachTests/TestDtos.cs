@@ -82,7 +82,6 @@ namespace MyCoachTests
                     Count = 10,
                     Name = "Armkreisen",
                     Unit = "Stück",
-                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 0,
                     Info = "https://www.youtube.com/watch?v=Gl6g9CZTZL0",
                     Active = true
@@ -95,7 +94,6 @@ namespace MyCoachTests
                     Count = 10,
                     Name = "Hantelheben 10kg",
                     Unit = "Stück",
-                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 10,
                     Info = "Hier könnte Ihre Testbeschreibung stehen ... ",
                     Active = true
@@ -108,7 +106,6 @@ namespace MyCoachTests
                     Count = 10,
                     Name = "Hantelheben 20kg",
                     Unit = "Stück",
-                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 10,
                     Info = "Hier könnte Ihre Testbeschreibung stehen ... ",
                     Active = false
@@ -121,7 +118,6 @@ namespace MyCoachTests
                     Count = 10,
                     Name = "Situps",
                     Unit = "Stück",
-                    RelatedCategory = ExerciseCategory.Category2,
                     Scores = 10,
                     Info = "Schwabbel, Schwabbel und Schwabbel!",
                     Active = true
@@ -134,7 +130,6 @@ namespace MyCoachTests
                     Count = 10,
                     Name = "Arme strecken",
                     Unit = "Stück",
-                    RelatedCategory = ExerciseCategory.Category1,
                     Scores = 0,
                     Info = "Die Arme in die Höhe!",
                     Active = false
