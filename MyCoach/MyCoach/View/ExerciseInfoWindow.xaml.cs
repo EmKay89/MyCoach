@@ -27,6 +27,13 @@ namespace MyCoach.View
             var context = this.DataContext as Exercise;
             this.EditTextBox.IsReadOnly = !this.AllowEdit;
             this.EditTextBox.Document.Blocks.Clear();
+            if (context.Info == null || context.Info == string.Empty)
+            {
+                this.EditTextBox.Document.Blocks.Add(new Paragraph(new Run("Noch keine Beschreibung vorhanden ...")));
+                this.EditTextBox.FontWeight = FontWeights.Light;
+                this.EditTextBox.FontStyle = FontStyles.Italic;
+            }
+            
             this.EditTextBox.Document.Blocks.Add(new Paragraph(new Run(context.Info)));
         }
 
@@ -38,7 +45,9 @@ namespace MyCoach.View
             }
 
             var context = this.DataContext as Exercise;
-            context.Info = new TextRange(this.EditTextBox.Document.ContentStart, this.EditTextBox.Document.ContentEnd).Text.Trim(' ', '\n', '\r');
+            context.Info = new TextRange(
+                this.EditTextBox.Document.ContentStart, 
+                this.EditTextBox.Document.ContentEnd).Text.Trim(' ', '\n', '\r');
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
