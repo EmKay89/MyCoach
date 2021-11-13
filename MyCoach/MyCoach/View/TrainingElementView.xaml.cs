@@ -28,9 +28,12 @@ namespace MyCoach.View
 
         private void InfoButton_Click(object sender, RoutedEventArgs e)
         {
-            var exerciseInfoWinow = new ExerciseInfoWindow();
-            exerciseInfoWinow.DataContext = (this.DataContext as TrainingElementViewModel).Exercise;
-            exerciseInfoWinow.AllowEdit = false;
+            var exerciseInfoWinow = new ExerciseInfoWindow
+            {
+                DataContext = (this.DataContext as TrainingElementViewModel).Exercise,
+                AllowEdit = false
+            };
+
             exerciseInfoWinow.ShowDialog();
         }
     }
