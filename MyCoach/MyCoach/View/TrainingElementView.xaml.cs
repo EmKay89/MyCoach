@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoach.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace MyCoach.View
         public TrainingElementView()
         {
             InitializeComponent();
+        }
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            var exerciseInfoWinow = new ExerciseInfoWindow();
+            exerciseInfoWinow.DataContext = (this.DataContext as TrainingElementViewModel).Exercise;
+            exerciseInfoWinow.AllowEdit = false;
+            exerciseInfoWinow.ShowDialog();
         }
     }
 }

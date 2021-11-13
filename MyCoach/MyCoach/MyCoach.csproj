@@ -138,6 +138,9 @@
     <Compile Include="View\EditTrainingScheduleView.xaml.cs">
       <DependentUpon>EditTrainingScheduleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ExerciseInfoWindow.xaml.cs">
+      <DependentUpon>ExerciseInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ExercisesView.xaml.cs">
       <DependentUpon>ExercisesView.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditTrainingScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ExerciseInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

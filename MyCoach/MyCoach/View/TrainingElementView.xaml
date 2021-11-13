@@ -19,15 +19,14 @@
             <CheckBox IsChecked="{Binding Completed}" 
                   VerticalAlignment="Center"
                   DockPanel.Dock="Left"/>
-            <Image Source="/Resources/InfoIcon.jpg" 
-               Height="15"
-               Width="20"
-               DockPanel.Dock="Right">
-                <Image.ToolTip>
-                    <TextBlock Text="Hier klicken für Übungsbeschreibung ... "
-                               FontStyle="Italic"/>
-                </Image.ToolTip>
-            </Image>
+            <Button Height="15"
+                    Width="20"
+                    DockPanel.Dock="Right"
+                    Background="White"
+                    BorderThickness="0" Click="InfoButton_Click">
+                <Image Source="/Resources/InfoIcon.jpg" 
+                       Stretch="Fill"/>
+            </Button>
             <TextBlock Text="{Binding ExerciseText}"/>
         </DockPanel>
     </Grid>
