@@ -30,5 +30,4 @@
             <TextBlock Text="{Binding ExerciseText}"/>
         </DockPanel>
     </Grid>
-
 </UserControl>

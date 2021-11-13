@@ -39,22 +39,7 @@ namespace MyCoach.ViewModel
         public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
             "zusammengestellt werden.";
 
-        public List<Category> ActiveCategories
-        {
-            get
-            {
-                List<Category> categories = new List<Category>();
-
-                categories.AddRange(this.Categories.Where(c => c.Active));
-
-                if (this.CategoryInFocus != null && categories.Where(c => c.ID == CategoryInFocus.ID).Any() == false)
-                {
-                    this.CategoryInFocus = null;
-                }
-
-                return categories;
-            }
-        }
+        public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
 
         public ObservableCollection<Category> Categories { get; }
 
@@ -253,7 +238,7 @@ namespace MyCoach.ViewModel
                         this.TrainingMode,
                         this.LapCount,
                         this.ExercisesPerLap,
-                        this.CategoryInFocus.ID,
+                        this.CategoryInFocus?.ID ?? default,
                         this.GetCategoriesEnabledForTraining()));
             }
 
@@ -339,6 +324,11 @@ namespace MyCoach.ViewModel
 
         private void OnCategoriesChanged(object sender, EventArgs e)
         {
+            if (this.CategoryInFocus != null && this.Categories.Where(c => c.ID == CategoryInFocus.ID && c.Active).Any() == false)
+            {
+                this.CategoryInFocus = null;
+            }
+
             this.InvokePropertiesChanged(
                 nameof(this.ActiveCategories),
                 nameof(this.CategoryWarmUpName),
