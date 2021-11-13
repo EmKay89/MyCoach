@@ -12,10 +12,15 @@ namespace MyCoach.ViewModel
 {
     public class ExerciseViewModel : BaseViewModel
     {
-        public ExerciseViewModel()
+        private Exercise exercise;
+        private ExercisesViewModel parent;
+
+        public ExerciseViewModel(Exercise exercise, ExercisesViewModel parent)
         {
+            this.exercise = exercise;
+            this.parent = parent;
             this.RemoveExerciseCommand = new RelayCommand(this.RemoveExercise);
-            this.PropertyChanged += delegate { this.Parent.HasUnsavedExercises = true; };
+            this.exercise.PropertyChanged += delegate { this.parent.HasUnsavedExercises = true; };
         }
 
         public List<string> SelectableUnits { get; } = new List<string>
@@ -25,120 +30,118 @@ namespace MyCoach.ViewModel
             "Sekunden"
         };
 
-        public Exercise Exercise { get; set; }
-
-        public ExercisesViewModel Parent { get; set; }
-
+        public Exercise Exercise => this.exercise;
+        
         public RelayCommand RemoveExerciseCommand { get; }
 
         public bool Active
         {
-            get => this.Exercise.Active;
+            get => this.exercise.Active;
 
             set
             {
-                if (this.Exercise.Active == value)
+                if (this.exercise.Active == value)
                 {
                     return;
                 }
 
-                this.Exercise.Active = value;
+                this.exercise.Active = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public ExerciseCategory Category
         {
-            get => this.Exercise.Category;
+            get => this.exercise.Category;
 
             set
             {
-                if (this.Exercise.Category == value)
+                if (this.exercise.Category == value)
                 {
                     return;
                 }
 
-                this.Exercise.Category = value;
+                this.exercise.Category = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public ushort Count
         {
-            get => this.Exercise.Count;
+            get => this.exercise.Count;
 
             set
             {
-                if (this.Exercise.Count == value)
+                if (this.exercise.Count == value)
                 {
                     return;
                 }
 
-                this.Exercise.Count = value;
+                this.exercise.Count = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public string Info
         {
-            get => this.Exercise.Info;
+            get => this.exercise.Info;
 
             set
             {
-                if (this.Exercise.Info == value)
+                if (this.exercise.Info == value)
                 {
                     return;
                 }
 
-                this.Exercise.Info = value;
+                this.exercise.Info = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public string Name
         {
-            get => this.Exercise.Name;
+            get => this.exercise.Name;
 
             set
             {
-                if (this.Exercise.Name == value)
+                if (this.exercise.Name == value)
                 {
                     return;
                 }
 
-                this.Exercise.Name = value;
+                this.exercise.Name = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public string Unit
         {
-            get => this.Exercise.Unit;
+            get => this.exercise.Unit;
 
             set
             {
-                if (this.Exercise.Unit == value)
+                if (this.exercise.Unit == value)
                 {
                     return;
                 }
 
-                this.Exercise.Unit = value;
+                this.exercise.Unit = value;
                 this.InvokePropertyChanged();
             }
         }
 
         public ushort Scores
         {
-            get => this.Exercise.Scores;
+            get => this.exercise.Scores;
 
             set
             {
-                if (this.Exercise.Scores == value)
+                if (this.exercise.Scores == value)
                 {
                     return;
                 }
 
-                this.Exercise.Scores = value;
+                this.exercise.Scores = value;
                 this.InvokePropertyChanged();
             }
         }
@@ -149,9 +152,9 @@ namespace MyCoach.ViewModel
 
             if (exercise != null)
             {
-                this.Parent.Exercises.Remove(exercise);
-                this.Parent.RefreshExercisesFilteredByCategory();
-                this.Parent.HasUnsavedExercises = true;
+                this.parent.Exercises.Remove(exercise);
+                this.parent.RefreshExercisesFilteredByCategory();
+                this.parent.HasUnsavedExercises = true;
             }
         }
     }

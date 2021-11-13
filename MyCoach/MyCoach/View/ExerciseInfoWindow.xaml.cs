@@ -32,8 +32,13 @@ namespace MyCoach.View
 
         private void OnWindowClosed(object sender, CancelEventArgs e)
         {
+            if (this.AllowEdit == false)
+            {
+                return;
+            }
+
             var context = this.DataContext as Exercise;
-            context.Info = new TextRange(this.EditTextBox.Document.ContentStart, this.EditTextBox.Document.ContentEnd).Text;
+            context.Info = new TextRange(this.EditTextBox.Document.ContentStart, this.EditTextBox.Document.ContentEnd).Text.Trim(' ', '\n', '\r');
         }
 
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

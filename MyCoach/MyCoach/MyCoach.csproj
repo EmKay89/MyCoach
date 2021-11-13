@@ -174,8 +174,8 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControls\ExerciseUserControl.xaml.cs">
-      <DependentUpon>ExerciseUserControl.xaml</DependentUpon>
+    <Compile Include="View\ExerciseView.xaml.cs">
+      <DependentUpon>ExerciseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewTrainingScheduleView.xaml.cs">
       <DependentUpon>ViewTrainingScheduleView.xaml</DependentUpon>
@@ -266,7 +266,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UserControls\ExerciseUserControl.xaml">
+    <Page Include="View\ExerciseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,5 +278,6 @@
   <ItemGroup>
     <Resource Include="Resources\InfoIcon.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

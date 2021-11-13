@@ -483,11 +483,7 @@ namespace MyCoach.ViewModel
             foreach (var exercise in exercises)
             {
                 this.ExercisesFilteredByCategory.Add(
-                    new ExerciseViewModel
-                    {
-                        Exercise = exercise,
-                        Parent = this
-                    });
+                    new ExerciseViewModel(exercise, this));
             }
         }
 

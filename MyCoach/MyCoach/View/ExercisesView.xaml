@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyCoach.View"
-             xmlns:uc="clr-namespace:MyCoach.View.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
@@ -187,7 +186,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <uc:ExerciseUserControl/>
+                            <local:ExerciseView/>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

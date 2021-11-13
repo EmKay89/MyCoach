@@ -15,16 +15,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyCoach.View.UserControls
+namespace MyCoach.View
 {
     /// <summary>
-    /// Interaction logic for ExerciseUserControl.xaml
+    /// Interaction logic for ExerciseView.xaml
     /// </summary>
-    public partial class ExerciseUserControl : UserControl
+    public partial class ExerciseView : UserControl
     {
-        public ExerciseUserControl()
+        public ExerciseView()
         {
             InitializeComponent();
+        }
+
+        private void InfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            var exerciseInfoWinow = new ExerciseInfoWindow
+            {
+                DataContext = (this.DataContext as ExerciseViewModel).Exercise,
+                AllowEdit = true,
+            };
+
+            exerciseInfoWinow.ShowDialog();
         }
     }
 }
