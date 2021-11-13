@@ -27,11 +27,13 @@ namespace MyCoach.View
             var context = this.DataContext as Exercise;
             this.EditTextBox.IsReadOnly = !this.AllowEdit;
             this.EditTextBox.Document.Blocks.Clear();
-            if (context.Info == null || context.Info == string.Empty)
+
+            if (this.AllowEdit == false && (context.Info == null || context.Info == string.Empty))
             {
                 this.EditTextBox.Document.Blocks.Add(new Paragraph(new Run("Noch keine Beschreibung vorhanden ...")));
                 this.EditTextBox.FontWeight = FontWeights.Light;
                 this.EditTextBox.FontStyle = FontStyles.Italic;
+                return;
             }
             
             this.EditTextBox.Document.Blocks.Add(new Paragraph(new Run(context.Info)));
