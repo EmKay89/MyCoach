@@ -3,10 +3,12 @@ using Moq;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 {
@@ -19,7 +21,10 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         public void Init()
         {
             base.Initialize();
-            
+
+            TrainingEvaluator.MessageBoxService = Mock.Of<IMessageBoxService>(service =>
+                service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.OK);
+
             this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
             this.TrainingSchedule.Duration = 3;
             this.TrainingSchedule.StartMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);

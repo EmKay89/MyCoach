@@ -1,34 +1,49 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.Defines;
+using MyCoach.ViewModel.Services;
+using MyCustomTypes.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
     ///     Provides functions for calculating and saving scores from a <see cref="Training"/>.
+    ///     Also shows a message summarizing the scores obtained.
     /// </summary>
     public static class TrainingEvaluator
     {
+        public static IMessageBoxService MessageBoxService { get; set; } = new MessageBoxService();
+
         /// <summary>
         ///     Calulates and saves the scores from a given <see cref="Training"/>.
         /// </summary>
         /// <param name="training">The given Training.</param>
         public static void Evaluate(Training training)
         {
+            var scores = new List<Pair<ExerciseCategory, ushort>>();
+
             foreach (var trainingElement in training)
             {
-                CalculateAndSetScores(trainingElement);
+                UpdateScores(trainingElement, scores);
+            }
+
+            foreach (var pair in scores)
+            {
+                SetScoresForCategory(pair.Item1, pair.Item2);
             }
 
             DataInterface.GetInstance().SaveData<Month>();
+            ShowEvaluationMessage(scores);
         }
 
-        private static void CalculateAndSetScores(TrainingElementViewModel trainingElement)
+        private static void UpdateScores(
+            TrainingElementViewModel trainingElement, 
+            List<Pair<ExerciseCategory, ushort>> scores)
         {
             if ((trainingElement.Type != TrainingElementType.exercise)
                 || trainingElement.Exercise.Category == ExerciseCategory.WarmUp
@@ -39,12 +54,18 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
 
             var category = trainingElement.Exercise.Category;
-            var scores = (ushort)Math.Round(trainingElement.ScoresMultiplier * trainingElement.Exercise.Scores);
-            
-            SetScoresForCategory(scores, category);
+            var scoresToBeAdded = (ushort)Math.Round(trainingElement.ScoresMultiplier * trainingElement.Exercise.Scores);
+
+            if (scores.Any(s => s.Item1 == category))
+            {
+                scores.Where(s => s.Item1 == category).Single().Item2 += scoresToBeAdded;
+                return;
+            }
+
+            scores.Add(new Pair<ExerciseCategory, ushort>(trainingElement.Exercise.Category, scoresToBeAdded));
         }
 
-        private static void SetScoresForCategory(ushort scores, ExerciseCategory category)
+        private static void SetScoresForCategory(ExerciseCategory category, ushort scores)
         {
             var scheduleType = DataInterface.GetInstance().GetData<TrainingSchedule>().First().ScheduleType;
             var currentMonth = DataInterface.GetInstance().GetData<Month>().Where(m => m.Number == MonthNumber.Current).First();
@@ -59,6 +80,26 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 var newScoresForTimeBasedMonth = (ushort)(currentMonthInTimeBasedSchedule.GetScores(category) + scores);
                 currentMonthInTimeBasedSchedule.SetScores(category, newScoresForTimeBasedMonth);
             }
+        }
+
+        private static void ShowEvaluationMessage(List<Pair<ExerciseCategory, ushort>> results)
+        {
+            if (results.Any() == false)
+            {
+                return;
+            }
+
+            var sb = new StringBuilder("Folgende Punkte wurden gutgeschrieben:");
+            sb.AppendLine();
+            sb.AppendLine();
+
+            foreach (var result in results)
+            {
+                var categoryName = DataInterface.GetInstance().GetData<Category>().Where(c => c.ID == result.Item1).Single();
+                sb.AppendLine(categoryName + ": " + result.Item2.ToString());
+            }
+
+            MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

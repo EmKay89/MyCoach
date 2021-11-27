@@ -95,7 +95,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\DLLs\MyExtensions\MyExtensions\MyExtensions.csproj">
+    <ProjectReference Include="..\..\..\..\libs\MyExtensions\MyExtensions\MyExtensions.csproj">
       <Project>{7f9f2579-d9ae-405c-9ed2-ab914ad4f59d}</Project>
       <Name>MyExtensions</Name>
     </ProjectReference>
