@@ -12,13 +12,14 @@ namespace MyCoach.ViewModel
 {
     public class ExerciseViewModel : BaseViewModel
     {
-        private Exercise exercise;
-        private ExercisesViewModel parent;
+        private readonly Exercise exercise;
+        private readonly ExercisesViewModel parent;
 
         public ExerciseViewModel(Exercise exercise, ExercisesViewModel parent)
         {
             this.exercise = exercise;
             this.parent = parent;
+            this.AddExerciseCommand = new RelayCommand(this.AddExerciseToTraining);
             this.RemoveExerciseCommand = new RelayCommand(this.RemoveExercise);
             this.exercise.PropertyChanged += delegate { this.parent.HasUnsavedExercises = true; };
         }
@@ -31,7 +32,9 @@ namespace MyCoach.ViewModel
         };
 
         public Exercise Exercise => this.exercise;
-        
+
+        public RelayCommand AddExerciseCommand { get; }
+
         public RelayCommand RemoveExerciseCommand { get; }
 
         public bool Active
@@ -146,11 +149,17 @@ namespace MyCoach.ViewModel
             }
         }
 
+        private void AddExerciseToTraining(object parameter)
+        {
+            if (parameter is Exercise exercise)
+            {
+                this.parent.InvokeAddExerciseExecuted(exercise);
+            }
+        }
+
         private void RemoveExercise(object parameter)
         {
-            var exercise = parameter as Exercise;
-
-            if (exercise != null)
+            if (parameter is Exercise exercise)
             {
                 this.parent.Exercises.Remove(exercise);
                 this.parent.RefreshExercisesFilteredByCategory();

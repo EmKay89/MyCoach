@@ -3,6 +3,7 @@ using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.Events;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System;
 using System.Collections.Generic;
@@ -222,6 +223,12 @@ namespace MyCoach.ViewModel
         public bool FocusTrainingElementsVisible => this.TrainingMode == TrainingMode.FocusTraining;
 
         public bool CircleOrFocusTrainingElementsVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
+
+        public void OnAddExerciseExecuted(object sender, AddExerciseExecutedEventArgs args)
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.exercise, args.Exercise);
+            this.Training.Add(vm);
+        }
 
         private void StartTraining()
         {

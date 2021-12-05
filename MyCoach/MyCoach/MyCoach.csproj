@@ -106,6 +106,8 @@
     <Compile Include="ViewModel\DataBaseValidation\TrainingScheduleValidator.cs" />
     <Compile Include="ViewModel\EditMonthViewModel.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
+    <Compile Include="ViewModel\Events\AddExerciseExecutedEventArgs.cs" />
+    <Compile Include="ViewModel\Events\AddExerciseExecutedEventHandler.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

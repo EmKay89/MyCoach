@@ -1,21 +1,17 @@
-﻿using Microsoft.Win32;
-using MyCoach.DataHandling;
+﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
 using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
+using MyCoach.ViewModel.Events;
 using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Data;
-using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
@@ -48,6 +44,8 @@ namespace MyCoach.ViewModel
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
         public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
         public const string RESET_CAPTION = "Zurücksetzen";
+
+        public event AddExerciseExecutedEventHandler AddExerciseExecuted;
 
         public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
         
@@ -485,6 +483,11 @@ namespace MyCoach.ViewModel
                 this.ExercisesFilteredByCategory.Add(
                     new ExerciseViewModel(exercise, this));
             }
+        }
+
+        public void InvokeAddExerciseExecuted(Exercise exercise)
+        {
+            this.AddExerciseExecuted.Invoke(this, new AddExerciseExecutedEventArgs(exercise));
         }
 
         private void AddExercise()

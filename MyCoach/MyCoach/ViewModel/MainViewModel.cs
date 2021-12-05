@@ -1,15 +1,9 @@
-﻿using MyCoach.DataHandling;
-using MyCoach.View;
+﻿using MyCoach.View;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
@@ -20,10 +14,14 @@ namespace MyCoach.ViewModel
         public MainViewModel()
         {
             DtoCollectionsValidator.ValidateAll();
-            this.ExerciseViewModel = new ExercisesViewModel();
+
+            this.ExercisesViewModel = new ExercisesViewModel();
             this.SettingsViewModel = new SettingsViewModel();
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
             this.TrainingViewModel = new TrainingViewModel();
+
+            this.ExercisesViewModel.AddExerciseExecuted += this.TrainingViewModel.OnAddExerciseExecuted;
+
             this.UpdateMainViewCommand = new RelayCommand(
                 this.SelectViewModel,
                 () => this.SelectedViewModel != this.TrainingViewModel || this.TrainingViewModel.TrainingActive == false);
@@ -33,7 +31,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool ExerciseViewSelected => this.SelectedViewModel == this.ExerciseViewModel;
+        public bool ExerciseViewSelected => this.SelectedViewModel == this.ExercisesViewModel;
 
         public bool SettingsViewSelected => this.SelectedViewModel == this.SettingsViewModel;
 
@@ -65,7 +63,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public ExercisesViewModel ExerciseViewModel { get; }
+        public ExercisesViewModel ExercisesViewModel { get; }
 
         public SettingsViewModel SettingsViewModel { get; }
 
@@ -85,7 +83,7 @@ namespace MyCoach.ViewModel
             switch (parameter.ToString())
             {
                 case "Exercise":
-                    this.SelectedViewModel = ExerciseViewModel;
+                    this.SelectedViewModel = ExercisesViewModel;
                     break;
                 case "Settings":
                     this.SelectedViewModel = SettingsViewModel;
