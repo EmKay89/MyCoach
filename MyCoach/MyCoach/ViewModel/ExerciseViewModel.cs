@@ -26,7 +26,7 @@ namespace MyCoach.ViewModel
 
         public List<string> SelectableUnits { get; } = new List<string>
         {
-            "Wiederholungen",
+            "Wiederholungen je Seite",
             "Minuten",
             "Sekunden"
         };
