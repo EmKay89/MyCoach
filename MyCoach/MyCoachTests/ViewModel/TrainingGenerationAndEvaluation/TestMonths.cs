@@ -33,8 +33,10 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
                 new Month
                 {
-                    Number = MonthNumber.Month1,
-                    StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1),
+                    Number = MonthNumber.Month1,                    
+                    StartDate = DateTime.Now.Month != 1
+                        ? new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1)
+                        : new DateTime(DateTime.Now.Year - 1, 12, 1),
                     Category1Goal = 100,
                     Category1Scores = 100,
                     Category2Goal = 100,
@@ -78,7 +80,9 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 new Month
                 {
                     Number = MonthNumber.Month3,
-                    StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1),
+                    StartDate = DateTime.Now.Month != 12 
+                        ? new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, 1)
+                        : new DateTime(DateTime.Now.Year + 1, 1, 1),
                     Category1Goal = 120,
                     Category1Scores = 0,
                     Category2Goal = 120,

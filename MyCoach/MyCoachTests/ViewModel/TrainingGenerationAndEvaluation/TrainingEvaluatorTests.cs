@@ -27,7 +27,9 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
             this.TrainingSchedule.Duration = 3;
-            this.TrainingSchedule.StartMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
+            this.TrainingSchedule.StartMonth = DateTime.Now.Month == 1
+                ? new DateTime(DateTime.Now.Year - 1, 12, 1)
+                : new DateTime(DateTime.Now.Year, DateTime.Now.Month - 1, 1);
 
             this.SetupData(TestMonths.ThreeMonthsWithCurrentInTheMiddle);
             this.SetupData(TestExercises.TwoOfEachCategory);
