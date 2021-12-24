@@ -99,6 +99,9 @@
                           SelectedValue="{Binding ExercisesPerLap}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
+            <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
+                       TextWrapping="Wrap"
+                       Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </StackPanel>
         <ItemsControl BorderBrush="LightGray"
                       BorderThickness="1"
