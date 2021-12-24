@@ -215,18 +215,16 @@ namespace MyCoachTests.ViewModel
         #region Event Reactions
 
         [TestMethod]
-        public void CategoryChanges_RemovedAndAdded_PropertyChangedEventsRaisedAndCategoriesAndCategoryNamesDisplayedCorrectly()
+        public void CategoryChanges_RemovedAndAdded_CategoriesAndCategoryNamesDisplayedCorrectly()
         {
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
             this.Categories.Remove(cat1);
 
-            this.AssertThatCategoryChangeEventsAreRaisedAfterCollectionChange();
             this.AssertThatCategoryNamesAndActivitiyValuesAreCorrect();
 
             this.PropertyChangedEvents.Clear();
             this.Categories.Add(cat1);
 
-            this.AssertThatCategoryChangeEventsAreRaisedAfterCollectionChange();
             this.AssertThatCategoryNamesAndActivitiyValuesAreCorrect();
         }
 
@@ -329,32 +327,6 @@ namespace MyCoachTests.ViewModel
             Assert.AreEqual(
                 this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).FirstOrDefault()?.Name ?? string.Empty,
                 this.sut.CategoryCoolDownName);
-        }
-
-        private void AssertThatCategoryChangeEventsAreRaisedAfterCollectionChange()
-        {
-            Assert.AreEqual(21, this.PropertyChangedEvents.Count);
-            Assert.AreEqual(nameof(this.sut.ActiveCategories), this.PropertyChangedEvents[0]);
-            Assert.AreEqual(nameof(this.sut.CategoryWarmUpName), this.PropertyChangedEvents[1]);
-            Assert.AreEqual(nameof(this.sut.CategoryWarmUpActive), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.Category1Name), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.Category1Active), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.Category2Name), this.PropertyChangedEvents[5]);
-            Assert.AreEqual(nameof(this.sut.Category2Active), this.PropertyChangedEvents[6]);
-            Assert.AreEqual(nameof(this.sut.Category3Name), this.PropertyChangedEvents[7]);
-            Assert.AreEqual(nameof(this.sut.Category3Active), this.PropertyChangedEvents[8]);
-            Assert.AreEqual(nameof(this.sut.Category4Name), this.PropertyChangedEvents[9]);
-            Assert.AreEqual(nameof(this.sut.Category4Active), this.PropertyChangedEvents[10]);
-            Assert.AreEqual(nameof(this.sut.Category5Name), this.PropertyChangedEvents[11]);
-            Assert.AreEqual(nameof(this.sut.Category5Active), this.PropertyChangedEvents[12]);
-            Assert.AreEqual(nameof(this.sut.Category6Name), this.PropertyChangedEvents[13]);
-            Assert.AreEqual(nameof(this.sut.Category6Active), this.PropertyChangedEvents[14]);
-            Assert.AreEqual(nameof(this.sut.Category7Name), this.PropertyChangedEvents[15]);
-            Assert.AreEqual(nameof(this.sut.Category7Active), this.PropertyChangedEvents[16]);
-            Assert.AreEqual(nameof(this.sut.Category8Name), this.PropertyChangedEvents[17]);
-            Assert.AreEqual(nameof(this.sut.Category8Active), this.PropertyChangedEvents[18]);
-            Assert.AreEqual(nameof(this.sut.CategoryCoolDownName), this.PropertyChangedEvents[19]);
-            Assert.AreEqual(nameof(this.sut.CategoryCoolDownActive), this.PropertyChangedEvents[20]);
         }
 
         #endregion

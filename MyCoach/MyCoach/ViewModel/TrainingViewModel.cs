@@ -5,12 +5,10 @@ using MyCoach.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Events;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
-using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -599,30 +597,6 @@ namespace MyCoach.ViewModel
             {
                 this.CategoryInFocus = null;
             }
-
-            this.InvokePropertiesChanged(
-                nameof(this.ActiveCategories),
-                nameof(this.CategoryWarmUpName),
-                nameof(this.CategoryWarmUpActive),
-                nameof(this.Category1Name),
-                nameof(this.Category1Active),
-                nameof(this.Category2Name),
-                nameof(this.Category2Active),
-                nameof(this.Category3Name),
-                nameof(this.Category3Active),
-                nameof(this.Category4Name),
-                nameof(this.Category4Active),
-                nameof(this.Category5Name),
-                nameof(this.Category5Active),
-                nameof(this.Category6Name),
-                nameof(this.Category6Active),
-                nameof(this.Category7Name),
-                nameof(this.Category7Active),
-                nameof(this.Category8Name),
-                nameof(this.Category8Active),
-                nameof(this.CategoryCoolDownName),
-                nameof(this.CategoryCoolDownActive)
-                );
         }
 
         private void OnTrainingActiveChanged(object sender, EventArgs e)
