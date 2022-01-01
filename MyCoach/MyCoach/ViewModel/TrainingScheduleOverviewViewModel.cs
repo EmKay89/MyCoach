@@ -33,6 +33,7 @@ namespace MyCoach.ViewModel
 
             this.UpdateAvailableCategories();
             this.UpdateSelectedCategory();
+            this.UpdateChart();
         }
 
         public ObservableCollection<OverviewElementViewModel> Elements { get; } = new ObservableCollection<OverviewElementViewModel>();
@@ -137,14 +138,15 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
             this.AvailableCategories.Add(null);
+            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
             UpdateAvailableCategoryListItems(true);
         }
 
         private void UpdateAvailableCategoryListItems(bool resetSelectedIndex)
         {
             this.AvailableCategoryListItems.Clear();
+            this.AvailableCategoryListItems.Add("Gesamt");
 
             foreach (var category in this.AvailableCategories)
             {
@@ -153,8 +155,6 @@ namespace MyCoach.ViewModel
                     this.AvailableCategoryListItems.Add(category.Name);
                 }
             }
-
-            this.AvailableCategoryListItems.Add("Gesamt");
 
             if (resetSelectedIndex)
             {

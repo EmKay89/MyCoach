@@ -46,12 +46,12 @@ namespace MyCoachTests.ViewModel
 
             Assert.IsTrue(this.sut.AvailableCategories.Count == activeTestCategories.Count() + 1);
 
+            Assert.IsNull(this.sut.AvailableCategories[0]);
+
             for (int i = 0; i < activeTestCategories.Count(); i++)
             {
-                Assert.AreEqual(activeTestCategories[i], sut.AvailableCategories[i]);
-            }
-
-            Assert.IsNull(this.sut.AvailableCategories[this.sut.AvailableCategories.Count() - 1]);
+                Assert.AreEqual(activeTestCategories[i], sut.AvailableCategories[i + 1]);
+            }            
         }
 
         [TestMethod]
@@ -67,18 +67,18 @@ namespace MyCoachTests.ViewModel
             this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First().Active = true;
             this.Categories.Where(c => c.ID == ExerciseCategory.Category2).First().Active = true;
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category1Goal = 50;
-            this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Goal = 100;
+            this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Goal = 1200;
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().TotalGoal = 1000;
 
             this.sut = new TrainingScheduleOverviewViewModel();
 
-            Assert.IsTrue(this.sut.MaxScoreOrGoal == 50);
+            Assert.IsTrue(this.sut.MaxScoreOrGoal == 1000);
 
-            this.Months.Where(m => m.Number == MonthNumber.Month2).First().Category1Scores = 150;
+            this.Months.Where(m => m.Number == MonthNumber.Month2).First().Category1Scores = 1500;
 
             this.sut = new TrainingScheduleOverviewViewModel();
 
-            Assert.IsTrue(this.sut.MaxScoreOrGoal == 150);
+            Assert.IsTrue(this.sut.MaxScoreOrGoal == 1500);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace MyCoachTests.ViewModel
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Scores = 1234;
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Goal = 2345;
 
-            this.sut.SelectedCategoryListIndex = 1;
+            this.sut.SelectedCategoryListIndex = 2;
 
             Assert.IsTrue(this.sut.Elements.First().ScoresString == "1234 von 2345");
             this.AssertChartElementsCountAndType();
@@ -106,18 +106,22 @@ namespace MyCoachTests.ViewModel
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Goal = 100;
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().TotalGoal = 1000;
 
-            this.sut.SelectedCategoryListIndex = activeTestCategories.Count();
+            this.sut.SelectedCategoryListIndex = 2;
+
+            Assert.IsTrue(this.sut.MaxScoreOrGoal == 100);
+
+            this.sut.SelectedCategoryListIndex = 0;
 
             Assert.IsTrue(this.sut.MaxScoreOrGoal == 1000);
 
             this.sut.SelectedCategoryListIndex = 1;
 
-            Assert.IsTrue(this.sut.MaxScoreOrGoal == 100);
+            Assert.IsTrue(this.sut.MaxScoreOrGoal == 50);
 
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category1Scores = 500;
             this.Months.Where(m => m.Number == MonthNumber.Month1).First().Category2Scores = 1000;
 
-            this.sut.SelectedCategoryListIndex = activeTestCategories.Count();
+            this.sut.SelectedCategoryListIndex = 0;
 
             Assert.IsTrue(this.sut.MaxScoreOrGoal == 1500);
         }
@@ -142,21 +146,23 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void CategoriesChange_SelectedCategoryRemoved_FirstOtherCategorySelected()
+        public void CategoriesChange_SelectedCategoryRemoved_TotalSelected()
         {
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
             var cat2 = this.Categories.Where(c => c.ID == ExerciseCategory.Category2).First();
             Assert.IsTrue(cat1.Active);
             Assert.IsTrue(cat2.Active);
             Assert.IsTrue(cat1.Name != cat2.Name);
-            Assert.IsTrue(this.sut.SelectedCategoryListIndex == 0);
-            Assert.IsTrue(this.sut.AvailableCategoryListItems.First() == cat1.Name);
+            this.sut.SelectedCategoryListIndex = 1;
+            Assert.IsTrue(this.sut.AvailableCategories[this.sut.SelectedCategoryListIndex].Name == cat1.Name);
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == cat1.Name);
 
             this.Categories.Remove(cat1);
 
             this.AssertChartElementsCountAndType();
             Assert.IsTrue(this.sut.SelectedCategoryListIndex == 0);
-            Assert.IsTrue(this.sut.AvailableCategoryListItems.First() == cat2.Name);
+            Assert.IsTrue(this.sut.AvailableCategories[this.sut.SelectedCategoryListIndex] == null);
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == "Gesamt");            
         }
 
         [TestMethod]
@@ -164,6 +170,7 @@ namespace MyCoachTests.ViewModel
         {
             var newName = "New Category Name";
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
+            this.sut.SelectedCategoryListIndex = 1;
             Assert.IsTrue(cat1.Name != newName);
             Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == cat1.Name);
 
@@ -174,21 +181,22 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SelectedCategoryChanges_Inactivated_FirstOtherCategorySelected()
+        public void SelectedCategoryChanges_Inactivated_TotalSelected()
         {
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
             var cat2 = this.Categories.Where(c => c.ID == ExerciseCategory.Category2).First();
             Assert.IsTrue(cat1.Active);
             Assert.IsTrue(cat2.Active);
             Assert.IsTrue(cat1.Name != cat2.Name);
-            Assert.IsTrue(this.sut.SelectedCategoryListIndex == 0);
-            Assert.IsTrue(this.sut.AvailableCategoryListItems.First() == cat1.Name);
+            this.sut.SelectedCategoryListIndex = 1;
+            Assert.IsTrue(this.sut.AvailableCategories[this.sut.SelectedCategoryListIndex].Name == cat1.Name);
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == cat1.Name);
 
             cat1.Active = false;
 
-            this.AssertChartElementsCountAndType();
             Assert.IsTrue(this.sut.SelectedCategoryListIndex == 0);
-            Assert.IsTrue(this.sut.AvailableCategoryListItems.First() == cat2.Name);
+            Assert.IsTrue(this.sut.AvailableCategories[this.sut.SelectedCategoryListIndex] == null);
+            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == "Gesamt");
         }
 
         [TestMethod]
@@ -215,7 +223,7 @@ namespace MyCoachTests.ViewModel
             var cat1 = this.Categories.Where(c => c.ID == ExerciseCategory.Category1).First();
             Assert.IsTrue(cat1.Active);
             Assert.IsTrue(cat1.Name != string.Empty);
-            Assert.IsTrue(this.sut.AvailableCategoryListItems[this.sut.SelectedCategoryListIndex] == cat1.Name);
+            this.sut.SelectedCategoryListIndex = 1;
 
             this.Months.First(m => m.Number != MonthNumber.Current).Category1Scores = ushort.MaxValue;
 
