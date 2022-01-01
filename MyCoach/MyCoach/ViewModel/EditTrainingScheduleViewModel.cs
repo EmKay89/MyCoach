@@ -115,7 +115,7 @@ namespace MyCoach.ViewModel
                 this.Schedule.ScheduleType = value;
                 this.InvokePropertyChanged("TimeBasedScheduleElementsVisible");
                 this.UpdateEditMonthViewModels();
-                this.HasUnsavedChanges = true;                
+                this.HasUnsavedChanges = true;
             }
         }
 
@@ -234,6 +234,7 @@ namespace MyCoach.ViewModel
         {
             this.Schedule = (TrainingSchedule)DataInterface.GetInstance().GetData<TrainingSchedule>().First().Clone();
             this.InvokePropertiesChanged(
+                nameof(this.Duration),
                 nameof(this.TimeBasedScheduleElementsVisible),
                 nameof(this.Type));
 
