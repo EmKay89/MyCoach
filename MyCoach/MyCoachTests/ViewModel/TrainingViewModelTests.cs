@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
