@@ -234,7 +234,7 @@ namespace MyCoach.ViewModel
         {
             this.Schedule = (TrainingSchedule)DataInterface.GetInstance().GetData<TrainingSchedule>().First().Clone();
             this.InvokePropertiesChanged(
-                nameof(this.Duration),
+                nameof(this.NumbersOneToTwelveWithCaption),
                 nameof(this.TimeBasedScheduleElementsVisible),
                 nameof(this.Type));
 
