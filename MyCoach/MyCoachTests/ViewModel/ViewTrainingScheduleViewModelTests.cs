@@ -2,7 +2,7 @@
 using Moq;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
-using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using System;

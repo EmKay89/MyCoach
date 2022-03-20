@@ -1,12 +1,4 @@
-﻿using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.ViewModel.Commands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MyCoach.ViewModel.Commands;
 
 namespace MyCoach.ViewModel
 {

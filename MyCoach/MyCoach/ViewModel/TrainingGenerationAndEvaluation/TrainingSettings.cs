@@ -1,10 +1,5 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Model.Defines;
-using System;
+﻿using MyCoach.Model.Defines;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {

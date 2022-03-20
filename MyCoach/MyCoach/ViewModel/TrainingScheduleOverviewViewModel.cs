@@ -167,7 +167,7 @@ namespace MyCoach.ViewModel
             this.Elements.Clear();
             var schedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             this.MonthsInSchedule = DataInterface.GetInstance().GetData<Month>().Where(
-                m => (int)m.Number <= schedule.Duration && m.Number != Defines.MonthNumber.Current).ToList();
+                m => (int)m.Number <= schedule.Duration && m.Number != Model.Defines.MonthNumber.Current).ToList();
 
             foreach (var month in this.MonthsInSchedule)
             {

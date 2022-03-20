@@ -1,22 +1,18 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel
 {
     public class EditMonthViewModel : BaseViewModel
     {
-        private Month month;
-        private ObservableCollection<Category> categories;
+        private readonly Month month;
+        private readonly ObservableCollection<Category> categories;
 
         public EditMonthViewModel(Month month)
         {
