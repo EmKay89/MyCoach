@@ -1,7 +1,7 @@
 ﻿using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
-using MyCoach.Defines;
+using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects.CollectionExtensions;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
 using MyCoach.ViewModel.Events;

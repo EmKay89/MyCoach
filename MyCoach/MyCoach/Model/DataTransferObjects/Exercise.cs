@@ -1,6 +1,6 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert eine Übung.
@@ -21,16 +21,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public uint ID
         {
-            get => this.iD;
+            get => iD;
             set
             {
-                if (value == this.iD)
+                if (value == iD)
                 {
                     return;
                 }
 
-                this.iD = value;
-                this.InvokePropertyChanged();
+                iD = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -39,16 +39,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ExerciseCategory Category
         {
-            get => this.category;
+            get => category;
             set
             {
-                if (value == this.category)
+                if (value == category)
                 {
                     return;
                 }
 
-                this.category = value;
-                this.InvokePropertyChanged();
+                category = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -57,17 +57,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Count
         {
-            get => this.count;
+            get => count;
 
             set
             {
-                if (value == this.count)
+                if (value == count)
                 {
                     return;
                 }
 
-                this.count = value;
-                this.InvokePropertyChanged();
+                count = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -76,17 +76,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public string Name
         {
-            get => this.name;
+            get => name;
 
             set
             {
-                if (value == this.name)
+                if (value == name)
                 {
                     return;
                 }
 
-                this.name = value;
-                this.InvokePropertyChanged();
+                name = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -95,17 +95,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public string Unit
         {
-            get => this.unit;
+            get => unit;
 
             set
             {
-                if (value == this.unit)
+                if (value == unit)
                 {
                     return;
                 }
 
-                this.unit = value;
-                this.InvokePropertyChanged();
+                unit = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -114,17 +114,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Scores
         {
-            get => this.scores;
+            get => scores;
 
             set
             {
-                if (value == this.scores)
+                if (value == scores)
                 {
                     return;
                 }
 
-                this.scores = value;
-                this.InvokePropertyChanged();
+                scores = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -133,17 +133,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public string Info
         {
-            get => this.info;
+            get => info;
 
             set
             {
-                if (value == this.info)
+                if (value == info)
                 {
                     return;
                 }
 
-                this.info = value;
-                this.InvokePropertyChanged();
+                info = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -152,17 +152,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public bool Active
         {
-            get => this.active; 
-            
+            get => active;
+
             set
             {
-                if (value == this.active)
+                if (value == active)
                 {
                     return;
                 }
 
-                this.active = value;
-                this.InvokePropertyChanged();
+                active = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -171,13 +171,13 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is Exercise targetExercise)
             {
-                targetExercise.Category = this.Category;
-                targetExercise.Count = this.Count;
-                targetExercise.Name = this.Name;
-                targetExercise.Unit = this.Unit;
-                targetExercise.Scores = this.Scores;
-                targetExercise.Info = this.Info;
-                targetExercise.Active = this.Active;
+                targetExercise.Category = Category;
+                targetExercise.Count = Count;
+                targetExercise.Name = Name;
+                targetExercise.Unit = Unit;
+                targetExercise.Scores = Scores;
+                targetExercise.Info = Info;
+                targetExercise.Active = Active;
             }
         }
 
@@ -186,7 +186,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

@@ -3,7 +3,7 @@ using Moq;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -82,7 +82,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_ScheduleTypeGeneric_TimeBasedElementsNotVisible()
         {
-            this.TrainingSchedule.ScheduleType = MyCoach.Defines.ScheduleType.Generic;
+            this.TrainingSchedule.ScheduleType = ScheduleType.Generic;
 
             this.sut = new ViewTrainingScheduleViewModel();
 
@@ -92,7 +92,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_ScheduleTypeTimeBased_TimeBasedElementsVisible()
         {
-            this.TrainingSchedule.ScheduleType = MyCoach.Defines.ScheduleType.TimeBased;
+            this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
 
             this.sut = new ViewTrainingScheduleViewModel();
 
@@ -102,7 +102,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void Construction_ScheduleTypeTimeBased_OverviewElementsVisibleByDefault()
         {
-            this.TrainingSchedule.ScheduleType = MyCoach.Defines.ScheduleType.TimeBased;
+            this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
 
             this.sut = new ViewTrainingScheduleViewModel();
 
@@ -122,7 +122,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void DisplayTimeBasedElementsCommand_HappyPath_UpdatesVisibilities()
         {
-            this.TrainingSchedule.ScheduleType = MyCoach.Defines.ScheduleType.TimeBased;
+            this.TrainingSchedule.ScheduleType = ScheduleType.TimeBased;
             this.sut = new ViewTrainingScheduleViewModel();
 
             this.sut.DisplayTimeBasedElementsCommand.Execute("Details");

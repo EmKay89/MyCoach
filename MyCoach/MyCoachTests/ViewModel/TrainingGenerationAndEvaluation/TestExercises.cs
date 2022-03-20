@@ -1,5 +1,5 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+﻿using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +12,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 1,
                 Name = "WarmUp-1",
                 Unit = "Repeats",
@@ -24,7 +24,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 2,
                 Name = "WarmUp-2",
                 Unit = "Repeats",
@@ -36,7 +36,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 3,
                 Name = "WarmUp-3",
                 Unit = "Repeats",
@@ -48,7 +48,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 4,
                 Name = "WarmUp-4",
                 Unit = "Repeats",
@@ -60,7 +60,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 5,
                 Name = "WarmUp-5",
                 Unit = "Repeats",
@@ -72,7 +72,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.WarmUp,
+                Category = ExerciseCategory.WarmUp,
                 Count = 6,
                 Name = "WarmUp-6",
                 Unit = "Repeats",
@@ -84,7 +84,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 11,
                 Name = "Category1-1",
                 Unit = "Repeats",
@@ -96,7 +96,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 12,
                 Name = "Category1-2",
                 Unit = "Repeats",
@@ -108,7 +108,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 13,
                 Name = "Category1-3",
                 Unit = "Repeats",
@@ -120,7 +120,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 14,
                 Name = "Category1-4",
                 Unit = "Repeats",
@@ -132,7 +132,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 15,
                 Name = "Category1-5",
                 Unit = "Repeats",
@@ -144,7 +144,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category1,
+                Category = ExerciseCategory.Category1,
                 Count = 16,
                 Name = "Category1-6",
                 Unit = "Repeats",
@@ -156,7 +156,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 21,
                 Name = "Category2-1",
                 Unit = "Repeats",
@@ -168,7 +168,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 22,
                 Name = "Category2-2",
                 Unit = "Repeats",
@@ -180,7 +180,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 23,
                 Name = "Category2-3",
                 Unit = "Repeats",
@@ -192,7 +192,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 24,
                 Name = "Category2-4",
                 Unit = "Repeats",
@@ -204,7 +204,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 25,
                 Name = "Category2-5",
                 Unit = "Repeats",
@@ -216,7 +216,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category2,
+                Category = ExerciseCategory.Category2,
                 Count = 26,
                 Name = "Category2-6",
                 Unit = "Repeats",
@@ -228,7 +228,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 31,
                 Name = "Category3-1",
                 Unit = "Repeats",
@@ -240,7 +240,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 32,
                 Name = "Category3-2",
                 Unit = "Repeats",
@@ -252,7 +252,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 33,
                 Name = "Category3-3",
                 Unit = "Repeats",
@@ -264,7 +264,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 34,
                 Name = "Category3-4",
                 Unit = "Repeats",
@@ -276,7 +276,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 35,
                 Name = "Category3-5",
                 Unit = "Repeats",
@@ -288,7 +288,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category3,
+                Category = ExerciseCategory.Category3,
                 Count = 36,
                 Name = "Category3-6",
                 Unit = "Repeats",
@@ -300,7 +300,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 41,
                 Name = "Category4-1",
                 Unit = "Repeats",
@@ -312,7 +312,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 42,
                 Name = "Category4-2",
                 Unit = "Repeats",
@@ -324,7 +324,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 43,
                 Name = "Category4-3",
                 Unit = "Repeats",
@@ -336,7 +336,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 44,
                 Name = "Category4-4",
                 Unit = "Repeats",
@@ -348,7 +348,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 45,
                 Name = "Category4-5",
                 Unit = "Repeats",
@@ -360,7 +360,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category4,
+                Category = ExerciseCategory.Category4,
                 Count = 46,
                 Name = "Category4-6",
                 Unit = "Repeats",
@@ -372,7 +372,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 51,
                 Name = "Category5-1",
                 Unit = "Repeats",
@@ -384,7 +384,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 52,
                 Name = "Category5-2",
                 Unit = "Repeats",
@@ -396,7 +396,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 53,
                 Name = "Category5-3",
                 Unit = "Repeats",
@@ -408,7 +408,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 54,
                 Name = "Category5-4",
                 Unit = "Repeats",
@@ -420,7 +420,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 55,
                 Name = "Category5-5",
                 Unit = "Repeats",
@@ -432,7 +432,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category5,
+                Category = ExerciseCategory.Category5,
                 Count = 56,
                 Name = "Category5-6",
                 Unit = "Repeats",
@@ -444,7 +444,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 61,
                 Name = "Category6-1",
                 Unit = "Repeats",
@@ -456,7 +456,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 62,
                 Name = "Category6-2",
                 Unit = "Repeats",
@@ -468,7 +468,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 63,
                 Name = "Category6-3",
                 Unit = "Repeats",
@@ -480,7 +480,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 64,
                 Name = "Category6-4",
                 Unit = "Repeats",
@@ -492,7 +492,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 65,
                 Name = "Category6-5",
                 Unit = "Repeats",
@@ -504,7 +504,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category6,
+                Category = ExerciseCategory.Category6,
                 Count = 66,
                 Name = "Category6-6",
                 Unit = "Repeats",
@@ -516,7 +516,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 71,
                 Name = "Category7-1",
                 Unit = "Repeats",
@@ -528,7 +528,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 72,
                 Name = "Category7-2",
                 Unit = "Repeats",
@@ -540,7 +540,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 73,
                 Name = "Category7-3",
                 Unit = "Repeats",
@@ -552,7 +552,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 74,
                 Name = "Category7-4",
                 Unit = "Repeats",
@@ -564,7 +564,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 75,
                 Name = "Category7-5",
                 Unit = "Repeats",
@@ -576,7 +576,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category7,
+                Category = ExerciseCategory.Category7,
                 Count = 76,
                 Name = "Category7-6",
                 Unit = "Repeats",
@@ -588,7 +588,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 81,
                 Name = "Category8-1",
                 Unit = "Repeats",
@@ -600,7 +600,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 82,
                 Name = "Category8-2",
                 Unit = "Repeats",
@@ -612,7 +612,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 83,
                 Name = "Category8-3",
                 Unit = "Repeats",
@@ -624,7 +624,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 84,
                 Name = "Category8-4",
                 Unit = "Repeats",
@@ -636,7 +636,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 85,
                 Name = "Category8-5",
                 Unit = "Repeats",
@@ -648,7 +648,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.Category8,
+                Category = ExerciseCategory.Category8,
                 Count = 86,
                 Name = "Category8-6",
                 Unit = "Repeats",
@@ -660,7 +660,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 0,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 91,
                 Name = "CoolDown-1",
                 Unit = "Repeats",
@@ -672,7 +672,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 1,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 92,
                 Name = "CoolDown-2",
                 Unit = "Repeats",
@@ -684,7 +684,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 2,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 93,
                 Name = "CoolDown-3",
                 Unit = "Repeats",
@@ -696,7 +696,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 3,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 94,
                 Name = "CoolDown-4",
                 Unit = "Repeats",
@@ -708,7 +708,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 4,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 95,
                 Name = "CoolDown-5",
                 Unit = "Repeats",
@@ -720,7 +720,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             new Exercise
             {
                 ID = 5,
-                Category = MyCoach.Defines.ExerciseCategory.CoolDown,
+                Category = ExerciseCategory.CoolDown,
                 Count = 96,
                 Name = "CoolDown-6",
                 Unit = "Repeats",

@@ -1,7 +1,7 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 using System;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert die Eckdaten eines Trainingsplans. Der gesamte Plan setzt sich aus den Daten dieser Klasse und
@@ -19,17 +19,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ScheduleType ScheduleType
         {
-            get => this.scheduleType;
+            get => scheduleType;
 
             set
             {
-                if (value == this.scheduleType)
+                if (value == scheduleType)
                 {
                     return;
                 }
 
-                this.scheduleType = value;
-                this.InvokePropertyChanged();
+                scheduleType = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -38,17 +38,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public DateTime StartMonth
         {
-            get => this.startMonth;
+            get => startMonth;
 
             set
             {
-                if (value == this.startMonth)
+                if (value == startMonth)
                 {
                     return;
                 }
 
-                this.startMonth = value;
-                this.InvokePropertyChanged();
+                startMonth = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -57,17 +57,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Duration
         {
-            get => this.duration; 
-            
+            get => duration;
+
             set
             {
-                if (value == this.duration)
+                if (value == duration)
                 {
                     return;
                 }
 
-                this.duration = value;
-                this.InvokePropertyChanged();
+                duration = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -76,9 +76,9 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is TrainingSchedule targetSchedule)
             {
-                targetSchedule.ScheduleType = this.ScheduleType;
-                targetSchedule.StartMonth = this.StartMonth;
-                targetSchedule.Duration = this.Duration;
+                targetSchedule.ScheduleType = ScheduleType;
+                targetSchedule.StartMonth = StartMonth;
+                targetSchedule.Duration = Duration;
             }
         }
     }

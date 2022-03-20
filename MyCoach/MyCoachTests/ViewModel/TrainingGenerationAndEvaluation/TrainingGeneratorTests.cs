@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyCoach.Defines;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             base.Initialize();
             this.SetupData(TestCategories.AllCategoriesActive);
             this.SetupData(TestExercises.SixOfEachCategory);
-            this.Settings.Permission = MyCoach.Defines.ExerciseSchedulingRepetitionPermission.No;
+            this.Settings.Permission = ExerciseSchedulingRepetitionPermission.No;
         }
 
         [TestCleanup]

@@ -1,4 +1,4 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel;
 using System.ComponentModel;
 using System.Windows;

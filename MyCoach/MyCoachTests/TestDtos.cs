@@ -1,11 +1,11 @@
-﻿using MyCoach.Defines;
-using MyCoach.DataHandling.DataTransferObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 
 namespace MyCoachTests
 {

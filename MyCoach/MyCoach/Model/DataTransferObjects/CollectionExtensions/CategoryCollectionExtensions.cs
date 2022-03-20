@@ -1,13 +1,8 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
-using System;
+﻿using MyCoach.Model.Defines;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyCoach.DataHandling.DataTransferObjects.CollectionExtensions
+namespace MyCoach.Model.DataTransferObjects.CollectionExtensions
 {
     public static class CategoryCollectionExtensions
     {

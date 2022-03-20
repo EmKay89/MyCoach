@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyExtensions.IEnumerable;
@@ -66,10 +66,10 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ModeChanges_ToCircleTraining_CorrectTrainingSettingsVisibility()
         {
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.UserDefinedTraining;
+            this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
             this.PropertyChangedEvents.Clear();
 
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.CircleTraining;
+            this.sut.TrainingMode = TrainingMode.CircleTraining;
 
             Assert.IsTrue(this.sut.CircleTrainingElementsVisible);
             Assert.IsFalse(this.sut.FocusTrainingElementsVisible);
@@ -87,10 +87,10 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ModeChanges_ToFocusTraining_CorrectTrainingSettingsVisibility()
         {
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.CircleTraining;
+            this.sut.TrainingMode = TrainingMode.CircleTraining;
             this.PropertyChangedEvents.Clear();
 
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.FocusTraining;
+            this.sut.TrainingMode = TrainingMode.FocusTraining;
 
             Assert.IsFalse(this.sut.CircleTrainingElementsVisible);
             Assert.IsTrue(this.sut.FocusTrainingElementsVisible);
@@ -109,10 +109,10 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ModeChanges_ToUserDefinedTraining_CorrectTrainingSettingsVisibility()
         {
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.FocusTraining;
+            this.sut.TrainingMode = TrainingMode.FocusTraining;
             this.PropertyChangedEvents.Clear();
 
-            this.sut.TrainingMode = MyCoach.Defines.TrainingMode.UserDefinedTraining;
+            this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
 
             Assert.IsFalse(this.sut.CircleTrainingElementsVisible);
             Assert.IsFalse(this.sut.FocusTrainingElementsVisible);

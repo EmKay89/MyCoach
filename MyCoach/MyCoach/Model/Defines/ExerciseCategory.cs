@@ -1,4 +1,4 @@
-﻿namespace MyCoach.Defines
+﻿namespace MyCoach.Model.Defines
 {
     public enum ExerciseCategory
     {

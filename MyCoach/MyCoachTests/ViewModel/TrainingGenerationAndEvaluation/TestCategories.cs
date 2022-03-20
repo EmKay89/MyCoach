@@ -1,5 +1,5 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+﻿using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 using System.Collections.Generic;
 
 namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation

@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using MyCoach.DataHandling.DataTransferObjects;
 using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
-using MyCoach.Defines;
+using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
 using System;

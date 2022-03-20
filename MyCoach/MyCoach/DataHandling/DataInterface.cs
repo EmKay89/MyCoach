@@ -1,7 +1,5 @@
 ﻿using MyCoach.DataHandling.DataManager;
-using MyCoach.DataHandling.DataTransferObjects;
-using System;
-using System.Collections.Generic;
+using MyCoach.Model.DataTransferObjects;
 using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling

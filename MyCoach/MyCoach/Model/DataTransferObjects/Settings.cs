@@ -1,6 +1,6 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert einen Einstellungssatz. 
@@ -57,16 +57,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is Settings targetSettings)
             {
-                targetSettings.Permission = this.Permission;
-                targetSettings.RepeatsRound1 = this.RepeatsRound1;
-                targetSettings.ScoresRound1 = this.ScoresRound1;
-                targetSettings.RepeatsRound2 = this.RepeatsRound2;
-                targetSettings.ScoresRound2 = this.ScoresRound2;
-                targetSettings.RepeatsRound3 = this.RepeatsRound3;
-                targetSettings.ScoresRound3 = this.ScoresRound3;
-                targetSettings.RepeatsRound4 = this.RepeatsRound4;
-                targetSettings.ScoresRound4 = this.ScoresRound4;
-            }          
+                targetSettings.Permission = Permission;
+                targetSettings.RepeatsRound1 = RepeatsRound1;
+                targetSettings.ScoresRound1 = ScoresRound1;
+                targetSettings.RepeatsRound2 = RepeatsRound2;
+                targetSettings.ScoresRound2 = ScoresRound2;
+                targetSettings.RepeatsRound3 = RepeatsRound3;
+                targetSettings.ScoresRound3 = ScoresRound3;
+                targetSettings.RepeatsRound4 = RepeatsRound4;
+                targetSettings.ScoresRound4 = ScoresRound4;
+            }
         }
     }
 }

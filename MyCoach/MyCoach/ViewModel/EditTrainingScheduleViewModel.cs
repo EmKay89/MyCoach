@@ -1,8 +1,9 @@
 ﻿using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
-using MyCoach.Defines;
+using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects.CollectionExtensions;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.Defines;
 using MyCoach.ViewModel.Services;
 using MyExtensions.IEnumerable;
 using System;
@@ -75,6 +76,8 @@ namespace MyCoach.ViewModel
             { ScheduleType.Generic, "Fortlaufend" },
             { ScheduleType.TimeBased, "Zeitbasiert" }
         };
+
+        public ScheduleEditingType ScheduleEditingType { get; set; }
 
         public RelayCommand DeleteScheduleCommand { get; }
 

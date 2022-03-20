@@ -1,4 +1,4 @@
-﻿namespace MyCoach.DataHandling.DataTransferObjects
+﻿namespace MyCoach.Model.DataTransferObjects
 {
     public interface IDataTransferObject
     {

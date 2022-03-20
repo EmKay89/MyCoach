@@ -1,12 +1,8 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Stellt Listen aller Dtos mit Standardwerten für jede Datanstruktur zur Verfügung.
@@ -15,7 +11,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
     {
         public static ObservableCollection<Category> Categories
         {
-            get => new ObservableCollection<Category>() 
+            get => new ObservableCollection<Category>()
             {
                 new Category { ID = ExerciseCategory.WarmUp, Name = "Aufwärmübungen", Count = 3, Active = true, Type = ExerciseType.WarmUp },
                 new Category { ID = ExerciseCategory.Category1, Name = "Arme", Count = 0, Active = true, Type = ExerciseType.Training },
@@ -34,14 +30,14 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             get => new ObservableCollection<Exercise>()
             {
-                new Exercise 
-                { 
-                    ID = 0, 
-                    Category = ExerciseCategory.WarmUp, 
+                new Exercise
+                {
+                    ID = 0,
+                    Category = ExerciseCategory.WarmUp,
                     Count = 10,
                     Name = "Hampelmann",
                     Unit = "Wiederholungen",
-                    Scores = 0, 
+                    Scores = 0,
                     Info = "",
                     Active = true
                 },
@@ -50,7 +46,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
                 {
                     ID = 1,
                     Category = ExerciseCategory.Category1,
-                    Count = 20, 
+                    Count = 20,
                     Name = "Hantelheben 5 kg",
                     Unit = "Wiederholungen",
                     Scores = 10,
@@ -105,7 +101,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
         public static ObservableCollection<TrainingSchedule> TrainingSchedules
         {
-            get => new ObservableCollection<TrainingSchedule>() 
+            get => new ObservableCollection<TrainingSchedule>()
             {
                 new TrainingSchedule
                 {

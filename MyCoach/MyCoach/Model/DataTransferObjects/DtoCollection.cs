@@ -1,8 +1,7 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Fasst Listen aller DataTransferObject Typen zu einem Objekt zusammen.

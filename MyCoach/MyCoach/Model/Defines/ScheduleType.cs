@@ -1,4 +1,4 @@
-﻿namespace MyCoach.Defines
+﻿namespace MyCoach.Model.Defines
 {
     /// <summary>
     ///     Trainingsplantyp, ein Trainingsplan kann entweder zeitbasiert über bis zu 12 Monate

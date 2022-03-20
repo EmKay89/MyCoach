@@ -1,5 +1,5 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+﻿using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using System;
 using System.Collections.Generic;

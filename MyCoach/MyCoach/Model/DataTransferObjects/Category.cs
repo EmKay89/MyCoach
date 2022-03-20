@@ -1,6 +1,6 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert eine Übungskategorie. Übungen können in Typen unterteilt werden, die Typen wiederum in Kategorien. Die Typen
@@ -19,16 +19,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ExerciseCategory ID
         {
-            get => this.iD;
+            get => iD;
             set
             {
-                if (value == this.iD)
+                if (value == iD)
                 {
                     return;
                 }
 
-                this.iD = value;
-                this.InvokePropertyChanged();
+                iD = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -37,16 +37,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public string Name
         {
-            get => this.name;
+            get => name;
             set
             {
-                if (value == this.name)
+                if (value == name)
                 {
                     return;
                 }
 
-                this.name = value;
-                this.InvokePropertyChanged();
+                name = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -55,16 +55,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ExerciseType Type
         {
-            get => this.type;
+            get => type;
             set
             {
-                if (value == this.type)
+                if (value == type)
                 {
                     return;
                 }
 
-                this.type = value;
-                this.InvokePropertyChanged();
+                type = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -75,16 +75,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Count
         {
-            get => this.count;
+            get => count;
             set
             {
-                if (value == this.count)
+                if (value == count)
                 {
                     return;
                 }
 
-                this.count = value;
-                this.InvokePropertyChanged();
+                count = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -93,16 +93,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public bool Active
         {
-            get => this.active; 
+            get => active;
             set
             {
-                if (value == this.active)
+                if (value == active)
                 {
                     return;
                 }
 
-                this.active = value;
-                this.InvokePropertyChanged();
+                active = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -111,11 +111,11 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is Category targetCategory)
             {
-                targetCategory.ID = this.ID;
-                targetCategory.Name = this.Name;
-                targetCategory.Type = this.Type;
-                targetCategory.Count = this.Count;
-                targetCategory.Active = this.Active;
+                targetCategory.ID = ID;
+                targetCategory.Name = Name;
+                targetCategory.Type = Type;
+                targetCategory.Count = Count;
+                targetCategory.Active = Active;
             }
         }
 
@@ -124,7 +124,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
+﻿using MyCoach.Model.DataTransferObjects;
 
-namespace MyCoach.Defines
+namespace MyCoach.Model.Defines
 {
     /// <summary>
     ///     Repräsentiert die Nummer eines Monats im Trainigsplan beginnend mit 1 ab dem Monat gespeichert in

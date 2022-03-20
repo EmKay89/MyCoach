@@ -1,11 +1,8 @@
-﻿using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.DataHandling.DataTransferObjects.CollectionExtensions;
+﻿using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace MyCoach.DataHandling.DataManager

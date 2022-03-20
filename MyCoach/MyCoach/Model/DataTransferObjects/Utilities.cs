@@ -1,12 +1,10 @@
-﻿using MyCoach.Defines;
-using System;
+﻿using MyCoach.DataHandling;
+using MyCoach.Model.Defines;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     public static class Utilities
     {
@@ -141,7 +139,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
 
         public static bool AreEqual(ExerciseSet set1, ExerciseSet set2)
         {
-            if(AreEqual(set1.Categories, set2.Categories) == false
+            if (AreEqual(set1.Categories, set2.Categories) == false
                 || AreEqual(set1.Exercises, set2.Exercises) == false)
             {
                 return false;

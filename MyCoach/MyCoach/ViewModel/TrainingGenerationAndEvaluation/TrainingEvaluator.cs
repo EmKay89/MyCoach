@@ -1,6 +1,6 @@
 ﻿using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataTransferObjects;
-using MyCoach.Defines;
+using MyCoach.Model.DataTransferObjects;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Services;
 using MyCustomTypes.Classes;
 using System;

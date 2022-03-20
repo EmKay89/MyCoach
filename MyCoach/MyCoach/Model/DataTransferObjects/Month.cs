@@ -1,7 +1,7 @@
-﻿using MyCoach.Defines;
+﻿using MyCoach.Model.Defines;
 using System;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     /// <summary>
     ///     Repräsentiert Istwerte und Ziele für das Erreichen von Trainingspunkten der jeweiligen Übungskategorien bezogen auf einen Monat.
@@ -37,17 +37,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public DateTime StartDate
         {
-            get => this.startMonth;
+            get => startMonth;
 
             set
             {
-                if (value == this.startMonth)
+                if (value == startMonth)
                 {
                     return;
                 }
 
-                this.startMonth = value;
-                this.InvokePropertyChanged();
+                startMonth = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -56,17 +56,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category1Scores
         {
-            get => this.category1Scores; 
+            get => category1Scores;
             set
             {
-                if (value == this.category1Scores)
+                if (value == category1Scores)
                 {
                     return;
                 }
 
-                this.category1Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category1Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -75,16 +75,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category1Goal
         {
-            get => this.category1Goal;
+            get => category1Goal;
             set
             {
-                if (value == this.category1Goal)
+                if (value == category1Goal)
                 {
                     return;
                 }
 
-                this.category1Goal = value;
-                this.InvokePropertyChanged();
+                category1Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -93,17 +93,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category2Scores
         {
-            get => this.category2Scores;
+            get => category2Scores;
             set
             {
-                if (value == this.category2Scores)
+                if (value == category2Scores)
                 {
                     return;
                 }
 
-                this.category2Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category2Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -112,16 +112,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category2Goal
         {
-            get => this.category2Goal;
+            get => category2Goal;
             set
             {
-                if (value == this.category2Goal)
+                if (value == category2Goal)
                 {
                     return;
                 }
 
-                this.category2Goal = value;
-                this.InvokePropertyChanged();
+                category2Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -130,17 +130,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category3Scores
         {
-            get => this.category3Scores;
+            get => category3Scores;
             set
             {
-                if (value == this.category3Scores)
+                if (value == category3Scores)
                 {
                     return;
                 }
 
-                this.category3Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category3Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -149,16 +149,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category3Goal
         {
-            get => this.category3Goal;
+            get => category3Goal;
             set
             {
-                if (value == this.category3Goal)
+                if (value == category3Goal)
                 {
                     return;
                 }
 
-                this.category3Goal = value;
-                this.InvokePropertyChanged();
+                category3Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -167,17 +167,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category4Scores
         {
-            get => this.category4Scores;
+            get => category4Scores;
             set
             {
-                if (value == this.category4Scores)
+                if (value == category4Scores)
                 {
                     return;
                 }
 
-                this.category4Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category4Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -186,16 +186,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category4Goal
         {
-            get => this.category4Goal;
+            get => category4Goal;
             set
             {
-                if (value == this.category4Goal)
+                if (value == category4Goal)
                 {
                     return;
                 }
 
-                this.category4Goal = value;
-                this.InvokePropertyChanged();
+                category4Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -204,17 +204,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category5Scores
         {
-            get => this.category5Scores;
+            get => category5Scores;
             set
             {
-                if (value == this.category5Scores)
+                if (value == category5Scores)
                 {
                     return;
                 }
 
-                this.category5Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category5Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -223,16 +223,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category5Goal
         {
-            get => this.category5Goal;
+            get => category5Goal;
             set
             {
-                if (value == this.category5Goal)
+                if (value == category5Goal)
                 {
                     return;
                 }
 
-                this.category5Goal = value;
-                this.InvokePropertyChanged();
+                category5Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -241,17 +241,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category6Scores
         {
-            get => this.category6Scores;
+            get => category6Scores;
             set
             {
-                if (value == this.category6Scores)
+                if (value == category6Scores)
                 {
                     return;
                 }
 
-                this.category6Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category6Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -260,16 +260,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category6Goal
         {
-            get => this.category6Goal;
+            get => category6Goal;
             set
             {
-                if (value == this.category6Goal)
+                if (value == category6Goal)
                 {
                     return;
                 }
 
-                this.category6Goal = value;
-                this.InvokePropertyChanged();
+                category6Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -278,17 +278,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category7Scores
         {
-            get => this.category7Scores;
+            get => category7Scores;
             set
             {
-                if (value == this.category7Scores)
+                if (value == category7Scores)
                 {
                     return;
                 }
 
-                this.category7Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category7Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -297,16 +297,16 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category7Goal
         {
-            get => this.category7Goal;
+            get => category7Goal;
             set
             {
-                if (value == this.category7Goal)
+                if (value == category7Goal)
                 {
                     return;
                 }
 
-                this.category7Goal = value;
-                this.InvokePropertyChanged();
+                category7Goal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -315,17 +315,17 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category8Scores
         {
-            get => this.category8Scores;
+            get => category8Scores;
             set
             {
-                if (value == this.category8Scores)
+                if (value == category8Scores)
                 {
                     return;
                 }
 
-                this.category8Scores = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged(nameof(this.TotalScores));
+                category8Scores = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged(nameof(TotalScores));
             }
         }
 
@@ -334,46 +334,46 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public ushort Category8Goal
         {
-            get => this.category8Goal;
+            get => category8Goal;
             set
             {
-                if (value == this.category8Goal)
+                if (value == category8Goal)
                 {
                     return;
                 }
 
-                this.category8Goal = value;
-                this.InvokePropertyChanged();
+                category8Goal = value;
+                InvokePropertyChanged();
             }
         }
 
         /// <summary>
         ///     Ruft die Summe der für alle Kategorien erreichten Punkte ab.
         /// </summary>
-        public uint TotalScores => (uint)this.Category1Scores
-                    + this.Category2Scores
-                    + this.Category3Scores
-                    + this.Category4Scores
-                    + this.Category5Scores
-                    + this.Category6Scores
-                    + this.Category7Scores
-                    + this.Category8Scores;
+        public uint TotalScores => (uint)Category1Scores
+                    + Category2Scores
+                    + Category3Scores
+                    + Category4Scores
+                    + Category5Scores
+                    + Category6Scores
+                    + Category7Scores
+                    + Category8Scores;
 
         /// <summary>
         ///     Ruft das Punkteziel für alle Monate ab, oder legt es fest.
         /// </summary>
         public uint TotalGoal
         {
-            get => this.totalGoal;
+            get => totalGoal;
             set
             {
-                if (value == this.totalGoal)
+                if (value == totalGoal)
                 {
                     return;
                 }
 
-                this.totalGoal = value;
-                this.InvokePropertyChanged();
+                totalGoal = value;
+                InvokePropertyChanged();
             }
         }
 
@@ -383,14 +383,14 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// <param name="targetMonth">Der Monat, dessen Trainingspunkte aktualisiert werden sollen.</param>
         public void CopyScoresTo(Month targetMonth)
         {
-            targetMonth.Category1Scores = this.Category1Scores;
-            targetMonth.Category2Scores = this.Category2Scores;
-            targetMonth.Category3Scores = this.Category3Scores;
-            targetMonth.Category4Scores = this.Category4Scores;
-            targetMonth.Category5Scores = this.Category5Scores;
-            targetMonth.Category6Scores = this.Category6Scores;
-            targetMonth.Category7Scores = this.Category7Scores;
-            targetMonth.Category8Scores = this.Category8Scores;
+            targetMonth.Category1Scores = Category1Scores;
+            targetMonth.Category2Scores = Category2Scores;
+            targetMonth.Category3Scores = Category3Scores;
+            targetMonth.Category4Scores = Category4Scores;
+            targetMonth.Category5Scores = Category5Scores;
+            targetMonth.Category6Scores = Category6Scores;
+            targetMonth.Category7Scores = Category7Scores;
+            targetMonth.Category8Scores = Category8Scores;
         }
 
         /// <inheritdoc/>
@@ -398,24 +398,24 @@ namespace MyCoach.DataHandling.DataTransferObjects
         {
             if (target is Month targetMonth)
             {
-                targetMonth.StartDate = this.StartDate;
-                targetMonth.Category1Scores = this.Category1Scores;
-                targetMonth.Category1Goal = this.Category1Goal;
-                targetMonth.Category2Scores = this.Category2Scores;
-                targetMonth.Category2Goal = this.Category2Goal;
-                targetMonth.Category3Scores = this.Category3Scores;
-                targetMonth.Category3Goal = this.Category3Goal;
-                targetMonth.Category4Scores = this.Category4Scores;
-                targetMonth.Category4Goal = this.Category4Goal;
-                targetMonth.Category5Scores = this.Category5Scores;
-                targetMonth.Category5Goal = this.Category5Goal;
-                targetMonth.Category6Scores = this.Category6Scores;
-                targetMonth.Category6Goal = this.Category6Goal;
-                targetMonth.Category7Scores = this.Category7Scores;
-                targetMonth.Category7Goal = this.Category7Goal;
-                targetMonth.Category8Scores = this.Category8Scores;
-                targetMonth.Category8Goal = this.Category8Goal;
-                targetMonth.TotalGoal = this.TotalGoal;
+                targetMonth.StartDate = StartDate;
+                targetMonth.Category1Scores = Category1Scores;
+                targetMonth.Category1Goal = Category1Goal;
+                targetMonth.Category2Scores = Category2Scores;
+                targetMonth.Category2Goal = Category2Goal;
+                targetMonth.Category3Scores = Category3Scores;
+                targetMonth.Category3Goal = Category3Goal;
+                targetMonth.Category4Scores = Category4Scores;
+                targetMonth.Category4Goal = Category4Goal;
+                targetMonth.Category5Scores = Category5Scores;
+                targetMonth.Category5Goal = Category5Goal;
+                targetMonth.Category6Scores = Category6Scores;
+                targetMonth.Category6Goal = Category6Goal;
+                targetMonth.Category7Scores = Category7Scores;
+                targetMonth.Category7Goal = Category7Goal;
+                targetMonth.Category8Scores = Category8Scores;
+                targetMonth.Category8Goal = Category8Goal;
+                targetMonth.TotalGoal = TotalGoal;
             }
         }
 
@@ -429,21 +429,21 @@ namespace MyCoach.DataHandling.DataTransferObjects
             switch (category)
             {
                 case ExerciseCategory.Category1:
-                    return this.Category1Goal;
+                    return Category1Goal;
                 case ExerciseCategory.Category2:
-                    return this.Category2Goal;
+                    return Category2Goal;
                 case ExerciseCategory.Category3:
-                    return this.Category3Goal;
+                    return Category3Goal;
                 case ExerciseCategory.Category4:
-                    return this.Category4Goal;
+                    return Category4Goal;
                 case ExerciseCategory.Category5:
-                    return this.Category5Goal;
+                    return Category5Goal;
                 case ExerciseCategory.Category6:
-                    return this.Category6Goal;
+                    return Category6Goal;
                 case ExerciseCategory.Category7:
-                    return this.Category7Goal;
+                    return Category7Goal;
                 case ExerciseCategory.Category8:
-                    return this.Category8Goal;
+                    return Category8Goal;
                 default:
                     return 0;
             }
@@ -459,21 +459,21 @@ namespace MyCoach.DataHandling.DataTransferObjects
             switch (category)
             {
                 case ExerciseCategory.Category1:
-                    return this.Category1Scores;
+                    return Category1Scores;
                 case ExerciseCategory.Category2:
-                    return this.Category2Scores;
+                    return Category2Scores;
                 case ExerciseCategory.Category3:
-                    return this.Category3Scores;
+                    return Category3Scores;
                 case ExerciseCategory.Category4:
-                    return this.Category4Scores;
+                    return Category4Scores;
                 case ExerciseCategory.Category5:
-                    return this.Category5Scores;
+                    return Category5Scores;
                 case ExerciseCategory.Category6:
-                    return this.Category6Scores;
+                    return Category6Scores;
                 case ExerciseCategory.Category7:
-                    return this.Category7Scores;
+                    return Category7Scores;
                 case ExerciseCategory.Category8:
-                    return this.Category8Scores;
+                    return Category8Scores;
                 default:
                     return 0;
             }
@@ -484,15 +484,15 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public void ResetGoals()
         {
-            this.Category1Goal = 0;
-            this.Category2Goal = 0;
-            this.Category3Goal = 0;
-            this.Category4Goal = 0;
-            this.Category5Goal = 0;
-            this.Category6Goal = 0;
-            this.Category7Goal = 0;
-            this.Category8Goal = 0;
-            this.TotalGoal = 0;
+            Category1Goal = 0;
+            Category2Goal = 0;
+            Category3Goal = 0;
+            Category4Goal = 0;
+            Category5Goal = 0;
+            Category6Goal = 0;
+            Category7Goal = 0;
+            Category8Goal = 0;
+            TotalGoal = 0;
         }
 
         /// <summary>
@@ -500,14 +500,14 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public void ResetScores()
         {
-            this.Category1Scores = 0;
-            this.Category2Scores = 0;
-            this.Category3Scores = 0;
-            this.Category4Scores = 0;
-            this.Category5Scores = 0;
-            this.Category6Scores = 0;
-            this.Category7Scores = 0;
-            this.Category8Scores = 0;
+            Category1Scores = 0;
+            Category2Scores = 0;
+            Category3Scores = 0;
+            Category4Scores = 0;
+            Category5Scores = 0;
+            Category6Scores = 0;
+            Category7Scores = 0;
+            Category8Scores = 0;
         }
 
         /// <summary>
@@ -520,28 +520,28 @@ namespace MyCoach.DataHandling.DataTransferObjects
             switch (category)
             {
                 case ExerciseCategory.Category1:
-                    this.Category1Scores = value;
+                    Category1Scores = value;
                     break;
                 case ExerciseCategory.Category2:
-                    this.Category2Scores = value;
+                    Category2Scores = value;
                     break;
                 case ExerciseCategory.Category3:
-                    this.Category3Scores = value;
+                    Category3Scores = value;
                     break;
                 case ExerciseCategory.Category4:
-                    this.Category4Scores = value;
+                    Category4Scores = value;
                     break;
                 case ExerciseCategory.Category5:
-                    this.Category5Scores = value;
+                    Category5Scores = value;
                     break;
                 case ExerciseCategory.Category6:
-                    this.Category6Scores = value;
+                    Category6Scores = value;
                     break;
                 case ExerciseCategory.Category7:
-                    this.Category7Scores = value;
+                    Category7Scores = value;
                     break;
                 case ExerciseCategory.Category8:
-                    this.Category8Scores = value;
+                    Category8Scores = value;
                     break;
                 default:
                     return;
@@ -560,21 +560,21 @@ namespace MyCoach.DataHandling.DataTransferObjects
             switch (category)
             {
                 case ExerciseCategory.Category1:
-                    return this.GetPercentageFromGoalAndScores(this.Category1Goal, this.Category1Scores);
+                    return GetPercentageFromGoalAndScores(Category1Goal, Category1Scores);
                 case ExerciseCategory.Category2:
-                    return this.GetPercentageFromGoalAndScores(this.Category2Goal, this.Category2Scores);
+                    return GetPercentageFromGoalAndScores(Category2Goal, Category2Scores);
                 case ExerciseCategory.Category3:
-                    return this.GetPercentageFromGoalAndScores(this.Category3Goal, this.Category3Scores);
+                    return GetPercentageFromGoalAndScores(Category3Goal, Category3Scores);
                 case ExerciseCategory.Category4:
-                    return this.GetPercentageFromGoalAndScores(this.Category4Goal, this.Category4Scores);
+                    return GetPercentageFromGoalAndScores(Category4Goal, Category4Scores);
                 case ExerciseCategory.Category5:
-                    return this.GetPercentageFromGoalAndScores(this.Category5Goal, this.Category5Scores);
+                    return GetPercentageFromGoalAndScores(Category5Goal, Category5Scores);
                 case ExerciseCategory.Category6:
-                    return this.GetPercentageFromGoalAndScores(this.Category6Goal, this.Category6Scores);
+                    return GetPercentageFromGoalAndScores(Category6Goal, Category6Scores);
                 case ExerciseCategory.Category7:
-                    return this.GetPercentageFromGoalAndScores(this.Category7Goal, this.Category7Scores);
+                    return GetPercentageFromGoalAndScores(Category7Goal, Category7Scores);
                 case ExerciseCategory.Category8:
-                    return this.GetPercentageFromGoalAndScores(this.Category8Goal, this.Category8Scores);
+                    return GetPercentageFromGoalAndScores(Category8Goal, Category8Scores);
                 default:
                     return 0;
             }

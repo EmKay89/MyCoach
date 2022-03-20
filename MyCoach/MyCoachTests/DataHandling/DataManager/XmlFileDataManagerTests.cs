@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling.DataManager;
-using MyCoach.DataHandling.DataTransferObjects;
+using MyCoach.Model.DataTransferObjects;
 
 namespace MyCoachTests.DataHandling.DataManager
 {

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MyCoach.DataHandling.DataTransferObjects
+namespace MyCoach.Model.DataTransferObjects
 {
     public abstract class DtoBase : ICloneable, INotifyPropertyChanged
     {
@@ -17,7 +13,7 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// </summary>
         public virtual object Clone()
         {
-            var clone = this.MemberwiseClone() as DtoBase;
+            var clone = MemberwiseClone() as DtoBase;
             clone.ResetSubscriptions();
             return clone;
         }
@@ -30,11 +26,11 @@ namespace MyCoach.DataHandling.DataTransferObjects
         /// <summary>
         ///     Entfernt alle Abonnenten aller Events.
         /// </summary>
-        public void ResetSubscriptions() => this.PropertyChanged = null;
+        public void ResetSubscriptions() => PropertyChanged = null;
 
         protected void InvokePropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

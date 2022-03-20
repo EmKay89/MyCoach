@@ -62,17 +62,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\DtoBase.cs" />
-    <Compile Include="Defines\ScheduleType.cs" />
-    <Compile Include="Defines\TrainingMode.cs" />
+    <Compile Include="Model\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
+    <Compile Include="Model\DataTransferObjects\DtoBase.cs" />
+    <Compile Include="Model\Defines\ScheduleType.cs" />
+    <Compile Include="Model\Defines\TrainingMode.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\Commands\RelayCommand.cs" />
-    <Compile Include="Defines\ExerciseCategory.cs" />
+    <Compile Include="Model\Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -82,21 +82,21 @@
     <Compile Include="DataHandling\DataManager\DataManagerBase.cs" />
     <Compile Include="DataHandling\DataManager\IDataManager.cs" />
     <Compile Include="DataHandling\DataManager\IXmlFileReaderWriter.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\DtoCollection.cs" />
+    <Compile Include="Model\DataTransferObjects\DtoCollection.cs" />
     <Compile Include="DataHandling\DataManager\XmlFileReaderWriter.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\Category.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\DefaultDtos.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\Utilities.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\Exercise.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\ExerciseSet.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\IDataTransferObject.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\Settings.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\TrainingSchedule.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\Month.cs" />
+    <Compile Include="Model\DataTransferObjects\Category.cs" />
+    <Compile Include="Model\DataTransferObjects\DefaultDtos.cs" />
+    <Compile Include="Model\DataTransferObjects\Utilities.cs" />
+    <Compile Include="Model\DataTransferObjects\Exercise.cs" />
+    <Compile Include="Model\DataTransferObjects\ExerciseSet.cs" />
+    <Compile Include="Model\DataTransferObjects\IDataTransferObject.cs" />
+    <Compile Include="Model\DataTransferObjects\Settings.cs" />
+    <Compile Include="Model\DataTransferObjects\TrainingSchedule.cs" />
+    <Compile Include="Model\DataTransferObjects\Month.cs" />
     <Compile Include="DataHandling\DataManager\XmlFileDataManager.cs" />
-    <Compile Include="Defines\ExerciseType.cs" />
-    <Compile Include="Defines\ExerciseSchedulingRepetitionPermission.cs" />
-    <Compile Include="Defines\MonthNumber.cs" />
+    <Compile Include="Model\Defines\ExerciseType.cs" />
+    <Compile Include="Model\Defines\ExerciseSchedulingRepetitionPermission.cs" />
+    <Compile Include="Model\Defines\MonthNumber.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DataBaseValidation\CategoriesValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\DtoCollectionsValidator.cs" />
@@ -104,6 +104,7 @@
     <Compile Include="ViewModel\DataBaseValidation\SettingsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\MonthsValidator.cs" />
     <Compile Include="ViewModel\DataBaseValidation\TrainingScheduleValidator.cs" />
+    <Compile Include="ViewModel\Defines\ScheduleEditingType.cs" />
     <Compile Include="ViewModel\EditMonthViewModel.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\Events\AddExerciseExecutedEventArgs.cs" />
@@ -111,8 +112,8 @@
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\CategoryCollectionExtensions.cs" />
-    <Compile Include="DataHandling\DataTransferObjects\CollectionExtensions\MonthCollectionExtensions.cs" />
+    <Compile Include="Model\DataTransferObjects\CollectionExtensions\CategoryCollectionExtensions.cs" />
+    <Compile Include="Model\DataTransferObjects\CollectionExtensions\MonthCollectionExtensions.cs" />
     <Compile Include="ViewModel\MonthCategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\MonthViewModel.cs" />
     <Compile Include="ViewModel\OverviewElementViewModel.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
+    <Compile Include="ViewModel\TypeConverter\EnumToBooleanConverter.cs" />
     <Compile Include="ViewModel\TypeConverter\UintToGridLenthConverter.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModel.cs" />
