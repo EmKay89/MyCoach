@@ -1,6 +1,7 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
+using MyCoach.ViewModel.Defines;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace MyCoach.ViewModel
     {
         private readonly Month month;
         private readonly ObservableCollection<Category> categories;
+        private ScheduleEditingType scheduleEditingType;
 
         public EditMonthViewModel(Month month)
         {
@@ -22,7 +24,7 @@ namespace MyCoach.ViewModel
             {
                 category.PropertyChanged += this.OnCategoryChanged;
             }
-            
+
             this.categories.CollectionChanged += this.OnCategoriesChanged;
         }
 
@@ -35,7 +37,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category1Goal;
 
-            set => this.month.Category1Goal = value;
+            set 
+            {
+                this.month.Category1Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category2ItemsVisible
@@ -47,7 +53,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category2Goal;
 
-            set => this.month.Category2Goal = value;
+            set
+            {
+                this.month.Category2Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category3ItemsVisible
@@ -59,7 +69,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category3Goal;
 
-            set => this.month.Category3Goal = value;
+            set
+            {
+                this.month.Category3Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category4ItemsVisible
@@ -71,7 +85,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category4Goal;
 
-            set => this.month.Category4Goal = value;
+            set
+            {
+                this.month.Category4Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category5ItemsVisible
@@ -83,7 +101,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category5Goal;
 
-            set => this.month.Category5Goal = value;
+            set
+            {
+                this.month.Category5Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category6ItemsVisible
@@ -95,7 +117,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category6Goal;
 
-            set => this.month.Category6Goal = value;
+            set
+            {
+                this.month.Category6Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category7ItemsVisible
@@ -107,7 +133,11 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category7Goal;
 
-            set => this.month.Category7Goal = value;
+            set
+            {
+                this.month.Category7Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public bool Category8ItemsVisible
@@ -119,21 +149,158 @@ namespace MyCoach.ViewModel
         {
             get => this.month.Category8Goal;
 
-            set => this.month.Category8Goal = value;
+            set
+            {
+                this.month.Category8Goal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public uint TotalGoal
         {
             get => this.month.TotalGoal;
 
-            set => this.month.TotalGoal = value;
+            set
+            {
+                this.month.TotalGoal = value;
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
         }
 
         public string MonthName
         {
-            get => this.month.Number == MonthNumber.Current 
-                ? string.Empty 
+            get => this.month.Number == MonthNumber.Current
+                ? string.Empty
                 : this.month.StartDate.ToString("y", CultureInfo.CurrentCulture);
+        }
+
+        public ScheduleEditingType ScheduleEditingType
+        {
+            get => this.scheduleEditingType;
+            
+            set
+            {
+                if (value == this.scheduleEditingType)
+                {
+                    return;
+                }
+
+                this.scheduleEditingType = value;
+                this.InvokePropertiesChanged(
+                    nameof(this.ScheduleEditingType),
+                    nameof(this.SingleCategoryGoalsEnabled),
+                    nameof(this.TotalCategoryGoalEnabled));
+                this.RecalculateScoresBasedOnScheduleEditingType();
+            }
+        }
+
+        public bool SingleCategoryGoalsEnabled => this.ScheduleEditingType != ScheduleEditingType.DivideTotal;
+
+        public bool TotalCategoryGoalEnabled => this.ScheduleEditingType != ScheduleEditingType.SumUpTotal;
+
+        private void RecalculateScoresBasedOnScheduleEditingType()
+        {
+            switch (this.ScheduleEditingType)
+            {
+                case ScheduleEditingType.DivideTotal:
+                    this.DistributeTotalGoalToActiveCategories();
+                    this.InvokePropertiesChangedForAllGoals();
+                    break;
+                case ScheduleEditingType.SumUpTotal:
+                    this.month.TotalGoal = this.GetSumOfActiveCategories();
+                    this.InvokePropertiesChangedForAllGoals();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DistributeTotalGoalToActiveCategories()
+        {
+            var activeCategories = this.categories.Where(c => c.Active && c.Type == ExerciseType.Training).ToList();
+            var modulo = activeCategories.Count == 0
+                ? 0
+                : this.month.TotalGoal % activeCategories.Count;
+
+            var distributedGoal = activeCategories.Count == 0
+                ? 0
+                : this.month.TotalGoal / activeCategories.Count;
+
+            var goalLimitedToUshort = (ushort)(distributedGoal > ushort.MaxValue ? ushort.MaxValue : distributedGoal);
+
+            for (int i = 0; i < activeCategories.Count; i++)
+            {
+                if (i >= modulo
+                    || goalLimitedToUshort == ushort.MaxValue)
+                {
+                    this.month.SetGoal(activeCategories[i].ID, goalLimitedToUshort);
+                }
+                else
+                {
+                    this.month.SetGoal(activeCategories[i].ID, (ushort)(goalLimitedToUshort + 1));
+                }
+            }
+        }
+
+        private uint GetSumOfActiveCategories()
+        {
+            uint subtotal = 0;
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category1)?.Active == true)
+            {
+                subtotal += this.month.Category1Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category2)?.Active == true)
+            {
+                subtotal += this.month.Category2Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category3)?.Active == true)
+            {
+                subtotal += this.month.Category3Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category4)?.Active == true)
+            {
+                subtotal += this.month.Category4Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category5)?.Active == true)
+            {
+                subtotal += this.month.Category5Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category6)?.Active == true)
+            {
+                subtotal += this.month.Category6Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category7)?.Active == true)
+            {
+                subtotal += this.month.Category7Goal;
+            }
+
+            if (this.categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category8)?.Active == true)
+            {
+                subtotal += this.month.Category8Goal;
+            }
+
+            return subtotal;
+        }
+
+        private void InvokePropertiesChangedForAllGoals()
+        {
+            this.InvokePropertiesChanged(
+                nameof(this.Category1Goal),
+                nameof(this.Category2Goal),
+                nameof(this.Category3Goal),
+                nameof(this.Category4Goal),
+                nameof(this.Category5Goal),
+                nameof(this.Category6Goal),
+                nameof(this.Category7Goal),
+                nameof(this.Category8Goal),
+                nameof(this.TotalGoal));
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)

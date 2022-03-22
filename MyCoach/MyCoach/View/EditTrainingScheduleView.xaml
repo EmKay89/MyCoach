@@ -57,6 +57,14 @@
                       DockPanel.Dock="Top"
                       Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ScrollViewer}}">
             <DockPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=FreeEntry}"
+                             Content="Freie Eingabe"/>
+                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DivideTotal}"
+                             Content="Gesamtpunkte gleichmäßig auf Kategorien verteilen"/>
+                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SumUpTotal}"
+                             Content="Gesamtpunkte automatisch berechnen"/>
+                </StackPanel>
                 <ItemsControl ItemsSource="{Binding AvailableCategories}"
                           Margin="0,14,0,0"
                           DockPanel.Dock="Left">

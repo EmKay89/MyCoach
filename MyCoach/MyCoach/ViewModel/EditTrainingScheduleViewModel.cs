@@ -12,8 +12,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MyCoach.ViewModel
@@ -22,6 +20,7 @@ namespace MyCoach.ViewModel
     {
         private readonly IMessageBoxService messageBoxService;
         private bool hasUnsavedChanges;
+        private ScheduleEditingType scheduleEditingType;
 
         public EditTrainingScheduleViewModel(
             IMessageBoxService messageBoxService = null)
@@ -46,7 +45,7 @@ namespace MyCoach.ViewModel
         public const string RESET_SCORES_CAPTION = "Trainingspunkte löschen";
         public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch wird ihr Trainingsplan gelöscht. Möchten Sie fortfahren?";
         public const string RESET_SCORES_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchten Sie fortfahren?";
-        
+
         public TrainingSchedule Schedule { get; private set; }
 
         public ObservableCollection<Month> Months { get; } = new ObservableCollection<Month>();
@@ -77,7 +76,22 @@ namespace MyCoach.ViewModel
             { ScheduleType.TimeBased, "Zeitbasiert" }
         };
 
-        public ScheduleEditingType ScheduleEditingType { get; set; }
+        public ScheduleEditingType ScheduleEditingType
+        {
+            get => this.scheduleEditingType;
+
+            set
+            {
+                if (value == this.scheduleEditingType)
+                {
+                    return;
+                }
+
+                this.scheduleEditingType = value;             
+                this.InvokePropertyChanged();
+                this.EditMonthViewModels.Foreach(vm => vm.ScheduleEditingType = value);
+            }
+        }
 
         public RelayCommand DeleteScheduleCommand { get; }
 
@@ -192,9 +206,9 @@ namespace MyCoach.ViewModel
             if (resultSaving == false)
             {
                 this.messageBoxService.ShowMessage(
-                    SAVING_ERROR_TEXT, 
-                    SAVING_ERROR_CAPTION, 
-                    MessageBoxButton.OK, 
+                    SAVING_ERROR_TEXT,
+                    SAVING_ERROR_CAPTION,
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
 
@@ -204,9 +218,9 @@ namespace MyCoach.ViewModel
         private void DeleteSchedule()
         {
             var questionResult = this.messageBoxService.ShowMessage(
-                RESET_SCHEDULE_TEXT, 
-                RESET_SCHEDULE_CAPTION, 
-                MessageBoxButton.YesNo, 
+                RESET_SCHEDULE_TEXT,
+                RESET_SCHEDULE_CAPTION,
+                MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
 
             if (questionResult == MessageBoxResult.No)
@@ -224,9 +238,9 @@ namespace MyCoach.ViewModel
             if (resultSaving == false)
             {
                 this.messageBoxService.ShowMessage(
-                    SAVING_ERROR_TEXT, 
-                    SAVING_ERROR_CAPTION, 
-                    MessageBoxButton.OK, 
+                    SAVING_ERROR_TEXT,
+                    SAVING_ERROR_CAPTION,
+                    MessageBoxButton.OK,
                     MessageBoxImage.Error);
             }
 
@@ -360,6 +374,7 @@ namespace MyCoach.ViewModel
         private void UpdateEditMonthViewModels()
         {
             this.EditMonthViewModels.Clear();
+            this.ScheduleEditingType = ScheduleEditingType.FreeEntry;
 
             if (this.Schedule.ScheduleType == ScheduleType.Generic)
             {

@@ -22,7 +22,7 @@ namespace MyCoach.ViewModel.TypeConverter
 
             var parameterValue = Enum.Parse(value.GetType(), parameterString);
 
-            return parameterValue == value;
+            return parameterValue.Equals(value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

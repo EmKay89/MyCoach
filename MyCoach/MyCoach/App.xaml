@@ -80,6 +80,7 @@
 
         <!-- Converter -->
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
         <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter"/>
     </Application.Resources>
 </Application>

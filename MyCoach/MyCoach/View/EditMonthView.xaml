@@ -17,29 +17,38 @@
                    HorizontalAlignment="Center"/>
         <TextBox Text="{Binding Category1Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category1ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category1ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category2Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category2ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category2ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category3Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category3ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category3ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category4Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category4ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category4ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category5Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category5ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category5ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category6Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category6ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category6ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category7Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category7ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category7ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding Category8Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
-                 Visibility="{Binding Category8ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                 Visibility="{Binding Category8ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                 IsEnabled="{Binding SingleCategoryGoalsEnabled}"/>
         <TextBox Text="{Binding TotalGoal}" 
-                 Style="{DynamicResource EditMonthViewTextBox}"/>
+                 Style="{DynamicResource EditMonthViewTextBox}"
+                 IsEnabled="{Binding TotalCategoryGoalEnabled}"/>
     </StackPanel>
 </UserControl>

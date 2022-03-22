@@ -511,6 +511,44 @@ namespace MyCoach.Model.DataTransferObjects
         }
 
         /// <summary>
+        ///     Setzt das Trainingspunkteziel für eine Übungskategorie.
+        /// </summary>
+        /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
+        /// <param name="value">Das Trainingspunkteziel als positive Ganzzahl.</param>
+        public void SetGoal(ExerciseCategory category, ushort value)
+        {
+            switch (category)
+            {
+                case ExerciseCategory.Category1:
+                    Category1Goal = value;
+                    break;
+                case ExerciseCategory.Category2:
+                    Category2Goal = value;
+                    break;
+                case ExerciseCategory.Category3:
+                    Category3Goal = value;
+                    break;
+                case ExerciseCategory.Category4:
+                    Category4Goal = value;
+                    break;
+                case ExerciseCategory.Category5:
+                    Category5Goal = value;
+                    break;
+                case ExerciseCategory.Category6:
+                    Category6Goal = value;
+                    break;
+                case ExerciseCategory.Category7:
+                    Category7Goal = value;
+                    break;
+                case ExerciseCategory.Category8:
+                    Category8Goal = value;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        /// <summary>
         ///     Setzt die Trainingspunkte für eine Übungskategorie.
         /// </summary>
         /// <param name="category">Enumeration zur Auswahl der Kategorie.</param>
