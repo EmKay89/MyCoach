@@ -19,6 +19,8 @@ namespace MyCoach.ViewModel
         public EditMonthViewModel(Month month)
         {
             this.month = month;
+            this.month.PropertyChanged += this.OnMonthChanged;
+
             this.categories = DataInterface.GetInstance().GetData<Category>();
             foreach (var category in this.categories)
             {
@@ -204,11 +206,9 @@ namespace MyCoach.ViewModel
             {
                 case ScheduleEditingType.DivideTotal:
                     this.DistributeTotalGoalToActiveCategories();
-                    this.InvokePropertiesChangedForAllGoals();
                     break;
                 case ScheduleEditingType.SumUpTotal:
                     this.month.TotalGoal = this.GetSumOfActiveCategories();
-                    this.InvokePropertiesChangedForAllGoals();
                     break;
                 default:
                     break;
@@ -289,18 +289,40 @@ namespace MyCoach.ViewModel
             return subtotal;
         }
 
-        private void InvokePropertiesChangedForAllGoals()
+        private void OnMonthChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.InvokePropertiesChanged(
-                nameof(this.Category1Goal),
-                nameof(this.Category2Goal),
-                nameof(this.Category3Goal),
-                nameof(this.Category4Goal),
-                nameof(this.Category5Goal),
-                nameof(this.Category6Goal),
-                nameof(this.Category7Goal),
-                nameof(this.Category8Goal),
-                nameof(this.TotalGoal));
+            switch (e.PropertyName)
+            {
+                case nameof(this.month.Category1Goal):
+                    this.InvokePropertyChanged(nameof(this.Category1Goal));
+                    break;
+                case nameof(this.month.Category2Goal):
+                    this.InvokePropertyChanged(nameof(this.Category2Goal));
+                    break;
+                case nameof(this.month.Category3Goal):
+                    this.InvokePropertyChanged(nameof(this.Category3Goal));
+                    break;
+                case nameof(this.month.Category4Goal):
+                    this.InvokePropertyChanged(nameof(this.Category4Goal));
+                    break;
+                case nameof(this.month.Category5Goal):
+                    this.InvokePropertyChanged(nameof(this.Category5Goal));
+                    break;
+                case nameof(this.month.Category6Goal):
+                    this.InvokePropertyChanged(nameof(this.Category6Goal));
+                    break;
+                case nameof(this.month.Category7Goal):
+                    this.InvokePropertyChanged(nameof(this.Category7Goal));
+                    break;
+                case nameof(this.month.Category8Goal):
+                    this.InvokePropertyChanged(nameof(this.Category8Goal));
+                    break;
+                case nameof(this.month.TotalGoal):
+                    this.InvokePropertyChanged(nameof(this.TotalGoal));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)

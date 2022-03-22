@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
+using MyCoach.ViewModel.Defines;
 
 namespace MyCoachTests.ViewModel
 {
@@ -113,6 +114,24 @@ namespace MyCoachTests.ViewModel
             Assert.IsTrue(this.sut.HasUnsavedChanges);
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.HasUnsavedChanges), this.PropertyChangedEvents.First());
+        }
+
+        [TestMethod]
+        public void ScheduleEditingType_Changes_AlsoChangedForEditMonthViewModels()
+        {
+            Assert.AreEqual(ScheduleEditingType.FreeEntry, this.sut.ScheduleEditingType);
+            Assert.IsTrue(this.sut.EditMonthViewModels.All(vm => vm.ScheduleEditingType == ScheduleEditingType.FreeEntry));
+
+            this.sut.ScheduleEditingType = ScheduleEditingType.DivideTotal;
+
+            Assert.IsTrue(this.sut.EditMonthViewModels.All(vm => vm.ScheduleEditingType == ScheduleEditingType.DivideTotal));
+
+            Assert.AreEqual(2, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(nameof(this.sut.ScheduleEditingType), this.PropertyChangedEvents[0]);
+
+            // HasUnsavedChanges because should be true because changing the ScheduleEditingType changes the actual goals in the EditMonthViewModels
+            Assert.AreEqual(nameof(this.sut.HasUnsavedChanges), this.PropertyChangedEvents[1]);
+            Assert.IsTrue(this.sut.HasUnsavedChanges);
         }
 
         #endregion

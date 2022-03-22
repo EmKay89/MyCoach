@@ -2,8 +2,9 @@
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.Defines;
+using MyExtensions.IEnumerable;
 using System;
-using System.ComponentModel;
 using System.Linq;
 
 namespace MyCoachTests.ViewModel
@@ -93,6 +94,61 @@ namespace MyCoachTests.ViewModel
             Assert.AreEqual(8000, this.month.Category8Goal);
         }
 
+        [TestMethod]
+        public void ScheduleEditingType_ChangesToDivideTotal_TotalPointsDistributedCorrectlyAndPropertyChangedEventsRaised()
+        {
+            this.Categories.Foreach(c => c.Active = true);
+            this.PropertyChangedEvents.Clear();
+
+            this.sut.ScheduleEditingType = ScheduleEditingType.DivideTotal;
+
+            Assert.AreEqual((uint)1007, this.sut.TotalGoal);
+            Assert.AreEqual((ushort)126, this.sut.Category1Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category2Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category3Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category4Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category5Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category6Goal);
+            Assert.AreEqual((ushort)126, this.sut.Category7Goal);
+            Assert.AreEqual((ushort)125, this.sut.Category8Goal);
+
+            Assert.AreEqual(11, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScheduleEditingType));
+            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.SingleCategoryGoalsEnabled));
+            Assert.AreEqual(this.PropertyChangedEvents[2], nameof(this.sut.TotalCategoryGoalEnabled));
+            Assert.AreEqual(this.PropertyChangedEvents[3], nameof(this.sut.Category1Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[4], nameof(this.sut.Category2Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[5], nameof(this.sut.Category3Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[6], nameof(this.sut.Category4Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[7], nameof(this.sut.Category5Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[8], nameof(this.sut.Category6Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[9], nameof(this.sut.Category7Goal));
+            Assert.AreEqual(this.PropertyChangedEvents[10], nameof(this.sut.Category8Goal));
+
+            Assert.IsFalse(this.sut.SingleCategoryGoalsEnabled);
+            Assert.IsTrue(this.sut.TotalCategoryGoalEnabled);
+        }
+
+        [TestMethod]
+        public void ScheduleEditingType_ChangesTo_SumUpTotal()
+        {
+            this.Categories.Foreach(c => c.Active = true);
+            this.PropertyChangedEvents.Clear();
+
+            this.sut.ScheduleEditingType = ScheduleEditingType.SumUpTotal;
+
+            Assert.AreEqual((uint)3600, this.sut.TotalGoal);
+
+            Assert.AreEqual(4, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScheduleEditingType));
+            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.SingleCategoryGoalsEnabled));
+            Assert.AreEqual(this.PropertyChangedEvents[2], nameof(this.sut.TotalCategoryGoalEnabled));
+            Assert.AreEqual(this.PropertyChangedEvents[3], nameof(this.sut.TotalGoal));
+
+            Assert.IsTrue(this.sut.SingleCategoryGoalsEnabled);
+            Assert.IsFalse(this.sut.TotalCategoryGoalEnabled);
+        }
+
         #endregion
 
         #region Event Reactions
@@ -174,6 +230,7 @@ namespace MyCoachTests.ViewModel
                 Category6Goal = 600,
                 Category7Goal = 700,
                 Category8Goal = 800,
+                TotalGoal = 1007,
                 StartDate = new DateTime(1989, 11, 01)
             };
         }
