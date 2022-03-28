@@ -234,6 +234,24 @@ namespace MyCoachTests.ViewModel
 
             // List of child view models was updated
             this.AssertThatEditMonthViewModelsAreUpdatedCorrectly();
+
+            Assert.IsFalse(this.sut.HasUnsavedChanges);
+        }
+
+        [TestMethod]
+        public void ResetCommandExecute_HappyPath_InvokesPropertyChangedEvents()
+        {
+            this.sut.ScheduleEditingType = ScheduleEditingType.DivideTotal;
+            this.PropertyChangedEvents.Clear();
+
+            this.sut.ResetCommand.Execute(null);
+
+            this.AssertPropertyChangedInvokation(1,
+                nameof(this.sut.Duration),
+                nameof(this.sut.TimeBasedScheduleElementsVisible),
+                nameof(this.sut.Type),
+                nameof(this.sut.ScheduleEditingType),
+                nameof(this.sut.HasUnsavedChanges));
         }
 
         [TestMethod]

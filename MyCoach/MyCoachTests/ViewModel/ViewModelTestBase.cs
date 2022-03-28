@@ -1,10 +1,7 @@
-﻿using MyCoach.ViewModel;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoachTests.ViewModel
 {
@@ -21,6 +18,36 @@ namespace MyCoachTests.ViewModel
         protected virtual void OnSutPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.PropertyChangedEvents.Add(e.PropertyName);
+        }
+
+        protected virtual void AssertPropertyChangedInvokation(int count)
+        {
+            Assert.AreEqual(count, this.PropertyChangedEvents.Count());
+        }
+
+        protected virtual void AssertPropertyChangedInvokation(params string[] propertyNames)
+        {
+            foreach (var propertyName in propertyNames)
+            {
+                Assert.IsTrue(this.PropertyChangedEvents.Contains(propertyName));
+            }
+        }
+
+        protected virtual void AssertPropertyChangedInvokation(int count, params string[] propertyNames)
+        {
+            foreach (var propertyName in propertyNames)
+            {
+                Assert.AreEqual(count, this.PropertyChangedEvents.Count(e => e == propertyName));
+            }
+        }
+
+        protected virtual void AssertPropertyChangedInvokation(int count, string propertyName,  params int[] positions)
+        {
+            Assert.AreEqual(count, this.PropertyChangedEvents.Count);
+            foreach (var position in positions)
+            {
+                Assert.AreEqual(propertyName, this.PropertyChangedEvents[position]);
+            }
         }
     }
 }
