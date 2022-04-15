@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyExtensions.IEnumerable;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -36,7 +37,12 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 }
 
                 isActive = value;
-                TrainingActiveChanged.Invoke(this, new EventArgs());
+                TrainingActiveChanged?.Invoke(this, new EventArgs());
+
+                if (IsActive)
+                {
+                    this.Foreach(element => element.Activate());
+                }                
             }
         }
 
@@ -63,7 +69,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             {
                 var vm = item as TrainingElementViewModel;
 
-                if (vm.Type == TrainingElementType.exercise)
+                if (vm.Type == TrainingElementType.Exercise)
                 {
                     vm.PropertyChanged += OnTrainingExerciseChanged;
                 }
@@ -73,7 +79,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
         private void OnTrainingExerciseChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(TrainingElementViewModel.Completed)
-                && this.Where(element => element.Type == TrainingElementType.exercise).All(element => element.Completed))
+                && this.Where(element => element.Type == TrainingElementType.Exercise).All(element => element.Completed))
             {
                 Finish();
             }

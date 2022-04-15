@@ -1,5 +1,8 @@
-﻿using MyCoach.Model.DataTransferObjects;
+﻿using MyCoach.DataHandling;
+using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using System.Linq;
+using System.Text;
 
 namespace MyCoach.ViewModel
 {
@@ -12,6 +15,7 @@ namespace MyCoach.ViewModel
         private readonly TrainingElementType type;
         private readonly Exercise exercise;
         private bool completed;
+        private bool isActive;
 
         /// <summary>
         ///     Creates a new instance of <see cref="TrainingElementViewModel"/>.
@@ -41,12 +45,24 @@ namespace MyCoach.ViewModel
         /// <summary>
         ///     Gets, if lap separator specific view elements are supposed to be shown.
         /// </summary>
-        public bool LapSeparatorElementsVisible => this.Type == TrainingElementType.lapSeparator;
+        public bool LapSeparatorElementsVisible => this.Type == TrainingElementType.LapSeparator;
 
         /// <summary>
         ///     Gets, if exercise specific view elements are supposed to be shown.
         /// </summary>
-        public bool TrainingExerciseElementsVisible => this.Type == TrainingElementType.exercise;
+        public bool TrainingExerciseElementsVisible => this.Type == TrainingElementType.Exercise;
+
+        /// <summary>
+        ///     Gets, if the user controls for completing the exercise are allowed to be used.
+        ///     Only allowed, if the training element has been activated.
+        /// </summary>
+        public bool CompletionAllowed => this.isActive;
+
+        /// <summary>
+        ///     Gets, if the user controls for editing the exercise are allowed to be used.
+        ///     Only allowed, if the training element has not yet been activated.
+        /// </summary>
+        public bool EditingAllowed => this.isActive == false;
 
         /// <summary>
         ///     Text to be displayed, if this object represents an exercise.
@@ -103,6 +119,17 @@ namespace MyCoach.ViewModel
         /// </summary>
         public double ScoresMultiplier { get; set; } = 1.0;
 
+        /// <summary>
+        ///     Activates the training element, if it is of type <see cref="TrainingElementType.Exercise"/>.
+        /// </summary>
+        public void Activate()
+        {
+            this.isActive = true;
+            this.InvokePropertiesChanged(
+                nameof(this.CompletionAllowed),
+                nameof(this.EditingAllowed));
+        }
+
         private string GetExerciseText()
         {
             if (this.Exercise == null)
@@ -110,18 +137,35 @@ namespace MyCoach.ViewModel
                 return string.Empty;
             }
 
-            var text = ((uint)(Exercise.Count * RepeatsMultiplier)).ToString();
+            var sb = new StringBuilder();
+            sb.Append(((uint)(this.Exercise.Count * this.RepeatsMultiplier)).ToString());
 
-            if (Exercise.Unit != null && Exercise.Unit != string.Empty)
+            if (this.Exercise.Unit != null && this.Exercise.Unit != string.Empty)
             {
-                text = string.Concat(text, " ", Exercise.Unit);
+                sb.Append(" ");
+                sb.Append(this.Exercise.Unit);
             }
 
-            text = Exercise.Name != null && Exercise.Name != string.Empty
-                ? string.Concat(text, " ", Exercise.Name)
-                : string.Concat(text, " ", UNKNOWN_EXERCISE_NAME);
+            if (this.Exercise.Name != null && this.Exercise.Name != string.Empty)
+            {
+                sb.Append(" ");
+                sb.Append(this.Exercise.Name);
+            }
+            else
+            {
+                sb.Append(" ");
+                sb.Append(UNKNOWN_EXERCISE_NAME);
+            }
 
-            return text;
+            var categoryActive = DataInterface.GetInstance().GetData<Category>().SingleOrDefault(c => c.ID == this.Exercise.Category)?.Active;
+            var categoryName = DataInterface.GetInstance().GetData<Category>().SingleOrDefault(c => c.ID == this.Exercise.Category)?.Name;
+
+            if (categoryActive == true && this.Exercise.Scores > 0)
+            {
+                sb.Append($" --- {(uint)(this.Exercise.Scores * this.ScoresMultiplier)} Punkte für Kategorie '{categoryName ?? string.Empty}'");
+            }
+
+            return sb.ToString();
         }
     }
 }

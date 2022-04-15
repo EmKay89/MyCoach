@@ -16,7 +16,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 1,
                 Name = "WarmUp-1",
                 Unit = "Repeats",
-                Scores = 1,
+                Scores = 0,
                 Info = "WarmUp-1",
                 Active = true                
             },
@@ -28,7 +28,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 2,
                 Name = "WarmUp-2",
                 Unit = "Repeats",
-                Scores = 2,
+                Scores = 0,
                 Info = "WarmUp-2",
                 Active = true
             },
@@ -40,7 +40,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 3,
                 Name = "WarmUp-3",
                 Unit = "Repeats",
-                Scores = 3,
+                Scores = 0,
                 Info = "WarmUp-3",
                 Active = true
             },
@@ -52,7 +52,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 4,
                 Name = "WarmUp-4",
                 Unit = "Repeats",
-                Scores = 4,
+                Scores = 0,
                 Info = "WarmUp-4",
                 Active = true
             },
@@ -64,7 +64,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 5,
                 Name = "WarmUp-5",
                 Unit = "Repeats",
-                Scores = 5,
+                Scores = 0,
                 Info = "WarmUp-5",
                 Active = true
             },
@@ -76,7 +76,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 6,
                 Name = "WarmUp-6",
                 Unit = "Repeats",
-                Scores = 6,
+                Scores = 0,
                 Info = "WarmUp-6",
                 Active = true
             },
@@ -664,7 +664,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 91,
                 Name = "CoolDown-1",
                 Unit = "Repeats",
-                Scores = 91,
+                Scores = 0,
                 Info = "CoolDown-1",
                 Active = true
             },
@@ -676,7 +676,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 92,
                 Name = "CoolDown-2",
                 Unit = "Repeats",
-                Scores = 92,
+                Scores = 0,
                 Info = "CoolDown-2",
                 Active = true
             },
@@ -688,7 +688,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 93,
                 Name = "CoolDown-3",
                 Unit = "Repeats",
-                Scores = 93,
+                Scores = 0,
                 Info = "CoolDown-3",
                 Active = true
             },
@@ -700,7 +700,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 94,
                 Name = "CoolDown-4",
                 Unit = "Repeats",
-                Scores = 94,
+                Scores = 0,
                 Info = "CoolDown-4",
                 Active = true
             },
@@ -712,7 +712,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 95,
                 Name = "CoolDown-5",
                 Unit = "Repeats",
-                Scores = 95,
+                Scores = 0,
                 Info = "CoolDown-5",
                 Active = true
             },
@@ -724,7 +724,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 Count = 96,
                 Name = "CoolDown-6",
                 Unit = "Repeats",
-                Scores = 96,
+                Scores = 0,
                 Info = "CoolDown-6",
                 Active = true
             },

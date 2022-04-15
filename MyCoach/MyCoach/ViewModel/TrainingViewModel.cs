@@ -387,7 +387,7 @@ namespace MyCoach.ViewModel
 
         public void OnAddExerciseExecuted(object sender, AddExerciseExecutedEventArgs args)
         {
-            var vm = new TrainingElementViewModel(TrainingElementType.exercise, args.Exercise);
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, args.Exercise);
             this.Training.Add(vm);
         }
 

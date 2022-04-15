@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyExtensions.IEnumerable;
 using System;
@@ -10,6 +12,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyCoachTests.ViewModel
 {
@@ -26,6 +29,9 @@ namespace MyCoachTests.ViewModel
             base.Initialize();
             this.sut = new TrainingViewModel();
             this.sut.PropertyChanged += this.OnSutPropertyChanged;
+
+            TrainingEvaluator.MessageBoxService = Mock.Of<IMessageBoxService>(service =>
+                service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.OK);
         }
 
         [TestCleanup]
@@ -173,7 +179,7 @@ namespace MyCoachTests.ViewModel
         public void StartCommandCanExecute_UserDefinedTrainingWithExercises_True()
         {
             var exercise = new Exercise();
-            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
             this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
 
             Assert.IsTrue(this.sut.StartTrainingCommand.CanExecute(null));
@@ -192,7 +198,7 @@ namespace MyCoachTests.ViewModel
         public void StartCommandExecute_ActivatesAndDeactivatesTraining()
         {
             var exercise = new Exercise();
-            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
             this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
             this.PropertyChangedEvents.Clear();
 
@@ -248,8 +254,8 @@ namespace MyCoachTests.ViewModel
             // Actually belongs to a separate unit test class for Training class ... 
             var exercise1 = new Exercise() { Name = "Test1" };
             var exercise2 = new Exercise() { Name = "Test2" }; ;
-            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise1));
-            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise2));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise1));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise2));
             this.sut.StartTrainingCommand.Execute(null);
 
             (this.sut.Training.First() as TrainingElementViewModel).Completed = true;

@@ -241,7 +241,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             this.AssertLapSeparatorsPresenceAndName(training, false, 4, false);
             this.AssertExercisesOfCategory(training, ExerciseCategory.Category1, 4, true, 1, 1, 1, 1);
-            var viewModels = training.Where(e => e.Type == TrainingElementType.exercise).ToList();
+            var viewModels = training.Where(e => e.Type == TrainingElementType.Exercise).ToList();
             Assert.AreEqual(viewModels[0].RepeatsMultiplier, 2.0);
             Assert.AreEqual(viewModels[1].RepeatsMultiplier, 1.0);
             Assert.AreEqual(viewModels[2].RepeatsMultiplier, 0.5);
@@ -290,7 +290,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             if (expectedCoolDown)
             {
-                var coolDownSeparator = training.Where(e => e.Type == TrainingElementType.lapSeparator).Last();
+                var coolDownSeparator = training.Where(e => e.Type == TrainingElementType.LapSeparator).Last();
                 Assert.AreEqual(this.Categories.Where(c => c.ID == ExerciseCategory.CoolDown).First().Name, coolDownSeparator.LapHeadline);
             }
 
@@ -298,12 +298,12 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             for (int i = lapCountOffset; i < expectedLapCount + lapCountOffset; i++)
             {
-                var lapSeparator = training.Where(e => e.Type == TrainingElementType.lapSeparator).ToArray()[i];
+                var lapSeparator = training.Where(e => e.Type == TrainingElementType.LapSeparator).ToArray()[i];
                 Assert.AreEqual(TrainingElementViewModel.LAPDESIGNATION + " " + (i + 1 - lapCountOffset).ToString(), lapSeparator.LapHeadline);
                 
                 if (i == expectedLapCount + lapCountOffset - 1 
                     && training.Any(
-                        e => e.Type == TrainingElementType.lapSeparator
+                        e => e.Type == TrainingElementType.LapSeparator
                         && training.IndexOf(e) > training.IndexOf(lapSeparator) 
                         && e.LapHeadline.StartsWith(TrainingElementViewModel.LAPDESIGNATION)))
                 {
@@ -322,7 +322,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             int? expectedCountLap3 = null,
             int? expectedCountLap4 = null)
         {
-            var allExercisesOfCategory = training.Where(e => e.Type == TrainingElementType.exercise && e.Exercise.Category == category).ToList();
+            var allExercisesOfCategory = training.Where(e => e.Type == TrainingElementType.Exercise && e.Exercise.Category == category).ToList();
 
             Assert.AreEqual(expectedTotalCount, allExercisesOfCategory.Count);
 
@@ -364,7 +364,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             int lap)
         {
             var previousSeparator = training.Where(
-                e => e.Type == TrainingElementType.lapSeparator 
+                e => e.Type == TrainingElementType.LapSeparator 
                 && e.LapHeadline == TrainingElementViewModel.LAPDESIGNATION + " " + lap).FirstOrDefault();
 
             if (previousSeparator == null)
@@ -380,7 +380,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             }
 
             var nextSeparator = training.Where(
-                e => e.Type == TrainingElementType.lapSeparator 
+                e => e.Type == TrainingElementType.LapSeparator 
                 && training.IndexOf(e) > training.IndexOf(previousSeparator)).FirstOrDefault();
 
             var exercisesLap1 = nextSeparator == null

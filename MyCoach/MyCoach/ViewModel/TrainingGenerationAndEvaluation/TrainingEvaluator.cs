@@ -45,10 +45,14 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             TrainingElementViewModel trainingElement, 
             List<Pair<ExerciseCategory, ushort>> scores)
         {
-            if ((trainingElement.Type != TrainingElementType.exercise)
+            var categoryActive = DataInterface.GetInstance().GetData<Category>()
+                .SingleOrDefault(c => c.ID == trainingElement.Exercise?.Category)?.Active;
+
+            if ((trainingElement.Type != TrainingElementType.Exercise)
                 || trainingElement.Exercise.Category == ExerciseCategory.WarmUp
                 || trainingElement.Exercise.Category == ExerciseCategory.CoolDown
-                || trainingElement.Completed == false)
+                || trainingElement.Completed == false
+                || categoryActive != true)
             {
                 return;
             }
@@ -84,19 +88,22 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         private static void ShowEvaluationMessage(List<Pair<ExerciseCategory, ushort>> results)
         {
+            var sb = new StringBuilder();
             if (results.Any() == false)
             {
-                return;
+                sb.Append("Training beendet ... Punkte gab es dafür aber nicht.");
             }
-
-            var sb = new StringBuilder("Folgende Punkte wurden gutgeschrieben:");
-            sb.AppendLine();
-            sb.AppendLine();
-
-            foreach (var result in results)
+            else
             {
-                var categoryName = DataInterface.GetInstance().GetData<Category>().Where(c => c.ID == result.Item1).Single();
-                sb.AppendLine(categoryName + ": " + result.Item2.ToString());
+                sb.Append("Folgende Punkte wurden gutgeschrieben:");
+                sb.AppendLine();
+                sb.AppendLine();
+
+                foreach (var result in results)
+                {
+                    var categoryName = DataInterface.GetInstance().GetData<Category>().Where(c => c.ID == result.Item1).Single();
+                    sb.AppendLine(categoryName + ": " + result.Item2.ToString());
+                }
             }
 
             MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information);

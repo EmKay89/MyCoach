@@ -5,6 +5,7 @@ using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +34,12 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
 
             this.SetupData(TestMonths.ThreeMonthsWithCurrentInTheMiddle);
             this.SetupData(TestExercises.TwoOfEachCategory);
+            this.SetupData(TestCategories.AllCategoriesActive);
 
             this.training = new Training();
             foreach (var exercise in this.Exercises)
             {
-                this.training.Add(new TrainingElementViewModel(TrainingElementType.exercise, exercise));
+                this.training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
             }
         }
 
@@ -65,6 +67,58 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(2).First(),
                 this.Months.Skip(2).First(),
                 TestExercises.TwoOfEachCategory);
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(3).First(),
+                this.Months.Skip(3).First());
+
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Month>(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Evaluate_TrainingWithCurentMonthInTimeBasedScheduleButCategoriesAreNotActive_ScoresNotChanged()
+        {
+            this.Categories.Foreach(c => c.Active = false);
+
+            this.CompleteTraining();
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.First(),
+                this.Months.First());
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(1).First(),
+                this.Months.Skip(1).First());
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(2).First(),
+                this.Months.Skip(2).First());
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(3).First(),
+                this.Months.Skip(3).First());
+
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Month>(), Times.Once);
+        }
+
+        [TestMethod]
+        public void Evaluate_TrainingWithCurentMonthInTimeBasedScheduleButCategoriesAreNotAvailable_ScoresNotChanged()
+        {
+            this.Categories.Clear();
+
+            this.CompleteTraining();
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.First(),
+                this.Months.First());
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(1).First(),
+                this.Months.Skip(1).First());
+
+            this.AssertThatScoresForMonthsAreEqual(
+                TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(2).First(),
+                this.Months.Skip(2).First());
 
             this.AssertThatScoresForMonthsAreEqual(
                 TestMonths.ThreeMonthsWithCurrentInTheMiddle.Skip(3).First(),
@@ -145,7 +199,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.TrainingSchedule.ScheduleType = ScheduleType.Generic;
             this.training.Clear();
             var exercise = new Exercise { ID = 0, Category = ExerciseCategory.Category1, Scores = 10 };
-            var vm = new TrainingElementViewModel(TrainingElementType.exercise, exercise)
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, exercise)
             {
                 ScoresMultiplier = 0.55
             };

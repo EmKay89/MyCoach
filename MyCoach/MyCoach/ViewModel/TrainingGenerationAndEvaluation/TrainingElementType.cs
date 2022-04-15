@@ -2,7 +2,7 @@
 {
     public enum TrainingElementType
     {
-        lapSeparator = 0,
-        exercise
+        LapSeparator = 0,
+        Exercise
     }
 }
