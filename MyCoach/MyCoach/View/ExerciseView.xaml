@@ -90,7 +90,7 @@
                         Grid.Column="2"
                         Style="{StaticResource DefaultButton}"
                         Content="Ins Training"
-                        Command="{Binding AddExerciseCommand}"
+                        Command="{Binding AddExerciseToTrainingCommand}"
                         CommandParameter="{Binding Exercise}"/>
                 <Button Grid.Row="3"
                         Grid.Column="3"

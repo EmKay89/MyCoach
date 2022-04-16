@@ -171,14 +171,26 @@ namespace MyCoach.Model.DataTransferObjects
         {
             if (target is Exercise targetExercise)
             {
-                targetExercise.Category = Category;
-                targetExercise.Count = Count;
-                targetExercise.Name = Name;
-                targetExercise.Unit = Unit;
-                targetExercise.Scores = Scores;
-                targetExercise.Info = Info;
-                targetExercise.Active = Active;
+                targetExercise.Category = this.Category;
+                targetExercise.Count = this.Count;
+                targetExercise.Name = this.Name;
+                targetExercise.Unit = this.Unit;
+                targetExercise.Scores = this.Scores;
+                targetExercise.Info = this.Info;
+                targetExercise.Active = this.Active;
             }
+        }
+
+        /// <inheritdoc/>
+        public override bool ValuesAreEqual(DtoBase dto)
+        {
+            return dto is Exercise exercise
+                && this.ID == exercise.ID
+                && this.Count == exercise.Count
+                && this.Name == exercise.Name
+                && this.Unit == exercise.Unit
+                && this.Scores == exercise.Scores
+                && this.Info == exercise.Info;
         }
 
         /// <summary>

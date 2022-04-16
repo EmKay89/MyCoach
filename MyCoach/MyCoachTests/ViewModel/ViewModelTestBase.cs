@@ -15,6 +15,11 @@ namespace MyCoachTests.ViewModel
             base.Initialize();
         }
 
+        protected void CleanUp()
+        {
+            base.CleanupTestBase();
+        }
+
         protected virtual void OnSutPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.PropertyChangedEvents.Add(e.PropertyName);

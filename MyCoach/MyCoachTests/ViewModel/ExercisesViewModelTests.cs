@@ -4,6 +4,7 @@ using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel;
+using MyCoach.ViewModel.Events;
 using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ namespace MyCoachTests.ViewModel
             this.SetupServices();
             this.sut = new ExercisesViewModel(this.messageBoxService, this.fileDialogService);
             this.sut.PropertyChanged += this.OnSutPropertyChanged;
+        }
+
+        [TestCleanup]
+        public new void CleanUp()
+        {
+            base.CleanUp();
         }
 
         #endregion
@@ -128,7 +135,7 @@ namespace MyCoachTests.ViewModel
 
             Assert.AreEqual(this.sut.Exercises.Count, oldExercisesCount + 1);
             Assert.AreEqual(this.sut.ExercisesFilteredByCategory.Count, oldExercisesFilteredByCategoryCount + 1);
-            var newExercise = this.sut.Exercises.Where(e => e.Name == ExercisesViewModel.NEW_EXERCISE_NAME).FirstOrDefault();
+            var newExercise = this.sut.Exercises.Where(e => e.Name == ExercisesViewModel.NEW_EXERCISE_NAME).Single();
             newExercise.Category = this.sut.SelectedCategory.ID;
         }
 
@@ -161,6 +168,32 @@ namespace MyCoachTests.ViewModel
             this.sut.AddExerciseCommand.Execute(null);
 
             Assert.AreEqual((uint)0, this.sut.Exercises.Skip(1).First().ID);
+        }
+
+        [TestMethod]
+        public void ExerciseVmAddExerciseToTrainingExecute_HappyPath_AddExerciseToTrainingExecutedInvokedWithCopyOfTheExercise()
+        {
+            var addedExercises = new List<Exercise>();
+            this.sut.AddExerciseToTrainingExecuted +=
+                (object sender, ExerciseEventArgs e) => { addedExercises.Add(e.Exercise); };
+            var vm = this.sut.ExercisesFilteredByCategory.First();
+
+            vm.AddExerciseToTrainingCommand.Execute(vm.Exercise);
+
+            Assert.AreNotSame(addedExercises.Single(), vm.Exercise);
+            Assert.IsTrue(addedExercises.Single().ValuesAreEqual(vm.Exercise));
+        }
+
+        [TestMethod]
+        public void ExerciseVmDeleteExerciseExecute_HappyPath_ExerciseAndViewModelDeleted()
+        {
+            var vm = this.sut.ExercisesFilteredByCategory.First();
+            var ex = vm.Exercise;
+
+            vm.RemoveExerciseCommand.Execute(ex);
+
+            Assert.IsFalse(this.sut.Exercises.Contains(ex));
+            Assert.IsFalse(this.sut.ExercisesFilteredByCategory.Any(viewmodel => viewmodel.Exercise == ex));
         }
 
         [TestMethod]
@@ -392,6 +425,21 @@ namespace MyCoachTests.ViewModel
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Category>(), Times.Once);
             Assert.IsTrue(Utilities.AreEqual(this.sut.Categories, DefaultDtos.Categories));
             Assert.IsTrue(Utilities.AreEqual(this.sut.Exercises, DefaultDtos.Exercises));
+        }
+
+        #endregion
+
+        #region Event Reactions
+
+        [TestMethod]
+        public void ExerciseVmExerciseChanged_HappyPath_HasUnsavedExercisesBecomesTrue()
+        {
+            var exercise = this.sut.Exercises.First(e => e.Category == this.sut.SelectedCategory.ID);
+            Assert.IsFalse(this.sut.HasUnsavedExercises);
+
+            exercise.Count++;
+
+            Assert.IsTrue(this.sut.HasUnsavedExercises);
         }
 
         #endregion

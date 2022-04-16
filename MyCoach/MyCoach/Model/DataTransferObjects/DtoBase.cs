@@ -28,6 +28,13 @@ namespace MyCoach.Model.DataTransferObjects
         /// </summary>
         public void ResetSubscriptions() => PropertyChanged = null;
 
+        /// <summary>
+        ///     Vergleicht das DTO auf Gleichheit aller Werte mit einem anderen DTO.
+        /// </summary>
+        /// <param name="dto">Das andere DTO.</param>
+        /// <returns>True, wenn alle Properties gleiche Werte haben, ansonsten false.</returns>
+        public abstract bool ValuesAreEqual(DtoBase dto);
+
         protected void InvokePropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

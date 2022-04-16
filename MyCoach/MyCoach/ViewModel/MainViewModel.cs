@@ -1,6 +1,7 @@
 ﻿using MyCoach.View;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
+using MyCoach.ViewModel.Events;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -20,7 +21,7 @@ namespace MyCoach.ViewModel
             this.TrainingScheduleViewModel = new TrainingScheduleViewModel();
             this.TrainingViewModel = new TrainingViewModel();
 
-            this.ExercisesViewModel.AddExerciseExecuted += this.TrainingViewModel.OnAddExerciseExecuted;
+            this.ExercisesViewModel.AddExerciseToTrainingExecuted += this.OnExerciveVmAddExerciseToTrainingExecuted;
 
             this.UpdateMainViewCommand = new RelayCommand(
                 this.SelectViewModel,
@@ -76,6 +77,11 @@ namespace MyCoach.ViewModel
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
             this.SelectViewModel("Training");
+        }
+
+        private void OnExerciveVmAddExerciseToTrainingExecuted(object sender, ExerciseEventArgs e)
+        {
+            this.TrainingViewModel.AddExerciseToTraining(e.Exercise);
         }
 
         private void SelectViewModel(object parameter)

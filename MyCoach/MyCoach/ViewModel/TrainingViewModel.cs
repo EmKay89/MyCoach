@@ -385,9 +385,9 @@ namespace MyCoach.ViewModel
 
         public bool NotEnoughExercisesAvailable => this.AreEnoughExercisesAvailable() == false;
 
-        public void OnAddExerciseExecuted(object sender, AddExerciseExecutedEventArgs args)
+        public void AddExerciseToTraining(Exercise exercise)
         {
-            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, args.Exercise);
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, exercise);
             this.Training.Add(vm);
         }
 

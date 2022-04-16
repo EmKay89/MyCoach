@@ -81,5 +81,14 @@ namespace MyCoach.Model.DataTransferObjects
                 targetSchedule.Duration = Duration;
             }
         }
+
+        /// <inheritdoc/>
+        public override bool ValuesAreEqual(DtoBase dto)
+        {
+            return dto is TrainingSchedule schedule
+                && this.ScheduleType == schedule.ScheduleType
+                && this.StartMonth == schedule.StartMonth
+                && this.Duration == schedule.Duration;
+        }
     }
 }

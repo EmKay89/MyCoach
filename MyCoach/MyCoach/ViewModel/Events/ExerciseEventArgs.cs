@@ -3,9 +3,9 @@ using System;
 
 namespace MyCoach.ViewModel.Events
 {
-    public class AddExerciseExecutedEventArgs : EventArgs
+    public class ExerciseEventArgs : EventArgs
     {
-        public AddExerciseExecutedEventArgs(Exercise exercise)
+        public ExerciseEventArgs(Exercise exercise)
         {
             this.Exercise = exercise;
         }

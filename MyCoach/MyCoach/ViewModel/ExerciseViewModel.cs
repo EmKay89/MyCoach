@@ -1,28 +1,27 @@
 ﻿using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
-using System;
+using MyCoach.ViewModel.Events;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.ComponentModel;
 
 namespace MyCoach.ViewModel
 {
     public class ExerciseViewModel : BaseViewModel
     {
         private readonly Exercise exercise;
-        private readonly ExercisesViewModel parent;
 
-        public ExerciseViewModel(Exercise exercise, ExercisesViewModel parent)
+        public ExerciseViewModel(Exercise exercise)
         {
             this.exercise = exercise;
-            this.parent = parent;
-            this.AddExerciseCommand = new RelayCommand(this.AddExerciseToTraining);
-            this.RemoveExerciseCommand = new RelayCommand(this.RemoveExercise);
-            this.exercise.PropertyChanged += delegate { this.parent.HasUnsavedExercises = true; };
+            this.AddExerciseToTrainingCommand = new RelayCommand(this.InvokeAddExerciseToTrainingExecuted);
+            this.RemoveExerciseCommand = new RelayCommand(this.InvokeDeleteExerciseExecuted);
+            this.exercise.PropertyChanged += this.IvokeExerciseChanged;
         }
+
+        public event ExerciseEventHandler AddExerciseToTrainingExecuted;
+        public event ExerciseEventHandler DeleteExerciseExecuted;
+        public event ExerciseEventHandler ExerciseChanged;
 
         public List<string> SelectableUnits { get; } = new List<string>
         {
@@ -33,7 +32,7 @@ namespace MyCoach.ViewModel
 
         public Exercise Exercise => this.exercise;
 
-        public RelayCommand AddExerciseCommand { get; }
+        public RelayCommand AddExerciseToTrainingCommand { get; }
 
         public RelayCommand RemoveExerciseCommand { get; }
 
@@ -149,21 +148,30 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void AddExerciseToTraining(object parameter)
-        {
+        private void InvokeAddExerciseToTrainingExecuted(object parameter)
+        {            
             if (parameter is Exercise exercise)
             {
-                this.parent.InvokeAddExerciseExecuted(exercise);
+                // Use a copy so further changes or possible nulling won't affect the exercise in training.
+                var copy = new Exercise();
+                exercise.CopyValuesTo(copy);
+                this.AddExerciseToTrainingExecuted?.Invoke(this, new ExerciseEventArgs(copy));
             }
         }
 
-        private void RemoveExercise(object parameter)
+        private void InvokeDeleteExerciseExecuted(object parameter)
         {
             if (parameter is Exercise exercise)
             {
-                this.parent.Exercises.Remove(exercise);
-                this.parent.RefreshExercisesFilteredByCategory();
-                this.parent.HasUnsavedExercises = true;
+                this.DeleteExerciseExecuted?.Invoke(this, new ExerciseEventArgs(exercise));
+            }
+        }
+
+        private void IvokeExerciseChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is Exercise exercise)
+            {
+                this.ExerciseChanged?.Invoke(this, new ExerciseEventArgs(exercise));
             }
         }
     }

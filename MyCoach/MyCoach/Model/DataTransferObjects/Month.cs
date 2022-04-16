@@ -419,6 +419,30 @@ namespace MyCoach.Model.DataTransferObjects
             }
         }
 
+        /// <inheritdoc/>
+        public override bool ValuesAreEqual(DtoBase dto)
+        {
+            return dto is Month month
+                && this.StartDate == month.StartDate
+                && this.Category1Scores == month.Category1Scores
+                && this.Category1Goal == month.Category1Goal
+                && this.Category2Scores == month.Category2Scores
+                && this.Category2Goal == month.Category2Goal
+                && this.Category3Scores == month.Category3Scores
+                && this.Category3Goal == month.Category3Goal
+                && this.Category4Scores == month.Category4Scores
+                && this.Category4Goal == month.Category4Goal
+                && this.Category5Scores == month.Category5Scores
+                && this.Category5Goal == month.Category5Goal
+                && this.Category6Scores == month.Category6Scores
+                && this.Category6Goal == month.Category6Goal
+                && this.Category7Scores == month.Category7Scores
+                && this.Category7Goal == month.Category7Goal
+                && this.Category8Scores == month.Category8Scores
+                && this.Category8Goal == month.Category8Goal
+                && this.TotalGoal == month.TotalGoal;
+        }
+
         /// <summary>
         ///     Gibt das gespeicherte Punkteziel einer Übungskategorie zurück.
         /// </summary>

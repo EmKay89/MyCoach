@@ -107,8 +107,8 @@
     <Compile Include="ViewModel\Defines\ScheduleEditingType.cs" />
     <Compile Include="ViewModel\EditMonthViewModel.cs" />
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
-    <Compile Include="ViewModel\Events\AddExerciseExecutedEventArgs.cs" />
-    <Compile Include="ViewModel\Events\AddExerciseExecutedEventHandler.cs" />
+    <Compile Include="ViewModel\Events\ExerciseEventArgs.cs" />
+    <Compile Include="ViewModel\Events\ExerciseEventHandler.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

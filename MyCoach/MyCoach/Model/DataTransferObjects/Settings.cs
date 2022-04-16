@@ -68,5 +68,20 @@ namespace MyCoach.Model.DataTransferObjects
                 targetSettings.ScoresRound4 = ScoresRound4;
             }
         }
+
+        /// <inheritdoc/>
+        public override bool ValuesAreEqual(DtoBase dto)
+        {
+            return dto is Settings settings
+                && this.Permission == settings.Permission
+                && this.RepeatsRound1 == settings.RepeatsRound1
+                && this.ScoresRound1 == settings.ScoresRound1
+                && this.RepeatsRound2 == settings.RepeatsRound2
+                && this.ScoresRound2 == settings.ScoresRound2
+                && this.RepeatsRound3 == settings.RepeatsRound3
+                && this.ScoresRound3 == settings.ScoresRound3
+                && this.RepeatsRound4 == settings.RepeatsRound4
+                && this.ScoresRound4 == settings.ScoresRound4;
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace MyCoach.ViewModel
         public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
         public const string RESET_CAPTION = "Zurücksetzen";
 
-        public event AddExerciseExecutedEventHandler AddExerciseExecuted;
+        public event ExerciseEventHandler AddExerciseToTrainingExecuted;
 
         public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
         
@@ -475,19 +475,25 @@ namespace MyCoach.ViewModel
                 return;
             }
 
+            foreach (var vm in ExercisesFilteredByCategory)
+            {
+                vm.AddExerciseToTrainingExecuted -= this.OnExerciseAddExerciseToTrainingExecuted;
+                vm.DeleteExerciseExecuted -= this.OnExerciseDeleteExerciseToTrainingExecuted;
+                vm.ExerciseChanged -= this.OnExerciseChanged;
+            }
+
             this.ExercisesFilteredByCategory.Clear();
+            
             var exercises = this.Exercises.Where(e => e.Category == this.SelectedCategory?.ID);
 
             foreach (var exercise in exercises)
             {
-                this.ExercisesFilteredByCategory.Add(
-                    new ExerciseViewModel(exercise, this));
+                var vm = new ExerciseViewModel(exercise);
+                vm.AddExerciseToTrainingExecuted += this.OnExerciseAddExerciseToTrainingExecuted;
+                vm.DeleteExerciseExecuted += this.OnExerciseDeleteExerciseToTrainingExecuted;
+                vm.ExerciseChanged += this.OnExerciseChanged;
+                this.ExercisesFilteredByCategory.Add(vm);
             }
-        }
-
-        public void InvokeAddExerciseExecuted(Exercise exercise)
-        {
-            this.AddExerciseExecuted.Invoke(this, new AddExerciseExecutedEventArgs(exercise));
         }
 
         private void AddExercise()
@@ -639,6 +645,28 @@ namespace MyCoach.ViewModel
                 nameof(this.CategoryWarmUpCount),
                 nameof(this.CategoryCoolDownCount),
                 nameof(this.SelectedCategory));
+        }
+
+        private void OnExerciseAddExerciseToTrainingExecuted(object sender, ExerciseEventArgs e)
+        {
+            this.InvokeAddExerciseToTrainingExecuted(e.Exercise);
+        }
+
+        private void OnExerciseDeleteExerciseToTrainingExecuted(object sender, ExerciseEventArgs e)
+        {
+            this.Exercises.Remove(e.Exercise);
+            this.RefreshExercisesFilteredByCategory();
+            this.HasUnsavedExercises = true;
+        }
+
+        private void OnExerciseChanged(object sender, ExerciseEventArgs e)
+        {
+            this.HasUnsavedExercises = true;
+        }
+
+        public void InvokeAddExerciseToTrainingExecuted(Exercise exercise)
+        {
+            this.AddExerciseToTrainingExecuted.Invoke(this, new ExerciseEventArgs(exercise));
         }
 
         private void SaveCategories()

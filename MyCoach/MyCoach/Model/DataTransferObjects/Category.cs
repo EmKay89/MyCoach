@@ -119,6 +119,17 @@ namespace MyCoach.Model.DataTransferObjects
             }
         }
 
+        /// <inheritdoc/>
+        public override bool ValuesAreEqual(DtoBase dto)
+        {
+            return dto is Category category
+                && this.ID == category.ID
+                && this.Name == category.Name
+                && this.Type == category.Type
+                && this.Count == category.Count
+                && this.Active == category.Active;
+        }
+
         /// <summary>
         ///     <see cref="ToString"/> Methode ist überschrieben und gibt den Namen der Kategorie zurück.
         /// </summary>
