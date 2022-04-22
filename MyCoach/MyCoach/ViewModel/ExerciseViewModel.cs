@@ -148,6 +148,9 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public bool IsTrainingExercise => this.Exercise.Category != ExerciseCategory.WarmUp
+            && this.Exercise.Category != ExerciseCategory.CoolDown;
+
         private void InvokeAddExerciseToTrainingExecuted(object parameter)
         {            
             if (parameter is Exercise exercise)

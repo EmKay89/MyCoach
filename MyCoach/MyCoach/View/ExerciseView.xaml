@@ -59,10 +59,12 @@
                            Grid.Row="1"
                            Grid.ColumnSpan="3">
                     <TextBlock Text="Punkte"
-                               DockPanel.Dock="Left"/>
+                               DockPanel.Dock="Left"
+                               Visibility="{Binding IsTrainingExercise, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     <TextBox Text="{Binding Scores}"
                              Margin="3,0,3,0"
-                             HorizontalAlignment="Stretch"/>
+                             HorizontalAlignment="Stretch"
+                             Visibility="{Binding IsTrainingExercise, Converter={StaticResource BoolToVisibilityConverter}}"/>
                 </DockPanel>
                 <TextBlock Grid.Row="2"
                            Grid.Column="2"

@@ -500,7 +500,7 @@ namespace MyCoach.ViewModel
         {
             var id = GetLowestEmptyExerciseId();
             this.Exercises.Add(
-                new Exercise { ID = id, Name = NEW_EXERCISE_NAME, Active = true, Scores = 10, Category = this.SelectedCategory.ID });
+                new Exercise { ID = id, Name = NEW_EXERCISE_NAME, Active = true, Category = this.SelectedCategory.ID });
             this.RefreshExercisesFilteredByCategory();
             this.HasUnsavedExercises = true;
         }
