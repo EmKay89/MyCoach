@@ -88,6 +88,12 @@ namespace MyCoach.ViewModel
                 }
 
                 this.trainingMode = value;
+
+                if (value != TrainingMode.UserDefinedTraining)
+                {
+                    this.Training?.Clear();
+                }
+
                 this.InvokePropertiesChanged(
                     nameof(this.TrainingMode),
                     nameof(this.CircleTrainingElementsVisible),
@@ -387,8 +393,12 @@ namespace MyCoach.ViewModel
 
         public void AddExerciseToTraining(Exercise exercise)
         {
-            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, exercise);
-            this.Training.Add(vm);
+            if (this.Training.IsActive == false)
+            {
+                var vm = new TrainingElementViewModel(TrainingElementType.Exercise, exercise);
+                this.Training.Add(vm);
+                this.TrainingMode = TrainingMode.UserDefinedTraining;
+            }
         }
 
         private void StartTraining()
