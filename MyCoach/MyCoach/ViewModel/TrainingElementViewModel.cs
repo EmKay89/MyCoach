@@ -1,5 +1,7 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
+using MyCoach.ViewModel.Commands;
+using MyCoach.ViewModel.Events;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System.Linq;
 using System.Text;
@@ -31,10 +33,15 @@ namespace MyCoach.ViewModel
         {
             this.type = type;
             this.exercise = exercise;
+            this.RemoveExerciseCommand = new RelayCommand(this.InvokeRemoveExerciseFromTrainingExecuted);
         }
 
         public const string UNKNOWN_EXERCISE_NAME = "unbekannte Übung";
         public const string LAPDESIGNATION = "Runde";
+
+        public event ExerciseEventHandler RemoveExerciseFromTrainingExecuted;
+
+        public RelayCommand RemoveExerciseCommand { get; }
 
         /// <summary>
         ///     Gets or sets, if this <see cref="TrainingElementViewModel"/> is supposed to represent an
@@ -166,6 +173,16 @@ namespace MyCoach.ViewModel
             }
 
             return sb.ToString();
+        }
+
+        private void InvokeRemoveExerciseFromTrainingExecuted()
+        {
+            if (this.Type == TrainingElementType.Exercise)
+            {
+                this.RemoveExerciseFromTrainingExecuted?.Invoke(
+                    this,
+                    new ExerciseEventArgs(this.exercise));
+            }
         }
     }
 }

@@ -216,6 +216,17 @@ namespace MyCoachTests.ViewModel
             Assert.IsFalse(this.sut.TrainingActive);
         }
 
+        [TestMethod]
+        public void TrainingElementVmRemoveExerciseCommandExecute_HappyPath_RemovesExerciseFromTraining()
+        {
+            var exercise = new Exercise();
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
+
+            this.sut.Training.Single().RemoveExerciseCommand.Execute(null);
+
+            Assert.IsFalse(this.sut.Training.Any());
+        }
+
         #endregion
 
         #region Event Reactions
