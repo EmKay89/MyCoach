@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling
@@ -59,6 +60,16 @@ namespace MyCoach.DataHandling
         public bool ImportExerciseSet(string path)
         {
             return dataManager.TryImportExerciseSet(path);
+        }
+
+        public bool ExportTraining(string path, List<Exercise> training)
+        {
+            return dataManager.TryExportTraining(path, training);
+        }
+
+        public bool ImportTraining(string path, out List<Exercise> training)
+        {
+            return dataManager.TryImportTraining(path, out training);
         }
     }
 }

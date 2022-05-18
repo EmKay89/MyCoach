@@ -1,6 +1,7 @@
 ﻿using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -35,6 +36,16 @@ namespace MyCoach.DataHandling.DataManager
         ///     Fehlermeldung beim Importieren des Übungssatzes.
         /// </summary>
         public virtual string ErrorMessageExerciseSetImport { get; protected set; }
+
+        /// <summary>
+        ///     Fehlermeldung beim Exportieren des Trainings.
+        /// </summary>
+        public virtual string ErrorMessageTrainingExport { get; protected set; }
+
+        /// <summary>
+        ///     Fehlermeldung beim Importieren des Trainings.
+        /// </summary>
+        public virtual string ErrorMessageTrainingImport { get; protected set; }
 
         /// <summary>
         ///     Fehlermeldung beim initialen Laden.
@@ -138,14 +149,17 @@ namespace MyCoach.DataHandling.DataManager
         public virtual bool TryImportExerciseSet(string path)
         {
             bool success = false;
-            StringReader reader = null;
                         
             try
             {
+                ExerciseSet exerciseSet;
                 var xmlString = this.XmlFileReaderWriter.ReadXmlFromFile(path);
-                reader = new StringReader(xmlString);
-                XmlSerializer serializer = new XmlSerializer(typeof(ExerciseSet));                
-                var exerciseSet = (ExerciseSet)(serializer.Deserialize(reader));
+
+                using (StringReader reader = new StringReader(xmlString))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ExerciseSet));
+                    exerciseSet = (ExerciseSet)(serializer.Deserialize(reader));
+                }
 
                 this.Buffer.Categories.ResetSubscriptions();
                 this.Buffer.Categories.Clear();
@@ -168,9 +182,53 @@ namespace MyCoach.DataHandling.DataManager
                 // ToDo: Fehlerfälle erweitern
                 this.ErrorMessageExerciseSetExport = Constants.ImportError + e.ToString();
             }
-            finally
+
+            return success;
+        }
+
+        public virtual bool TryExportTraining(string path, List<Exercise> training)
+        {
+            bool success = false;
+
+            using (StringWriter writer = new StringWriter())
             {
-                reader?.Dispose();
+                try
+                {
+                    XmlSerializer serializer = new XmlSerializer(training.GetType());
+                    serializer.Serialize(writer, training);
+                    this.XmlFileReaderWriter.WriteXmlToFile(writer.ToString(), path);
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    // ToDo: Fehlerfälle erweitern
+                    this.ErrorMessageTrainingExport = Constants.ExportError;
+                }
+            }
+
+            return success;
+        }
+
+        public virtual bool TryImportTraining(string path, out List<Exercise> training)
+        {
+            bool success = false;
+            training = null;
+
+            try
+            {                
+                var xmlString = this.XmlFileReaderWriter.ReadXmlFromFile(path);
+                using (StringReader reader = new StringReader(xmlString))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Exercise>));
+                    training = (List<Exercise>)(serializer.Deserialize(reader));
+                }
+
+                success = true;
+            }
+            catch (Exception e)
+            {
+                // ToDo: Fehlerfälle erweitern
+                this.ErrorMessageTrainingImport = Constants.ImportError + e.ToString();
             }
 
             return success;

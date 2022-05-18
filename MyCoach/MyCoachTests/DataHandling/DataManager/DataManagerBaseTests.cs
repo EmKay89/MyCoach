@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -90,7 +91,38 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.TryImportExerciseSet("path");
             StringAssert.Equals(this.sut.ErrorMessageExerciseSetImport, Constants.ImportError);
         }
-               
+
+        [TestMethod]
+        public void TryExportAndImportTraining_HappyPath_ExercisesAreExportedAndReimportedCorrectly()
+        {
+            var training = new List<Exercise>(TestDtos.Exercises);
+
+            var successExport = this.sut.TryExportTraining("path", training);
+            var successImport = this.sut.TryImportTraining("path", out var trainingAfterReimport);
+
+            Assert.IsTrue(successExport);
+            Assert.IsTrue(successImport);
+            Assert.IsTrue(Utilities.AreEqual(training, trainingAfterReimport));
+        }
+
+        [TestMethod]
+        public void TryExportTraining_Exception_ErrorMessageIsSet()
+        {
+            var training = new List<Exercise>(TestDtos.Exercises);
+
+            this.readerWriterMock.Exception = new Exception();
+            this.sut.TryExportTraining("path", training);
+            StringAssert.Equals(this.sut.ErrorMessageTrainingExport, Constants.ExportError);
+        }
+
+        [TestMethod]
+        public void TryImportTraining_Exception_ErrorMessageIsSet()
+        {
+            this.readerWriterMock.Exception = new Exception();
+            this.sut.TryImportTraining("path", out var _);
+            StringAssert.Equals(this.sut.ErrorMessageExerciseSetImport, Constants.ImportError);
+        }
+
         private void AssertThatSutBufferHasDefaultValues()
         {
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Categories, DefaultDtos.Categories));

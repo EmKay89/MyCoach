@@ -1,4 +1,5 @@
 ﻿using MyCoach.Model.DataTransferObjects;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MyCoach.DataHandling.DataManager
@@ -8,6 +9,10 @@ namespace MyCoach.DataHandling.DataManager
         string ErrorMessageExerciseSetExport { get; }
 
         string ErrorMessageExerciseSetImport { get; }
+
+        string ErrorMessageTrainingExport { get; }
+
+        string ErrorMessageTrainingImport { get; }
 
         string ErrorMessageInitialLoading { get; }
 
@@ -22,5 +27,9 @@ namespace MyCoach.DataHandling.DataManager
         bool TryExportExerciseSet(string path);
 
         bool TryImportExerciseSet(string path);
+
+        bool TryExportTraining(string path, List<Exercise> training);
+
+        bool TryImportTraining(string path, out List<Exercise> training);
     }
 }

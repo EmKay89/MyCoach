@@ -8,7 +8,7 @@ namespace MyCoach.Model.DataTransferObjects
 {
     public static class Utilities
     {
-        public static bool AreEqual(ObservableCollection<Category> list1, ObservableCollection<Category> list2)
+        public static bool AreEqual(IList<Category> list1, IList<Category> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -30,7 +30,7 @@ namespace MyCoach.Model.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(ObservableCollection<Exercise> list1, ObservableCollection<Exercise> list2)
+        public static bool AreEqual(IList<Exercise> list1, IList<Exercise> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -55,7 +55,7 @@ namespace MyCoach.Model.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(ObservableCollection<Settings> list1, ObservableCollection<Settings> list2)
+        public static bool AreEqual(IList<Settings> list1, IList<Settings> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -81,7 +81,7 @@ namespace MyCoach.Model.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(ObservableCollection<TrainingSchedule> list1, ObservableCollection<TrainingSchedule> list2)
+        public static bool AreEqual(IList<TrainingSchedule> list1, IList<TrainingSchedule> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -101,7 +101,7 @@ namespace MyCoach.Model.DataTransferObjects
             return true;
         }
 
-        public static bool AreEqual(ObservableCollection<Month> list1, ObservableCollection<Month> list2)
+        public static bool AreEqual(IList<Month> list1, IList<Month> list2)
         {
             if (list1.Count != list2.Count)
             {
@@ -167,24 +167,24 @@ namespace MyCoach.Model.DataTransferObjects
             switch (dto1)
             {
                 case Category category:
-                    var categories1 = new ObservableCollection<Category> { category };
-                    var categories2 = new ObservableCollection<Category> { dto2 as Category };
+                    var categories1 = new List<Category> { category };
+                    var categories2 = new List<Category> { dto2 as Category };
                     return AreEqual(categories1, categories2);
                 case Exercise exercise:
-                    var exercises1 = new ObservableCollection<Exercise> { exercise };
-                    var exercises2 = new ObservableCollection<Exercise> { dto2 as Exercise };
+                    var exercises1 = new List<Exercise> { exercise };
+                    var exercises2 = new List<Exercise> { dto2 as Exercise };
                     return AreEqual(exercises1, exercises2);
                 case Settings settings:
-                    var settings1 = new ObservableCollection<Settings> { settings };
-                    var settings2 = new ObservableCollection<Settings> { dto2 as Settings };
+                    var settings1 = new List<Settings> { settings };
+                    var settings2 = new List<Settings> { dto2 as Settings };
                     return AreEqual(settings1, settings2);
                 case TrainingSchedule schedule:
-                    var schedules1 = new ObservableCollection<TrainingSchedule> { schedule };
-                    var schedules2 = new ObservableCollection<TrainingSchedule> { dto2 as TrainingSchedule };
+                    var schedules1 = new List<TrainingSchedule> { schedule };
+                    var schedules2 = new List<TrainingSchedule> { dto2 as TrainingSchedule };
                     return AreEqual(schedules1, schedules2);
                 case Month score:
-                    var scores1 = new ObservableCollection<Month> { score };
-                    var scores2 = new ObservableCollection<Month> { dto2 as Month };
+                    var scores1 = new List<Month> { score };
+                    var scores2 = new List<Month> { dto2 as Month };
                     return AreEqual(scores1, scores2);
                 default:
                     return false;
