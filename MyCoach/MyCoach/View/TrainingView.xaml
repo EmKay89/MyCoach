@@ -24,7 +24,10 @@
             <Button Content="Timer"
                     Style="{StaticResource DefaultButton}" Click="Button_Click"/>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Right" Width="300">
+        <StackPanel 
+            DockPanel.Dock="Right" 
+            Width="300"
+            Visibility="{Binding TrainingSettingsEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel>
                 <Label Content="Modus"
                        FontWeight="Bold"/>
@@ -102,6 +105,17 @@
             <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
                        TextWrapping="Wrap"
                        Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <StackPanel Visibility="{Binding UserDefinedTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Label Content="Training laden oder speichern" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource DefaultButton}"
+                        Content="Laden"
+                        Command="{Binding ImportTrainingCommand}"/>
+                    <Button Style="{StaticResource DefaultButton}"
+                        Content="Speichern"
+                        Command="{Binding ExportTrainingCommand}"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
         <ItemsControl BorderBrush="LightGray"
                       BorderThickness="1"

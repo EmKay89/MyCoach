@@ -108,6 +108,7 @@ namespace MyCoach.ViewModel
                     nameof(this.TrainingMode),
                     nameof(this.CircleTrainingElementsVisible),
                     nameof(this.FocusTrainingElementsVisible),
+                    nameof(this.UserDefinedTrainingElementsVisible),
                     nameof(this.CircleOrFocusTrainingElementsVisible),
                     nameof(this.NotEnoughExercisesAvailable),
                     nameof(this.ModeExplanation));
@@ -400,6 +401,8 @@ namespace MyCoach.ViewModel
         public bool CircleTrainingElementsVisible => this.TrainingMode == TrainingMode.CircleTraining;
 
         public bool FocusTrainingElementsVisible => this.TrainingMode == TrainingMode.FocusTraining;
+
+        public bool UserDefinedTrainingElementsVisible => this.TrainingMode == TrainingMode.UserDefinedTraining;
 
         public bool CircleOrFocusTrainingElementsVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
 
