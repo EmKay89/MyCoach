@@ -6,12 +6,8 @@ using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyExtensions.IEnumerable;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MyCoachTests.ViewModel
@@ -21,17 +17,21 @@ namespace MyCoachTests.ViewModel
     {
         #region Initialization and Cleanup
 
+        private const string validExportPath = "validExportPath";
+        private const string validImportPath = "validImportPath";
+        private IFileDialogService fileDialogService;
+        private IMessageBoxService messageBoxService;
         TrainingViewModel sut;
 
         [TestInitialize]
         public void Init()
         {
             base.Initialize();
-            this.sut = new TrainingViewModel();
+            this.SetupServices();
+            this.SetupDataManager();
+            this.sut = new TrainingViewModel(fileDialogService, messageBoxService);
             this.sut.PropertyChanged += this.OnSutPropertyChanged;
-
-            TrainingEvaluator.MessageBoxService = Mock.Of<IMessageBoxService>(service =>
-                service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.OK);
+            TrainingEvaluator.MessageBoxService = this.messageBoxService;
         }
 
         [TestCleanup]
@@ -227,6 +227,163 @@ namespace MyCoachTests.ViewModel
             Assert.IsFalse(this.sut.Training.Any());
         }
 
+        [TestMethod]
+        [DataRow(false, TrainingMode.UserDefinedTraining, true)]
+        [DataRow(true, TrainingMode.UserDefinedTraining, false)]
+        [DataRow(false, TrainingMode.CircleTraining, false)]    
+        public void ImportCommandCanExecute_VariousConditions_ReturnsCorrectValue(
+            bool trainingActive,
+            TrainingMode trainingMode,
+            bool canExecute)
+        {
+            this.sut.TrainingMode = trainingMode;
+
+            if (trainingActive)
+            {
+                this.sut.Training.Start();
+            }
+
+            Assert.AreEqual(canExecute, this.sut.ImportTrainingCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void ImportTrainingCommandExecute_HappyPath_ImportsExercisesFromFileToTraining()
+        {
+            this.sut.ImportTrainingCommand.Execute(null);
+
+            Assert.IsTrue(
+                Utilities.AreEqual(
+                    this.Exercises, 
+                    this.sut.Training.Where(e => e.Type == TrainingElementType.Exercise).Select(e => e.Exercise).ToList()));
+        }
+
+        [TestMethod]
+        public void ImportTrainingCommandExecute_WithPreexistingElements_PreexistingElementsAreCleared()
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+
+            this.sut.ImportTrainingCommand.Execute(null);
+
+            Assert.IsTrue(
+                Utilities.AreEqual(
+                    this.Exercises,
+                    this.sut.Training.Where(e => e.Type == TrainingElementType.Exercise).Select(e => e.Exercise).ToList()));
+        }
+
+        [TestMethod]
+        public void ImportTrainingCommandExecute_AbortedByUser_PreexistingElementsRemain()
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+            this.sut.Training.Add(vm);
+            var okClicked = false;
+            Mock.Get(this.fileDialogService).Setup(
+                s => s.OpenFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked));
+
+            this.sut.ImportTrainingCommand.Execute(null);
+
+            Assert.AreEqual(vm, this.sut.Training.Single());
+        }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("someInvalidPath")]
+        public void ImportTrainingCommandExecute_LoadingErrors_PreexistingElementsRemainAndErrorMessageShown(string path)
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+            this.sut.Training.Add(vm);
+            var okClicked = true;
+            Mock.Get(this.fileDialogService).Setup(
+                s => s.OpenFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked)).Returns(path);
+
+            this.sut.ImportTrainingCommand.Execute(null);
+
+            Assert.AreEqual(vm, this.sut.Training.Single());
+            Mock.Get(this.messageBoxService).Verify(service => service.ShowMessage(
+                ExercisesViewModel.IMPORT_ERROR_TEXT,
+                ExercisesViewModel.IMPORT_ERROR_TEXT,
+                It.IsAny<MessageBoxButton>(),
+                It.IsAny<MessageBoxImage>()), Times.Once());
+        }
+
+        [TestMethod]
+        [DataRow(false, TrainingMode.UserDefinedTraining, true, true)]
+        [DataRow(true, TrainingMode.UserDefinedTraining, true, false)]
+        [DataRow(false, TrainingMode.CircleTraining, true, false)]
+        [DataRow(false, TrainingMode.UserDefinedTraining, false, false)]
+        public void ExportCommandCanExecute_VariousConditions_ReturnsCorrectValue(
+            bool trainingActive,
+            TrainingMode trainingMode,
+            bool hasElement,
+            bool canExecute)
+        {
+            if (hasElement)
+            {
+                var exercise = new Exercise();
+                this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
+            }
+
+            this.sut.TrainingMode = trainingMode;
+
+            if (trainingActive)
+            {
+                this.sut.Training.Start();
+            }
+
+            Assert.AreEqual(canExecute, this.sut.ExportTrainingCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void ExportTrainingCommandExecute_HappyPath_CallsDataManagerToExportListOfExercise()
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+            this.sut.Training.Add(vm);
+
+            this.sut.ExportTrainingCommand.Execute(null);
+
+            Assert.AreEqual(vm, this.sut.Training.Single());
+            Mock.Get(this.DataManager).Verify(
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Once());
+        }
+
+        [TestMethod]
+        public void ExportTrainingCommandExecute_AbortedByUser_DoesNotCallDataManagerToExportListOfExercise()
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+            this.sut.Training.Add(vm);
+            var okClicked = false;
+            Mock.Get(this.fileDialogService).Setup(
+                s => s.SaveFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked));
+
+            this.sut.ExportTrainingCommand.Execute(null);
+
+            Assert.AreEqual(vm, this.sut.Training.Single());
+            Mock.Get(this.DataManager).Verify(
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Never());
+        }
+
+        [TestMethod]
+        [DataRow(null)]
+        [DataRow("someInvalidPath")]
+        public void ExportTrainingCommandExecute_LoadingErrors_DoesNotCallDataManagerToExportListOfExerciseAndErrorMessageShown(string path)
+        {
+            var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
+            this.sut.Training.Add(vm);
+            var okClicked = true;
+            Mock.Get(this.fileDialogService).Setup(
+                s => s.SaveFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked)).Returns(path);
+
+            this.sut.ExportTrainingCommand.Execute(null);
+
+            Assert.AreEqual(vm, this.sut.Training.Single());
+            Mock.Get(this.messageBoxService).Verify(service => service.ShowMessage(
+                ExercisesViewModel.EXPORT_ERROR_TEXT,
+                ExercisesViewModel.EXPORT_ERROR_TEXT,
+                It.IsAny<MessageBoxButton>(),
+                It.IsAny<MessageBoxImage>()), Times.Once());
+            Mock.Get(this.DataManager).Verify(
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Never());
+        }
+
         #endregion
 
         #region Event Reactions
@@ -281,6 +438,25 @@ namespace MyCoachTests.ViewModel
         #endregion
 
         #region Helper Methods
+
+        private void SetupServices()
+        {
+            var okClicked = true;
+            this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
+                service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
+            this.fileDialogService = Mock.Of<IFileDialogService>(service =>
+                service.OpenFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked) == validImportPath &&
+                service.SaveFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), out okClicked) == validExportPath);
+        }
+
+        private void SetupDataManager()
+        {
+            Assert.IsTrue(this.Exercises.Any());
+            List<Exercise> expectedExercises = new List<Exercise>();
+            this.Exercises.Foreach(e => expectedExercises.Add((Exercise)e.Clone()));
+            Mock.Get(this.DataManager).Setup(dm => dm.TryImportTraining(validImportPath, out expectedExercises)).Returns(true);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>())).Returns(true);
+        }
 
         private void AssertThatCategoryNamesAndActivitiyValuesAreCorrect()
         {

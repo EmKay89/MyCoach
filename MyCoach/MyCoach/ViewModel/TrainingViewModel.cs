@@ -3,14 +3,16 @@ using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
-using MyCoach.ViewModel.Events;
+using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace MyCoach.ViewModel
 {
@@ -21,6 +23,8 @@ namespace MyCoach.ViewModel
         private ushort exercisesPerLap = 2;
         private TrainingMode trainingMode;
         private Training training;
+        private IFileDialogService fileDialogService;
+        private IMessageBoxService messageBoxService;
         private bool categoryWarmUpEnabledForTraining = true;
         private bool category1EnabledForTraining = true;
         private bool category2EnabledForTraining = true;
@@ -32,18 +36,24 @@ namespace MyCoach.ViewModel
         private bool category8EnabledForTraining = true;
         private bool categoryCoolDownEnabledForTraining = true;
 
-        public TrainingViewModel()
+        public TrainingViewModel(IFileDialogService fileDialogService = null, IMessageBoxService messageBoxService = null)
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
             this.StartTrainingCommand = new RelayCommand(this.StartTraining, this.CanStartTraining);
+            this.ExportTrainingCommand = new RelayCommand(this.ExportTraining, this.CanExportTraining);
+            this.ImportTrainingCommand = new RelayCommand(this.ImportTraining, this.CanImportTraining);
             this.TrainingMode = TrainingMode.CircleTraining;
             this.Training = new Training();
+            this.fileDialogService = fileDialogService ?? new FileDialogService();
+            this.messageBoxService = messageBoxService ?? new MessageBoxService();
         }
 
         public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
         public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
             "zusammengestellt werden.";
+        public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
+        public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
 
         public List<Category> ActiveCategories => this.Categories.Where(c => c.Active).ToList();
 
@@ -379,6 +389,10 @@ namespace MyCoach.ViewModel
 
         public RelayCommand StartTrainingCommand { get; }
 
+        public RelayCommand ExportTrainingCommand { get; }
+
+        public RelayCommand ImportTrainingCommand { get; }
+
         public bool TrainingActive => this.Training?.IsActive == true;
 
         public bool TrainingSettingsEnabled => !this.TrainingActive;
@@ -441,6 +455,92 @@ namespace MyCoach.ViewModel
             }
 
             return false;
+        }
+
+        private bool CanExportTraining()
+        {
+            return this.TrainingActive == false
+                && this.TrainingMode == TrainingMode.UserDefinedTraining
+                && this.Training.Any(e => e != null && e.Type == TrainingElementType.Exercise);
+        }
+
+        private void ExportTraining()
+        {
+            var path = this.fileDialogService.SaveFile(
+                System.AppDomain.CurrentDomain.BaseDirectory,
+                "XML files (*.xml)|*.xml",
+                1,
+                out bool okClicked);
+
+            if (okClicked == false)
+            {
+                return;
+            }
+
+            if (path == null)
+            {
+                this.messageBoxService.ShowMessage(
+                    EXPORT_ERROR_TEXT,
+                    EXPORT_ERROR_TEXT,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            var exercises = this.Training.Where(e => e.Type == TrainingElementType.Exercise && e.Exercise != null)
+                .Select(e => e.Exercise).ToList();
+
+            if (DataInterface.GetInstance().ExportTraining(path, exercises) == false)
+            {
+                this.messageBoxService.ShowMessage(
+                    EXPORT_ERROR_TEXT,
+                    EXPORT_ERROR_TEXT,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
+        }
+
+        private bool CanImportTraining()
+        {
+            return this.TrainingActive == false
+                && this.TrainingMode == TrainingMode.UserDefinedTraining;
+        }
+
+        private void ImportTraining()
+        {
+            var path = this.fileDialogService.OpenFile(
+                System.AppDomain.CurrentDomain.BaseDirectory,
+                "XML files (*.xml)|*.xml",
+                1,
+                out bool okClicked);
+
+            if (okClicked == false)
+            {
+                return;
+            }
+
+            if (path == null)
+            {
+                this.messageBoxService.ShowMessage(
+                    IMPORT_ERROR_TEXT,
+                    IMPORT_ERROR_TEXT,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            if (DataInterface.GetInstance().ImportTraining(path, out var exercises))
+            {
+                this.Training.Clear();
+                exercises.Foreach(e => this.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, e)));
+                return;
+            }
+
+            this.messageBoxService.ShowMessage(
+                IMPORT_ERROR_TEXT,
+                IMPORT_ERROR_TEXT,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
 
         private List<ExerciseCategory> GetCategoriesEnabledForTraining()
