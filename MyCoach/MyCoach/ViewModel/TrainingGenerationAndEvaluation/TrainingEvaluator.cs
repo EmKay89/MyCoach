@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
@@ -106,7 +107,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 }
             }
 
-            MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information);
+            Task.Run(() => MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information));            
         }
     }
 }

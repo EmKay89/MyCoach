@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyCoach.View"
              xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -16,18 +18,61 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Storyboard x:Key="ShowTrainingSettings">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="300">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="HideTrainingSettings">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </UserControl.Resources>
+    <!--The following code is an alternative way to start the animations based on TrainingActive.
+    The drawback is that the animation ShowTrainingSettings always started when the UserControl
+    was loaded and not only when a property changed. Two NuGet packs were installed for this.
+    <i:Interaction.Triggers>
+        <ei:DataTrigger Binding="{Binding TrainingActive, Mode=OneWay}" Value="True">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource HideTrainingSettings}" ControlStoryboardOption="Play"/>
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding TrainingActive, Mode=OneWay}" Value="False">
+            <ei:ControlStoryboardAction Storyboard="{StaticResource ShowTrainingSettings}" ControlStoryboardOption="Play"/>
+        </ei:DataTrigger>
+    </i:Interaction.Triggers>-->
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
             <Button Command="{Binding StartTrainingCommand}"
                     Style="{StaticResource StartStopButton}"/>
             <Button Content="Timer"
-                    Style="{StaticResource DefaultButton}" Click="Button_Click"/>
+                    Style="{StaticResource DefaultButton}"
+                    Click="TimerButton_Click"/>
         </StackPanel>
-        <StackPanel 
+        <StackPanel x:Name="stackPanel" 
             DockPanel.Dock="Right" 
-            Width="300"
-            Visibility="{Binding TrainingSettingsEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
+            Width="300">
             <StackPanel>
                 <Label Content="Modus"
                        FontWeight="Bold"/>
