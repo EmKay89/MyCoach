@@ -81,13 +81,14 @@ namespace MyCoachTests.ViewModel
             Assert.IsFalse(this.sut.FocusTrainingElementsVisible);
             Assert.IsTrue(this.sut.CircleOrFocusTrainingElementsVisible);
 
-            Assert.AreEqual(6, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
             Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
             Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
         }
 
         [TestMethod]
@@ -103,13 +104,14 @@ namespace MyCoachTests.ViewModel
             Assert.IsTrue(this.sut.CircleOrFocusTrainingElementsVisible);
             Assert.AreEqual(TrainingViewModel.DESCRIPTION_FOCUSTRAINING, this.sut.ModeExplanation);
 
-            Assert.AreEqual(6, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
             Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
             Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
         }
 
         [TestMethod]
@@ -125,13 +127,14 @@ namespace MyCoachTests.ViewModel
             Assert.IsFalse(this.sut.CircleOrFocusTrainingElementsVisible);
             Assert.AreEqual(TrainingViewModel.DESCRIPTION_USERDEFINEDTRAINING, this.sut.ModeExplanation);
 
-            Assert.AreEqual(6, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
             Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
             Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
         }
 
         #endregion
