@@ -67,7 +67,9 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                     if (vm.Type == TrainingElementType.Exercise)
                     {
                         vm.PropertyChanged += this.OnTrainingExerciseChanged;
-                        vm.RemoveExerciseFromTrainingExecuted += this.OnRemoveExerciseFromTrainingExecuted;
+                        vm.RemoveElementFromTrainingExecuted += this.OnRemoveExerciseFromTrainingExecuted;
+                        vm.MoveElementUpExecuted += this.OnMoveExerciseUpExecuted;
+                        vm.MoveElementDownExecuted += this.OnMoveExerciseDownExecuted;
                     }
                 }
             }
@@ -82,11 +84,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 if (item is TrainingElementViewModel vm && vm.Type == TrainingElementType.Exercise)
                 {
                     vm.PropertyChanged -= this.OnTrainingExerciseChanged;
-                    vm.RemoveExerciseFromTrainingExecuted -= this.OnRemoveExerciseFromTrainingExecuted;
+                    vm.RemoveElementFromTrainingExecuted -= this.OnRemoveExerciseFromTrainingExecuted;
+                    vm.MoveElementUpExecuted -= this.OnMoveExerciseUpExecuted;
+                    vm.MoveElementDownExecuted -= this.OnMoveExerciseDownExecuted;
                 }
             }
         }
-               
+
         private void OnTrainingExerciseChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(TrainingElementViewModel.Completed)
@@ -107,6 +111,32 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             {
                 this.IsActive = false;
                 this.Clear();
+            }
+        }
+
+        private void OnMoveExerciseUpExecuted(object sender, ExerciseEventArgs e)
+        {
+            if (sender is TrainingElementViewModel vm)
+            {
+                var index = this.IndexOf(vm);
+
+                if (index > 0)
+                {
+                    this.MoveItem(index, index - 1);
+                }
+            }
+        }
+
+        private void OnMoveExerciseDownExecuted(object sender, ExerciseEventArgs e)
+        {
+            if (sender is TrainingElementViewModel vm)
+            {
+                var index = this.IndexOf(vm);
+
+                if (index >= 0 && index + 1 < this.Count)
+                {
+                    this.MoveItem(index, index + 1);
+                }
             }
         }
     }

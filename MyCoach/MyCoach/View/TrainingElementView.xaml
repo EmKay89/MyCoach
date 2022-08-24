@@ -38,6 +38,26 @@
                 <Image Source="/Resources/DeleteIcon.jpg" 
                        Stretch="Fill"/>
             </Button>
+            <Button Height="15"
+                    Width="20"
+                    DockPanel.Dock="Right"
+                    Background="White"
+                    BorderThickness="0" 
+                    Command="{Binding MoveExerciseDownCommand}"
+                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Resources/InfoIcon.jpg" 
+                       Stretch="Fill"/>
+            </Button>
+            <Button Height="15"
+                    Width="20"
+                    DockPanel.Dock="Right"
+                    Background="White"
+                    BorderThickness="0" 
+                    Command="{Binding MoveExerciseUpCommand}"
+                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Resources/InfoIcon.jpg" 
+                       Stretch="Fill"/>
+            </Button>
             <TextBlock Text="{Binding ExerciseText}"/>
         </DockPanel>
     </Grid>

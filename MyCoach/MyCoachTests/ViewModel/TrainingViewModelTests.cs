@@ -220,12 +220,58 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void TrainingElementVmRemoveExerciseCommandExecute_HappyPath_RemovesExerciseFromTraining()
+        public void TrainingElementVmMoveElementUpCommandExecute_HappyPath_MovesExerciseUp()
+        {
+            var exercise1 = new Exercise();
+            var exercise2 = new Exercise();
+            var exercise3 = new Exercise();
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise1));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise2));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise3));
+
+            this.sut.Training.Last().MoveElementUpCommand.Execute(null);
+            Assert.AreEqual(exercise1, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise2, this.sut.Training.Last().Exercise);
+
+            this.sut.Training[1].MoveElementUpCommand.Execute(null);
+            Assert.AreEqual(exercise3, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise2, this.sut.Training.Last().Exercise);
+
+            this.sut.Training.First().MoveElementUpCommand.Execute(null);
+            Assert.AreEqual(exercise3, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise2, this.sut.Training.Last().Exercise);
+        }
+
+        [TestMethod]
+        public void TrainingElementVmMoveElementDownCommandExecute_HappyPath_MovesExerciseDown()
+        {
+            var exercise1 = new Exercise();
+            var exercise2 = new Exercise();
+            var exercise3 = new Exercise();
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise1));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise2));
+            this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise3));
+
+            this.sut.Training.First().MoveElementDownCommand.Execute(null);
+            Assert.AreEqual(exercise2, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise3, this.sut.Training.Last().Exercise);
+
+            this.sut.Training[1].MoveElementDownCommand.Execute(null);
+            Assert.AreEqual(exercise2, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise1, this.sut.Training.Last().Exercise);
+
+            this.sut.Training.Last().MoveElementDownCommand.Execute(null);
+            Assert.AreEqual(exercise2, this.sut.Training.First().Exercise);
+            Assert.AreEqual(exercise1, this.sut.Training.Last().Exercise);
+        }
+
+        [TestMethod]
+        public void TrainingElementVmRemoveElementCommandExecute_HappyPath_RemovesExerciseFromTraining()
         {
             var exercise = new Exercise();
             this.sut.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, exercise));
 
-            this.sut.Training.Single().RemoveExerciseCommand.Execute(null);
+            this.sut.Training.Single().RemoveElementCommand.Execute(null);
 
             Assert.IsFalse(this.sut.Training.Any());
         }

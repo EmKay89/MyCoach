@@ -33,15 +33,25 @@ namespace MyCoach.ViewModel
         {
             this.type = type;
             this.exercise = exercise;
-            this.RemoveExerciseCommand = new RelayCommand(this.InvokeRemoveExerciseFromTrainingExecuted);
+            this.MoveElementUpCommand = new RelayCommand(this.InvokeMoveElementUpExecuted);
+            this.MoveElementDownCommand = new RelayCommand(this.InvokeMoveElementDownExecuted);
+            this.RemoveElementCommand = new RelayCommand(this.InvokeRemoveElementFromTrainingExecuted);
         }
 
         public const string UNKNOWN_EXERCISE_NAME = "unbekannte Übung";
         public const string LAPDESIGNATION = "Runde";
 
-        public event ExerciseEventHandler RemoveExerciseFromTrainingExecuted;
+        public event ExerciseEventHandler MoveElementUpExecuted;
 
-        public RelayCommand RemoveExerciseCommand { get; }
+        public event ExerciseEventHandler MoveElementDownExecuted;
+
+        public event ExerciseEventHandler RemoveElementFromTrainingExecuted;
+
+        public RelayCommand MoveElementUpCommand { get; }
+
+        public RelayCommand MoveElementDownCommand { get; }
+
+        public RelayCommand RemoveElementCommand { get; }
 
         /// <summary>
         ///     Gets or sets, if this <see cref="TrainingElementViewModel"/> is supposed to represent an
@@ -175,11 +185,31 @@ namespace MyCoach.ViewModel
             return sb.ToString();
         }
 
-        private void InvokeRemoveExerciseFromTrainingExecuted()
+        private void InvokeMoveElementUpExecuted()
         {
             if (this.Type == TrainingElementType.Exercise)
             {
-                this.RemoveExerciseFromTrainingExecuted?.Invoke(
+                this.MoveElementUpExecuted?.Invoke(
+                    this,
+                    new ExerciseEventArgs(this.exercise));
+            }
+        }
+
+        private void InvokeMoveElementDownExecuted()
+        {
+            if (this.Type == TrainingElementType.Exercise)
+            {
+                this.MoveElementDownExecuted?.Invoke(
+                    this,
+                    new ExerciseEventArgs(this.exercise));
+            }
+        }
+
+        private void InvokeRemoveElementFromTrainingExecuted()
+        {
+            if (this.Type == TrainingElementType.Exercise)
+            {
+                this.RemoveElementFromTrainingExecuted?.Invoke(
                     this,
                     new ExerciseEventArgs(this.exercise));
             }
