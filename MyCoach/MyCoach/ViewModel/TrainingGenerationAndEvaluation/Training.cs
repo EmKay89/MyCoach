@@ -39,7 +39,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
                 if (this.IsActive)
                 {
-                    this.Foreach(element => element.Activate());
+                    this.ForEach(element => element.Activate());
                 }                
             }
         }

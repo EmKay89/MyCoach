@@ -78,7 +78,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void Evaluate_TrainingWithCurentMonthInTimeBasedScheduleButCategoriesAreNotActive_ScoresNotChanged()
         {
-            this.Categories.Foreach(c => c.Active = false);
+            this.Categories.ForEach(c => c.Active = false);
 
             this.CompleteTraining();
 

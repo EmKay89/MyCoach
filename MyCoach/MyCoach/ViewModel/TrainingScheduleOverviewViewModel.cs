@@ -139,7 +139,7 @@ namespace MyCoach.ViewModel
         {
             this.AvailableCategories.Clear();
             this.AvailableCategories.Add(null);
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c));
+            Utilities.GetActiveTrainingCategories().ForEach(c => this.AvailableCategories.Add(c));
             UpdateAvailableCategoryListItems(true);
         }
 

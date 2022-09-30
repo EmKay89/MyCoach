@@ -97,7 +97,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ScheduleEditingType_ChangesToDivideTotal_TotalPointsDistributedCorrectlyAndPropertyChangedEventsRaised()
         {
-            this.Categories.Foreach(c => c.Active = true);
+            this.Categories.ForEach(c => c.Active = true);
             this.PropertyChangedEvents.Clear();
 
             this.sut.ScheduleEditingType = ScheduleEditingType.DivideTotal;
@@ -132,7 +132,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void ScheduleEditingType_ChangesTo_SumUpTotal()
         {
-            this.Categories.Foreach(c => c.Active = true);
+            this.Categories.ForEach(c => c.Active = true);
             this.PropertyChangedEvents.Clear();
 
             this.sut.ScheduleEditingType = ScheduleEditingType.SumUpTotal;

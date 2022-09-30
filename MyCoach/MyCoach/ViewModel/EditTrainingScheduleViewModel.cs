@@ -32,7 +32,7 @@ namespace MyCoach.ViewModel
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
 
             DataInterface.GetInstance().GetData<Category>().CollectionChanged += this.OnCategoriesChanged;
-            DataInterface.GetInstance().GetData<Category>().Foreach(c => c.PropertyChanged += this.OnCategoryChanged);
+            DataInterface.GetInstance().GetData<Category>().ForEach(c => c.PropertyChanged += this.OnCategoryChanged);
 
             this.DeleteScheduleCommand = new RelayCommand(() => this.DeleteSchedule());
             this.DeleteScoresCommand = new RelayCommand(() => this.DeleteScores());
@@ -89,7 +89,7 @@ namespace MyCoach.ViewModel
 
                 this.scheduleEditingType = value;             
                 this.InvokePropertyChanged();
-                this.EditMonthViewModels.Foreach(vm => vm.ScheduleEditingType = value);
+                this.EditMonthViewModels.ForEach(vm => vm.ScheduleEditingType = value);
             }
         }
 
@@ -200,7 +200,7 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            DataInterface.GetInstance().GetData<Month>().Foreach(m => m.ResetScores());
+            DataInterface.GetInstance().GetData<Month>().ForEach(m => m.ResetScores());
 
             var resultSaving = DataInterface.GetInstance().SaveData<Month>();
             if (resultSaving == false)
@@ -231,7 +231,7 @@ namespace MyCoach.ViewModel
             DataInterface.GetInstance().SetDefaults<TrainingSchedule>();
             var savedSchedule = DataInterface.GetInstance().GetData<TrainingSchedule>().FirstOrDefault();
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
-            savedMonths.Foreach(m => m.ResetGoals());
+            savedMonths.ForEach(m => m.ResetGoals());
             savedMonths.UpdateStartDatesBySchedule(savedSchedule);
 
             var resultSaving = DataInterface.GetInstance().SaveData<Month>() && DataInterface.GetInstance().SaveData<TrainingSchedule>();
@@ -256,11 +256,11 @@ namespace MyCoach.ViewModel
                 nameof(this.Type));
 
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
-            this.Months.Foreach(m => m.PropertyChanged -= this.OnMonthChanged);
+            this.Months.ForEach(m => m.PropertyChanged -= this.OnMonthChanged);
             this.Months.Clear();
-            savedMonths.Foreach(m => this.Months.Add((Month)m.Clone()));
+            savedMonths.ForEach(m => this.Months.Add((Month)m.Clone()));
             this.Months.UpdateStartDatesBySchedule(this.Schedule);
-            this.Months.Foreach(m => m.PropertyChanged += this.OnMonthChanged);
+            this.Months.ForEach(m => m.PropertyChanged += this.OnMonthChanged);
 
             this.HasUnsavedChanges = false;
             this.UpdateEditMonthViewModels();
@@ -306,7 +306,7 @@ namespace MyCoach.ViewModel
 
             if (changesWillDeleteScores)
             {
-                this.Months.Foreach(m => m.ResetScores());
+                this.Months.ForEach(m => m.ResetScores());
             }
 
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
@@ -367,7 +367,7 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().Foreach(c => this.AvailableCategories.Add(c.Name));
+            Utilities.GetActiveTrainingCategories().ForEach(c => this.AvailableCategories.Add(c.Name));
             this.AvailableCategories.Add("Gesamt");
         }
 
@@ -395,7 +395,7 @@ namespace MyCoach.ViewModel
         private void UpdateScoresOfMonths()
         {
             var savedMonths = DataInterface.GetInstance().GetData<Month>();
-            savedMonths.Foreach(sm => sm.CopyScoresTo(this.Months.Where(m => m.Number == sm.Number).First()));
+            savedMonths.ForEach(sm => sm.CopyScoresTo(this.Months.Where(m => m.Number == sm.Number).First()));
         }
     }
 }

@@ -154,7 +154,7 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void StartCommandCanExecute_CircleTrainingWithoutEnabledCategories_False()
         {            
-            this.Categories.Foreach(c => c.Active = false);
+            this.Categories.ForEach(c => c.Active = false);
             this.sut.TrainingMode = TrainingMode.CircleTraining;
 
             Assert.IsFalse(this.sut.StartTrainingCommand.CanExecute(null));
@@ -454,14 +454,14 @@ namespace MyCoachTests.ViewModel
         [TestMethod]
         public void CategoryChanges_Name_CategoriesAndCategoryNamesDisplayedCorrectly()
         {
-            this.Categories.Foreach(c => c.Name = string.Concat(c.Name, "_Test"));
+            this.Categories.ForEach(c => c.Name = string.Concat(c.Name, "_Test"));
             this.AssertThatCategoryNamesAndActivitiyValuesAreCorrect();
         }
 
         [TestMethod]
         public void CategoryChanges_Active_CategoriesAndCategoryNamesDisplayedCorrectly()
         {
-            this.Categories.Foreach(c => c.Active = !c.Active);
+            this.Categories.ForEach(c => c.Active = !c.Active);
             this.AssertThatCategoryNamesAndActivitiyValuesAreCorrect();
         }
 
@@ -502,7 +502,7 @@ namespace MyCoachTests.ViewModel
         {
             Assert.IsTrue(this.Exercises.Any());
             List<Exercise> expectedExercises = new List<Exercise>();
-            this.Exercises.Foreach(e => expectedExercises.Add((Exercise)e.Clone()));
+            this.Exercises.ForEach(e => expectedExercises.Add((Exercise)e.Clone()));
             Mock.Get(this.DataManager).Setup(dm => dm.TryImportTraining(validImportPath, out expectedExercises)).Returns(true);
             Mock.Get(this.DataManager).Setup(dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>())).Returns(true);
         }

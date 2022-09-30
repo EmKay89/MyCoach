@@ -535,7 +535,7 @@ namespace MyCoach.ViewModel
             if (DataInterface.GetInstance().ImportTraining(path, out var exercises))
             {
                 this.Training.Clear();
-                exercises.Foreach(e => this.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, e)));
+                exercises.ForEach(e => this.Training.Add(new TrainingElementViewModel(TrainingElementType.Exercise, e)));
                 return;
             }
 
