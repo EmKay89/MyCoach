@@ -33,7 +33,7 @@
                     DockPanel.Dock="Right"
                     Background="White"
                     BorderThickness="0" 
-                    Command="{Binding RemoveExerciseCommand}"
+                    Command="{Binding RemoveElementCommand}"
                     Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image Source="/Resources/DeleteIcon.jpg" 
                        Stretch="Fill"/>
@@ -43,7 +43,7 @@
                     DockPanel.Dock="Right"
                     Background="White"
                     BorderThickness="0" 
-                    Command="{Binding MoveExerciseDownCommand}"
+                    Command="{Binding MoveElementDownCommand}"
                     Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image Source="/Resources/InfoIcon.jpg" 
                        Stretch="Fill"/>
@@ -53,7 +53,7 @@
                     DockPanel.Dock="Right"
                     Background="White"
                     BorderThickness="0" 
-                    Command="{Binding MoveExerciseUpCommand}"
+                    Command="{Binding MoveElementUpCommand}"
                     Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image Source="/Resources/InfoIcon.jpg" 
                        Stretch="Fill"/>
