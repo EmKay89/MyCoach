@@ -6,9 +6,24 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>
-        <Label Content="Einstellungen bearbeiten"
+    <StackPanel>        
+        <Label Content="Einstellungen ändern"
                FontWeight="Bold"/>
+        <TextBlock Text="Vorlagen für die Bezeichnung der Einheiten von Übungen:"/>
+        <ListBox Height="100" 
+                 ItemsSource="{Binding Units}"
+                 SelectedItem="{Binding SelectedUnit}"/>
+        <TextBox Text="{Binding NewUnit}"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Hinzufügen"
+                    Command="{Binding AddUnitCommand}"
+                    Style="{StaticResource DefaultButton}"
+                    HorizontalAlignment="Left"/>
+            <Button Content="Entfernen"
+                    Command="{Binding DeleteUnitCommand}"
+                    Style="{StaticResource DefaultButton}"
+                    HorizontalAlignment="Left"/>
+        </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>

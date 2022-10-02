@@ -3,20 +3,18 @@ using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace MyCoach.ViewModel
 {
     public class SettingsViewModel : BaseViewModel
     {
         private string permissionText;
+        private string newUnit = string.Empty;
         private readonly IMessageBoxService messageBoxService;
 
         public SettingsViewModel(IMessageBoxService messageBoxService = null)
@@ -24,9 +22,13 @@ namespace MyCoach.ViewModel
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
             this.Settings = new Settings();
             this.LoadSettingsBuffer();
+
+            this.AddUnitCommand = new RelayCommand(this.AddUnit, () => this.NewUnit != null && this.NewUnit != string.Empty);
+            this.DeleteUnitCommand = new RelayCommand(this.DeleteUnit, () => this.SelectedUnit != null);
             this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedChanges);
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
             this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedChanges);
+
             this.PropertyChanged += delegate { this.HasUnsavedChanges = true; };
         }
 
@@ -39,6 +41,10 @@ namespace MyCoach.ViewModel
             { ExerciseSchedulingRepetitionPermission.Yes, "Ja" }
         };
 
+        public RelayCommand AddUnitCommand { get; }
+
+        public RelayCommand DeleteUnitCommand { get; }
+
         public RelayCommand SaveSettingsCommand { get; }
 
         public RelayCommand SetDefaultsCommand { get; }
@@ -46,6 +52,25 @@ namespace MyCoach.ViewModel
         public RelayCommand ResetSettingsCommand { get; }
 
         public Settings Settings { get; set; }
+
+        public ObservableCollection<string> Units => this.Settings.Units;
+
+        public string NewUnit
+        {
+            get => newUnit;
+
+            set
+            {
+                if (value == newUnit)
+                {
+                    return;
+                }
+
+                newUnit = value;
+                this.InvokePropertyChanged();
+            }
+        }
+        public string SelectedUnit { get; set; }
 
         public ExerciseSchedulingRepetitionPermission Permission
         {
@@ -208,16 +233,35 @@ namespace MyCoach.ViewModel
             }
         }
 
+        private void AddUnit()
+        {
+            this.Units.Add(this.NewUnit);
+            this.NewUnit = string.Empty;
+        }
+
+        private void DeleteUnit()
+        {
+            if (this.Units.Contains(SelectedUnit))
+            {
+                this.Units.Remove(SelectedUnit);
+            }
+        }
+
         private void LoadSettingsBuffer()
         {
-            var savedSettings = DataInterface.GetInstance().GetData<Settings>()?.FirstOrDefault();
-
-            this.Settings = savedSettings != null
-                ? (Settings)savedSettings.Clone()
-                : (Settings)DefaultDtos.Settings.FirstOrDefault().Clone();
+            this.Units.CollectionChanged -= this.OnUnitsChanged;
+            var savedSettings = DataInterface.GetInstance().GetData<Settings>()?.FirstOrDefault();            
+            if (savedSettings == null)
+            {
+                DefaultDtos.Settings.Single().CopyValuesTo(this.Settings);
+            }
+            else
+            {
+                savedSettings.CopyValuesTo(this.Settings);
+            }            
 
             this.UpdatePermissionText();
-            this.InvokePropertiesChanged(   
+            this.InvokePropertiesChanged(
                 nameof(this.Permission),
                 nameof(this.PermissionText),
                 nameof(this.RepeatsRound1),
@@ -228,7 +272,13 @@ namespace MyCoach.ViewModel
                 nameof(this.ScoresRound2),
                 nameof(this.ScoresRound3),
                 nameof(this.ScoresRound4));
+            this.Units.CollectionChanged += this.OnUnitsChanged;
             this.HasUnsavedChanges = false;
+        }
+
+        private void OnUnitsChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.HasUnsavedChanges = true;
         }
 
         private void SaveSettings()

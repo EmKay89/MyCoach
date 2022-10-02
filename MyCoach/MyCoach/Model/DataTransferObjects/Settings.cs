@@ -1,4 +1,7 @@
 ﻿using MyCoach.Model.Defines;
+using MyExtensions.IEnumerable;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MyCoach.Model.DataTransferObjects
 {
@@ -52,6 +55,11 @@ namespace MyCoach.Model.DataTransferObjects
         /// </summary>
         public ushort ScoresRound4 { get; set; }
 
+        /// <summary>
+        ///     Ruft eine Liste mit vordefinierten Einheiten ab, die Übungen zugewiesen werden können (z.B. Wiederholungen oder Minuten).
+        /// </summary>
+        public ObservableCollection<string> Units { get; } = new ObservableCollection<string>();
+
         /// <inheritdoc/>
         public override void CopyValuesTo(DtoBase target)
         {
@@ -66,6 +74,8 @@ namespace MyCoach.Model.DataTransferObjects
                 targetSettings.ScoresRound3 = ScoresRound3;
                 targetSettings.RepeatsRound4 = RepeatsRound4;
                 targetSettings.ScoresRound4 = ScoresRound4;
+                targetSettings.Units.Clear();
+                this.Units.ForEach(u => targetSettings.Units.Add(u));
             }
         }
 
@@ -81,7 +91,9 @@ namespace MyCoach.Model.DataTransferObjects
                 && this.RepeatsRound3 == settings.RepeatsRound3
                 && this.ScoresRound3 == settings.ScoresRound3
                 && this.RepeatsRound4 == settings.RepeatsRound4
-                && this.ScoresRound4 == settings.ScoresRound4;
+                && this.ScoresRound4 == settings.ScoresRound4
+                && this.Units.Count == settings.Units.Count
+                && this.Units.TrueForAll(u => settings.Units[this.Units.IndexOf(u)] == u);
         }
     }
 }

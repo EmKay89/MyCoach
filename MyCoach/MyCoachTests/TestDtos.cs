@@ -139,7 +139,7 @@ namespace MyCoachTests
 
         private static ObservableCollection<Settings> CreateSettings()
         {
-            return new ObservableCollection<Settings>
+            var settings = new ObservableCollection<Settings>
             {
                 new Settings
                 {
@@ -154,6 +154,9 @@ namespace MyCoachTests
                     ScoresRound4 = 101
                 }
             };
+
+            settings.Single().Units.Add("TestUnit");
+            return settings;
         }
 
         private static ObservableCollection<TrainingSchedule> CreateSchedules()

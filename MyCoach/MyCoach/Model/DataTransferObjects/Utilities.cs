@@ -72,9 +72,18 @@ namespace MyCoach.Model.DataTransferObjects
                     list1[i].RepeatsRound3 != list2[i].RepeatsRound3 ||
                     list1[i].ScoresRound3 != list2[i].ScoresRound3 ||
                     list1[i].RepeatsRound4 != list2[i].RepeatsRound4 ||
-                    list1[i].ScoresRound4 != list2[i].ScoresRound4)
+                    list1[i].ScoresRound4 != list2[i].ScoresRound4 ||
+                    list1[i].Units.Count != list2[i].Units.Count)
                 {
                     return false;
+                }
+
+                for (int j = 0; j < list1[i].Units.Count; j++)
+                {
+                    if (list1[i].Units[j] != list2[i].Units[j])
+                    {
+                        return false;
+                    }
                 }
             }
 

@@ -9,7 +9,8 @@ namespace MyCoach.Model.DataTransferObjects
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        ///     Erzeugt eine neue Instanz des Objekts mit kopierten Werten, jedoch ohne Abonnenten auf Events.
+        ///     Erzeugt eine neue Instanz des Objekts mit kopierten Werten, jedoch ohne Abonnenten 
+        ///     auf PropertyChangedEvents.
         /// </summary>
         public virtual object Clone()
         {
@@ -24,7 +25,7 @@ namespace MyCoach.Model.DataTransferObjects
         public abstract void CopyValuesTo(DtoBase target);
 
         /// <summary>
-        ///     Entfernt alle Abonnenten aller Events.
+        ///     Entfernt alle Abonnenten aller PropertyChangedEvents.
         /// </summary>
         public void ResetSubscriptions() => PropertyChanged = null;
 

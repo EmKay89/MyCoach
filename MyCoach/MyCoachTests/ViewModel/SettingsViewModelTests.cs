@@ -1,18 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MyCoach.DataHandling;
-using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MyCoachTests.ViewModel
@@ -31,7 +25,7 @@ namespace MyCoachTests.ViewModel
             base.Initialize();
             this.messageBoxService = Mock.Of<IMessageBoxService>(service =>
                 service.ShowMessage(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<MessageBoxButton>(), It.IsAny<MessageBoxImage>()) == MessageBoxResult.Yes);
-            DataInterface.SetDataManager(DataManager);
+            DataInterface.SetDataManager(this.DataManager);
             this.sut = new SettingsViewModel(this.messageBoxService);
             this.sut.PropertyChanged += this.OnSutPropertyChanged;
         }
@@ -170,6 +164,64 @@ namespace MyCoachTests.ViewModel
         #endregion
 
         #region Command Tests
+
+        [TestMethod]
+        public void AddUnitCommandCanExecute_NewUnitIsEmpty_ReturnsFalse()
+        {
+            this.sut.NewUnit = string.Empty;
+
+            Assert.IsFalse(this.sut.AddUnitCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void AddUnitCommandCanExecute_NewUnitIsNotEmpty_ReturnsTrue()
+        {
+            this.sut.NewUnit = "AnotherTestUnit";
+
+            Assert.IsTrue(this.sut.AddUnitCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void AddUnitCommandExecute_HappyPath_AddsNewUnitToExistingUnitsAndClearsNewUnitAfterwards()
+        {
+            int preexistingUnitsCount = this.sut.Units.Count;
+            this.sut.NewUnit = "AnotherTestUnit";
+
+            this.sut.AddUnitCommand.Execute(null);
+
+            Assert.AreEqual(preexistingUnitsCount + 1, this.sut.Units.Count);
+            Assert.AreEqual(this.sut.Units.Last(), "AnotherTestUnit");
+            Assert.AreEqual(this.sut.NewUnit, string.Empty);
+        }
+
+        [TestMethod]
+        public void DeleteUnitCommandCanExecute_SelectedUnitIsNull_ReturnsFalse()
+        {
+            this.sut.SelectedUnit = null;
+
+            Assert.IsFalse(this.sut.DeleteUnitCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void DeleteUnitCommandCanExecute_SelectedUnitIsNotNull_ReturnsTrue()
+        {
+            this.sut.SelectedUnit = this.sut.Units.First();
+
+            Assert.IsTrue(this.sut.DeleteUnitCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void DeleteUnitCommandExecute_HappyPath_DeletesSelectedUnitFromExistingUnits()
+        {
+            int preexistingUnitsCount = this.sut.Units.Count;
+            string firstUnit = this.sut.Units.First();
+            this.sut.SelectedUnit = firstUnit;
+
+            this.sut.DeleteUnitCommand.Execute(null);
+
+            Assert.AreEqual(preexistingUnitsCount - 1, this.sut.Units.Count);
+            Assert.IsFalse(this.sut.Units.Contains(firstUnit));
+        }
 
         [TestMethod]
         public void SaveSettingsCommandCanExecute_NoUnsavedChanges_ReturnsFalse()

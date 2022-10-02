@@ -1,9 +1,12 @@
-﻿using MyCoach.Model.DataTransferObjects;
+﻿using MyCoach.DataHandling;
+using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Events;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 
 namespace MyCoach.ViewModel
 {
@@ -17,18 +20,14 @@ namespace MyCoach.ViewModel
             this.AddExerciseToTrainingCommand = new RelayCommand(this.InvokeAddExerciseToTrainingExecuted);
             this.RemoveExerciseCommand = new RelayCommand(this.InvokeDeleteExerciseExecuted);
             this.exercise.PropertyChanged += this.IvokeExerciseChanged;
+            this.SelectableUnits = DataInterface.GetInstance().GetData<Settings>().Single().Units;
         }
 
         public event ExerciseEventHandler AddExerciseToTrainingExecuted;
         public event ExerciseEventHandler DeleteExerciseExecuted;
         public event ExerciseEventHandler ExerciseChanged;
 
-        public List<string> SelectableUnits { get; } = new List<string>
-        {
-            "Wiederholungen je Seite",
-            "Minuten",
-            "Sekunden"
-        };
+        public ObservableCollection<string> SelectableUnits { get; } = new ObservableCollection<string>();
 
         public Exercise Exercise => this.exercise;
 
