@@ -23,8 +23,8 @@ namespace MyCoach.ViewModel
         private ushort exercisesPerLap = 2;
         private TrainingMode trainingMode;
         private Training training;
-        private IFileDialogService fileDialogService;
-        private IMessageBoxService messageBoxService;
+        private readonly IFileDialogService fileDialogService;
+        private readonly IMessageBoxService messageBoxService;
         private bool categoryWarmUpEnabledForTraining = true;
         private bool category1EnabledForTraining = true;
         private bool category2EnabledForTraining = true;
@@ -388,6 +388,8 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public ushort Multiplyer { get; set; } = 100;
+
         public RelayCommand StartTrainingCommand { get; }
 
         public RelayCommand ExportTrainingCommand { get; }
@@ -431,8 +433,9 @@ namespace MyCoach.ViewModel
                 this.Training = TrainingGenerator.CreateTraining(
                     new TrainingSettings(
                         this.TrainingMode,
-                        this.LapCount,
+                        this.LapCount,                        
                         this.ExercisesPerLap,
+                        this.Multiplyer,
                         this.CategoryInFocus?.ID ?? default,
                         this.GetCategoriesEnabledForTraining()));
             }

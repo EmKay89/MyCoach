@@ -132,6 +132,7 @@ namespace MyCoach.View
             Application.Current.Dispatcher.BeginInvoke(
                 DispatcherPriority.Loaded, new Action<DatePicker>(ApplyDateFormat), datePicker);
         }
+
         private static void ApplyDateFormat(DatePicker datePicker)
         {
             var binding = new Binding("SelectedDate")
@@ -163,7 +164,6 @@ namespace MyCoach.View
             return (ButtonBase)datePicker.Template.FindName("PART_Button", datePicker);
         }
 
-
         /// <summary>
         ///     Prevents a bug in the DatePicker, where clicking the Dropdown open button results in Text being set to default formatting regardless of StringFormat or binding overrides
         /// </summary>
@@ -192,8 +192,6 @@ namespace MyCoach.View
                 e.Handled = true;
             }
         }
-
-
 
         private static TextBox GetTemplateTextBox(Control control)
         {

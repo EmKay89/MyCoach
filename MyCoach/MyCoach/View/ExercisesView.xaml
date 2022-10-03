@@ -10,6 +10,8 @@
         <StackPanel>
             <Label Content="Übungssatz importieren oder exportieren"
                FontWeight="Bold"/>
+            <TextBlock Text="Hinweis: Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
+                       TextWrapping="WrapWithOverflow"/>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Export"
                         Style="{StaticResource DefaultButton}"

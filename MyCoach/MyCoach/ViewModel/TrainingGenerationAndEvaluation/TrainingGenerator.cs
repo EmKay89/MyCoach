@@ -5,8 +5,6 @@ using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
@@ -181,13 +179,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return (double)globalSettings.RepeatsRound1 / (double)100;
+                    return (double)globalSettings.RepeatsRound1 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 2:
-                    return (double)globalSettings.RepeatsRound2 / (double)100;
+                    return (double)globalSettings.RepeatsRound2 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 3:
-                    return (double)globalSettings.RepeatsRound3 / (double)100;
+                    return (double)globalSettings.RepeatsRound3 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 4:
-                    return (double)globalSettings.RepeatsRound4 / (double)100;
+                    return (double)globalSettings.RepeatsRound4 * (double)trainingSettings.Multiplyer / (double)10000;
                 default:
                     return 1.0;
             }
@@ -198,13 +196,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return (double)globalSettings.ScoresRound1 / (double)100;
+                    return (double)globalSettings.ScoresRound1 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 2:
-                    return (double)globalSettings.ScoresRound2 / (double)100;
+                    return (double)globalSettings.ScoresRound2 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 3:
-                    return (double)globalSettings.ScoresRound3 / (double)100;
+                    return (double)globalSettings.ScoresRound3 * (double)trainingSettings.Multiplyer / (double)10000;
                 case 4:
-                    return (double)globalSettings.ScoresRound4 / (double)100;
+                    return (double)globalSettings.ScoresRound4 * (double)trainingSettings.Multiplyer / (double)10000;
                 default:
                     return 1.0;
             }

@@ -141,7 +141,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTraining()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 3, 2, ExerciseCategory.Category1);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 3, 2, 100, ExerciseCategory.Category1);
 
             var training = TrainingGenerator.CreateTraining(settings);
 
@@ -161,7 +161,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingLimitedByExerciseAvailabilityAndRepetitionPermission()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.WarmUp);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.WarmUp);
             this.Exercises.Where(e => e.Category == ExerciseCategory.WarmUp).First().Active = false;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -182,7 +182,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingWithRepeatsNotPreferred()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.CoolDown);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.CoolDown);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.NotPreferred;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -203,7 +203,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingWithRepeats()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.Category8);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.Category8);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -234,7 +234,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.Settings.ScoresRound4 = 40;
             this.SetupData(TestExercises.TwoOfEachCategory);
             this.Exercises.Where(e => e.Category == ExerciseCategory.Category1).Last().Active = false;
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 1, ExerciseCategory.Category1);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 1, 150, ExerciseCategory.Category1);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -242,21 +242,21 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.AssertLapSeparatorsPresenceAndName(training, false, 4, false);
             this.AssertExercisesOfCategory(training, ExerciseCategory.Category1, 4, true, 1, 1, 1, 1);
             var viewModels = training.Where(e => e.Type == TrainingElementType.Exercise).ToList();
-            Assert.AreEqual(viewModels[0].RepeatsMultiplier, 2.0);
-            Assert.AreEqual(viewModels[1].RepeatsMultiplier, 1.0);
-            Assert.AreEqual(viewModels[2].RepeatsMultiplier, 0.5);
-            Assert.AreEqual(viewModels[3].RepeatsMultiplier, 0.33);
-            Assert.AreEqual(viewModels[0].ScoresMultiplier, 3.0);
-            Assert.AreEqual(viewModels[1].ScoresMultiplier, 1.5);
-            Assert.AreEqual(viewModels[2].ScoresMultiplier, 0.75);
-            Assert.AreEqual(viewModels[3].ScoresMultiplier, 0.4);
-
+            Assert.AreEqual(viewModels[0].RepeatsMultiplier, 3.0);
+            Assert.AreEqual(viewModels[1].RepeatsMultiplier, 1.5);
+            Assert.AreEqual(viewModels[2].RepeatsMultiplier, 0.75);
+            Assert.AreEqual(viewModels[3].RepeatsMultiplier, 0.495);
+            Assert.AreEqual(viewModels[0].ScoresMultiplier, 4.5);
+            Assert.AreEqual(viewModels[1].ScoresMultiplier, 2.25);
+            Assert.AreEqual(viewModels[2].ScoresMultiplier, 1.125);
+            Assert.AreEqual(viewModels[3].ScoresMultiplier, 0.6);
         }
 
         private TrainingSettings GetTrainingSettings(
             TrainingMode mode,
             ushort lapCount,
             ushort exercisesPerLap = 0,
+            ushort multiplyer = 100,
             ExerciseCategory categoryInFocus = ExerciseCategory.Category1)
         {
             this.activeCategoriesForTrainingSettings = new List<ExerciseCategory>()
@@ -273,7 +273,13 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 ExerciseCategory.CoolDown
             };
 
-            return new TrainingSettings(mode, lapCount, exercisesPerLap, categoryInFocus, activeCategoriesForTrainingSettings);
+            return new TrainingSettings(
+                mode,
+                lapCount,
+                exercisesPerLap,
+                multiplyer,
+                categoryInFocus,
+                activeCategoriesForTrainingSettings);
         }
 
         private void AssertLapSeparatorsPresenceAndName(

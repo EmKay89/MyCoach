@@ -12,12 +12,14 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             TrainingMode trainingMode,
             ushort lapCount,
             ushort exercisesPerLap,
+            ushort multiplyer,
             ExerciseCategory categoryInFocus,
             List<ExerciseCategory> categoriesEnabledForTraining)
         {
             TrainingMode = trainingMode;
             LapCount = lapCount;
             ExercisesPerLap = exercisesPerLap;
+            Multiplyer = multiplyer;
             CategoryInFocus = categoryInFocus;
             CategoriesEnabledForTraining = categoriesEnabledForTraining;
         }
@@ -27,6 +29,8 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
         public ushort LapCount { get; }
 
         public ushort ExercisesPerLap { get; }
+
+        public ushort Multiplyer { get; }
 
         public ExerciseCategory CategoryInFocus { get; }
 

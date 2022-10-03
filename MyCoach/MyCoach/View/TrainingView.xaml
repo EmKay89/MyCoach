@@ -150,6 +150,15 @@
             <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
                        TextWrapping="Wrap"
                        Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <StackPanel Visibility="{Binding CircleOrFocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Label Content="Multiplikator für Wiederholungen und Punkte" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Text="{Binding Multiplyer}"
+                        IsEnabled="{Binding TrainingSettingsEnabled}"
+                        Width="100"/>
+                    <TextBlock Text="%"/>
+                </StackPanel>
+            </StackPanel>
             <StackPanel Visibility="{Binding UserDefinedTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Training laden oder speichern" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
