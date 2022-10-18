@@ -367,7 +367,7 @@ namespace MyCoach.ViewModel
         private void UpdateAvailableCategories()
         {
             this.AvailableCategories.Clear();
-            Utilities.GetActiveTrainingCategories().ForEach(c => this.AvailableCategories.Add(c.Name));
+            Model.DataTransferObjects.Utilities.GetActiveTrainingCategories().ForEach(c => this.AvailableCategories.Add(c.Name));
             this.AvailableCategories.Add("Gesamt");
         }
 

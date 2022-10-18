@@ -5,13 +5,12 @@ using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
-using MyExtensions.IEnumerable;
+using MyCoach.ViewModel.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Windows;
 
 namespace MyCoach.ViewModel
@@ -49,9 +48,6 @@ namespace MyCoach.ViewModel
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
         }
 
-        public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
-        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
-            "zusammengestellt werden.";
         public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
 
@@ -66,6 +62,7 @@ namespace MyCoach.ViewModel
         public Dictionary<TrainingMode, string> ModesWithCaption { get; } = new Dictionary<TrainingMode, string>
         {
             { TrainingMode.CircleTraining, "Zirkeltraining" },
+            { TrainingMode.RandomTraining, "Zufallstraining" },
             { TrainingMode.FocusTraining, "Fokustraining" },
             { TrainingMode.UserDefinedTraining, "Benutzerdefiniertes Training" }
         };
@@ -106,16 +103,18 @@ namespace MyCoach.ViewModel
 
                 this.InvokePropertiesChanged(
                     nameof(this.TrainingMode),
-                    nameof(this.CircleTrainingElementsVisible),
-                    nameof(this.FocusTrainingElementsVisible),
-                    nameof(this.UserDefinedTrainingElementsVisible),
-                    nameof(this.CircleOrFocusTrainingElementsVisible),
+                    nameof(this.SingleCategorySelectionVisible),
+                    nameof(this.MultipleCategorySelectionVisible),
+                    nameof(this.LapCountSelectionVisible),
+                    nameof(this.ExercisesPerLapSelectionVisible),
+                    nameof(this.MultiplyerSelectionVisible),
+                    nameof(this.LoadingSavingButtonsVisisble),
                     nameof(this.NotEnoughExercisesAvailable),
                     nameof(this.ModeExplanation));
             }
         }
 
-        public string ModeExplanation => GetTrainingModeExplanation();
+        public string ModeExplanation => TrainingModeDescriptions.GetTrainingModeDescription(this.TrainingMode);
 
         public Category CategoryInFocus
         {
@@ -400,15 +399,22 @@ namespace MyCoach.ViewModel
 
         public bool TrainingSettingsEnabled => !this.TrainingActive;
 
-        public bool CircleTrainingElementsVisible => this.TrainingMode == TrainingMode.CircleTraining;
+        public bool SingleCategorySelectionVisible => this.TrainingMode == TrainingMode.FocusTraining;
 
-        public bool FocusTrainingElementsVisible => this.TrainingMode == TrainingMode.FocusTraining;
+        public bool MultipleCategorySelectionVisible => this.TrainingMode == TrainingMode.CircleTraining
+            || this.TrainingMode == TrainingMode.RandomTraining;
 
-        public bool UserDefinedTrainingElementsVisible => this.TrainingMode == TrainingMode.UserDefinedTraining;
+        public bool LapCountSelectionVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
 
-        public bool CircleOrFocusTrainingElementsVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
+        public bool ExercisesPerLapSelectionVisible => this.TrainingMode == TrainingMode.FocusTraining
+            || this.TrainingMode == TrainingMode.RandomTraining;
 
-        public bool NotEnoughExercisesAvailable => this.AreEnoughExercisesAvailable() == false;
+        public bool MultiplyerSelectionVisible => this.TrainingMode != TrainingMode.UserDefinedTraining;
+
+        public bool LoadingSavingButtonsVisisble => this.TrainingMode == TrainingMode.UserDefinedTraining;
+
+        public bool NotEnoughExercisesAvailable =>
+            ExerciseAvailabilityChecker.Check(this.GetTrainingSettings()) == false;
 
         public void AddExerciseToTraining(Exercise exercise)
         {
@@ -418,6 +424,74 @@ namespace MyCoach.ViewModel
                 this.Training.Add(vm);
                 this.TrainingMode = TrainingMode.UserDefinedTraining;
             }
+        }
+
+        private TrainingSettings GetTrainingSettings()
+        {
+            return new TrainingSettings(
+                this.TrainingMode,
+                this.LapCount,
+                this.ExercisesPerLap,
+                this.Multiplyer,
+                this.CategoryInFocus?.ID ?? null,
+                this.GetCategoriesEnabledForTraining());
+        }
+
+        private List<ExerciseCategory> GetCategoriesEnabledForTraining()
+        {
+            var categories = new List<ExerciseCategory>();
+
+            if (this.CategoryWarmUpActive && this.CategoryWarmUpEnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.WarmUp);
+            }
+
+            if (this.Category1Active && this.Category1EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category1);
+            }
+
+            if (this.Category2Active && this.Category2EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category2);
+            }
+
+            if (this.Category3Active && this.Category3EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category3);
+            }
+
+            if (this.Category4Active && this.Category4EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category4);
+            }
+
+            if (this.Category5Active && this.Category5EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category5);
+            }
+
+            if (this.Category6Active && this.Category6EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category6);
+            }
+
+            if (this.Category7Active && this.Category7EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category7);
+            }
+
+            if (this.Category8Active && this.Category8EnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.Category8);
+            }
+
+            if (this.CategoryCoolDownActive && this.CategoryCoolDownEnabledForTraining)
+            {
+                categories.Add(ExerciseCategory.CoolDown);
+            }
+
+            return categories;
         }
 
         private void StartTraining()
@@ -430,14 +504,7 @@ namespace MyCoach.ViewModel
 
             if (this.Training.Any() == false)
             {
-                this.Training = TrainingGenerator.CreateTraining(
-                    new TrainingSettings(
-                        this.TrainingMode,
-                        this.LapCount,                        
-                        this.ExercisesPerLap,
-                        this.Multiplyer,
-                        this.CategoryInFocus?.ID ?? default,
-                        this.GetCategoriesEnabledForTraining()));
+                this.Training = TrainingGenerator.CreateTraining(GetTrainingSettings());
             }
 
             this.Training.Start();
@@ -450,7 +517,8 @@ namespace MyCoach.ViewModel
                 return true;
             }
 
-            if (this.TrainingMode == TrainingMode.CircleTraining && this.GetCategoriesEnabledForTraining().Any())
+            if ((this.TrainingMode == TrainingMode.CircleTraining || this.TrainingMode == TrainingMode.RandomTraining)
+                && this.GetCategoriesEnabledForTraining().Any())
             {
                 return true;
             }
@@ -547,164 +615,6 @@ namespace MyCoach.ViewModel
                 IMPORT_ERROR_TEXT,
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
-        }
-
-        private List<ExerciseCategory> GetCategoriesEnabledForTraining()
-        {
-            var categories = new List<ExerciseCategory>();
-
-            if (this.CategoryWarmUpActive && this.CategoryWarmUpEnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.WarmUp);
-            }
-
-            if (this.Category1Active && this.Category1EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category1);
-            }
-
-            if (this.Category2Active && this.Category2EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category2);
-            }
-
-            if (this.Category3Active && this.Category3EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category3);
-            }
-
-            if (this.Category4Active && this.Category4EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category4);
-            }
-
-            if (this.Category5Active && this.Category5EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category5);
-            }
-
-            if (this.Category6Active && this.Category6EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category6);
-            }
-
-            if (this.Category7Active && this.Category7EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category7);
-            }
-
-            if (this.Category8Active && this.Category8EnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.Category8);
-            }
-
-            if (this.CategoryCoolDownActive && this.CategoryCoolDownEnabledForTraining)
-            {
-                categories.Add(ExerciseCategory.CoolDown);
-            }
-
-            return categories;
-        }
-
-        private bool AreEnoughExercisesAvailable()
-        {
-            var permission = DataInterface.GetInstance().GetData<Settings>().Single().Permission;
-            var exercises = DataInterface.GetInstance().GetData<Exercise>().Where(e => e.Active).ToList();
-
-            switch (this.TrainingMode)
-            {
-                case TrainingMode.CircleTraining:
-                    return AreEnoughExercisesAvailableForCircleTraining(permission, exercises);
-
-                case TrainingMode.FocusTraining:
-                    return AreEnoughExercisesAvailableForFocusTraining(permission, exercises);
-
-                case TrainingMode.UserDefinedTraining:
-                default:
-                    return true;
-            }
-        }
-
-        private bool AreEnoughExercisesAvailableForCircleTraining(
-            ExerciseSchedulingRepetitionPermission permission,
-            List<Exercise> exercises)
-        {
-            foreach (var category in GetCategoriesEnabledForTraining())
-            {
-                int compare;
-
-                if ((category == ExerciseCategory.WarmUp || category == ExerciseCategory.CoolDown))
-                {
-                    compare = this.Categories.Single(c => c.ID == category).Count;
-                }
-                else if (permission == ExerciseSchedulingRepetitionPermission.No)
-                {
-                    compare = this.LapCount;
-                }
-                else
-                {
-                    compare = 1;
-                }
-
-                if (exercises.Count(e => e.Category == category) < compare)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private bool AreEnoughExercisesAvailableForFocusTraining(ExerciseSchedulingRepetitionPermission permission, List<Exercise> exercises)
-        {
-            if (this.CategoryInFocus == null)
-            {
-                return true;
-            }
-
-            return permission == ExerciseSchedulingRepetitionPermission.No
-                ? exercises.Count(e => e.Category == this.CategoryInFocus.ID) >= (this.LapCount * this.ExercisesPerLap)
-                : exercises.Any(e => e.Category == this.CategoryInFocus.ID);
-        }
-
-        private string GetTrainingModeExplanation()
-        {
-            switch (this.TrainingMode)
-            {
-                case TrainingMode.CircleTraining:
-                    var warmUp = this.Categories.Where(c => c.Type == ExerciseType.WarmUp).FirstOrDefault();
-                    var coolDown = this.Categories.Where(c => c.Type == ExerciseType.CoolDown).FirstOrDefault();
-
-                    var sb = new StringBuilder("In diesem Modus wird pro Runde je eine Übung aller aktiven Kategorien ins Training eingeplant.");
-
-                    if (warmUp?.Active == true)
-                    {
-                        sb.Append($" Vor dem eigentlichen Zirkeltraining steht ein Block {warmUp}");
-                    }
-
-                    if (coolDown?.Active == true && warmUp?.Active == true)
-                    {
-                        sb.Append(" und danach");
-                    }
-
-                    if (coolDown?.Active == true && warmUp?.Active != true)
-                    {
-                        sb.Append(" Nach dem Zirkeltraining");
-                    }
-
-                    if (coolDown?.Active == true)
-                    {
-                        sb.Append($" folgt ein Block {coolDown}.");
-                    }
-
-                    return sb.ToString();
-                case TrainingMode.FocusTraining:
-                    return DESCRIPTION_FOCUSTRAINING;
-                case TrainingMode.UserDefinedTraining:
-                    return DESCRIPTION_USERDEFINEDTRAINING;
-                default:
-                    return string.Empty;
-            }
         }
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)

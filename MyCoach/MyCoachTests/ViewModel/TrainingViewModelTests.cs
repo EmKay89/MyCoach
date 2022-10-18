@@ -5,6 +5,7 @@ using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyCoach.ViewModel.Utilities;
 using MyExtensions.IEnumerable;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,41 +78,78 @@ namespace MyCoachTests.ViewModel
 
             this.sut.TrainingMode = TrainingMode.CircleTraining;
 
-            Assert.IsTrue(this.sut.CircleTrainingElementsVisible);
-            Assert.IsFalse(this.sut.FocusTrainingElementsVisible);
-            Assert.IsTrue(this.sut.CircleOrFocusTrainingElementsVisible);
+            Assert.IsFalse(this.sut.SingleCategorySelectionVisible);
+            Assert.IsTrue(this.sut.MultipleCategorySelectionVisible);
+            Assert.IsTrue(this.sut.LapCountSelectionVisible);
+            Assert.IsFalse(this.sut.ExercisesPerLapSelectionVisible);
+            Assert.IsTrue(this.sut.MultiplyerSelectionVisible);
+            Assert.IsFalse(this.sut.LoadingSavingButtonsVisisble);
 
-            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(9, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
-            Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
-            Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.SingleCategorySelectionVisible), this.PropertyChangedEvents[1]);
+            Assert.AreEqual(nameof(this.sut.MultipleCategorySelectionVisible), this.PropertyChangedEvents[2]);
+            Assert.AreEqual(nameof(this.sut.LapCountSelectionVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.ExercisesPerLapSelectionVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.MultiplyerSelectionVisible), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.LoadingSavingButtonsVisisble), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[7]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[8]);
+        }
+
+        [TestMethod]
+        public void ModeChanges_ToRandomTraining_CorrectTrainingSettingsVisibility()
+        {
+            this.sut.TrainingMode = TrainingMode.CircleTraining;
+            this.PropertyChangedEvents.Clear();
+
+            this.sut.TrainingMode = TrainingMode.RandomTraining;
+
+            Assert.IsFalse(this.sut.SingleCategorySelectionVisible);
+            Assert.IsTrue(this.sut.MultipleCategorySelectionVisible);
+            Assert.IsTrue(this.sut.LapCountSelectionVisible);
+            Assert.IsTrue(this.sut.ExercisesPerLapSelectionVisible);
+            Assert.IsTrue(this.sut.MultiplyerSelectionVisible);
+            Assert.IsFalse(this.sut.LoadingSavingButtonsVisisble);
+
+            Assert.AreEqual(9, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
+            Assert.AreEqual(nameof(this.sut.SingleCategorySelectionVisible), this.PropertyChangedEvents[1]);
+            Assert.AreEqual(nameof(this.sut.MultipleCategorySelectionVisible), this.PropertyChangedEvents[2]);
+            Assert.AreEqual(nameof(this.sut.LapCountSelectionVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.ExercisesPerLapSelectionVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.MultiplyerSelectionVisible), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.LoadingSavingButtonsVisisble), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[7]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[8]);
         }
 
         [TestMethod]
         public void ModeChanges_ToFocusTraining_CorrectTrainingSettingsVisibility()
         {
-            this.sut.TrainingMode = TrainingMode.CircleTraining;
+            this.sut.TrainingMode = TrainingMode.RandomTraining;
             this.PropertyChangedEvents.Clear();
 
             this.sut.TrainingMode = TrainingMode.FocusTraining;
 
-            Assert.IsFalse(this.sut.CircleTrainingElementsVisible);
-            Assert.IsTrue(this.sut.FocusTrainingElementsVisible);
-            Assert.IsTrue(this.sut.CircleOrFocusTrainingElementsVisible);
-            Assert.AreEqual(TrainingViewModel.DESCRIPTION_FOCUSTRAINING, this.sut.ModeExplanation);
+            Assert.IsTrue(this.sut.SingleCategorySelectionVisible);
+            Assert.IsFalse(this.sut.MultipleCategorySelectionVisible);
+            Assert.IsTrue(this.sut.LapCountSelectionVisible);
+            Assert.IsTrue(this.sut.ExercisesPerLapSelectionVisible);
+            Assert.IsTrue(this.sut.MultiplyerSelectionVisible);
+            Assert.IsFalse(this.sut.LoadingSavingButtonsVisisble);
+            Assert.AreEqual(TrainingModeDescriptions.DESCRIPTION_FOCUSTRAINING, this.sut.ModeExplanation);
 
-            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(9, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
-            Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
-            Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.SingleCategorySelectionVisible), this.PropertyChangedEvents[1]);
+            Assert.AreEqual(nameof(this.sut.MultipleCategorySelectionVisible), this.PropertyChangedEvents[2]);
+            Assert.AreEqual(nameof(this.sut.LapCountSelectionVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.ExercisesPerLapSelectionVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.MultiplyerSelectionVisible), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.LoadingSavingButtonsVisisble), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[7]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[8]);
         }
 
         [TestMethod]
@@ -122,19 +160,24 @@ namespace MyCoachTests.ViewModel
 
             this.sut.TrainingMode = TrainingMode.UserDefinedTraining;
 
-            Assert.IsFalse(this.sut.CircleTrainingElementsVisible);
-            Assert.IsFalse(this.sut.FocusTrainingElementsVisible);
-            Assert.IsFalse(this.sut.CircleOrFocusTrainingElementsVisible);
-            Assert.AreEqual(TrainingViewModel.DESCRIPTION_USERDEFINEDTRAINING, this.sut.ModeExplanation);
+            Assert.IsFalse(this.sut.SingleCategorySelectionVisible);
+            Assert.IsFalse(this.sut.MultipleCategorySelectionVisible);
+            Assert.IsFalse(this.sut.LapCountSelectionVisible);
+            Assert.IsFalse(this.sut.ExercisesPerLapSelectionVisible);
+            Assert.IsFalse(this.sut.MultiplyerSelectionVisible);
+            Assert.IsTrue(this.sut.LoadingSavingButtonsVisisble);
+            Assert.AreEqual(TrainingModeDescriptions.DESCRIPTION_USERDEFINEDTRAINING, this.sut.ModeExplanation);
 
-            Assert.AreEqual(7, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(9, this.PropertyChangedEvents.Count);
             Assert.AreEqual(nameof(this.sut.TrainingMode), this.PropertyChangedEvents[0]);
-            Assert.AreEqual(nameof(this.sut.CircleTrainingElementsVisible), this.PropertyChangedEvents[1]);
-            Assert.AreEqual(nameof(this.sut.FocusTrainingElementsVisible), this.PropertyChangedEvents[2]);
-            Assert.AreEqual(nameof(this.sut.UserDefinedTrainingElementsVisible), this.PropertyChangedEvents[3]);
-            Assert.AreEqual(nameof(this.sut.CircleOrFocusTrainingElementsVisible), this.PropertyChangedEvents[4]);
-            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[5]);
-            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.SingleCategorySelectionVisible), this.PropertyChangedEvents[1]);
+            Assert.AreEqual(nameof(this.sut.MultipleCategorySelectionVisible), this.PropertyChangedEvents[2]);
+            Assert.AreEqual(nameof(this.sut.LapCountSelectionVisible), this.PropertyChangedEvents[3]);
+            Assert.AreEqual(nameof(this.sut.ExercisesPerLapSelectionVisible), this.PropertyChangedEvents[4]);
+            Assert.AreEqual(nameof(this.sut.MultiplyerSelectionVisible), this.PropertyChangedEvents[5]);
+            Assert.AreEqual(nameof(this.sut.LoadingSavingButtonsVisisble), this.PropertyChangedEvents[6]);
+            Assert.AreEqual(nameof(this.sut.NotEnoughExercisesAvailable), this.PropertyChangedEvents[7]);
+            Assert.AreEqual(nameof(this.sut.ModeExplanation), this.PropertyChangedEvents[8]);
         }
 
         #endregion

@@ -35,63 +35,37 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (trainingSettings.TrainingMode)
             {
                 case TrainingMode.CircleTraining:
-                    return CreateCircleTraining();
+                    return CreateTraining(true, AddCircleTrainingLap);
+                case TrainingMode.RandomTraining:
+                    return CreateTraining(true, AddRandomTrainingLap);
                 case TrainingMode.FocusTraining:
-                    return CreateFocusTraining();
+                    return CreateTraining(false, AddFocusTrainingLap);
                 case TrainingMode.UserDefinedTraining:
                 default:
                     return null;
             }
         }
 
-        private static Training CreateCircleTraining()
+        private static Training CreateTraining(bool addWarmUpAndCoolDown, Action<Training, int> lapCreationAction)
         {
             var training = new Training();
 
-            AddWarmUpOrCoolDown(training, ExerciseCategory.WarmUp);
-            for (int i = 0; i < trainingSettings.LapCount; i++)
+            if (addWarmUpAndCoolDown)
             {
-                AddCircleTrainingLap(training, i + 1);
+                AddWarmUpOrCoolDown(training, ExerciseCategory.WarmUp);
             }
-
-            AddWarmUpOrCoolDown(training, ExerciseCategory.CoolDown);
-
-            return training;
-        }
-
-        private static Training CreateFocusTraining()
-        {
-            var training = new Training();
 
             for (int i = 0; i < trainingSettings.LapCount; i++)
             {
-                AddFocusTrainingLap(training, i + 1);
+                lapCreationAction(training, i + 1);
+            }
+
+            if (addWarmUpAndCoolDown)
+            {
+                AddWarmUpOrCoolDown(training, ExerciseCategory.CoolDown);
             }
 
             return training;
-        }
-
-        private static void AddCircleTrainingLap(Training training, int lap)
-        {
-            var usedCategories = trainingSettings.CategoriesEnabledForTraining;
-            var exercises = new List<Exercise>();
-
-            foreach (var category in usedCategories)
-            {
-                if (category == ExerciseCategory.WarmUp || category == ExerciseCategory.CoolDown)
-                {
-                    continue;
-                }
-
-                var exercise = GetExerciseFromPool(category);
-
-                if (exercise != null)
-                {
-                    exercises.Add(exercise);
-                }
-            }
-
-            ConvertExercisesToTrainingLap(training, lap, exercises);
         }
 
         private static void AddWarmUpOrCoolDown(Training training, ExerciseCategory category)
@@ -122,9 +96,9 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new TrainingElementViewModel(TrainingElementType.LapSeparator, null) 
+            training.Add(new TrainingElementViewModel(TrainingElementType.LapSeparator, null)
             {
-                LapHeadline = savedCategoryDto.Name 
+                LapHeadline = savedCategoryDto.Name
             });
 
             foreach (var exercise in exercises)
@@ -133,13 +107,59 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
         }
 
-        private static void AddFocusTrainingLap(Training training, int lap)
+        private static void AddCircleTrainingLap(Training training, int lap)
         {
+            var usedCategories = trainingSettings.CategoriesEnabledForTraining;
+            var exercises = new List<Exercise>();
+
+            foreach (var category in usedCategories)
+            {
+                if (category == ExerciseCategory.WarmUp || category == ExerciseCategory.CoolDown)
+                {
+                    continue;
+                }
+
+                var exercise = GetExerciseFromPool(category);
+
+                if (exercise != null)
+                {
+                    exercises.Add(exercise);
+                }
+            }
+
+            ConvertExercisesToTrainingLap(training, lap, exercises);
+        }
+
+        private static void AddRandomTrainingLap(Training training, int lap)
+        {
+            var usedCategories = trainingSettings.CategoriesEnabledForTraining;
             var exercises = new List<Exercise>();
 
             for (int i = 0; i < trainingSettings.ExercisesPerLap; i++)
             {
-                var exercise = GetExerciseFromPool(trainingSettings.CategoryInFocus);
+                var exercise = GetExerciseFromPool(usedCategories, ExerciseCategory.WarmUp, ExerciseCategory.CoolDown);
+
+                if (exercise != null)
+                {
+                    exercises.Add(exercise);
+                }
+            }
+
+            ConvertExercisesToTrainingLap(training, lap, exercises);
+        }
+
+        private static void AddFocusTrainingLap(Training training, int lap)
+        {
+            var exercises = new List<Exercise>();
+
+            if (!(trainingSettings.CategoryInFocus is ExerciseCategory categoryInFocus))
+            {
+                return;
+            }
+
+            for (int i = 0; i < trainingSettings.ExercisesPerLap; i++)
+            {
+                var exercise = GetExerciseFromPool(categoryInFocus);
 
                 if (exercise != null)
                 {
@@ -158,7 +178,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
 
             training.Add(new TrainingElementViewModel (TrainingElementType.LapSeparator, null) 
-            { 
+            {
                 LapHeadline = TrainingElementViewModel.LAPDESIGNATION + " " + lap.ToString() 
             });
 
@@ -208,17 +228,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
         }
 
-        private static void RefreshPoolList()
-        {
-            pool.Clear();
-
-            foreach (var category in (ExerciseCategory[])Enum.GetValues(typeof(ExerciseCategory)))
-            {
-                var subPool = RefreshSubPool(category);
-                pool.Add(category, subPool);
-            }
-        }
-
+        /// <summary>
+        ///     Gets a random exercise of the given <see cref="ExerciseCategory"/> from the pool.
+        ///     The exercise will be removed from the pool unless the <see cref="Settings.Permission"/>
+        ///     of the <see cref="globalSettings"/> is set to <see cref="ExerciseSchedulingRepetitionPermission.Yes"/>.
+        /// </summary>
+        /// <param name="category">The given <see cref="ExerciseCategory"/>.</param>
+        /// <returns>The randomly choosen exercise or null, if no exercise is available.</returns>
         private static Exercise GetExerciseFromPool(ExerciseCategory category)
         {
             if (pool.TryGetValue(category, out var subPool) == false)
@@ -248,6 +264,66 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                     return item;
                 default:
                     return null;
+            }
+        }
+
+        /// <summary>
+        ///     Gets a random exercise from the pool whose category is in the list of categories to include,
+        ///     but not in the list of categories to exclude.
+        ///     The exercise will be removed from the pool unless the <see cref="Settings.Permission"/>
+        ///     of the <see cref="globalSettings"/> is set to <see cref="ExerciseSchedulingRepetitionPermission.Yes"/>.
+        /// </summary>
+        /// <param name="includes">The list of categories to include.</param>
+        /// <param name="excludes">The list of categories to exclude.</param>
+        /// <returns>The randomly choosen exercise or null, if no exercise is available.</returns>
+        private static Exercise GetExerciseFromPool(List<ExerciseCategory> includes, params ExerciseCategory[] excludes)
+        {
+            List<Exercise> filteredExercises = GetFilteredPool(includes, excludes.ToList());
+
+            if (filteredExercises.Any() == false
+                && globalSettings.Permission == ExerciseSchedulingRepetitionPermission.NotPreferred)
+            {
+                RefreshPoolList();
+            }
+
+            filteredExercises = GetFilteredPool(includes, excludes.ToList());
+
+            if (filteredExercises.Any() == false)
+            {
+                return null;
+            }
+
+            switch (globalSettings.Permission)
+            {
+                case ExerciseSchedulingRepetitionPermission.Yes:
+                    return filteredExercises.GetRandom();
+                case ExerciseSchedulingRepetitionPermission.NotPreferred:
+                case ExerciseSchedulingRepetitionPermission.No:
+                    var item = filteredExercises.GetRandom();
+                    var parentSubPool = pool.Single(subPool => subPool.Value.Contains(item)).Value;
+                    parentSubPool.Remove(item);
+                    return item;
+                default:
+                    return null;
+            }
+        }
+
+        private static List<Exercise> GetFilteredPool(List<ExerciseCategory> includes, List<ExerciseCategory> excludes)
+        {
+            var allExercises = pool.SelectMany(p => p.Value).ToList();
+            var filteredExercises = allExercises.Where(
+                e => includes.Contains(e.Category) && excludes.Contains(e.Category) == false).ToList();
+            return filteredExercises;
+        }
+
+        private static void RefreshPoolList()
+        {
+            pool.Clear();
+
+            foreach (var category in (ExerciseCategory[])Enum.GetValues(typeof(ExerciseCategory)))
+            {
+                var subPool = RefreshSubPool(category);
+                pool.Add(category, subPool);
             }
         }
 

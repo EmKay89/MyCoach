@@ -115,6 +115,7 @@
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\Events\ExerciseEventArgs.cs" />
     <Compile Include="ViewModel\Events\ExerciseEventHandler.cs" />
+    <Compile Include="ViewModel\Utilities\ExerciseAvailabilityChecker.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModel.cs" />
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
+    <Compile Include="ViewModel\Utilities\TrainingModeDescriptions.cs" />
     <Compile Include="ViewModel\TypeConverter\EnumToBooleanConverter.cs" />
     <Compile Include="ViewModel\TypeConverter\UintToGridLenthConverter.cs" />
     <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />

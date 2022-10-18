@@ -84,7 +84,7 @@
                 <TextBlock Text="{Binding ModeExplanation}"
                            TextWrapping="Wrap"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding FocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding SingleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Kategorie"
                        FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding ActiveCategories}"
@@ -92,7 +92,7 @@
                           SelectedValue="{Binding CategoryInFocus}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding CircleTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding MultipleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Aktive Übungskategorien" FontWeight="Bold"/>
                 <CheckBox Content="{Binding CategoryWarmUpName}"
                           IsChecked="{Binding CategoryWarmUpEnabledForTraining}"
@@ -135,13 +135,13 @@
                           Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding CircleOrFocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding LapCountSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Runden" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding NumbersOneToFour}"
                           SelectedValue="{Binding LapCount}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
-            <StackPanel Visibility="{Binding FocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding ExercisesPerLapSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Anzahl Übungen je Runde" FontWeight="Bold"/>
                 <ComboBox ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding ExercisesPerLap}"
@@ -150,7 +150,7 @@
             <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
                        TextWrapping="Wrap"
                        Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
-            <StackPanel Visibility="{Binding CircleOrFocusTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding MultiplyerSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Multiplikator für Wiederholungen und Punkte" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBox Text="{Binding Multiplyer}"
@@ -159,7 +159,7 @@
                     <TextBlock Text="%"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel Visibility="{Binding UserDefinedTrainingElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Visibility="{Binding LoadingSavingButtonsVisisble, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Training laden oder speichern" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource DefaultButton}"

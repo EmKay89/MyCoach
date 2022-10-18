@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 {
     /// <summary>
-    ///     DTO that holds all information to create a <see cref="Training"/> using the <see cref="TrainingGenerator"/>.
+    ///     DTO that holds all non permanently saved training settings provided by the <see cref="TrainingViewModel"/>.
     /// </summary>
     public class TrainingSettings
     {
@@ -13,7 +13,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             ushort lapCount,
             ushort exercisesPerLap,
             ushort multiplyer,
-            ExerciseCategory categoryInFocus,
+            ExerciseCategory? categoryInFocus,
             List<ExerciseCategory> categoriesEnabledForTraining)
         {
             TrainingMode = trainingMode;
@@ -32,7 +32,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
         public ushort Multiplyer { get; }
 
-        public ExerciseCategory CategoryInFocus { get; }
+        public ExerciseCategory? CategoryInFocus { get; }
 
         public List<ExerciseCategory> CategoriesEnabledForTraining { get; }
     }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyExtensions.IEnumerable;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -136,6 +138,62 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.AssertExercisesOfCategory(training, ExerciseCategory.Category7, 3, true, 1, 1, 1);
             this.AssertExercisesOfCategory(training, ExerciseCategory.Category8, 3, true, 1, 1, 1);
             this.AssertExercisesOfCategory(training, ExerciseCategory.CoolDown, 3, true);
+        }
+
+        [TestMethod]
+        [DataRow(ExerciseSchedulingRepetitionPermission.No)]
+        [DataRow(ExerciseSchedulingRepetitionPermission.NotPreferred)]
+        public void CreateTraining_RandomTrainingWithEnoughExercises_CorrectTotalCountAndNoRepetitions(
+            ExerciseSchedulingRepetitionPermission permission)
+        {
+            // There are just enough exercises .. not a single one more than needed.
+            this.SetupData(TestExercises.TwoOfEachCategory);
+            this.Categories.Single(c => c.ID == ExerciseCategory.WarmUp).Count = 2;
+            this.Categories.Single(c => c.ID == ExerciseCategory.CoolDown).Count = 2;
+            this.Settings.Permission = permission;
+            var settings = this.GetTrainingSettings(TrainingMode.RandomTraining, 4, 4);
+
+            var training = TrainingGenerator.CreateTraining(settings);
+
+            this.AssertLapSeparatorsPresenceAndName(training, true, 4, true);
+            this.AssertExercisesOfCategory(training, ExerciseCategory.WarmUp, 2, false);
+            this.AssertThatTrainingExerciseCountIsEqualTo(training, 16);
+            this.AssertThatTrainingHasExerciseRepetitions(training, false);
+            this.AssertExercisesOfCategory(training, ExerciseCategory.CoolDown, 2, false);
+        }
+
+        [TestMethod]
+        [DataRow(ExerciseSchedulingRepetitionPermission.No, 15, 0)]
+        [DataRow(ExerciseSchedulingRepetitionPermission.NotPreferred, 16, 1)]
+        [DataRow(ExerciseSchedulingRepetitionPermission.Yes, 16, 1)]
+        public void CreateTraining_RandomTrainingWithNotEnoughExercises_CorrectTotalCountAndRepetitionsDependingOnSettings(
+            ExerciseSchedulingRepetitionPermission permission,
+            int expectedTrainingExerciseCount,
+            int expectedRepetitions)
+        {
+            // There ist just a single exericse less than needed
+            this.SetupData(TestExercises.TwoOfEachCategory);
+            this.Categories.Single(c => c.ID == ExerciseCategory.WarmUp).Count = 2;
+            this.Categories.Single(c => c.ID == ExerciseCategory.CoolDown).Count = 2;
+            this.Exercises.Remove(this.Exercises.First(ex => ex.Category == ExerciseCategory.Category1));
+            this.Settings.Permission = permission;
+            var settings = this.GetTrainingSettings(TrainingMode.RandomTraining, 4, 4);
+
+            var training = TrainingGenerator.CreateTraining(settings);
+
+            this.AssertLapSeparatorsPresenceAndName(training, true, 4, true);
+            this.AssertExercisesOfCategory(training, ExerciseCategory.WarmUp, 2);
+            this.AssertThatTrainingExerciseCountIsEqualTo(training, expectedTrainingExerciseCount);
+            if (permission != ExerciseSchedulingRepetitionPermission.Yes)
+            {
+                this.AssertExerciseRepetitionCount(training, expectedRepetitions);
+            }
+            else
+            {
+                this.AssertThatTrainingHasExerciseRepetitions(training, true);
+            }
+            
+            this.AssertExercisesOfCategory(training, ExerciseCategory.CoolDown, 2);
         }
 
         [TestMethod]
@@ -336,7 +394,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             {
                 var repeatsFound = allExercisesOfCategory.Any(
                     e1 => allExercisesOfCategory.Any(
-                        e2 => e2.Exercise.ID == e1.Exercise.ID 
+                        e2 => e2.Exercise.ID == e1.Exercise.ID
                             && ReferenceEquals(e1, e2) == false));
 
                 Assert.AreEqual(repeatsExpected, repeatsFound);
@@ -396,6 +454,64 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             var actualCountLap1 = exercisesLap1.Count(e => e is TrainingElementViewModel model && model.Exercise.Category == category);
 
             Assert.AreEqual(expectedCountLap, actualCountLap1);
+        }
+
+        private void AssertThatTrainingExerciseCountIsEqualTo(Training training, int expectedCount)
+        {
+            Assert.AreEqual(expectedCount, training.Count(
+                e => e.Exercise is Exercise ex
+                && ex.Category != ExerciseCategory.WarmUp
+                && ex.Category != ExerciseCategory.CoolDown));
+        }
+
+        private void AssertExerciseRepetitionCount(Training training, int expectedRepetitions)
+        {
+            int actualRepetitions = 0;
+            var bufferTraining = new Training();
+            training.ForEach(e => bufferTraining.Add(e));
+
+            foreach (var element in training)
+            {
+                if (element.Exercise == null)
+                {
+                    continue;
+                }
+
+                var matches = bufferTraining.Where(otherElement =>
+                    otherElement.Exercise != null && otherElement.Exercise == element.Exercise).ToList();
+
+                if (matches.Any())
+                {
+                    matches.ForEach(m => bufferTraining.Remove(m));
+                    actualRepetitions += (matches.Count - 1);
+                }
+            }
+
+            Assert.AreEqual(expectedRepetitions, actualRepetitions);
+        }
+
+        private void AssertThatTrainingHasExerciseRepetitions(Training training, bool expected)
+        {
+            var found = false;
+
+            foreach (var element in training)
+            {
+                if (element.Exercise == null)
+                {
+                    continue;
+                }
+
+                var repeats = training.Where(otherElement => otherElement != element
+                    && otherElement.Exercise != null
+                    && otherElement.Exercise == element.Exercise).ToList();
+
+                if (repeats.Any())
+                {
+                    found = true;
+                }
+            }
+
+            Assert.AreEqual(expected, found);
         }
     }
 }
