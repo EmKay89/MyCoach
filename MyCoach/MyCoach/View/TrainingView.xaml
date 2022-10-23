@@ -81,8 +81,18 @@
                           DisplayMemberPath="Value" 
                           SelectedValuePath="Key"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
-                <TextBlock Text="{Binding ModeExplanation}"
-                           TextWrapping="Wrap"/>
+                <Image Source="/Resources/InfoIcon.jpg"
+                       Stretch="None"
+                       ToolTipService.ShowDuration="30000"
+                       ToolTipService.InitialShowDelay="300"
+                       Cursor="Help">
+                    <Image.ToolTip>
+                        <ToolTip Width="600">
+                            <TextBlock Text="{Binding ModeExplanation}"
+                                       TextWrapping="WrapWithOverflow"/>
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
             </StackPanel>
             <StackPanel Visibility="{Binding SingleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Kategorie"
@@ -147,9 +157,19 @@
                           SelectedValue="{Binding ExercisesPerLap}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
-            <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
-                       TextWrapping="Wrap"
-                       Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <Image Source="/Resources/InfoIcon.jpg"
+                   Stretch="None"
+                   ToolTipService.ShowDuration="30000"
+                   ToolTipService.InitialShowDelay="300"
+                   Cursor="Help"
+                   Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image.ToolTip>
+                    <ToolTip Width="600">
+                        <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
+                                   TextWrapping="WrapWithOverflow"/>
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
             <StackPanel Visibility="{Binding MultiplyerSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Multiplikator für Wiederholungen und Punkte" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
