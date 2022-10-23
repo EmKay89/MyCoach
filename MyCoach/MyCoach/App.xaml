@@ -7,80 +7,51 @@
              xmlns:converter="clr-namespace:MyCoach.ViewModel.TypeConverter"
              StartupUri="View\MainWindow.xaml">
     <Application.Resources>
-        
-        <!-- ViewModel - View links -->
-        <DataTemplate DataType="{x:Type viewmodels:ExercisesViewModel}">
-            <views:ExercisesView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:MonthViewModel}">
-            <views:MonthView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:OverviewElementViewModel}">
-            <views:OverviewElementView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
-            <views:SettingsView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleOverviewViewModel}">
-            <views:TrainingScheduleOverviewView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleViewModel}">
-            <views:TrainingScheduleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TrainingViewModel}">
-            <views:TrainingView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ViewTrainingScheduleViewModel}">
-            <views:ViewTrainingScheduleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:EditMonthViewModel}">
-            <views:EditMonthView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:EditTrainingScheduleViewModel}">
-            <views:EditTrainingScheduleView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:TrainingElementViewModel}">
-            <views:TrainingElementView/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <!-- Styles from stylesheet-->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <!-- Control Templates -->
-        <Style TargetType="Button" x:Key="DefaultButton">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="90"/>
-            <Setter Property="Margin" Value="5,3,5,3"/>
-            <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-        </Style>
-        <Style TargetType="ToggleButton" x:Key="MainMenuButton">
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="Margin" Value="10,10,10,0"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-        </Style>
-        <Style TargetType="ToggleButton" x:Key="DefaultToggleButton">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="90"/>
-            <Setter Property="Margin" Value="5,3,5,3"/>
-            <Setter Property="Background" Value="AliceBlue"/>
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-        </Style>
-        <Style TargetType="ProgressBar" 
-               x:Key="ScoresBar">
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Height" Value="25"/>
-            <Setter Property="Minimum" Value="0"/>
-            <Setter Property="Maximum" Value="100"/>
-        </Style>
+            <!-- ViewModel - View links -->
+            <DataTemplate DataType="{x:Type viewmodels:ExercisesViewModel}">
+                <views:ExercisesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:MonthViewModel}">
+                <views:MonthView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:OverviewElementViewModel}">
+                <views:OverviewElementView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleOverviewViewModel}">
+                <views:TrainingScheduleOverviewView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleViewModel}">
+                <views:TrainingScheduleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:TrainingViewModel}">
+                <views:TrainingView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ViewTrainingScheduleViewModel}">
+                <views:ViewTrainingScheduleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditMonthViewModel}">
+                <views:EditMonthView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:EditTrainingScheduleViewModel}">
+                <views:EditTrainingScheduleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:TrainingElementViewModel}">
+                <views:TrainingElementView/>
+            </DataTemplate>
 
-        <!-- Converter -->
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-        <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter"/>
+            <!-- Converter -->
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
+            <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
