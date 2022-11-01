@@ -69,7 +69,8 @@
                 <TextBlock Grid.Row="2"
                            Grid.Column="2"
                            Text="Einheit"/>
-                <ComboBox Grid.Row="2"
+                <ComboBox Style="{StaticResource DefaultComboBox}"
+                          Grid.Row="2"
                           Grid.Column="3"
                           ItemsSource="{Binding SelectableUnits}"
                           Text="{Binding Unit}"

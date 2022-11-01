@@ -76,7 +76,9 @@
             <StackPanel>
                 <Label Content="Modus"
                        FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding ModesWithCaption}"
+                <ComboBox Style="{StaticResource DefaultComboBox}"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding ModesWithCaption}"
                           SelectedValue="{Binding TrainingMode}"
                           DisplayMemberPath="Value" 
                           SelectedValuePath="Key"
@@ -97,7 +99,9 @@
             <StackPanel Visibility="{Binding SingleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Kategorie"
                        FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding ActiveCategories}"
+                <ComboBox Style="{StaticResource DefaultComboBox}"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding ActiveCategories}"
                           SelectedIndex="0"
                           SelectedValue="{Binding CategoryInFocus}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
@@ -147,13 +151,17 @@
             </StackPanel>
             <StackPanel Visibility="{Binding LapCountSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Runden" FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding NumbersOneToFour}"
+                <ComboBox Style="{StaticResource DefaultComboBox}"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding NumbersOneToFour}"
                           SelectedValue="{Binding LapCount}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
             <StackPanel Visibility="{Binding ExercisesPerLapSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Anzahl Übungen je Runde" FontWeight="Bold"/>
-                <ComboBox ItemsSource="{Binding NumbersOneToTen}"
+                <ComboBox Style="{StaticResource DefaultComboBox}"
+                          HorizontalAlignment="Left"
+                          ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding ExercisesPerLap}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
