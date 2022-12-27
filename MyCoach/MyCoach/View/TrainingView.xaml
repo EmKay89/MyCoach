@@ -67,7 +67,6 @@
             <Button Command="{Binding StartTrainingCommand}"
                     Style="{StaticResource StartStopButton}"/>
             <Button Content="Timer"
-                    Style="{StaticResource DefaultButton}"
                     Click="TimerButton_Click"/>
         </StackPanel>
         <StackPanel x:Name="stackPanel" 
@@ -181,21 +180,17 @@
             <StackPanel Visibility="{Binding MultiplyerSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Multiplikator für Wiederholungen und Punkte" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Text="{Binding Multiplyer}"
-                        IsEnabled="{Binding TrainingSettingsEnabled}"
-                        Width="100"/>
+                    <TextBox Text="{Binding Multiplyer}" IsEnabled="{Binding TrainingSettingsEnabled}" Width="100"/>
                     <TextBlock Text="%"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Visibility="{Binding LoadingSavingButtonsVisisble, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Training laden oder speichern" FontWeight="Bold"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource DefaultButton}"
-                        Content="Laden"
-                        Command="{Binding ImportTrainingCommand}"/>
-                    <Button Style="{StaticResource DefaultButton}"
-                        Content="Speichern"
-                        Command="{Binding ExportTrainingCommand}"/>
+                    <Button Content="Laden"
+                            Command="{Binding ImportTrainingCommand}"/>
+                    <Button Content="Speichern"
+                            Command="{Binding ExportTrainingCommand}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

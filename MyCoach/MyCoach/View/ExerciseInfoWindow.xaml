@@ -15,8 +15,7 @@
         <RichTextBox x:Name="EditTextBox"
                  Margin="13"
                  BorderThickness="0" Grid.ColumnSpan="2"/>
-        <Button Style="{StaticResource DefaultButton}"
-                HorizontalAlignment="Right"
+        <Button HorizontalAlignment="Right"
                 Grid.Row="1"
                 Content="Schließen"
                 IsCancel="True" 

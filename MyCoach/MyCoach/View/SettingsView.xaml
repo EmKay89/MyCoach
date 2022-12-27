@@ -17,11 +17,9 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Hinzufügen"
                     Command="{Binding AddUnitCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             <Button Content="Entfernen"
                     Command="{Binding DeleteUnitCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
         </StackPanel>
         <Grid>
@@ -72,19 +70,15 @@
         <StackPanel Orientation="Horizontal">
             <Button Content="Speichern"
                     Command="{Binding SaveSettingsCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             <Button Content="Verwerfen"
-                    Command="{Binding ResetSettingsCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
         </StackPanel>
         <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen."
                FontWeight="Bold"/>
         <StackPanel Orientation="Horizontal">
             <Button Content="Zurücksetzen"
-                        Style="{StaticResource DefaultButton}"
-                        Command="{Binding SetDefaultsCommand}"/>
+                    Command="{Binding SetDefaultsCommand}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

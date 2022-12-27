@@ -14,10 +14,8 @@
                        TextWrapping="WrapWithOverflow"/>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Export"
-                        Style="{StaticResource DefaultButton}"
                         Command="{Binding ExportExercisesCommand}"/>
                 <Button Content="Import"
-                        Style="{StaticResource DefaultButton}"
                         Command="{Binding ImportExercisesCommand}"/>
             </StackPanel>
             <Label Content="Übungskategorien bearbeiten"
@@ -172,11 +170,9 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="Speichern"
                     Command="{Binding SaveCategoriesCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
                 <Button Content="Verwerfen"
                     Command="{Binding ResetCategoriesCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             </StackPanel>
             <Label Content="Übungen bearbeiten"
@@ -186,7 +182,6 @@
                       SelectedValue="{Binding SelectedCategory}"/>
             <Button Content="Hinzufügen"
                     Command="{Binding AddExerciseCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}">
                 <ItemsControl.ItemTemplate>
@@ -199,11 +194,9 @@
             </ItemsControl>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Speichern"
-                    Style="{StaticResource DefaultButton}"
                     Command="{Binding SaveExercisesCommand}"
                     HorizontalAlignment="Left"/>
                 <Button Content="Verwerfen"
-                    Style="{StaticResource DefaultButton}"
                     Command="{Binding ResetExercisesCommand}"
                     HorizontalAlignment="Left"/>
             </StackPanel>
@@ -211,7 +204,6 @@
                FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">
                 <Button Content="Zurücksetzen"
-                        Style="{StaticResource DefaultButton}"
                         Command="{Binding SetDefaultsCommand}"/>
             </StackPanel>
         </StackPanel>

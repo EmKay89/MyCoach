@@ -88,11 +88,9 @@
                     DockPanel.Dock="Top">
             <Button Content="Speichern"
                     Command="{Binding SaveCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
             <Button Content="Verwerfen"
                     Command="{Binding ResetCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"/>
         </StackPanel>
         <Label Content="Trainingsplan löschen"
@@ -100,7 +98,6 @@
                DockPanel.Dock="Top"/>
         <Button Content="Löschen"
                     Command="{Binding DeleteScheduleCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"
                 DockPanel.Dock="Top"/>
         <Label Content="Erreichte Trainingspunkte löschen"
@@ -108,7 +105,6 @@
                DockPanel.Dock="Top"/>
         <Button Content="Löschen"
                     Command="{Binding DeleteScoresCommand}"
-                    Style="{StaticResource DefaultButton}"
                     HorizontalAlignment="Left"
                 DockPanel.Dock="Top"/>
         <Grid/>
