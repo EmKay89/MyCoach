@@ -150,7 +150,11 @@
     <Compile Include="View\EditTrainingScheduleView.xaml.cs">
       <DependentUpon>EditTrainingScheduleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ExerciseInfoWindow.xaml.cs">
+    <Compile Include="View\Windows\WindowWithoutMenuAndIcon.cs" />
+    <Compile Include="View\Windows\TrainingElementInfoWindow.xaml.cs">
+      <DependentUpon>TrainingElementInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\ExerciseInfoWindow.xaml.cs">
       <DependentUpon>ExerciseInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ExercisesView.xaml.cs">
@@ -183,7 +187,7 @@
     <Compile Include="View\TrainingView.xaml.cs">
       <DependentUpon>TrainingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ExerciseView.xaml.cs">
@@ -240,7 +244,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ExerciseInfoWindow.xaml">
+    <Page Include="View\Windows\TrainingElementInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\ExerciseInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,7 +292,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

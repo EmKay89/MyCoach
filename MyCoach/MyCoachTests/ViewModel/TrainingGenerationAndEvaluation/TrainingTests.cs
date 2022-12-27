@@ -52,14 +52,18 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         }
 
         [TestMethod]
-        public void AddElements_VariousKinds_AllAreInactiveAndTextsForDisplayAreSetCorrectly()
+        public void AddElements_VariousKinds_TextsForDisplayAreSetCorrectly()
         {
             Assert.AreEqual("Lap1", this.sut[0].LapHeadline);
-            Assert.AreEqual($"{ex1.Count} {ex1.Unit} {ex1.Name}", this.sut[1].ExerciseText);
-            Assert.AreEqual($"{ex2.Count} {ex2.Unit} {ex2.Name}", this.sut[2].ExerciseText);
-            Assert.AreEqual($"{ex3.Count} {ex3.Unit} {ex3.Name}", this.sut[3].ExerciseText);
-            Assert.AreEqual($"{ex4.Count} {ex4.Unit} {ex4.Name} --- {ex4.Scores} Punkte für Kategorie " +
-                $"'{this.Categories.Single(c => c.ID == ExerciseCategory.Category3).Name}'", this.sut[4].ExerciseText);
+            Assert.AreEqual($"{ex1.Count} {ex1.Unit} {ex1.Name}", this.sut[1].NameAndRepeats);
+            Assert.AreEqual(string.Empty, this.sut[1].ScoresForCategory);
+            Assert.AreEqual($"{ex2.Count} {ex2.Unit} {ex2.Name}", this.sut[2].NameAndRepeats);
+            Assert.AreEqual(string.Empty, this.sut[2].ScoresForCategory);
+            Assert.AreEqual($"{ex3.Count} {ex3.Unit} {ex3.Name}", this.sut[3].NameAndRepeats);
+            Assert.AreEqual(string.Empty, this.sut[3].ScoresForCategory);
+            Assert.AreEqual($"{ex4.Count} {ex4.Unit} {ex4.Name}", this.sut[4].NameAndRepeats);
+            Assert.AreEqual($" --- {ex4.Scores} Punkte für Kategorie " +
+                $"'{this.Categories.Single(c => c.ID == ExerciseCategory.Category3).Name}'", this.sut[4].ScoresForCategory);
         }
 
         [TestMethod]

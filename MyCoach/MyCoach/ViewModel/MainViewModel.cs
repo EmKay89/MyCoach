@@ -1,4 +1,4 @@
-﻿using MyCoach.View;
+﻿using MyCoach.View.Windows;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.DataBaseValidation;
 using MyCoach.ViewModel.Events;

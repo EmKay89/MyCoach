@@ -58,7 +58,7 @@
                 <Image Source="/Resources/InfoIcon.jpg" 
                        Stretch="Fill"/>
             </Button>
-            <TextBlock Text="{Binding ExerciseText}"/>
+            <TextBlock Text="{Binding NameAndRepeats}"/>
         </DockPanel>
     </Grid>
 </UserControl>

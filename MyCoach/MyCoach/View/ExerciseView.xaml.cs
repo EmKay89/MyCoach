@@ -1,4 +1,5 @@
-﻿using MyCoach.ViewModel;
+﻿using MyCoach.View.Windows;
+using MyCoach.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -18,8 +19,7 @@ namespace MyCoach.View
         {
             var exerciseInfoWinow = new ExerciseInfoWindow
             {
-                DataContext = (this.DataContext as ExerciseViewModel).Exercise,
-                AllowEdit = true,
+                DataContext = (this.DataContext as ExerciseViewModel).Exercise
             };
 
             exerciseInfoWinow.ShowDialog();

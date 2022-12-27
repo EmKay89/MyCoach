@@ -82,12 +82,16 @@ namespace MyCoach.ViewModel
         public bool EditingAllowed => this.isActive == false;
 
         /// <summary>
-        ///     Text to be displayed, if this object represents an exercise.
+        ///     Gets a string indicating how much repeats of the exercise are supposed to be performed.
+        ///     Empty string, if the this object represents a lap separator.
         /// </summary>
-        public string ExerciseText
-        {
-            get => GetExerciseText();
-        }
+        public string NameAndRepeats => GetNameAndRepeats();
+
+        /// <summary>
+        ///     Gets a string indicating how much scores will be added to which exercise category after completing the exercise.
+        ///     Empty string, if the this object represents a lap separator, the exercise category is not set or the scores for the exercise is 0.
+        /// </summary>
+        public string ScoresForCategory => GetScoresForCategory();
 
         /// <summary>
         ///     Text to be displayed, if this object represents a lap separator.
@@ -147,7 +151,7 @@ namespace MyCoach.ViewModel
                 nameof(this.EditingAllowed));
         }
 
-        private string GetExerciseText()
+        private string GetNameAndRepeats()
         {
             if (this.Exercise == null)
             {
@@ -174,6 +178,17 @@ namespace MyCoach.ViewModel
                 sb.Append(UNKNOWN_EXERCISE_NAME);
             }
 
+            return sb.ToString();
+        }
+
+        private string GetScoresForCategory()
+        {
+            if (this.Exercise == null)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
             var categoryActive = DataInterface.GetInstance().GetData<Category>().SingleOrDefault(c => c.ID == this.Exercise.Category)?.Active;
             var categoryName = DataInterface.GetInstance().GetData<Category>().SingleOrDefault(c => c.ID == this.Exercise.Category)?.Name;
 
