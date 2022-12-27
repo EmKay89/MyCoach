@@ -32,14 +32,14 @@
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideTrainingSettings">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
                         <BackEase EasingMode="EaseIn"/>
                     </EasingDoubleKeyFrame.EasingFunction>
