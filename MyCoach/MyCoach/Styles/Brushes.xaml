@@ -45,7 +45,6 @@
     <SolidColorBrush x:Key="SelectedHighlightedBorderBrush" Color="#658CAA"/>
 
     <!-- Border Brushes -->
-
     <LinearGradientBrush x:Key="HorizontalNormalBorderBrush" StartPoint="0,0" EndPoint="1,0">
         <GradientBrush.GradientStops>
             <GradientStopCollection>

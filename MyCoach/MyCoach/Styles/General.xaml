@@ -7,10 +7,20 @@
     <!-- Text and Labels -->
     
     <!-- Checkbox -->
+    <Style TargetType="CheckBox">
+        <Setter Property="MinHeight" Value="22"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="3"/>
+            </Style>
+        </Style.Resources>
+    </Style>
 
     <!-- Textbox -->
     <Style TargetType="TextBox">
-        <Setter Property="MinHeight" Value="23"/>
+        <Setter Property="MinHeight" Value="22"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
         <Style.Resources>

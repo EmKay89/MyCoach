@@ -146,4 +146,6 @@
         <Style.Triggers>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="ComboBox" BasedOn="{StaticResource DefaultComboBox}"/>
 </ResourceDictionary>

@@ -75,8 +75,7 @@
             <StackPanel>
                 <Label Content="Modus"
                        FontWeight="Bold"/>
-                <ComboBox Style="{StaticResource DefaultComboBox}"
-                          HorizontalAlignment="Left"
+                <ComboBox HorizontalAlignment="Left"
                           ItemsSource="{Binding ModesWithCaption}"
                           SelectedValue="{Binding TrainingMode}"
                           DisplayMemberPath="Value" 
@@ -98,8 +97,7 @@
             <StackPanel Visibility="{Binding SingleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Kategorie"
                        FontWeight="Bold"/>
-                <ComboBox Style="{StaticResource DefaultComboBox}"
-                          HorizontalAlignment="Left"
+                <ComboBox HorizontalAlignment="Left"
                           ItemsSource="{Binding ActiveCategories}"
                           SelectedIndex="0"
                           SelectedValue="{Binding CategoryInFocus}"
@@ -150,16 +148,14 @@
             </StackPanel>
             <StackPanel Visibility="{Binding LapCountSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Runden" FontWeight="Bold"/>
-                <ComboBox Style="{StaticResource DefaultComboBox}"
-                          HorizontalAlignment="Left"
+                <ComboBox HorizontalAlignment="Left"
                           ItemsSource="{Binding NumbersOneToFour}"
                           SelectedValue="{Binding LapCount}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
             </StackPanel>
             <StackPanel Visibility="{Binding ExercisesPerLapSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Label Content="Anzahl Übungen je Runde" FontWeight="Bold"/>
-                <ComboBox Style="{StaticResource DefaultComboBox}"
-                          HorizontalAlignment="Left"
+                <ComboBox HorizontalAlignment="Left"
                           ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding ExercisesPerLap}"
                           IsEnabled="{Binding TrainingSettingsEnabled}"/>
@@ -172,7 +168,7 @@
                    Visibility="{Binding NotEnoughExercisesAvailable, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image.ToolTip>
                     <ToolTip Width="600">
-                        <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um mit den gewählten Einstellungen ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
+                        <TextBlock Text="Hinweis: Es sind nicht genug Übungen vorhanden, um ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
                                    TextWrapping="WrapWithOverflow"/>
                     </ToolTip>
                 </Image.ToolTip>
