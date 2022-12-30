@@ -7,8 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>        
-        <Label Content="Einstellungen ändern"
-               FontWeight="Bold"/>
+        <Label Content="Einstellungen ändern" Style="{StaticResource Headline}"/>
         <TextBlock Text="Vorlagen für die Bezeichnung der Einheiten von Übungen:"/>
         <ListBox Height="100" 
                  ItemsSource="{Binding Units}"
@@ -74,8 +73,7 @@
             <Button Content="Verwerfen"
                     HorizontalAlignment="Left"/>
         </StackPanel>
-        <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen."
-               FontWeight="Bold"/>
+        <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen." Style="{StaticResource Headline}"/>
         <StackPanel Orientation="Horizontal">
             <Button Content="Zurücksetzen"
                     Command="{Binding SetDefaultsCommand}"/>

@@ -8,11 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel Orientation="Vertical">
         <Label Content="Punkte aktueller Monat"
-                   FontWeight="Bold"/>
+               Style="{StaticResource Headline}"/>
         <ContentControl Content="{Binding CurrentMonthViewModel}"/>
         <Label Content="Punkte Gesamtzeitraum Trainingsplan"
-                   FontWeight="Bold"
-                   Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+               Style="{StaticResource Headline}"
+               Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
         <StackPanel Orientation="Horizontal"
                         Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <ToggleButton Content="Übersicht"

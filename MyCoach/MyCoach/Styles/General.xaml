@@ -5,9 +5,13 @@
     </ResourceDictionary.MergedDictionaries>
     
     <!-- Text and Labels -->
+    <Style TargetType="Label" x:Key="Headline">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
     
     <!-- Checkbox -->
-    <Style TargetType="CheckBox">
+    <Style TargetType="CheckBox" x:Key="DefaultCheckBox">
         <Setter Property="MinHeight" Value="22"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
@@ -17,9 +21,10 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBox}"/>
 
     <!-- Textbox -->
-    <Style TargetType="TextBox">
+    <Style TargetType="TextBox" x:Key="DefaultTextBox">
         <Setter Property="MinHeight" Value="22"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
@@ -29,7 +34,8 @@
             </Style>
         </Style.Resources>
     </Style>
-    
+    <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}"/>
+
     <!-- Other -->
     <Style TargetType="ProgressBar" x:Key="ScoresBar">
         <Setter Property="Margin" Value="5"/>
