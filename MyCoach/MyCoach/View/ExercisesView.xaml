@@ -38,8 +38,8 @@
             <Label Content="Übungssatz importieren oder exportieren" Style="{StaticResource Headline}"/>
             <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
                        TextWrapping="WrapWithOverflow"
-                       Margin="20,0,0,0"/>
-            <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+                       Margin="15,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
                 <Button Content="Export" Command="{Binding ExportExercisesCommand}"/>
                 <Button Content="Import" Command="{Binding ImportExercisesCommand}"/>
             </StackPanel>
@@ -162,7 +162,7 @@
                           Grid.Column="1"
                           Style="{StaticResource CategoryCountCombobox}"/>
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
                 <Button Content="Speichern" Command="{Binding SaveCategoriesCommand}"/>
                 <Button Content="Verwerfen" Command="{Binding ResetCategoriesCommand}"/>
             </StackPanel>
@@ -175,10 +175,10 @@
                           Margin="10,0,0,0"
                           Width="150"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
                 <Button Content="Hinzufügen" Command="{Binding AddExerciseCommand}"/>
             </StackPanel>
-            <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}" Margin="5">
+            <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}" Margin="10,3,5,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -187,12 +187,12 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel Orientation="Horizontal"  Margin="15,5,0,0">
+            <StackPanel Orientation="Horizontal"  Margin="10,5,0,0">
                 <Button Content="Speichern" Command="{Binding SaveExercisesCommand}"/>
                 <Button Content="Verwerfen" Command="{Binding ResetExercisesCommand}"/>
             </StackPanel>
             <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen." Style="{StaticResource Headline}"/>
-            <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
+            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
                 <Button Content="Zurücksetzen" Command="{Binding SetDefaultsCommand}"/>
             </StackPanel>
         </StackPanel>
