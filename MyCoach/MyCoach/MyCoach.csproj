@@ -321,5 +321,11 @@
   <ItemGroup>
     <None Include="Resources\DeleteIcon.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Chart.png" />
+    <Resource Include="Resources\Dumbbell.png" />
+    <Resource Include="Resources\Gear.png" />
+    <Resource Include="Resources\List.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

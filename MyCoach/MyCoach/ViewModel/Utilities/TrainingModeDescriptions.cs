@@ -17,7 +17,7 @@ namespace MyCoach.ViewModel.Utilities
         public const string DESCRIPTION_RONDOMTRAINING = "In diesem Modus wird pro Runde die gewählte Anzahl an Übungen zufällig aus allen aktiven Kategorien " +
             "gewählt und dann ins Training eingeplant.";
         public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
-        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training selbst aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
+        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
             "zusammengestellt werden. Ein so erstelltes Training kann als Datei gespeichert und später wieder geladen werden.";
 
         public static string GetTrainingModeDescription(TrainingMode trainingMode)
