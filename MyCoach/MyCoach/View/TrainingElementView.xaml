@@ -6,59 +6,77 @@
       xmlns:local="clr-namespace:MyCoach.View"
       mc:Ignorable="d" 
       d:DesignHeight="40" d:DesignWidth="550">
-    <Grid>
+    <Grid Margin="5,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding LapHeadline}" 
-                   Visibility="{Binding LapSeparatorElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-                   Grid.Row="0"/>
-        <DockPanel Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-                   Grid.Row="1">
+        <Label Content="{Binding LapHeadline}" 
+               Visibility="{Binding LapSeparatorElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+               Grid.Row="0"
+               FontWeight="Bold"/>
+        <Grid Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+              Height="20"
+              Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <CheckBox IsChecked="{Binding Completed}" 
                       Visibility="{Binding CompletionAllowed, Converter={StaticResource BoolToVisibilityConverter}}"
                       VerticalAlignment="Center"
-                      DockPanel.Dock="Left"/>
-            <Button Height="15"
-                    Width="20"
-                    DockPanel.Dock="Right"
-                    Background="White"
-                    BorderThickness="0" Click="InfoButton_Click">
-                <Image Source="/Resources/InfoIcon.jpg" 
-                       Stretch="Fill"/>
-            </Button>
-            <Button Height="15"
-                    Width="20"
-                    DockPanel.Dock="Right"
-                    Background="White"
-                    BorderThickness="0" 
-                    Command="{Binding RemoveElementCommand}"
-                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Image Source="/Resources/DeleteIcon.jpg" 
-                       Stretch="Fill"/>
-            </Button>
-            <Button Height="15"
-                    Width="20"
-                    DockPanel.Dock="Right"
-                    Background="White"
-                    BorderThickness="0" 
-                    Command="{Binding MoveElementDownCommand}"
-                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Image Source="/Resources/InfoIcon.jpg" 
-                       Stretch="Fill"/>
-            </Button>
-            <Button Height="15"
-                    Width="20"
-                    DockPanel.Dock="Right"
-                    Background="White"
-                    BorderThickness="0" 
-                    Command="{Binding MoveElementUpCommand}"
-                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Image Source="/Resources/InfoIcon.jpg" 
-                       Stretch="Fill"/>
-            </Button>
-            <TextBlock Text="{Binding NameAndRepeats}"/>
-        </DockPanel>
+                      Grid.Column="0"/>
+            <DockPanel Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                       Grid.Column="1">
+                <Button Height="15"
+                        Width="20"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right"
+                        Background="White"
+                        BorderThickness="0" Click="InfoButton_Click">
+                        <Image Source="/Resources/InfoIcon.jpg" 
+                               Stretch="Fill"/>
+                </Button>
+                <Button Height="15"
+                        Width="20"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right"
+                        Background="White"
+                        BorderThickness="0" 
+                        Command="{Binding RemoveElementCommand}"
+                        Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Image Source="/Resources/DeleteIcon.jpg" 
+                               Stretch="Fill"/>
+                </Button>
+                <Button Height="15"
+                        Width="20"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right"
+                        Background="White"
+                        BorderThickness="0" 
+                        Command="{Binding MoveElementDownCommand}"
+                        Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Image Source="/Resources/InfoIcon.jpg" 
+                               Stretch="Fill"/>
+                </Button>
+                <Button Height="15"
+                        Width="20"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Right"
+                        Background="White"
+                        BorderThickness="0" 
+                        Command="{Binding MoveElementUpCommand}"
+                        Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Image Source="/Resources/InfoIcon.jpg" 
+                               Stretch="Fill"/>
+                </Button>
+                <TextBlock Text="{Binding NameAndRepeats}"
+                           VerticalAlignment="Center"
+                           DockPanel.Dock="Left"/>
+                <TextBlock Text="{Binding ScoresForCategory}"
+                           VerticalAlignment="Center"
+                           Visibility="{Binding CompletionAllowed, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </DockPanel>
+        </Grid>        
     </Grid>
 </UserControl>

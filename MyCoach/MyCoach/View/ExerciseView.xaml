@@ -44,7 +44,7 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Bezeichnung"
+                <TextBlock Text="Name"
                            Style="{StaticResource ExerciseViewLabel}"/>
                 <TextBox Text="{Binding Name}"
                          Style="{StaticResource ExerciseViewTextBox}"
