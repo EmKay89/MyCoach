@@ -29,6 +29,8 @@
         <Setter Property="Foreground" Value="DarkSlateGray"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="LightGray"/>
+        <Setter Property="Padding" Value="25,0,0,0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Style.Resources>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="3"/>
