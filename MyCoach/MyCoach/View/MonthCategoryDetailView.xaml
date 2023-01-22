@@ -8,7 +8,11 @@
              d:DesignHeight="35" 
              d:DesignWidth="460">
     <DockPanel>
-        <TextBlock Text="{Binding Name}" Width="200" DockPanel.Dock="Left"/>
+        <TextBlock Margin="15,0,0,0"
+                   VerticalAlignment="Center"
+                   Text="{Binding Name}"
+                   Width="200"
+                   DockPanel.Dock="Left"/>
         <Grid>
             <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding Percentage, Mode=OneWay}"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
