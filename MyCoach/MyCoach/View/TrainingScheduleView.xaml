@@ -8,9 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
-            <TextBlock Text="Für das Absolvieren einer Übung im Training erhältst du eine Anzahl von Punkten, die du für jede Übung separat festlegen kannst. Im Trainingsplan kannst du ein Monatsziel für die somit erreichten Punkte festlegen."
+            <TextBlock Margin="5,10,0,0"
+                       Text="Für das Absolvieren einer Übung im Training erhältst du eine Anzahl von Punkten, die du für jede Übung separat festlegen kannst. Im Trainingsplan kannst du ein Monatsziel für die Punkte festlegen."
                        TextWrapping="WrapWithOverflow"/>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Margin="10,5,0,0"
+                        Orientation="Horizontal">
                 <ToggleButton Content="Einsehen"
                           Style="{StaticResource DefaultToggleButton}"
                           Command="{Binding UpdateSelectedViewModelCommand}"
