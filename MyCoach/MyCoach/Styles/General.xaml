@@ -36,7 +36,7 @@
     </Style>
     <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}"/>
 
-    <!-- Other -->
+    <!-- ProgressBar -->
     <Style TargetType="ProgressBar" x:Key="ScoresBar">
         <Setter Property="Margin" Value="5,5,10,5"/>
         <Setter Property="Height" Value="25"/>
@@ -50,6 +50,18 @@
             <Style TargetType="Rectangle">
                 <Setter Property="RadiusY" Value="3"/>
                 <Setter Property="RadiusX" Value="3"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <!-- DatePicker -->
+    <Style TargetType="DatePicker" x:Key="EditMonthDatePicker">
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="3"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="0"/>
             </Style>
         </Style.Resources>
     </Style>

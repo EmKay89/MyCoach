@@ -10,11 +10,19 @@
         <Style TargetType="TextBox"
                x:Key="EditMonthViewTextBox">
             <Setter Property="Margin" Value="10,10,10,0"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </Style.Resources>
         </Style>
     </UserControl.Resources>
     <StackPanel Width="100">
         <TextBlock Text="{Binding MonthName}" 
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Visibility="{Binding NotCurrentMonth, Converter={StaticResource BoolToVisibilityConverter}}"/>
         <TextBox Text="{Binding Category1Goal}" 
                  Style="{DynamicResource EditMonthViewTextBox}" 
                  Visibility="{Binding Category1ItemsVisible, Converter={StaticResource BoolToVisibilityConverter}}"

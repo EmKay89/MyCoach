@@ -30,10 +30,9 @@ namespace MyCoach.ViewModel
             this.categories.CollectionChanged += this.OnCategoriesChanged;
         }
 
-        public bool Category1ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category1)?.Active == true;
-        }
+        public bool NotCurrentMonth => this.month.Number != MonthNumber.Current;
+
+        public bool Category1ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category1)?.Active == true;
 
         public ushort Category1Goal
         {
@@ -46,10 +45,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category2ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category2)?.Active == true;
-        }
+        public bool Category2ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category2)?.Active == true;
 
         public ushort Category2Goal
         {
@@ -62,10 +58,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category3ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category3)?.Active == true;
-        }
+        public bool Category3ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category3)?.Active == true;
 
         public ushort Category3Goal
         {
@@ -78,10 +71,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category4ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category4)?.Active == true;
-        }
+        public bool Category4ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category4)?.Active == true;
 
         public ushort Category4Goal
         {
@@ -94,10 +84,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category5ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category5)?.Active == true;
-        }
+        public bool Category5ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category5)?.Active == true;
 
         public ushort Category5Goal
         {
@@ -110,10 +97,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category6ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category6)?.Active == true;
-        }
+        public bool Category6ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category6)?.Active == true;
 
         public ushort Category6Goal
         {
@@ -126,10 +110,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category7ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category7)?.Active == true;
-        }
+        public bool Category7ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category7)?.Active == true;
 
         public ushort Category7Goal
         {
@@ -142,10 +123,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool Category8ItemsVisible
-        {
-            get => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category8)?.Active == true;
-        }
+        public bool Category8ItemsVisible => categories.FirstOrDefault(c => c.ID == ExerciseCategory.Category8)?.Active == true;
 
         public ushort Category8Goal
         {
@@ -169,12 +147,9 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public string MonthName
-        {
-            get => this.month.Number == MonthNumber.Current
+        public string MonthName => this.month.Number == MonthNumber.Current
                 ? string.Empty
                 : this.month.StartDate.ToString("y", CultureInfo.CurrentCulture);
-        }
 
         public ScheduleEditingType ScheduleEditingType
         {

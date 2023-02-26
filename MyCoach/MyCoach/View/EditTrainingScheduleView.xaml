@@ -10,7 +10,8 @@
         <Label Content="Trainingsplan bearbeiten"
                Style="{StaticResource Headline}"
                DockPanel.Dock="Top"/>
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top"
+              Margin="15,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="85"/>
                 <ColumnDefinition Width="150"/>
@@ -22,59 +23,73 @@
             </Grid.RowDefinitions>
             <TextBlock Text="Typ: "
                        Grid.Column="0"
-                       Grid.Row="0"/>
+                       Grid.Row="0"
+                       VerticalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding ScheduleTypesWithCaption}"
                       SelectedValue="{Binding Type}"
                       DisplayMemberPath="Value" 
                       SelectedValuePath="Key"
                       Grid.Column="1"
-                      Grid.Row="0"/>
-            <TextBlock Text="Startdatum: "
-                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-                       Grid.Column="0"
-                       Grid.Row="1"/>
-            <DatePicker local:DatePickerCalendar.IsMonthYear="True" 
-                        local:DatePickerDateFormat.DateFormat="MMM-yyyy"
-                        Text="MMM-yyyy"
-                        SelectedDate="{Binding StartMonth}"
-                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-                        Grid.Column="1"
-                        Grid.Row="1"/>
+                      Grid.Row="0"
+                      Margin="0,3,0,3"/>
             <TextBlock Text="Dauer: "
                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                        Grid.Column="0"
-                       Grid.Row="2"/>
+                       Grid.Row="1"
+                       VerticalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding NumbersOneToTwelveWithCaption}"
                       SelectedValue="{Binding Duration}"
                       DisplayMemberPath="Value" 
                       SelectedValuePath="Key"
                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                       Grid.Column="1"
-                      Grid.Row="2"/>
+                      Grid.Row="1"
+                      Margin="0,3,0,3"/>
+            <TextBlock Text="Startdatum: "
+                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       VerticalAlignment="Center"/>
+            <DatePicker local:DatePickerCalendar.IsMonthYear="True"
+                        local:DatePickerDateFormat.DateFormat="MMM-yyyy"
+                        Style="{StaticResource EditMonthDatePicker}"
+                        Text="MMM-yyyy"
+                        SelectedDate="{Binding StartMonth}"
+                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Margin="0,3,0,3"/>
         </Grid>
+        <StackPanel DockPanel.Dock="Top"
+                    Margin="15,5,0,15"
+                    Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+            <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=FreeEntry}"
+                         Content="Freie Eingabe der Punkte"
+                         Margin="0,5,0,0"/>
+            <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DivideTotal}"
+                         Content="Gesamtpunkte gleichmäßig auf Kategorien verteilen"
+                         Margin="0,5,0,0"/>
+            <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SumUpTotal}"
+                         Content="Gesamtpunkte automatisch berechnen"
+                         Margin="0,5,0,0"/>
+        </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible"
                       HorizontalScrollBarVisibility="Auto"
                       DockPanel.Dock="Top"
                       Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ScrollViewer}}">
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Top">
-                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=FreeEntry}"
-                             Content="Freie Eingabe"/>
-                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DivideTotal}"
-                             Content="Gesamtpunkte gleichmäßig auf Kategorien verteilen"/>
-                    <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SumUpTotal}"
-                             Content="Gesamtpunkte automatisch berechnen"/>
+            <DockPanel Margin="15,0,0,10">
+                <StackPanel DockPanel.Dock="Left">
+                    <Label Height="13"
+                           Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <ItemsControl ItemsSource="{Binding AvailableCategories}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}"
+                                       Margin="0,12,0,0"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
-                <ItemsControl ItemsSource="{Binding AvailableCategories}"
-                          Margin="0,14,0,0"
-                          DockPanel.Dock="Left">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}"
-                                   Margin="0,12,0,0"/>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
                 <ItemsControl ItemsSource="{Binding EditMonthViewModels}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -85,7 +100,8 @@
             </DockPanel>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal"
-                    DockPanel.Dock="Top">
+                    DockPanel.Dock="Top"
+                    Margin="10,5,0,0">
             <Button Content="Speichern"
                     Command="{Binding SaveCommand}"
                     HorizontalAlignment="Left"/>
@@ -97,16 +113,18 @@
                Style="{StaticResource Headline}"
                DockPanel.Dock="Top"/>
         <Button Content="Löschen"
-                    Command="{Binding DeleteScheduleCommand}"
-                    HorizontalAlignment="Left"
-                DockPanel.Dock="Top"/>
+                Command="{Binding DeleteScheduleCommand}"
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Top"
+                Margin="15,5,0,0"/>
         <Label Content="Erreichte Trainingspunkte löschen"
                Style="{StaticResource Headline}"
                DockPanel.Dock="Top"/>
         <Button Content="Löschen"
-                    Command="{Binding DeleteScoresCommand}"
-                    HorizontalAlignment="Left"
-                DockPanel.Dock="Top"/>
+                Command="{Binding DeleteScoresCommand}"
+                HorizontalAlignment="Left"
+                DockPanel.Dock="Top"
+                Margin="15,5,0,0"/>
         <Grid/>
     </DockPanel>
 </UserControl>
