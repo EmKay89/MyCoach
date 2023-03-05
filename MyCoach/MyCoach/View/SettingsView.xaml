@@ -6,77 +6,149 @@
              xmlns:local="clr-namespace:MyCoach.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel>        
-        <Label Content="Einstellungen ändern" Style="{StaticResource Headline}"/>
-        <TextBlock Text="Vorlagen für die Bezeichnung der Einheiten von Übungen:"/>
-        <ListBox Height="100" 
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <StackPanel>
+            <Label Content="Einstellungen ändern" Style="{StaticResource Headline}"/>
+            <TextBlock Text="Vorlagen für die Bezeichnung der Einheiten von Übungen:"
+                       Style="{StaticResource DefaultAfterHeadline}"/>
+            <ListBox Height="100" 
                  ItemsSource="{Binding Units}"
-                 SelectedItem="{Binding SelectedUnit}"/>
-        <TextBox Text="{Binding NewUnit}"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Hinzufügen"
+                 SelectedItem="{Binding SelectedUnit}"
+                 Margin="15,5,15,0"/>
+            <TextBox Text="{Binding NewUnit}"
+                 Margin="15,0,15,0"/>
+            <StackPanel Orientation="Horizontal"
+                    Margin="10,5,0,0">
+                <Button Content="Hinzufügen"
                     Command="{Binding AddUnitCommand}"
                     HorizontalAlignment="Left"/>
-            <Button Content="Entfernen"
+                <Button Content="Entfernen"
                     Command="{Binding DeleteUnitCommand}"
                     HorizontalAlignment="Left"/>
-        </StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="13"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="13"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Multiplikator Anzahl" Grid.Column="1"/>
-            <TextBlock Text="Multiplikator Punkte" Grid.Column="3"/>
-            <TextBlock Text="Trainingsrunde 1" Grid.Row="1"/>
-            <TextBox Text="{Binding RepeatsRound1}" Grid.Column="1" Grid.Row="1"/>
-            <TextBlock Text="%" Grid.Column="2" Grid.Row="1"/>
-            <TextBox Text="{Binding ScoresRound1}" Grid.Column="3" Grid.Row="1"/>
-            <TextBlock Text="%" Grid.Column="4" Grid.Row="1"/>
-            <TextBlock Text="Trainingsrunde 2" Grid.Row="2"/>
-            <TextBox Text="{Binding RepeatsRound2}" Grid.Column="1" Grid.Row="2"/>
-            <TextBlock Text="%" Grid.Column="2" Grid.Row="2"/>
-            <TextBox Text="{Binding ScoresRound2}" Grid.Column="3" Grid.Row="2"/>
-            <TextBlock Text="%" Grid.Column="4" Grid.Row="2"/>
-            <TextBlock Text="Trainingsrunde 3" Grid.Row="3"/>
-            <TextBox Text="{Binding RepeatsRound3}" Grid.Column="1" Grid.Row="3"/>
-            <TextBlock Text="%" Grid.Column="2" Grid.Row="3"/>
-            <TextBox Text="{Binding ScoresRound3}" Grid.Column="3" Grid.Row="3"/>
-            <TextBlock Text="%" Grid.Column="4" Grid.Row="3"/>
-            <TextBlock Text="Trainingsrunde 4" Grid.Row="4"/>
-            <TextBox Text="{Binding RepeatsRound4}" Grid.Column="1" Grid.Row="4"/>
-            <TextBlock Text="%" Grid.Column="2" Grid.Row="4"/>
-            <TextBox Text="{Binding ScoresRound4}" Grid.Column="3" Grid.Row="4"/>
-            <TextBlock Text="%" Grid.Column="4" Grid.Row="4"/>
-        </Grid>
-        <TextBlock Text="Wiederholungen von Übungen im Training erlauben" TextWrapping="WrapWithOverflow"/>
-        <ComboBox ItemsSource="{Binding PremissionsWithCaption}"
+            </StackPanel>
+            <Grid Margin="15,15,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="95"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="13"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="13"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Multiplikator Anzahl"
+                       Grid.Column="1"
+                       HorizontalAlignment="Center"/>
+                <TextBlock Text="Multiplikator Punkte"
+                       Grid.Column="3"
+                       HorizontalAlignment="Center"/>
+                <TextBlock Text="Trainingsrunde 1"
+                       Grid.Row="1"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding RepeatsRound1}"
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="2"
+                       Grid.Row="1"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ScoresRound1}"
+                     Grid.Column="3"
+                     Grid.Row="1"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="4"
+                       Grid.Row="1"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="Trainingsrunde 2"
+                       Grid.Row="2"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding RepeatsRound2}"
+                     Grid.Column="1"
+                     Grid.Row="2"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ScoresRound2}"
+                     Grid.Column="3"
+                     Grid.Row="2"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="4"
+                       Grid.Row="2"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="Trainingsrunde 3"
+                       Grid.Row="3"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding RepeatsRound3}"
+                     Grid.Column="1"
+                     Grid.Row="3"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="2"
+                       Grid.Row="3"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ScoresRound3}"
+                     Grid.Column="3"
+                     Grid.Row="3"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="4"
+                       Grid.Row="3"
+                       VerticalAlignment="Center"/>
+                <TextBlock Text="Trainingsrunde 4"
+                       Grid.Row="4"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding RepeatsRound4}"
+                     Grid.Column="1"
+                     Grid.Row="4"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="2"
+                       Grid.Row="4"
+                       VerticalAlignment="Center"/>
+                <TextBox Text="{Binding ScoresRound4}"
+                     Grid.Column="3"
+                     Grid.Row="4"
+                     Margin="10,3,3,3"/>
+                <TextBlock Text="%"
+                       Grid.Column="4"
+                       Grid.Row="4"
+                       VerticalAlignment="Center"/>
+            </Grid>
+            <TextBlock Text="Wiederholungen von Übungen im Training erlauben"
+                   Style="{StaticResource DefaultTextBlock}"/>
+            <ComboBox ItemsSource="{Binding PremissionsWithCaption}"
                   SelectedValue="{Binding Permission}"
                   DisplayMemberPath="Value" 
-                  SelectedValuePath="Key"/>
-        <TextBlock Text="{Binding PermissionText}" TextWrapping="WrapWithOverflow"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Speichern"
+                  SelectedValuePath="Key"
+                  Margin="15,10,15,0"
+                  HorizontalAlignment="Left"/>
+            <TextBlock Text="{Binding PermissionText}"
+                   Style="{StaticResource DefaultTextBlock}"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Speichern"
                     Command="{Binding SaveSettingsCommand}"
                     HorizontalAlignment="Left"/>
-            <Button Content="Verwerfen"
+                <Button Content="Verwerfen"
                     HorizontalAlignment="Left"/>
-        </StackPanel>
-        <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen." Style="{StaticResource Headline}"/>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Zurücksetzen"
+            </StackPanel>
+            <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen." Style="{StaticResource Headline}"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Zurücksetzen"
                     Command="{Binding SetDefaultsCommand}"/>
+            </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </ScrollViewer>    
 </UserControl>

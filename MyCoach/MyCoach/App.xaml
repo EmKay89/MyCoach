@@ -10,9 +10,10 @@
         <ResourceDictionary>
             <!-- Styles from stylesheet-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles\General.xaml"/>
-                <ResourceDictionary Source="Styles\Combobox.xaml"/>
                 <ResourceDictionary Source="Styles\Buttons.xaml"/>
+                <ResourceDictionary Source="Styles\Combobox.xaml"/>
+                <ResourceDictionary Source="Styles\General.xaml"/>
+                <ResourceDictionary Source="Styles\Texts.xaml"/>                
             </ResourceDictionary.MergedDictionaries>
 
             <!-- ViewModel - View links -->

@@ -37,8 +37,7 @@
         <StackPanel>
             <Label Content="Übungssatz importieren oder exportieren" Style="{StaticResource Headline}"/>
             <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
-                       TextWrapping="WrapWithOverflow"
-                       Margin="15,5,0,0"/>
+                       Style="{StaticResource DefaultAfterHeadline}"/>
             <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
                 <Button Content="Export" Command="{Binding ExportExercisesCommand}"/>
                 <Button Content="Import" Command="{Binding ImportExercisesCommand}"/>
@@ -132,8 +131,7 @@
                 </StackPanel>
             </Grid>
             <TextBlock Text="Folgend kannst du die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
-                       TextWrapping="WrapWithOverflow"
-                       Margin="15,10,0,0"/>
+                       Style="{StaticResource DefaultTextBlock}"/>
             <Grid Margin="20,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>

@@ -3,13 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Brushes.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
-    <!-- Text and Labels -->
-    <Style TargetType="Label" x:Key="Headline">
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Margin" Value="0,4,0,0"/>
-    </Style>
-    
+        
     <!-- Checkbox -->
     <Style TargetType="CheckBox" x:Key="DefaultCheckBox">
         <Setter Property="MinHeight" Value="22"/>
@@ -35,6 +29,17 @@
         </Style.Resources>
     </Style>
     <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}"/>
+
+    <!-- Listbox -->
+    <Style TargetType="ListBox" x:Key="DefaultListBox">
+        <Setter Property="BorderBrush" Value="LightGray"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="3"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBox}"/>
 
     <!-- ProgressBar -->
     <Style TargetType="ProgressBar" x:Key="ScoresBar">
