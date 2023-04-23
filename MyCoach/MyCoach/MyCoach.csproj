@@ -323,13 +323,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DeleteIcon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Chart.png" />
     <Resource Include="Resources\Dumbbell.png" />
     <Resource Include="Resources\Gear.png" />
     <Resource Include="Resources\List.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\DownIcon.jpg" />
+    <Resource Include="Resources\QuestionIcon.jpg" />
+    <Resource Include="Resources\UpIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\RemoveIcon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

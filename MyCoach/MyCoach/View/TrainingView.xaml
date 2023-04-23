@@ -103,7 +103,7 @@
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
                               IsEnabled="{Binding TrainingSettingsEnabled}" />
-                    <Image Source="/Resources/InfoIcon.jpg"
+                    <Image Source="/Resources/QuestionIcon.jpg"
                            Stretch="None"
                            Margin="10,0,0,0"
                            ToolTipService.ShowDuration="30000"
@@ -191,7 +191,7 @@
                               ItemsSource="{Binding NumbersOneToFour}"
                               SelectedValue="{Binding LapCount}"
                               IsEnabled="{Binding TrainingSettingsEnabled}" />
-                    <Image Source="/Resources/InfoIcon.jpg"
+                    <Image Source="/Resources/QuestionIcon.jpg"
                            Stretch="None"
                            Margin="10,0,0,0"
                            ToolTipService.ShowDuration="30000"
