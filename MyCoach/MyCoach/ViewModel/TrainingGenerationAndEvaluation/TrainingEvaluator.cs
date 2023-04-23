@@ -50,6 +50,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 .SingleOrDefault(c => c.ID == trainingElement.Exercise?.Category)?.Active;
 
             if ((trainingElement.Type != TrainingElementType.Exercise)
+                || trainingElement.Exercise.Category == null
                 || trainingElement.Exercise.Category == ExerciseCategory.WarmUp
                 || trainingElement.Exercise.Category == ExerciseCategory.CoolDown
                 || trainingElement.Completed == false
@@ -67,7 +68,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            scores.Add(new Pair<ExerciseCategory, ushort>(trainingElement.Exercise.Category, scoresToBeAdded));
+            scores.Add(new Pair<ExerciseCategory, ushort>((ExerciseCategory)trainingElement.Exercise.Category, scoresToBeAdded));
         }
 
         private static void SetScoresForCategory(ExerciseCategory category, ushort scores)

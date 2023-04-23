@@ -51,7 +51,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public ExerciseCategory Category
+        public ExerciseCategory? Category
         {
             get => this.exercise.Category;
 

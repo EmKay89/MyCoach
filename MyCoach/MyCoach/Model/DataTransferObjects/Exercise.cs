@@ -8,7 +8,7 @@ namespace MyCoach.Model.DataTransferObjects
     public class Exercise : DtoBase, IDataTransferObject
     {
         private uint iD;
-        private ExerciseCategory category;
+        private ExerciseCategory? category;
         private ushort count;
         private string name;
         private string unit;
@@ -37,7 +37,7 @@ namespace MyCoach.Model.DataTransferObjects
         /// <summary>
         ///     Ruft die Übungskategorie auf oder legt sie fest.
         /// </summary>
-        public ExerciseCategory Category
+        public ExerciseCategory? Category
         {
             get => category;
             set

@@ -312,7 +312,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
         {
             var allExercises = pool.SelectMany(p => p.Value).ToList();
             var filteredExercises = allExercises.Where(
-                e => includes.Contains(e.Category) && excludes.Contains(e.Category) == false).ToList();
+                e => includes.Contains((ExerciseCategory)e.Category) && excludes.Contains((ExerciseCategory)e.Category) == false).ToList();
             return filteredExercises;
         }
 

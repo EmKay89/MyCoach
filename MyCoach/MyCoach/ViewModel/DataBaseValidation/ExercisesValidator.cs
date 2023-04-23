@@ -1,5 +1,6 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
+using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,6 +22,7 @@ namespace MyCoach.ViewModel.DataBaseValidation
             }
 
             RemoveDoublicates(exercises);
+            exercises.RemoveAll(e => e.Category == null);
 
             DataInterface.GetInstance().SaveData<Exercise>();
         }
