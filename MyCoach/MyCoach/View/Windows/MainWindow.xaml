@@ -6,50 +6,71 @@
         xmlns:local="clr-namespace:MyCoach.View"
         xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
         mc:Ignorable="d"
-        Title="MyCoach" Height="550" Width="900" MinHeight="550" MinWidth="900">
+        Title="MyCoach"
+        Height="550"
+        Width="900"
+        MinHeight="550"
+        MinWidth="900">
     <Window.DataContext>
-        <viewmodels:MainViewModel/>
+        <viewmodels:MainViewModel />
     </Window.DataContext>
     <DockPanel>
-        <StackPanel DockPanel.Dock="Left"  Width="180" Background="AliceBlue">
-            <ToggleButton Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateMainViewCommand}" 
+        <StackPanel DockPanel.Dock="Left"
+                    Width="180"
+                    Background="AliceBlue">
+            <ToggleButton Style="{StaticResource MainMenuButton}"
+                          Command="{Binding UpdateMainViewCommand}"
                           CommandParameter="Training"
                           IsChecked="{Binding TrainingViewSelected, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/List.png" Stretch="None"/>
-                    <TextBlock Text="Training" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Resources/List.png"
+                           Stretch="None" />
+                    <TextBlock Text="Training"
+                               VerticalAlignment="Center"
+                               Margin="5" />
                 </StackPanel>
             </ToggleButton>
-            <ToggleButton Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateMainViewCommand}" 
+            <ToggleButton Style="{StaticResource MainMenuButton}"
+                          Command="{Binding UpdateMainViewCommand}"
                           CommandParameter="Exercise"
                           IsChecked="{Binding ExerciseViewSelected, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Dumbbell.png" Stretch="None"/>
-                    <TextBlock Text="Übungen" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Resources/Dumbbell.png"
+                           Stretch="None" />
+                    <TextBlock Text="Übungen"
+                               VerticalAlignment="Center"
+                               Margin="5" />
                 </StackPanel>
             </ToggleButton>
-            <ToggleButton Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateMainViewCommand}" 
+            <ToggleButton Style="{StaticResource MainMenuButton}"
+                          Command="{Binding UpdateMainViewCommand}"
                           CommandParameter="TrainingSchedule"
                           IsChecked="{Binding TrainingScheduleViewSelected, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Chart.png" Stretch="None"/>
-                    <TextBlock Text="Trainingsplan" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Resources/Chart.png"
+                           Stretch="None" />
+                    <TextBlock Text="Trainingsplan"
+                               VerticalAlignment="Center"
+                               Margin="5" />
                 </StackPanel>
             </ToggleButton>
-            <ToggleButton Style="{StaticResource MainMenuButton}" 
-                          Command="{Binding UpdateMainViewCommand}" 
+            <ToggleButton Style="{StaticResource MainMenuButton}"
+                          Command="{Binding UpdateMainViewCommand}"
                           CommandParameter="Settings"
                           IsChecked="{Binding SettingsViewSelected, Mode=OneWay}">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Gear.png" Stretch="None"/>
-                    <TextBlock Text="Einstellungen" VerticalAlignment="Center" Margin="5"/>
+                    <Image Source="/Resources/Gear.png"
+                           Stretch="None" />
+                    <TextBlock Text="Einstellungen"
+                               VerticalAlignment="Center"
+                               Margin="5" />
                 </StackPanel>
             </ToggleButton>
         </StackPanel>
-        <Label DockPanel.Dock="Top" Background="LightGray" Height="4"/>
-        <ContentControl Content="{Binding SelectedViewModel}" Margin="0,0,0,10"/>
+        <Label DockPanel.Dock="Top"
+               Background="LightGray"
+               Height="4" />
+        <ContentControl Content="{Binding SelectedViewModel}"
+                        Margin="0,0,0,10" />
     </DockPanel>
 </Window>

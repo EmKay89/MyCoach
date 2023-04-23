@@ -1,72 +1,95 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Brushes.xaml"/>
+        <ResourceDictionary Source="Brushes.xaml" />
     </ResourceDictionary.MergedDictionaries>
-        
     <!-- Checkbox -->
-    <Style TargetType="CheckBox" x:Key="DefaultCheckBox">
-        <Setter Property="MinHeight" Value="22"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
+    <Style TargetType="CheckBox"
+           x:Key="DefaultCheckBox">
+        <Setter Property="MinHeight"
+                Value="22" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="BorderBrush"
+                Value="LightGray" />
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="CornerRadius"
+                        Value="3" />
             </Style>
         </Style.Resources>
     </Style>
-    <Style TargetType="CheckBox" BasedOn="{StaticResource DefaultCheckBox}"/>
-
+    <Style TargetType="CheckBox"
+           BasedOn="{StaticResource DefaultCheckBox}" />
     <!-- Textbox -->
-    <Style TargetType="TextBox" x:Key="DefaultTextBox">
-        <Setter Property="MinHeight" Value="22"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="BorderBrush" Value="LightGray"/>
+    <Style TargetType="TextBox"
+           x:Key="DefaultTextBox">
+        <Setter Property="MinHeight"
+                Value="22" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="BorderBrush"
+                Value="LightGray" />
         <Style.Resources>
-            <Style TargetType="Border">                
-                <Setter Property="CornerRadius" Value="3"/>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius"
+                        Value="3" />
             </Style>
         </Style.Resources>
     </Style>
-    <Style TargetType="TextBox" BasedOn="{StaticResource DefaultTextBox}"/>
-
+    <Style TargetType="TextBox"
+           BasedOn="{StaticResource DefaultTextBox}" />
     <!-- Listbox -->
-    <Style TargetType="ListBox" x:Key="DefaultListBox">
-        <Setter Property="BorderBrush" Value="LightGray"/>
+    <Style TargetType="ListBox"
+           x:Key="DefaultListBox">
+        <Setter Property="BorderBrush"
+                Value="LightGray" />
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="CornerRadius"
+                        Value="3" />
             </Style>
         </Style.Resources>
     </Style>
-    <Style TargetType="ListBox" BasedOn="{StaticResource DefaultListBox}"/>
-
+    <Style TargetType="ListBox"
+           BasedOn="{StaticResource DefaultListBox}" />
     <!-- ProgressBar -->
-    <Style TargetType="ProgressBar" x:Key="ScoresBar">
-        <Setter Property="Margin" Value="5,5,10,5"/>
-        <Setter Property="Height" Value="25"/>
-        <Setter Property="Minimum" Value="0"/>
-        <Setter Property="Maximum" Value="100"/>
-        <Setter Property="Foreground" Value="{StaticResource SelectedHighlightedBorderBrush}"/>
+    <Style TargetType="ProgressBar"
+           x:Key="ScoresBar">
+        <Setter Property="Margin"
+                Value="5,5,10,5" />
+        <Setter Property="Height"
+                Value="25" />
+        <Setter Property="Minimum"
+                Value="0" />
+        <Setter Property="Maximum"
+                Value="100" />
+        <Setter Property="Foreground"
+                Value="{StaticResource SelectedHighlightedBorderBrush}" />
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="CornerRadius"
+                        Value="3" />
             </Style>
             <Style TargetType="Rectangle">
-                <Setter Property="RadiusY" Value="3"/>
-                <Setter Property="RadiusX" Value="3"/>
+                <Setter Property="RadiusY"
+                        Value="3" />
+                <Setter Property="RadiusX"
+                        Value="3" />
             </Style>
         </Style.Resources>
     </Style>
-
     <!-- DatePicker -->
-    <Style TargetType="DatePicker" x:Key="EditMonthDatePicker">
+    <Style TargetType="DatePicker"
+           x:Key="EditMonthDatePicker">
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter Property="CornerRadius" Value="3"/>
+                <Setter Property="CornerRadius"
+                        Value="3" />
             </Style>
             <Style TargetType="Button">
-                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Margin"
+                        Value="0" />
             </Style>
         </Style.Resources>
     </Style>

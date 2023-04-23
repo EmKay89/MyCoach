@@ -1,23 +1,29 @@
 ﻿<UserControl x:Class="MyCoach.View.MonthCategoryDetailView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MyCoach.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="35" 
+             mc:Ignorable="d"
+             d:DesignHeight="35"
              d:DesignWidth="460">
     <DockPanel>
         <TextBlock Margin="15,0,0,0"
                    VerticalAlignment="Center"
                    Text="{Binding Name}"
                    Width="200"
-                   DockPanel.Dock="Left"/>
+                   DockPanel.Dock="Left" />
         <Grid>
-            <ProgressBar Style="{StaticResource ScoresBar}" Value="{Binding Percentage, Mode=OneWay}"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox Text="{Binding Scores}" Background="Transparent" BorderThickness="0" VerticalContentAlignment="Center"/>
-                <TextBlock Text="{Binding AppendedGoalTag}" VerticalAlignment="Center"/>
+            <ProgressBar Style="{StaticResource ScoresBar}"
+                         Value="{Binding Percentage, Mode=OneWay}" />
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBox Text="{Binding Scores}"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center" />
+                <TextBlock Text="{Binding AppendedGoalTag}"
+                           VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
     </DockPanel>

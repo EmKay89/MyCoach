@@ -10,51 +10,49 @@
         <ResourceDictionary>
             <!-- Styles from stylesheet-->
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles\Buttons.xaml"/>
-                <ResourceDictionary Source="Styles\Combobox.xaml"/>
-                <ResourceDictionary Source="Styles\General.xaml"/>
-                <ResourceDictionary Source="Styles\Texts.xaml"/>                
+                <ResourceDictionary Source="Styles\Buttons.xaml" />
+                <ResourceDictionary Source="Styles\Combobox.xaml" />
+                <ResourceDictionary Source="Styles\General.xaml" />
+                <ResourceDictionary Source="Styles\Texts.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <!-- ViewModel - View links -->
             <DataTemplate DataType="{x:Type viewmodels:ExercisesViewModel}">
-                <views:ExercisesView/>
+                <views:ExercisesView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:MonthViewModel}">
-                <views:MonthView/>
+                <views:MonthView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:OverviewElementViewModel}">
-                <views:OverviewElementView/>
+                <views:OverviewElementView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
-                <views:SettingsView/>
+                <views:SettingsView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleOverviewViewModel}">
-                <views:TrainingScheduleOverviewView/>
+                <views:TrainingScheduleOverviewView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:TrainingScheduleViewModel}">
-                <views:TrainingScheduleView/>
+                <views:TrainingScheduleView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:TrainingViewModel}">
-                <views:TrainingView/>
+                <views:TrainingView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:ViewTrainingScheduleViewModel}">
-                <views:ViewTrainingScheduleView/>
+                <views:ViewTrainingScheduleView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:EditMonthViewModel}">
-                <views:EditMonthView/>
+                <views:EditMonthView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:EditTrainingScheduleViewModel}">
-                <views:EditTrainingScheduleView/>
+                <views:EditTrainingScheduleView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:TrainingElementViewModel}">
-                <views:TrainingElementView/>
+                <views:TrainingElementView />
             </DataTemplate>
-
             <!-- Converter -->
-            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-            <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter"/>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            <converter:UintToGridLenthConverter x:Key="UintToGridLenthConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

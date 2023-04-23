@@ -1,53 +1,71 @@
 ﻿<UserControl x:Class="MyCoach.View.TrainingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MyCoach.View"
              xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <UserControl.Resources>
-        <Style TargetType="Button" x:Key="StartStopButton" BasedOn="{StaticResource DefaultButton}">
-            <Setter Property="Content" Value="Start"/>
+        <Style TargetType="Button"
+               x:Key="StartStopButton"
+               BasedOn="{StaticResource DefaultButton}">
+            <Setter Property="Content"
+                    Value="Start" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding TrainingActive}" Value="True">
-                    <Setter Property="Content" Value="Stop"/>
+                <DataTrigger Binding="{Binding TrainingActive}"
+                             Value="True">
+                    <Setter Property="Content"
+                            Value="Stop" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Storyboard x:Key="ShowTrainingSettings">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5"
+                                      Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
+                        <BackEase EasingMode="EaseOut" />
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="290">
+                <EasingDoubleKeyFrame KeyTime="0:0:1"
+                                      Value="290">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseOut"/>
+                        <BackEase EasingMode="EaseOut" />
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5"
+                                      Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:1"
+                                      Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideTrainingSettings">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="290"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)"
+                                           Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                      Value="290" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8"
+                                      Value="0">
                     <EasingDoubleKeyFrame.EasingFunction>
-                        <BackEase EasingMode="EaseIn"/>
+                        <BackEase EasingMode="EaseIn" />
                     </EasingDoubleKeyFrame.EasingFunction>
                 </EasingDoubleKeyFrame>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="stackPanel">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="stackPanel">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4"
+                                      Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8"
+                                      Value="0" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
@@ -67,23 +85,24 @@
                     DockPanel.Dock="Bottom"
                     Orientation="Horizontal">
             <Button Command="{Binding StartTrainingCommand}"
-                    Style="{StaticResource StartStopButton}"/>
+                    Style="{StaticResource StartStopButton}" />
             <Button Content="Timer"
-                    Click="TimerButton_Click"/>
+                    Click="TimerButton_Click" />
         </StackPanel>
-        <StackPanel x:Name="stackPanel" 
-                    DockPanel.Dock="Right" 
+        <StackPanel x:Name="stackPanel"
+                    DockPanel.Dock="Right"
                     Width="290">
             <StackPanel>
-                <Label Content="Modus" Style="{StaticResource Headline}"/>
+                <Label Content="Modus"
+                       Style="{StaticResource Headline}" />
                 <StackPanel Orientation="Horizontal">
                     <ComboBox HorizontalAlignment="Left"
                               Margin="15,0,0,0"
                               ItemsSource="{Binding ModesWithCaption}"
                               SelectedValue="{Binding TrainingMode}"
-                              DisplayMemberPath="Value" 
+                              DisplayMemberPath="Value"
                               SelectedValuePath="Key"
-                              IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                              IsEnabled="{Binding TrainingSettingsEnabled}" />
                     <Image Source="/Resources/InfoIcon.jpg"
                            Stretch="None"
                            Margin="10,0,0,0"
@@ -93,82 +112,85 @@
                         <Image.ToolTip>
                             <ToolTip Width="600">
                                 <TextBlock Text="{Binding ModeExplanation}"
-                                       TextWrapping="WrapWithOverflow"/>
+                                           TextWrapping="WrapWithOverflow" />
                             </ToolTip>
                         </Image.ToolTip>
                     </Image>
                 </StackPanel>
             </StackPanel>
             <StackPanel Visibility="{Binding SingleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Kategorie" Style="{StaticResource Headline}"/>
+                <Label Content="Kategorie"
+                       Style="{StaticResource Headline}" />
                 <ComboBox HorizontalAlignment="Left"
                           Margin="15,0,0,0"
                           ItemsSource="{Binding ActiveCategories}"
                           SelectedIndex="0"
                           SelectedValue="{Binding CategoryInFocus}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
             </StackPanel>
             <StackPanel Visibility="{Binding MultipleCategorySelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Aktive Übungskategorien" Style="{StaticResource Headline}"/>
+                <Label Content="Aktive Übungskategorien"
+                       Style="{StaticResource Headline}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding CategoryWarmUpName}"
                           IsChecked="{Binding CategoryWarmUpEnabledForTraining}"
                           Visibility="{Binding CategoryWarmUpActive, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
-                          Content="{Binding Category1Name}" 
+                          Content="{Binding Category1Name}"
                           IsChecked="{Binding Category1EnabledForTraining}"
                           Visibility="{Binding Category1Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category2Name}"
                           IsChecked="{Binding Category2EnabledForTraining}"
                           Visibility="{Binding Category2Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
-                          Content="{Binding Category3Name}" 
+                          Content="{Binding Category3Name}"
                           IsChecked="{Binding Category3EnabledForTraining}"
                           Visibility="{Binding Category3Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category4Name}"
                           IsChecked="{Binding Category4EnabledForTraining}"
                           Visibility="{Binding Category4Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category5Name}"
                           IsChecked="{Binding Category5EnabledForTraining}"
                           Visibility="{Binding Category5Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category6Name}"
                           IsChecked="{Binding Category6EnabledForTraining}"
                           Visibility="{Binding Category6Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category7Name}"
                           IsChecked="{Binding Category7EnabledForTraining}"
                           Visibility="{Binding Category7Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
                           Content="{Binding Category8Name}"
                           IsChecked="{Binding Category8EnabledForTraining}"
                           Visibility="{Binding Category8Active, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
                 <CheckBox Margin="15,0,0,0"
-                          Content="{Binding CategoryCoolDownName}" 
+                          Content="{Binding CategoryCoolDownName}"
                           IsChecked="{Binding CategoryCoolDownEnabledForTraining}"
                           Visibility="{Binding CategoryCoolDownActive, Converter={StaticResource BoolToVisibilityConverter}}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
             </StackPanel>
             <StackPanel Visibility="{Binding LapCountSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Runden" Style="{StaticResource Headline}"/>
+                <Label Content="Runden"
+                       Style="{StaticResource Headline}" />
                 <StackPanel Orientation="Horizontal"
                             Margin="15,0,0,0">
                     <ComboBox HorizontalAlignment="Left"
                               ItemsSource="{Binding NumbersOneToFour}"
                               SelectedValue="{Binding LapCount}"
-                              IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                              IsEnabled="{Binding TrainingSettingsEnabled}" />
                     <Image Source="/Resources/InfoIcon.jpg"
                            Stretch="None"
                            Margin="10,0,0,0"
@@ -179,36 +201,43 @@
                         <Image.ToolTip>
                             <ToolTip Width="600">
                                 <TextBlock Text="Es sind nicht genug Übungen vorhanden, um ein vollständiges Training zu erstellen. Du kannst mehr Übungen hinzufügen oder in den Einstellungen das Wiederholen von Übungen im Training erlauben."
-                                   TextWrapping="WrapWithOverflow"/>
+                                           TextWrapping="WrapWithOverflow" />
                             </ToolTip>
                         </Image.ToolTip>
                     </Image>
                 </StackPanel>
             </StackPanel>
             <StackPanel Visibility="{Binding ExercisesPerLapSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Anzahl Übungen je Runde" Style="{StaticResource Headline}"/>
+                <Label Content="Anzahl Übungen je Runde"
+                       Style="{StaticResource Headline}" />
                 <ComboBox Margin="15,0,0,0"
                           HorizontalAlignment="Left"
                           ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding ExercisesPerLap}"
-                          IsEnabled="{Binding TrainingSettingsEnabled}"/>
+                          IsEnabled="{Binding TrainingSettingsEnabled}" />
             </StackPanel>
             <StackPanel Visibility="{Binding MultiplyerSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Multiplikator für Wiederholungen und Punkte" Style="{StaticResource Headline}"/>
+                <Label Content="Multiplikator für Wiederholungen und Punkte"
+                       Style="{StaticResource Headline}" />
                 <StackPanel Margin="15,0,0,0"
                             Orientation="Horizontal">
-                    <TextBox Text="{Binding Multiplyer}" IsEnabled="{Binding TrainingSettingsEnabled}" Width="100"/>
-                    <TextBlock Text="%" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Multiplyer}"
+                             IsEnabled="{Binding TrainingSettingsEnabled}"
+                             Width="100" />
+                    <TextBlock Text="%"
+                               Margin="5,0,0,0"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Visibility="{Binding LoadingSavingButtonsVisisble, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Label Content="Training laden oder speichern" Style="{StaticResource Headline}"/>
+                <Label Content="Training laden oder speichern"
+                       Style="{StaticResource Headline}" />
                 <StackPanel Margin="10,0,0,0"
                             Orientation="Horizontal">
                     <Button Content="Laden"
-                            Command="{Binding ImportTrainingCommand}"/>
+                            Command="{Binding ImportTrainingCommand}" />
                     <Button Content="Speichern"
-                            Command="{Binding ExportTrainingCommand}"/>
+                            Command="{Binding ExportTrainingCommand}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -219,7 +248,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <local:TrainingElementView/>
+                        <local:TrainingElementView />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

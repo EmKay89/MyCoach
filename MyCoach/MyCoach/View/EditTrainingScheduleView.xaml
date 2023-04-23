@@ -1,55 +1,56 @@
 ﻿<UserControl x:Class="MyCoach.View.EditTrainingScheduleView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MyCoach.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <DockPanel>
         <Label Content="Trainingsplan bearbeiten"
                Style="{StaticResource Headline}"
-               DockPanel.Dock="Top"/>
+               DockPanel.Dock="Top" />
         <Grid DockPanel.Dock="Top"
               Margin="15,5,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="85"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="85" />
+                <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <TextBlock Text="Typ: "
                        Grid.Column="0"
                        Grid.Row="0"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
             <ComboBox ItemsSource="{Binding ScheduleTypesWithCaption}"
                       SelectedValue="{Binding Type}"
-                      DisplayMemberPath="Value" 
+                      DisplayMemberPath="Value"
                       SelectedValuePath="Key"
                       Grid.Column="1"
                       Grid.Row="0"
-                      Margin="0,3,0,3"/>
+                      Margin="0,3,0,3" />
             <TextBlock Text="Dauer: "
                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                        Grid.Column="0"
                        Grid.Row="1"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
             <ComboBox ItemsSource="{Binding NumbersOneToTwelveWithCaption}"
                       SelectedValue="{Binding Duration}"
-                      DisplayMemberPath="Value" 
+                      DisplayMemberPath="Value"
                       SelectedValuePath="Key"
                       Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                       Grid.Column="1"
                       Grid.Row="1"
-                      Margin="0,3,0,3"/>
+                      Margin="0,3,0,3" />
             <TextBlock Text="Startdatum: "
                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                        Grid.Column="0"
                        Grid.Row="2"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
             <DatePicker local:DatePickerCalendar.IsMonthYear="True"
                         local:DatePickerDateFormat.DateFormat="MMM-yyyy"
                         Style="{StaticResource EditMonthDatePicker}"
@@ -58,20 +59,20 @@
                         Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                         Grid.Column="1"
                         Grid.Row="2"
-                        Margin="0,3,0,3"/>
+                        Margin="0,3,0,3" />
         </Grid>
         <StackPanel DockPanel.Dock="Top"
                     Margin="15,5,0,15"
                     Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
             <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=FreeEntry}"
                          Content="Freie Eingabe der Punkte"
-                         Margin="0,5,0,0"/>
+                         Margin="0,5,0,0" />
             <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=DivideTotal}"
                          Content="Gesamtpunkte gleichmäßig auf Kategorien verteilen"
-                         Margin="0,5,0,0"/>
+                         Margin="0,5,0,0" />
             <RadioButton IsChecked="{Binding ScheduleEditingType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SumUpTotal}"
                          Content="Gesamtpunkte automatisch berechnen"
-                         Margin="0,5,0,0"/>
+                         Margin="0,5,0,0" />
         </StackPanel>
         <ScrollViewer VerticalScrollBarVisibility="Visible"
                       HorizontalScrollBarVisibility="Auto"
@@ -80,12 +81,12 @@
             <DockPanel Margin="15,0,0,10">
                 <StackPanel DockPanel.Dock="Left">
                     <Label Height="13"
-                           Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                           Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
                     <ItemsControl ItemsSource="{Binding AvailableCategories}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}"
-                                       Margin="0,12,0,0"/>
+                                           Margin="0,12,0,0" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -93,7 +94,7 @@
                 <ItemsControl ItemsSource="{Binding EditMonthViewModels}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
+                            <StackPanel Orientation="Horizontal" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                 </ItemsControl>
@@ -104,27 +105,27 @@
                     Margin="10,5,0,0">
             <Button Content="Speichern"
                     Command="{Binding SaveCommand}"
-                    HorizontalAlignment="Left"/>
+                    HorizontalAlignment="Left" />
             <Button Content="Verwerfen"
                     Command="{Binding ResetCommand}"
-                    HorizontalAlignment="Left"/>
+                    HorizontalAlignment="Left" />
         </StackPanel>
         <Label Content="Trainingsplan löschen"
                Style="{StaticResource Headline}"
-               DockPanel.Dock="Top"/>
+               DockPanel.Dock="Top" />
         <Button Content="Löschen"
                 Command="{Binding DeleteScheduleCommand}"
                 HorizontalAlignment="Left"
                 DockPanel.Dock="Top"
-                Margin="15,5,0,0"/>
+                Margin="15,5,0,0" />
         <Label Content="Erreichte Trainingspunkte löschen"
                Style="{StaticResource Headline}"
-               DockPanel.Dock="Top"/>
+               DockPanel.Dock="Top" />
         <Button Content="Löschen"
                 Command="{Binding DeleteScoresCommand}"
                 HorizontalAlignment="Left"
                 DockPanel.Dock="Top"
-                Margin="15,5,0,0"/>
-        <Grid/>
+                Margin="15,5,0,0" />
+        <Grid />
     </DockPanel>
 </UserControl>

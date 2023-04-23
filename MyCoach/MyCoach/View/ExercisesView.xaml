@@ -1,197 +1,305 @@
 ﻿<UserControl x:Class="MyCoach.View.ExercisesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:MyCoach.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">    
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-            <Style TargetType="TextBox" x:Key="CategoryNameTextBox" BasedOn="{StaticResource DefaultTextBox}">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="0,3,0,3"/>
-                <Setter Property="Width" Value="400"/>                
+            <Style TargetType="TextBox"
+                   x:Key="CategoryNameTextBox"
+                   BasedOn="{StaticResource DefaultTextBox}">
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0,3,0,3" />
+                <Setter Property="Width"
+                        Value="400" />
             </Style>
-            <Style TargetType="CheckBox" x:Key="CategoryActiveCheckBox" BasedOn="{StaticResource DefaultCheckBox}">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="10,0,0,0"/>
-                <Setter Property="FlowDirection" Value="RightToLeft"/>
-                <Setter Property="Content" Value="Aktiv"/>
+            <Style TargetType="CheckBox"
+                   x:Key="CategoryActiveCheckBox"
+                   BasedOn="{StaticResource DefaultCheckBox}">
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="10,0,0,0" />
+                <Setter Property="FlowDirection"
+                        Value="RightToLeft" />
+                <Setter Property="Content"
+                        Value="Aktiv" />
                 <Style.Resources>
                     <Style TargetType="{x:Type Path}">
-                        <Setter Property="FlowDirection" Value="LeftToRight"/>
+                        <Setter Property="FlowDirection"
+                                Value="LeftToRight" />
                     </Style>
                 </Style.Resources>
             </Style>
-            <Style TargetType="ComboBox" x:Key="CategoryCountCombobox" BasedOn="{StaticResource DefaultComboBox}">
-                <Setter Property="MinWidth" Value="75"/>
-                <Setter Property="Width" Value="75"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Margin" Value="0,3,0,3"/>
+            <Style TargetType="ComboBox"
+                   x:Key="CategoryCountCombobox"
+                   BasedOn="{StaticResource DefaultComboBox}">
+                <Setter Property="MinWidth"
+                        Value="75" />
+                <Setter Property="Width"
+                        Value="75" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Left" />
+                <Setter Property="VerticalAlignment"
+                        Value="Center" />
+                <Setter Property="Margin"
+                        Value="0,3,0,3" />
             </Style>
-        </ResourceDictionary>        
+        </ResourceDictionary>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
-            <Label Content="Übungssatz importieren oder exportieren" Style="{StaticResource Headline}"/>
+            <Label Content="Übungssatz importieren oder exportieren"
+                   Style="{StaticResource Headline}" />
             <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
-                       Style="{StaticResource DefaultAfterHeadline}"/>
-            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                <Button Content="Export" Command="{Binding ExportExercisesCommand}"/>
-                <Button Content="Import" Command="{Binding ImportExercisesCommand}"/>
+                       Style="{StaticResource DefaultAfterHeadline}" />
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Export"
+                        Command="{Binding ExportExercisesCommand}" />
+                <Button Content="Import"
+                        Command="{Binding ImportExercisesCommand}" />
             </StackPanel>
-            <Label Content="Übungskategorien bearbeiten" Style="{StaticResource Headline}"/>
-            <Label Content="Aufwärmübungen" Margin="10,0,0,0"/>
+            <Label Content="Übungskategorien bearbeiten"
+                   Style="{StaticResource Headline}" />
+            <Label Content="Aufwärmübungen"
+                   Margin="10,0,0,0" />
             <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="Bezeichnung" Grid.Column="0" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1">
-                    <TextBox Text="{Binding CategoryWarmUpName}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding CategoryWarmUpActive}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Bezeichnung"
+                       Grid.Column="0"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1">
+                    <TextBox Text="{Binding CategoryWarmUpName}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding CategoryWarmUpActive}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
             </Grid>
-            <Label Content="Trainingsübungen" Margin="10,5,0,0"/>
+            <Label Content="Trainingsübungen"
+                   Margin="10,5,0,0" />
             <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="Kategorie 1" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
-                    <TextBox Text="{Binding Category1Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category1Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 1"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="0">
+                    <TextBox Text="{Binding Category1Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category1Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 2" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-                    <TextBox Text="{Binding Category2Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category2Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 2"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="1">
+                    <TextBox Text="{Binding Category2Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category2Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 3" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
-                    <TextBox Text="{Binding Category3Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category3Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 3"
+                       Grid.Column="0"
+                       Grid.Row="2"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="2">
+                    <TextBox Text="{Binding Category3Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category3Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 4" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
-                    <TextBox Text="{Binding Category4Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category4Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 4"
+                       Grid.Column="0"
+                       Grid.Row="3"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="3">
+                    <TextBox Text="{Binding Category4Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category4Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 5" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
-                    <TextBox Text="{Binding Category5Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category5Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 5"
+                       Grid.Column="0"
+                       Grid.Row="4"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="4">
+                    <TextBox Text="{Binding Category5Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category5Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 6" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
-                    <TextBox Text="{Binding Category6Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category6Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 6"
+                       Grid.Column="0"
+                       Grid.Row="5"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="5">
+                    <TextBox Text="{Binding Category6Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category6Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 7" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
-                    <TextBox Text="{Binding Category7Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category7Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 7"
+                       Grid.Column="0"
+                       Grid.Row="6"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="6">
+                    <TextBox Text="{Binding Category7Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category7Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
-                <Label Content="Kategorie 8" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="7">
-                    <TextBox Text="{Binding Category8Name}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding Category8Active}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Kategorie 8"
+                       Grid.Column="0"
+                       Grid.Row="7"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1"
+                            Grid.Row="7">
+                    <TextBox Text="{Binding Category8Name}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding Category8Active}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
             </Grid>
-            <Label Content="Abwärmübungen" Margin="10,5,0,0"/>
+            <Label Content="Abwärmübungen"
+                   Margin="10,5,0,0" />
             <Grid Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="Bezeichnung" Grid.Column="0" VerticalAlignment="Center"/>
-                <StackPanel Orientation="Horizontal" Grid.Column="1">
-                    <TextBox Text="{Binding CategoryCoolDownName}" Style="{StaticResource CategoryNameTextBox}"/>
-                    <CheckBox IsChecked="{Binding CategoryCoolDownActive}" Style="{StaticResource CategoryActiveCheckBox}"/>
+                <Label Content="Bezeichnung"
+                       Grid.Column="0"
+                       VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Column="1">
+                    <TextBox Text="{Binding CategoryCoolDownName}"
+                             Style="{StaticResource CategoryNameTextBox}" />
+                    <CheckBox IsChecked="{Binding CategoryCoolDownActive}"
+                              Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
             </Grid>
             <TextBlock Text="Folgend kannst du die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
-                       Style="{StaticResource DefaultTextBlock}"/>
+                       Style="{StaticResource DefaultTextBlock}" />
             <Grid Margin="20,10,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Content="Aufwärmübungen"
                        Grid.Row="0"
                        Grid.Column="0"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
                 <ComboBox ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding CategoryWarmUpCount}"
                           Grid.Row="0"
                           Grid.Column="1"
-                          Style="{StaticResource CategoryCountCombobox}"/>
+                          Style="{StaticResource CategoryCountCombobox}" />
                 <Label Content="Abwärmübungen"
                        Grid.Row="1"
                        Grid.Column="0"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
                 <ComboBox ItemsSource="{Binding NumbersOneToTen}"
                           SelectedValue="{Binding CategoryCoolDownCount}"
                           Grid.Row="1"
                           Grid.Column="1"
-                          Style="{StaticResource CategoryCountCombobox}"/>
+                          Style="{StaticResource CategoryCountCombobox}" />
             </Grid>
-            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                <Button Content="Speichern" Command="{Binding SaveCategoriesCommand}"/>
-                <Button Content="Verwerfen" Command="{Binding ResetCategoriesCommand}"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Speichern"
+                        Command="{Binding SaveCategoriesCommand}" />
+                <Button Content="Verwerfen"
+                        Command="{Binding ResetCategoriesCommand}" />
             </StackPanel>
-            <Label Content="Übungen bearbeiten" Style="{StaticResource Headline}"/>            
-            <StackPanel Orientation="Horizontal" Margin="15,5,0,0">
-                <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:"/>
+            <Label Content="Übungen bearbeiten"
+                   Style="{StaticResource Headline}" />
+            <StackPanel Orientation="Horizontal"
+                        Margin="15,5,0,0">
+                <TextBlock Text="Übungen der folgenden Kategorie bearbeiten:" />
                 <ComboBox ItemsSource="{Binding ActiveCategories}"
                           SelectedValue="{Binding SelectedCategory}"
                           HorizontalAlignment="Left"
                           Margin="10,0,0,0"
-                          Width="150"/>
+                          Width="150" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                <Button Content="Hinzufügen" Command="{Binding AddExerciseCommand}"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Hinzufügen"
+                        Command="{Binding AddExerciseCommand}" />
             </StackPanel>
-            <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}" Margin="10,3,5,3">
+            <ItemsControl ItemsSource="{Binding ExercisesFilteredByCategory}"
+                          Margin="10,3,5,3">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <local:ExerciseView/>
+                            <local:ExerciseView />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <StackPanel Orientation="Horizontal"  Margin="10,5,0,0">
-                <Button Content="Speichern" Command="{Binding SaveExercisesCommand}"/>
-                <Button Content="Verwerfen" Command="{Binding ResetExercisesCommand}"/>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Speichern"
+                        Command="{Binding SaveExercisesCommand}" />
+                <Button Content="Verwerfen"
+                        Command="{Binding ResetExercisesCommand}" />
             </StackPanel>
-            <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen." Style="{StaticResource Headline}"/>
-            <StackPanel Orientation="Horizontal" Margin="10,5,0,0">
-                <Button Content="Zurücksetzen" Command="{Binding SetDefaultsCommand}"/>
+            <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen."
+                   Style="{StaticResource Headline}" />
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Zurücksetzen"
+                        Command="{Binding SetDefaultsCommand}" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
