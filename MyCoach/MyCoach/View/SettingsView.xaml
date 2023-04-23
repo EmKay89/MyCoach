@@ -28,7 +28,7 @@
                         Command="{Binding DeleteUnitCommand}"
                         HorizontalAlignment="Left" />
             </StackPanel>
-            <Grid Margin="15,15,0,0">
+            <Grid Margin="15,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="95" />
                     <ColumnDefinition Width="150" />
@@ -129,16 +129,29 @@
             </Grid>
             <TextBlock Text="Wiederholungen von Übungen im Training erlauben"
                        Style="{StaticResource DefaultTextBlock}" />
-            <ComboBox ItemsSource="{Binding PremissionsWithCaption}"
-                      SelectedValue="{Binding Permission}"
-                      DisplayMemberPath="Value"
-                      SelectedValuePath="Key"
-                      Margin="15,10,15,0"
-                      HorizontalAlignment="Left" />
-            <TextBlock Text="{Binding PermissionText}"
-                       Style="{StaticResource DefaultTextBlock}" />
             <StackPanel Orientation="Horizontal"
-                        Margin="10,5,0,0">
+                        Margin="15,10,15,0">
+                <ComboBox ItemsSource="{Binding PremissionsWithCaption}"
+                          SelectedValue="{Binding Permission}"
+                          DisplayMemberPath="Value"
+                          SelectedValuePath="Key"
+                          VerticalAlignment="Center" />
+                <Image Source="/Resources/InfoIcon.jpg"
+                       Stretch="None"
+                       Margin="10,0,0,0"
+                       ToolTipService.ShowDuration="30000"
+                       ToolTipService.InitialShowDelay="300"
+                       Cursor="Help">
+                    <Image.ToolTip>
+                        <ToolTip Width="600">
+                            <TextBlock Text="{Binding PermissionText}"
+                                       TextWrapping="WrapWithOverflow" />
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,10,0,0">
                 <Button Content="Speichern"
                         Command="{Binding SaveSettingsCommand}"
                         HorizontalAlignment="Left" />
