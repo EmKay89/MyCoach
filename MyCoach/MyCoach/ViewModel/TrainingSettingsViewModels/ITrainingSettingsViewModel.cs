@@ -4,6 +4,6 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 {
     public interface ITrainingSettingsViewModel
     {
-        bool CanStartTraining();
+        bool CanStartTraining { get; }
     }
 }

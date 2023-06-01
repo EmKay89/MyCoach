@@ -31,10 +31,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 
         public RelayCommand ImportTrainingCommand { get; }
 
-        public bool CanStartTraining()
-        {
-            return this.training.Any();
-        }
+        public bool CanStartTraining => this.training.Any();
 
         private bool CanExportTraining()
         {
