@@ -115,6 +115,9 @@
     <Compile Include="ViewModel\EditTrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\Events\ExerciseEventArgs.cs" />
     <Compile Include="ViewModel\Events\ExerciseEventHandler.cs" />
+    <Compile Include="ViewModel\TrainingSettingsViewModels\CircleRandomAndFocusTrainingViewModel.cs" />
+    <Compile Include="ViewModel\TrainingSettingsViewModels\ITrainingSettingsViewModel.cs" />
+    <Compile Include="ViewModel\TrainingSettingsViewModels\UserDefinedTrainingViewModel.cs" />
     <Compile Include="ViewModel\Utilities\ExerciseAvailabilityChecker.cs" />
     <Compile Include="ViewModel\ExercisesViewModel.cs" />
     <Compile Include="ViewModel\ExerciseViewModel.cs" />
