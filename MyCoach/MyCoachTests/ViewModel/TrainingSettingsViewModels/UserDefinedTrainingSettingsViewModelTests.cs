@@ -13,7 +13,7 @@ using System.Windows;
 namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
 {
     [TestClass]
-    public class UserDefinedTrainingViewModelTests : ViewModelTestBase
+    public class UserDefinedTrainingSettingsViewModelTests : ViewModelTestBase
     {
         #region Initialization and Cleanup
 
@@ -21,7 +21,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         private const string validImportPath = "validImportPath";
         private IFileDialogService fileDialogService;
         private IMessageBoxService messageBoxService;
-        UserDefinedTrainingViewModel sut;
+        UserDefinedTrainingSettingsViewModel sut;
         private readonly Training training = new Training();
 
         [TestInitialize]
@@ -30,7 +30,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
             base.Initialize();
             this.SetupServices();
             this.SetupDataManager();
-            this.sut = new UserDefinedTrainingViewModel(this.training, fileDialogService, messageBoxService);
+            this.sut = new UserDefinedTrainingSettingsViewModel(this.training, fileDialogService, messageBoxService);
             this.sut.PropertyChanged += this.OnSutPropertyChanged;
             TrainingEvaluator.MessageBoxService = this.messageBoxService;
         }
@@ -64,11 +64,9 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         [TestMethod]
         public void ImportCommandCanExecute_ReturnsTrueOnlyAsLongTrainingIsNotActive()
         {
-            Assert.IsFalse(this.training.IsActive);
-
             Assert.AreEqual(true, this.sut.ImportTrainingCommand.CanExecute(null));
 
-            this.training.Start();
+            this.sut.TrainingActive = true;
 
             Assert.AreEqual(false, this.sut.ImportTrainingCommand.CanExecute(null));
         }
@@ -146,7 +144,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
 
             if (isActive)
             {
-                this.training.Start();
+                this.sut.TrainingActive = true;
             }
 
             Assert.AreEqual(result, this.sut.ExportTrainingCommand.CanExecute(null));

@@ -10,11 +10,11 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
     {
         public TrainingSettings(
             TrainingMode trainingMode,
-            ushort lapCount,
-            ushort exercisesPerLap,
-            ushort multiplyer,
-            ExerciseCategory? categoryInFocus,
-            List<ExerciseCategory> categoriesEnabledForTraining)
+            ushort lapCount = 0,
+            ushort exercisesPerLap = 0,
+            ushort multiplyer = 100,
+            ExerciseCategory? categoryInFocus = null,
+            List<ExerciseCategory> categoriesEnabledForTraining = null)
         {
             TrainingMode = trainingMode;
             LapCount = lapCount;

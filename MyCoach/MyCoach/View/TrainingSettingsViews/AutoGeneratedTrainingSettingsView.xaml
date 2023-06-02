@@ -105,7 +105,7 @@
                       SelectedValue="{Binding ExercisesPerLap}"
                       IsEnabled="{Binding TrainingSettingsEnabled}" />
         </StackPanel>
-        <StackPanel Visibility="{Binding MultiplyerSelectionVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+        <StackPanel>
             <Label Content="Multiplikator für Wiederholungen und Punkte"
                    Style="{StaticResource Headline}" />
             <StackPanel Margin="15,0,0,0"

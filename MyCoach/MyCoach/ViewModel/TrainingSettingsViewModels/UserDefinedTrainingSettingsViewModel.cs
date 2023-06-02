@@ -1,4 +1,5 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
@@ -7,13 +8,13 @@ using System.Windows;
 
 namespace MyCoach.ViewModel.TrainingSettingsViewModels
 {
-    public class UserDefinedTrainingViewModel : BaseViewModel, ITrainingSettingsViewModel
+    public class UserDefinedTrainingSettingsViewModel : TrainingSettingsViewModelBase
     {
         private Training training;
         private readonly IFileDialogService fileDialogService;
         private readonly IMessageBoxService messageBoxService;
 
-        public UserDefinedTrainingViewModel(Training training, IFileDialogService fileDialogService = null, IMessageBoxService messageBoxService = null)
+        public UserDefinedTrainingSettingsViewModel(Training training, IFileDialogService fileDialogService = null, IMessageBoxService messageBoxService = null)
         {
             this.training = training;
             this.fileDialogService = fileDialogService ?? new FileDialogService();
@@ -25,13 +26,13 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
         public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
 
-        public bool TrainingActive => this.training?.IsActive == true;
+        public override bool CanStartTraining => this.training.Any();
+
+        public override TrainingSettings TrainingSettings => new TrainingSettings(TrainingMode.UserDefinedTraining);
 
         public RelayCommand ExportTrainingCommand { get; }
 
         public RelayCommand ImportTrainingCommand { get; }
-
-        public bool CanStartTraining => this.training.Any();
 
         private bool CanExportTraining()
         {
