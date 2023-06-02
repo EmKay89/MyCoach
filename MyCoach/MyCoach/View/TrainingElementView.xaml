@@ -7,15 +7,52 @@
              mc:Ignorable="d"
              d:DesignHeight="40"
              d:DesignWidth="550">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Height"
+                    Value="15" />
+            <Setter Property="Width"
+                    Value="20" />
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Setter Property="Background"
+                    Value="White" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Margin"
+                    Value="5,0,5,0" />
+        </Style>
+    </UserControl.Resources>
     <Grid Margin="5,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="{Binding Headline}"
-               Visibility="{Binding HeadlineElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
-               Grid.Row="0"
-               FontWeight="Bold" />
+        <DockPanel Visibility="{Binding HeadlineElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                   Grid.Row="0">
+            <Label Width="30"
+                   DockPanel.Dock="Right" />
+            <Button DockPanel.Dock="Right"
+                    Command="{Binding RemoveElementCommand}"
+                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Resources/RemoveIcon.jpg"
+                       Stretch="Fill" />
+            </Button>
+            <Button DockPanel.Dock="Right"
+                    Command="{Binding MoveElementDownCommand}"
+                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Resources/DownIcon.jpg"
+                       Stretch="Fill" />
+            </Button>
+            <Button DockPanel.Dock="Right"
+                    Command="{Binding MoveElementUpCommand}"
+                    Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image Source="/Resources/UpIcon.jpg"
+                       Stretch="Fill" />
+            </Button>
+            <Label Content="{Binding Headline}"
+                   FontWeight="Bold" />
+        </DockPanel>
         <Grid Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
               Height="20"
               Grid.Row="1">
@@ -29,44 +66,24 @@
                       Grid.Column="0" />
             <DockPanel Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                        Grid.Column="1">
-                <Button Height="15"
-                        Width="20"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Right"
-                        Background="White"
-                        BorderThickness="0"
+                <Button DockPanel.Dock="Right"
                         Click="InfoButton_Click">
                     <Image Source="/Resources/InfoIcon.jpg"
                            Stretch="Fill" />
                 </Button>
-                <Button Height="15"
-                        Width="20"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Right"
-                        Background="White"
-                        BorderThickness="0"
+                <Button DockPanel.Dock="Right"
                         Command="{Binding RemoveElementCommand}"
                         Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="/Resources/RemoveIcon.jpg"
                            Stretch="Fill" />
                 </Button>
-                <Button Height="15"
-                        Width="20"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Right"
-                        Background="White"
-                        BorderThickness="0"
+                <Button DockPanel.Dock="Right"
                         Command="{Binding MoveElementDownCommand}"
                         Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="/Resources/DownIcon.jpg"
                            Stretch="Fill" />
                 </Button>
-                <Button Height="15"
-                        Width="20"
-                        VerticalAlignment="Center"
-                        DockPanel.Dock="Right"
-                        Background="White"
-                        BorderThickness="0"
+                <Button DockPanel.Dock="Right"
                         Command="{Binding MoveElementUpCommand}"
                         Visibility="{Binding EditingAllowed, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="/Resources/UpIcon.jpg"

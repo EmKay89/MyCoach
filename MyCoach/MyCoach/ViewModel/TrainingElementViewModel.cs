@@ -3,6 +3,7 @@ using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Events;
+using System;
 using System.Linq;
 using System.Text;
 
@@ -41,11 +42,11 @@ namespace MyCoach.ViewModel
         public const string UNKNOWN_EXERCISE_NAME = "unbekannte Übung";
         public const string LAPDESIGNATION = "Runde";
 
-        public event ExerciseEventHandler MoveElementUpExecuted;
+        public event EventHandler MoveElementUpExecuted;
 
-        public event ExerciseEventHandler MoveElementDownExecuted;
+        public event EventHandler MoveElementDownExecuted;
 
-        public event ExerciseEventHandler RemoveElementFromTrainingExecuted;
+        public event EventHandler RemoveElementFromTrainingExecuted;
 
         public RelayCommand MoveElementUpCommand { get; }
 
@@ -202,32 +203,17 @@ namespace MyCoach.ViewModel
 
         private void InvokeMoveElementUpExecuted()
         {
-            if (this.Type == TrainingElementType.Exercise)
-            {
-                this.MoveElementUpExecuted?.Invoke(
-                    this,
-                    new ExerciseEventArgs(this.exercise));
-            }
+            this.MoveElementUpExecuted?.Invoke(this, EventArgs.Empty);
         }
 
         private void InvokeMoveElementDownExecuted()
         {
-            if (this.Type == TrainingElementType.Exercise)
-            {
-                this.MoveElementDownExecuted?.Invoke(
-                    this,
-                    new ExerciseEventArgs(this.exercise));
-            }
+            this.MoveElementDownExecuted?.Invoke(this, EventArgs.Empty);
         }
 
         private void InvokeRemoveElementFromTrainingExecuted()
         {
-            if (this.Type == TrainingElementType.Exercise)
-            {
-                this.RemoveElementFromTrainingExecuted?.Invoke(
-                    this,
-                    new ExerciseEventArgs(this.exercise));
-            }
+            this.RemoveElementFromTrainingExecuted?.Invoke(this, EventArgs.Empty);
         }
     }
 }

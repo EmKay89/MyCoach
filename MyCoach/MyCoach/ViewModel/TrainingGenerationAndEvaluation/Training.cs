@@ -68,10 +68,11 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                     if (vm.Type == TrainingElementType.Exercise)
                     {
                         vm.PropertyChanged += this.OnTrainingExerciseChanged;
-                        vm.RemoveElementFromTrainingExecuted += this.OnRemoveExerciseFromTrainingExecuted;
-                        vm.MoveElementUpExecuted += this.OnMoveExerciseUpExecuted;
-                        vm.MoveElementDownExecuted += this.OnMoveExerciseDownExecuted;
                     }
+
+                    vm.RemoveElementFromTrainingExecuted += this.OnRemoveExerciseFromTrainingExecuted;
+                    vm.MoveElementUpExecuted += this.OnMoveExerciseUpExecuted;
+                    vm.MoveElementDownExecuted += this.OnMoveExerciseDownExecuted;
                 }
             }
 
@@ -101,7 +102,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
         }
 
-        private void OnRemoveExerciseFromTrainingExecuted(object sender, ExerciseEventArgs e)
+        private void OnRemoveExerciseFromTrainingExecuted(object sender, EventArgs e)
         {
             if (sender is TrainingElementViewModel vm)
             {
@@ -115,7 +116,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
         }
 
-        private void OnMoveExerciseUpExecuted(object sender, ExerciseEventArgs e)
+        private void OnMoveExerciseUpExecuted(object sender, EventArgs e)
         {
             if (sender is TrainingElementViewModel vm)
             {
@@ -128,7 +129,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             }
         }
 
-        private void OnMoveExerciseDownExecuted(object sender, ExerciseEventArgs e)
+        private void OnMoveExerciseDownExecuted(object sender, EventArgs e)
         {
             if (sender is TrainingElementViewModel vm)
             {

@@ -19,7 +19,7 @@ namespace MyCoach.ViewModel
             this.exercise = exercise;
             this.AddExerciseToTrainingCommand = new RelayCommand(this.InvokeAddExerciseToTrainingExecuted);
             this.RemoveExerciseCommand = new RelayCommand(this.InvokeDeleteExerciseExecuted);
-            this.exercise.PropertyChanged += this.IvokeExerciseChanged;
+            this.exercise.PropertyChanged += this.InvokeExerciseChanged;
             this.SelectableUnits = DataInterface.GetInstance().GetData<Settings>().Single().Units;
         }
 
@@ -169,7 +169,7 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void IvokeExerciseChanged(object sender, PropertyChangedEventArgs e)
+        private void InvokeExerciseChanged(object sender, PropertyChangedEventArgs e)
         {
             if (sender is Exercise exercise)
             {
