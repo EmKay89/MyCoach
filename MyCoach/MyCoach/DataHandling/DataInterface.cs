@@ -62,12 +62,12 @@ namespace MyCoach.DataHandling
             return dataManager.TryImportExerciseSet(path);
         }
 
-        public bool ExportTraining(string path, List<Exercise> training)
+        public bool ExportTraining(string path, List<TrainingElement> training)
         {
             return dataManager.TryExportTraining(path, training);
         }
 
-        public bool ImportTraining(string path, out List<Exercise> training)
+        public bool ImportTraining(string path, out List<TrainingElement> training)
         {
             return dataManager.TryImportTraining(path, out training);
         }

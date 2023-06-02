@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
@@ -34,8 +35,8 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.ex3 = this.Exercises.Single(e => e.ID == 1 && e.Category == ExerciseCategory.Category2);
             this.ex4 = this.Exercises.Single(e => e.ID == 1 && e.Category == ExerciseCategory.Category3);
 
-            this.sut.Add(new TrainingElementViewModel(TrainingElementType.LapSeparator, null));
-            this.sut[0].LapHeadline = "Lap1";
+            this.sut.Add(new TrainingElementViewModel(TrainingElementType.Headline, null));
+            this.sut[0].Headline = "Lap1";
             this.sut.Add(new TrainingElementViewModel(TrainingElementType.Exercise, ex1));
             this.sut.Add(new TrainingElementViewModel(TrainingElementType.Exercise, ex2));
             this.sut.Add(new TrainingElementViewModel(TrainingElementType.Exercise, ex3));
@@ -54,7 +55,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void AddElements_VariousKinds_TextsForDisplayAreSetCorrectly()
         {
-            Assert.AreEqual("Lap1", this.sut[0].LapHeadline);
+            Assert.AreEqual("Lap1", this.sut[0].Headline);
             Assert.AreEqual($"{ex1.Count} {ex1.Unit} {ex1.Name}", this.sut[1].NameAndRepeats);
             Assert.AreEqual(string.Empty, this.sut[1].ScoresForCategory);
             Assert.AreEqual($"{ex2.Count} {ex2.Unit} {ex2.Name}", this.sut[2].NameAndRepeats);

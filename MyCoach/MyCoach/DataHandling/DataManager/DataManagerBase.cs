@@ -186,7 +186,7 @@ namespace MyCoach.DataHandling.DataManager
             return success;
         }
 
-        public virtual bool TryExportTraining(string path, List<Exercise> training)
+        public virtual bool TryExportTraining(string path, List<TrainingElement> training)
         {
             bool success = false;
 
@@ -209,7 +209,7 @@ namespace MyCoach.DataHandling.DataManager
             return success;
         }
 
-        public virtual bool TryImportTraining(string path, out List<Exercise> training)
+        public virtual bool TryImportTraining(string path, out List<TrainingElement> training)
         {
             bool success = false;
             training = null;
@@ -219,8 +219,8 @@ namespace MyCoach.DataHandling.DataManager
                 var xmlString = this.XmlFileReaderWriter.ReadXmlFromFile(path);
                 using (StringReader reader = new StringReader(xmlString))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<Exercise>));
-                    training = (List<Exercise>)(serializer.Deserialize(reader));
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<TrainingElement>));
+                    training = (List<TrainingElement>)(serializer.Deserialize(reader));
                 }
 
                 success = true;

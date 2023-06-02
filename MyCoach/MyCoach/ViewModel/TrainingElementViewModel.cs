@@ -1,15 +1,15 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Events;
-using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using System.Linq;
 using System.Text;
 
 namespace MyCoach.ViewModel
 {
     /// <summary>
-    ///     Holds data to display an exercise or lap separator for a training. Which of the two is displayed is
+    ///     Holds data to display an exercise or headline for a training. Which of the two is displayed is
     ///     determined by the property <see cref="Type"/>.
     /// </summary>
     public class TrainingElementViewModel : BaseViewModel
@@ -55,14 +55,14 @@ namespace MyCoach.ViewModel
 
         /// <summary>
         ///     Gets or sets, if this <see cref="TrainingElementViewModel"/> is supposed to represent an
-        ///     exercise or lap separator.
+        ///     exercise or headline.
         /// </summary>
         public TrainingElementType Type => this.type;
 
         /// <summary>
-        ///     Gets, if lap separator specific view elements are supposed to be shown.
+        ///     Gets, if headline specific view elements are supposed to be shown.
         /// </summary>
-        public bool LapSeparatorElementsVisible => this.Type == TrainingElementType.LapSeparator;
+        public bool HeadlineElementsVisible => this.Type == TrainingElementType.Headline;
 
         /// <summary>
         ///     Gets, if exercise specific view elements are supposed to be shown.
@@ -83,20 +83,20 @@ namespace MyCoach.ViewModel
 
         /// <summary>
         ///     Gets a string indicating how much repeats of the exercise are supposed to be performed.
-        ///     Empty string, if the this object represents a lap separator.
+        ///     Empty string, if the this object represents a headline.
         /// </summary>
         public string NameAndRepeats => GetNameAndRepeats();
 
         /// <summary>
         ///     Gets a string indicating how much scores will be added to which exercise category after completing the exercise.
-        ///     Empty string, if the this object represents a lap separator, the exercise category is not set or the scores for the exercise is 0.
+        ///     Empty string, if the this object represents a headline, the exercise category is not set or the scores for the exercise is 0.
         /// </summary>
         public string ScoresForCategory => GetScoresForCategory();
 
         /// <summary>
-        ///     Text to be displayed, if this object represents a lap separator.
+        ///     Text to be displayed, if this object represents a headline.
         /// </summary>
-        public string LapHeadline { get; set; }
+        public string Headline { get; set; }
 
         /// <summary>
         ///     The exercise DTO represented by this <see cref="TrainingElementViewModel"/>.

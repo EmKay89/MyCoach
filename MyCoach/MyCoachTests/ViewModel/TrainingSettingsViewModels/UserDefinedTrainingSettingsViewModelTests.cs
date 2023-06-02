@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Services;
@@ -62,6 +63,46 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         #region Command Tests
 
         [TestMethod]
+        public void AddExerciseCommandCanExecute_ReturnsTrueOnlyAsLongTrainingIsNotActive()
+        {
+            Assert.AreEqual(true, this.sut.AddExerciseCommand.CanExecute(null));
+
+            this.sut.TrainingActive = true;
+
+            Assert.AreEqual(false, this.sut.AddExerciseCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void AddExerciseCommandExecute_HappyPath_AddsNewTrainingElementOfTypeExercise()
+        {
+            Assert.AreEqual(this.training.Count, 0);
+
+            this.sut.AddExerciseCommand.Execute(null);
+
+            Assert.AreEqual(this.training.Single().Type, TrainingElementType.Exercise);
+        }
+
+        [TestMethod]
+        public void AddHeadlineCommandCanExecute_ReturnsTrueOnlyAsLongTrainingIsNotActive()
+        {
+            Assert.AreEqual(true, this.sut.AddHeadlineCommand.CanExecute(null));
+
+            this.sut.TrainingActive = true;
+
+            Assert.AreEqual(false, this.sut.AddHeadlineCommand.CanExecute(null));
+        }
+
+        [TestMethod]
+        public void AddHeadlineCommandExecute_HappyPath_AddsNewTrainingElementOfTypeHeadline()
+        {
+            Assert.AreEqual(this.training.Count, 0);
+
+            this.sut.AddHeadlineCommand.Execute(null);
+
+            Assert.AreEqual(this.training.Single().Type, TrainingElementType.Headline);
+        }
+
+        [TestMethod]
         public void ImportCommandCanExecute_ReturnsTrueOnlyAsLongTrainingIsNotActive()
         {
             Assert.AreEqual(true, this.sut.ImportTrainingCommand.CanExecute(null));
@@ -74,6 +115,9 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         [TestMethod]
         public void ImportTrainingCommandExecute_HappyPath_ImportsExercisesFromFileToTraining()
         {
+            Assert.AreEqual(this.training.Count, 0);
+            Assert.AreNotEqual(this.Exercises.Count, 0);
+
             this.sut.ImportTrainingCommand.Execute(null);
 
             Assert.IsTrue(
@@ -85,6 +129,8 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         [TestMethod]
         public void ImportTrainingCommandExecute_WithPreexistingElements_PreexistingElementsAreCleared()
         {
+            Assert.AreEqual(this.training.Count, 0);
+            Assert.AreNotEqual(this.Exercises.Count, 0);
             var vm = new TrainingElementViewModel(TrainingElementType.Exercise, new Exercise());
 
             this.sut.ImportTrainingCommand.Execute(null);
@@ -160,7 +206,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
 
             Assert.AreEqual(vm, this.training.Single());
             Mock.Get(this.DataManager).Verify(
-                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Once());
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<TrainingElement>>()), Times.Once());
         }
 
         [TestMethod]
@@ -176,7 +222,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
 
             Assert.AreEqual(vm, this.training.Single());
             Mock.Get(this.DataManager).Verify(
-                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Never());
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<TrainingElement>>()), Times.Never());
         }
 
         [TestMethod]
@@ -199,7 +245,7 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
                 It.IsAny<MessageBoxButton>(),
                 It.IsAny<MessageBoxImage>()), Times.Once());
             Mock.Get(this.DataManager).Verify(
-                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>()), Times.Never());
+                dm => dm.TryExportTraining(validExportPath, It.IsAny<List<TrainingElement>>()), Times.Never());
         }
 
         #endregion
@@ -219,10 +265,15 @@ namespace MyCoachTests.ViewModel.TrainingSettingsViewModels
         private void SetupDataManager()
         {
             Assert.IsTrue(this.Exercises.Any());
-            List<Exercise> expectedExercises = new List<Exercise>();
-            this.Exercises.ForEach(e => expectedExercises.Add((Exercise)e.Clone()));
-            Mock.Get(this.DataManager).Setup(dm => dm.TryImportTraining(validImportPath, out expectedExercises)).Returns(true);
-            Mock.Get(this.DataManager).Setup(dm => dm.TryExportTraining(validExportPath, It.IsAny<List<Exercise>>())).Returns(true);
+            List<TrainingElement> expectedTrainingElements = new List<TrainingElement>();
+            this.Exercises.ForEach(e => expectedTrainingElements.Add(
+                new TrainingElement()
+                {
+                    Type = TrainingElementType.Exercise,
+                    Exercise = (Exercise)e.Clone() 
+                }));
+            Mock.Get(this.DataManager).Setup(dm => dm.TryImportTraining(validImportPath, out expectedTrainingElements)).Returns(true);
+            Mock.Get(this.DataManager).Setup(dm => dm.TryExportTraining(validExportPath, It.IsAny<List<TrainingElement>>())).Returns(true);
         }
 
         #endregion

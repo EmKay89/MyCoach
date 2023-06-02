@@ -1,4 +1,5 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyExtensions.IEnumerable;
@@ -96,9 +97,9 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new TrainingElementViewModel(TrainingElementType.LapSeparator, null)
+            training.Add(new TrainingElementViewModel(TrainingElementType.Headline, null)
             {
-                LapHeadline = savedCategoryDto.Name
+                Headline = savedCategoryDto.Name
             });
 
             foreach (var exercise in exercises)
@@ -177,9 +178,9 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 return;
             }
 
-            training.Add(new TrainingElementViewModel (TrainingElementType.LapSeparator, null) 
+            training.Add(new TrainingElementViewModel (TrainingElementType.Headline, null) 
             {
-                LapHeadline = TrainingElementViewModel.LAPDESIGNATION + " " + lap.ToString() 
+                Headline = TrainingElementViewModel.LAPDESIGNATION + " " + lap.ToString() 
             });
 
             foreach (var exercise in exercises)

@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataHandling\DataManager\TrainingElement.cs" />
     <Compile Include="Model\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
     <Compile Include="Model\DataTransferObjects\DtoBase.cs" />
     <Compile Include="Model\Defines\ScheduleType.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
     <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingElementType.cs" />
+    <Compile Include="DataHandling\DataManager\TrainingElementType.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingEvaluator.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\Training.cs" />
     <Compile Include="ViewModel\TrainingElementViewModel.cs" />

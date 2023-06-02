@@ -1,4 +1,5 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Services;

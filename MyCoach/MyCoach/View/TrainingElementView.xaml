@@ -12,8 +12,8 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="{Binding LapHeadline}"
-               Visibility="{Binding LapSeparatorElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+        <Label Content="{Binding Headline}"
+               Visibility="{Binding HeadlineElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                Grid.Row="0"
                FontWeight="Bold" />
         <Grid Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"

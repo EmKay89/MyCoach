@@ -7,6 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="290">
     <StackPanel>
+        <Label Content="Neues Element hinzufügen"
+               Style="{StaticResource Headline}" />
+        <StackPanel Margin="10,0,0,0"
+                    Orientation="Horizontal">
+            <Button Content="Neue Übung"
+                    Command="{Binding AddExerciseCommand}" />
+            <Button Content="Neue Überschrift"
+                    Command="{Binding AddHeadlineCommand}" />
+        </StackPanel>
         <Label Content="Training laden oder speichern"
                Style="{StaticResource Headline}" />
         <StackPanel Margin="10,0,0,0"

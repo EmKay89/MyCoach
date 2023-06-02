@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
-using MyCoachTests;
+using MyExtensions.IEnumerable;
 
 namespace MyCoachTests.DataHandling.DataManager
 {
@@ -95,20 +94,22 @@ namespace MyCoachTests.DataHandling.DataManager
         [TestMethod]
         public void TryExportAndImportTraining_HappyPath_ExercisesAreExportedAndReimportedCorrectly()
         {
-            var training = new List<Exercise>(TestDtos.Exercises);
+            var training = new List<TrainingElement>();
+            TestDtos.Exercises.ForEach(e => training.Add(new TrainingElement { Type = TrainingElementType.Exercise, Exercise = e }));
 
             var successExport = this.sut.TryExportTraining("path", training);
             var successImport = this.sut.TryImportTraining("path", out var trainingAfterReimport);
 
             Assert.IsTrue(successExport);
             Assert.IsTrue(successImport);
-            Assert.IsTrue(Utilities.AreEqual(training, trainingAfterReimport));
+            Assert.IsTrue(Utilities.AreEqual(training.Select(t => t.Exercise).ToList(), trainingAfterReimport.Select(t => t.Exercise).ToList()));
         }
 
         [TestMethod]
         public void TryExportTraining_Exception_ErrorMessageIsSet()
         {
-            var training = new List<Exercise>(TestDtos.Exercises);
+            var training = new List<TrainingElement>();
+            TestDtos.Exercises.ForEach(e => training.Add(new TrainingElement { Type = TrainingElementType.Exercise, Exercise = e }));
 
             this.readerWriterMock.Exception = new Exception();
             this.sut.TryExportTraining("path", training);

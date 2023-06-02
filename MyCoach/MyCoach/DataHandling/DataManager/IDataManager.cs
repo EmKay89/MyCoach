@@ -28,8 +28,8 @@ namespace MyCoach.DataHandling.DataManager
 
         bool TryImportExerciseSet(string path);
 
-        bool TryExportTraining(string path, List<Exercise> training);
+        bool TryExportTraining(string path, List<TrainingElement> training);
 
-        bool TryImportTraining(string path, out List<Exercise> training);
+        bool TryImportTraining(string path, out List<TrainingElement> training);
     }
 }
