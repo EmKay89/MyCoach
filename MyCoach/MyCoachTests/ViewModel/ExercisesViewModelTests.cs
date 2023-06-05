@@ -5,7 +5,7 @@ using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.Events;
-using MyCoach.ViewModel.Services;
+using MyMvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyExtensions", "..\..\..\li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCustomTypes", "..\..\..\libs\MyCustomTypes\MyCustomTypes\MyCustomTypes.csproj", "{B30CDB91-E3AE-40F3-8738-80B71F719956}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMvvm", "..\..\..\libs\MyMvvm\MyMvvm\MyMvvm.csproj", "{5C282469-A1EE-4F4D-A4E9-DA4DC5673AF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B30CDB91-E3AE-40F3-8738-80B71F719956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B30CDB91-E3AE-40F3-8738-80B71F719956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B30CDB91-E3AE-40F3-8738-80B71F719956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C282469-A1EE-4F4D-A4E9-DA4DC5673AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C282469-A1EE-4F4D-A4E9-DA4DC5673AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C282469-A1EE-4F4D-A4E9-DA4DC5673AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C282469-A1EE-4F4D-A4E9-DA4DC5673AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

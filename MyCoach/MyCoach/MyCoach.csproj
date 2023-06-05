@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>MyCoach</RootNamespace>
     <AssemblyName>MyCoach</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,6 +42,8 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Expression.Interaction.3.0.40218.0\lib\net46\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,8 +63,6 @@
     </Reference>
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -78,7 +79,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\Commands\RelayCommand.cs" />
     <Compile Include="Model\Defines\ExerciseCategory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -128,10 +128,6 @@
     <Compile Include="ViewModel\MonthCategoryDetailViewModel.cs" />
     <Compile Include="ViewModel\MonthViewModel.cs" />
     <Compile Include="ViewModel\OverviewElementViewModel.cs" />
-    <Compile Include="ViewModel\Services\FileDialogService.cs" />
-    <Compile Include="ViewModel\Services\IFileDialogService.cs" />
-    <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
-    <Compile Include="ViewModel\Services\MessageBoxService.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="DataHandling\DataManager\TrainingElementType.cs" />
     <Compile Include="ViewModel\TrainingGenerationAndEvaluation\TrainingEvaluator.cs" />
@@ -143,9 +139,6 @@
     <Compile Include="ViewModel\TrainingScheduleViewModel.cs" />
     <Compile Include="ViewModel\TrainingViewModel.cs" />
     <Compile Include="ViewModel\Utilities\TrainingModeDescriptions.cs" />
-    <Compile Include="ViewModel\TypeConverter\EnumToBooleanConverter.cs" />
-    <Compile Include="ViewModel\TypeConverter\UintToGridLenthConverter.cs" />
-    <Compile Include="ViewModel\TypeConverter\BoolToVisibilityConverter.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModel.cs" />
     <Compile Include="View\DatePickerCalender.cs" />
     <Compile Include="View\EditMonthView.xaml.cs">
@@ -338,6 +331,10 @@
     <ProjectReference Include="..\..\..\..\libs\MyExtensions\MyExtensions\MyExtensions.csproj">
       <Project>{7f9f2579-d9ae-405c-9ed2-ab914ad4f59d}</Project>
       <Name>MyExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\libs\MyMvvm\MyMvvm\MyMvvm.csproj">
+      <Project>{5c282469-a1ee-4f4d-a4e9-da4dc5673af6}</Project>
+      <Name>MyMvvm</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

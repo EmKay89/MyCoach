@@ -2,9 +2,9 @@
 using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyCoach.ViewModel.Commands;
-using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyMvvm.Commands;
+using MyMvvm.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;

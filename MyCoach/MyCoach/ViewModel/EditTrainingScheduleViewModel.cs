@@ -2,10 +2,10 @@
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using MyCoach.Model.Defines;
-using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Defines;
-using MyCoach.ViewModel.Services;
 using MyExtensions.IEnumerable;
+using MyMvvm.Commands;
+using MyMvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

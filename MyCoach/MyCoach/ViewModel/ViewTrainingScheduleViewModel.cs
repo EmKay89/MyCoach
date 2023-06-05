@@ -1,14 +1,10 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyCoach.ViewModel.Commands;
-using System;
-using System.Collections.Generic;
+using MyMvvm.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCoach.ViewModel
 {

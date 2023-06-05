@@ -4,8 +4,8 @@ using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
-using MyCoach.ViewModel.Services;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
+using MyMvvm.Services;
 using System.Linq;
 using System.Windows;
 

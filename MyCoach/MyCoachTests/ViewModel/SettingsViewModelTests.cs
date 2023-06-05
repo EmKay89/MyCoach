@@ -4,7 +4,7 @@ using MyCoach.DataHandling;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
-using MyCoach.ViewModel.Services;
+using MyMvvm.Services;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;

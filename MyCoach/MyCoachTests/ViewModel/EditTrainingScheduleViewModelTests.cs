@@ -4,7 +4,6 @@ using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
-using MyCoach.ViewModel.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using MyCoach.ViewModel.Defines;
+using MyMvvm.Services;
 
 namespace MyCoachTests.ViewModel
 {

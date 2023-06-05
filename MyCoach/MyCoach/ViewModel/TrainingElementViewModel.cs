@@ -1,8 +1,8 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
 using MyCoach.Model.DataTransferObjects;
-using MyCoach.ViewModel.Commands;
 using MyCoach.ViewModel.Events;
+using MyMvvm.Commands;
 using System;
 using System.Linq;
 using System.Text;

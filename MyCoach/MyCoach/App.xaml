@@ -6,7 +6,7 @@
              xmlns:trainingSettingsViews="clr-namespace:MyCoach.View.TrainingSettingsViews"
              xmlns:viewmodels="clr-namespace:MyCoach.ViewModel"
              xmlns:trainingSettingsViewModels="clr-namespace:MyCoach.ViewModel.TrainingSettingsViewModels"
-             xmlns:converter="clr-namespace:MyCoach.ViewModel.TypeConverter"
+             xmlns:converter="clr-namespace:MyMvvm.TypeConverter;assembly=MyMvvm"
              StartupUri="View\Windows\MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
