@@ -13,13 +13,12 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 {
     public class UserDefinedTrainingSettingsViewModel : TrainingSettingsViewModelBase
     {
-        private Training training;
         private readonly IFileDialogService fileDialogService;
         private readonly IMessageBoxService messageBoxService;
 
         public UserDefinedTrainingSettingsViewModel(Training training, IFileDialogService fileDialogService = null, IMessageBoxService messageBoxService = null)
         {
-            this.training = training;
+            this.Training = training;
             this.fileDialogService = fileDialogService ?? new FileDialogService();
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
             this.AddExerciseCommand = new RelayCommand(this.AddExercise, this.CanAddExercise);
@@ -31,7 +30,9 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
         public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
 
-        public override bool CanStartTraining => this.training.Any();
+        public Training Training { set; get; }
+
+        public override bool CanStartTraining => this.Training.Any();
 
         public override TrainingSettings TrainingSettings => new TrainingSettings(TrainingMode.UserDefinedTraining);
 
@@ -50,7 +51,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 
         private void AddExercise()
         {
-            this.training.Add(
+            this.Training.Add(
                 new TrainingElementViewModel(
                     TrainingElementType.Exercise,
                     new Exercise()
@@ -66,7 +67,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 
         private void AddHeadline()
         {
-            this.training.Add(
+            this.Training.Add(
                 new TrainingElementViewModel(TrainingElementType.Headline, null)
                 {
                     Headline = "Neue Überschrift"
@@ -76,7 +77,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
         private bool CanExportTraining()
         {
             return this.TrainingActive == false
-                && this.training.Any();
+                && this.Training.Any();
         }
 
         private void ExportTraining()
@@ -103,7 +104,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
             }
 
             var trainingElements = new List<TrainingElement>();
-            foreach (var element in training)
+            foreach (var element in Training)
             {
                 trainingElements.Add(new TrainingElement()
                 {
@@ -153,8 +154,8 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 
             if (DataInterface.GetInstance().ImportTraining(path, out var elements))
             {
-                this.training.Clear();
-                elements.ForEach(e => this.training.Add(
+                this.Training.Clear();
+                elements.ForEach(e => this.Training.Add(
                     new TrainingElementViewModel(e.Type, e.Exercise)
                     {
                         Headline = e.Headline

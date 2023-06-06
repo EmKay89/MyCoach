@@ -68,6 +68,11 @@ namespace MyCoach.ViewModel
                 this.training = value;
                 this.training.TrainingActiveChanged += this.OnTrainingActiveChanged;
                 this.InvokePropertyChanged();
+
+                if (this.UserDefinedTrainingViewModel != null)
+                {
+                    this.UserDefinedTrainingViewModel.Training = value;
+                }
             }
         }
 
