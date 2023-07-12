@@ -153,6 +153,12 @@
     <Compile Include="View\TrainingSettingsViews\UserDefinedTrainingSettingsView.xaml.cs">
       <DependentUpon>UserDefinedTrainingSettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\ExerciseWindow.xaml.cs">
+      <DependentUpon>ExerciseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\HeadlineWindow.xaml.cs">
+      <DependentUpon>HeadlineWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\WindowWithoutMenuAndIcon.cs" />
     <Compile Include="View\Windows\TrainingElementInfoWindow.xaml.cs">
       <DependentUpon>TrainingElementInfoWindow.xaml</DependentUpon>
@@ -256,6 +262,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TrainingSettingsViews\UserDefinedTrainingSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\ExerciseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\HeadlineWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

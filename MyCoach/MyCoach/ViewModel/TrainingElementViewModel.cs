@@ -4,6 +4,7 @@ using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel.Events;
 using MyMvvm.Commands;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -19,6 +20,7 @@ namespace MyCoach.ViewModel
         private readonly Exercise exercise;
         private bool completed;
         private bool isActive;
+        private string headline;
 
         /// <summary>
         ///     Creates a new instance of <see cref="TrainingElementViewModel"/>.
@@ -34,6 +36,12 @@ namespace MyCoach.ViewModel
         {
             this.type = type;
             this.exercise = exercise;
+
+            if (this.exercise != null)
+            {
+                this.exercise.PropertyChanged += this.OnExercisePropertyChanged;
+            }
+
             this.MoveElementUpCommand = new RelayCommand(this.InvokeMoveElementUpExecuted);
             this.MoveElementDownCommand = new RelayCommand(this.InvokeMoveElementDownExecuted);
             this.RemoveElementCommand = new RelayCommand(this.InvokeRemoveElementFromTrainingExecuted);
@@ -97,7 +105,21 @@ namespace MyCoach.ViewModel
         /// <summary>
         ///     Text to be displayed, if this object represents a headline.
         /// </summary>
-        public string Headline { get; set; }
+        public string Headline
+        {
+            get => this.headline;
+
+            set
+            {
+                if (value == this.headline)
+                {
+                    return;
+                }
+
+                this.headline = value;
+                this.InvokePropertyChanged();
+            }
+        }
 
         /// <summary>
         ///     The exercise DTO represented by this <see cref="TrainingElementViewModel"/>.
@@ -214,6 +236,13 @@ namespace MyCoach.ViewModel
         private void InvokeRemoveElementFromTrainingExecuted()
         {
             this.RemoveElementFromTrainingExecuted?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void OnExercisePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.InvokePropertiesChanged(
+                nameof(this.NameAndRepeats),
+                nameof(this.ScoresForCategory));
         }
     }
 }

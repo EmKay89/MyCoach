@@ -21,7 +21,7 @@ namespace MyCoach.View.Windows
         {
             var context = this.DataContext as Exercise;
             this.Title = context.Name;
-            this.EditTextBox.Document.Blocks.Clear();            
+            this.EditTextBox.Document.Blocks.Clear();
             this.EditTextBox.Document.Blocks.Add(new Paragraph(new Run(context.Info)));
         }
 
@@ -29,7 +29,7 @@ namespace MyCoach.View.Windows
         {
             var context = this.DataContext as Exercise;
             context.Info = new TextRange(
-                this.EditTextBox.Document.ContentStart, 
+                this.EditTextBox.Document.ContentStart,
                 this.EditTextBox.Document.ContentEnd).Text.Trim(' ', '\n', '\r');
         }
     }

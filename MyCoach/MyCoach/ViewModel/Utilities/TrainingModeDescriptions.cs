@@ -18,7 +18,8 @@ namespace MyCoach.ViewModel.Utilities
             "gewählt und dann ins Training eingeplant.";
         public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
         public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training aus Übungen aus dem gleichnamigen Menü auf der linken Seite " +
-            "zusammengestellt werden. Ein so erstelltes Training kann als Datei gespeichert und später wieder geladen werden.";
+            "zusammengestellt werden. Ein so erstelltes Training kann als Datei gespeichert und später wieder geladen werden.\n\n" +
+            "In diesem Modus können Übungen und Überschriften im Training durch Anklicken bearbeitet werden.";
 
         public static string GetTrainingModeDescription(TrainingMode trainingMode)
         {

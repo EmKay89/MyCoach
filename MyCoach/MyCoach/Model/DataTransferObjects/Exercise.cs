@@ -171,6 +171,7 @@ namespace MyCoach.Model.DataTransferObjects
         {
             if (target is Exercise targetExercise)
             {
+                targetExercise.iD = this.iD;
                 targetExercise.Category = this.Category;
                 targetExercise.Count = this.Count;
                 targetExercise.Name = this.Name;

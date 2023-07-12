@@ -4,9 +4,11 @@ using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyCoach.ViewModel.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 namespace MyCoach.ViewModel.TrainingSettingsViewModels
@@ -32,6 +34,11 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
         {
             this.Categories = DataInterface.GetInstance().GetData<Category>();
             this.Categories.CollectionChanged += this.OnCategoriesChanged;
+
+            foreach (var category in this.Categories)
+            {
+                category.PropertyChanged += this.OnCategoryChanged;
+            }
         }
 
         public ObservableCollection<ushort> NumbersOneToFour { get; } = new ObservableCollection<ushort> { 1, 2, 3, 4 };
@@ -437,7 +444,36 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
 
         private void OnCategoriesChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (this.CategoryInFocus != null && this.Categories.Where(c => c.ID == CategoryInFocus.ID && c.Active).Any() == false)
+            if (e.OldItems != null)
+            {
+                foreach (Category oldCategory in e.OldItems)
+                {
+                    oldCategory.PropertyChanged -= this.OnCategoryChanged;
+                }
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (Category newCategory in e.NewItems)
+                {
+                    newCategory.PropertyChanged += this.OnCategoryChanged;
+                }
+            }
+
+            this.CheckResetCategoryInFocus();
+        }
+
+        private void OnCategoryChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Category.Active))
+            {
+                this.CheckResetCategoryInFocus();
+            }
+        }
+
+        private void CheckResetCategoryInFocus()
+        {
+            if (this.CategoryInFocus != null && this.ActiveCategories.Any(c => c.ID == this.CategoryInFocus.ID) == false)
             {
                 this.CategoryInFocus = null;
             }

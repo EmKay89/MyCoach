@@ -2,9 +2,11 @@
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.Events;
+using MyExtensions.IEnumerable;
 using MyMvvm.Commands;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
@@ -21,6 +23,7 @@ namespace MyCoach.ViewModel
             this.RemoveExerciseCommand = new RelayCommand(this.InvokeDeleteExerciseExecuted);
             this.exercise.PropertyChanged += this.InvokeExerciseChanged;
             this.SelectableUnits = DataInterface.GetInstance().GetData<Settings>().Single().Units;
+            this.Categories = DataInterface.GetInstance().GetData<Category>();
         }
 
         public event ExerciseEventHandler AddExerciseToTrainingExecuted;
@@ -28,6 +31,25 @@ namespace MyCoach.ViewModel
         public event ExerciseEventHandler ExerciseChanged;
 
         public ObservableCollection<string> SelectableUnits { get; } = new ObservableCollection<string>();
+
+        public ObservableCollection<Category> Categories = new ObservableCollection<Category>();
+
+        public Dictionary<ExerciseCategory, string> ActiveCategories
+        {
+            get
+            {
+                var dictionary = new Dictionary<ExerciseCategory, string>();
+                this.Categories.ForEach(c =>
+                {
+                    if (c.Active)
+                    {
+                        dictionary.Add(c.ID, c.Name);
+                    }
+                });
+
+                return dictionary;
+            }
+        }
 
         public Exercise Exercise => this.exercise;
 
@@ -63,7 +85,15 @@ namespace MyCoach.ViewModel
                 }
 
                 this.exercise.Category = value;
-                this.InvokePropertyChanged();
+
+                if (this.IsTrainingExercise == false)
+                {
+                    this.Scores = 0;
+                }
+
+                this.InvokePropertiesChanged(
+                    nameof(this.Category), 
+                    nameof(this.IsTrainingExercise));
             }
         }
 
@@ -147,11 +177,12 @@ namespace MyCoach.ViewModel
             }
         }
 
-        public bool IsTrainingExercise => this.Exercise.Category != ExerciseCategory.WarmUp
-            && this.Exercise.Category != ExerciseCategory.CoolDown;
+        public bool IsTrainingExercise => this.Category != null 
+            && this.Category != ExerciseCategory.WarmUp
+            && this.Category != ExerciseCategory.CoolDown;
 
         private void InvokeAddExerciseToTrainingExecuted(object parameter)
-        {            
+        {
             if (parameter is Exercise exercise)
             {
                 // Use a copy so further changes or possible nulling won't affect the exercise in training.

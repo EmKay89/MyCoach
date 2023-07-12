@@ -13,7 +13,6 @@
             <ComboBox HorizontalAlignment="Left"
                       Margin="15,0,0,0"
                       ItemsSource="{Binding ActiveCategories}"
-                      SelectedIndex="0"
                       SelectedValue="{Binding CategoryInFocus}"
                       IsEnabled="{Binding TrainingSettingsEnabled}" />
         </StackPanel>

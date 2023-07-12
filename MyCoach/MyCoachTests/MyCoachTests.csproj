@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\TrainingViewModelTests.cs" />
     <Compile Include="ViewModel\DataInterfaceTestBase.cs" />
     <Compile Include="ViewModel\TrainingScheduleOverviewViewModelTests.cs" />
+    <Compile Include="ViewModel\ExerciseViewModelTests.cs" />
     <Compile Include="ViewModel\ViewModelTestBase.cs" />
     <Compile Include="ViewModel\ViewTrainingScheduleViewModelTests.cs" />
   </ItemGroup>

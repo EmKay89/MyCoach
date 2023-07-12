@@ -51,7 +51,8 @@
                        Stretch="Fill" />
             </Button>
             <Label Content="{Binding Headline}"
-                   FontWeight="Bold" />
+                   FontWeight="Bold"
+                   MouseLeftButtonUp="Headline_Click"/>
         </DockPanel>
         <Grid Visibility="{Binding TrainingExerciseElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
               Height="20"
@@ -91,7 +92,8 @@
                 </Button>
                 <TextBlock Text="{Binding NameAndRepeats}"
                            VerticalAlignment="Center"
-                           DockPanel.Dock="Left" />
+                           DockPanel.Dock="Left"
+                           MouseLeftButtonUp="Exercise_Click"/>
                 <TextBlock Text="{Binding ScoresForCategory}"
                            VerticalAlignment="Center"
                            Visibility="{Binding CompletionAllowed, Converter={StaticResource BoolToVisibilityConverter}}" />
