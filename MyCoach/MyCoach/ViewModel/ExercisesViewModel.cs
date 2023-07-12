@@ -599,7 +599,7 @@ namespace MyCoach.ViewModel
                 return;
             }
 
-            this.SelectedCategory = this.Categories.FirstOrDefault();
+            this.SelectedCategory = this.ActiveCategories.FirstOrDefault();
         }
 
         private void LoadExerciseBuffer()
