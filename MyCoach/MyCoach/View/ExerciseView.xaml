@@ -62,7 +62,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Name"
                            Style="{StaticResource ExerciseViewLabel}" />
-                <TextBox Text="{Binding Name}"
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource ExerciseViewTextBox}"
                          Grid.Column="1"
                          Grid.ColumnSpan="3" />
@@ -83,7 +83,7 @@
                 <TextBlock Text="Anzahl"
                            Grid.Row="1"
                            Style="{StaticResource ExerciseViewLabel}" />
-                <TextBox Text="{Binding Count}"
+                <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource ExerciseViewTextBox}"
                          Grid.Row="1"
                          Grid.Column="1" />
@@ -96,7 +96,7 @@
                           Height="22"
                           Margin="0,3,3,3"
                           ItemsSource="{Binding SelectableUnits}"
-                          Text="{Binding Unit}"
+                          Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                           IsEditable="True"
                           MinWidth="50" />
                 <TextBlock Text="Punkte"
@@ -104,7 +104,7 @@
                            Grid.Row="1"
                            Grid.Column="4"
                            Style="{StaticResource ExerciseViewLabel}" />
-                <TextBox Text="{Binding Scores}"
+                <TextBox Text="{Binding Scores, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource ExerciseViewTextBox}"
                          Visibility="{Binding IsTrainingExercise, Converter={StaticResource BoolToVisibilityConverter}}"
                          Grid.Row="1"
