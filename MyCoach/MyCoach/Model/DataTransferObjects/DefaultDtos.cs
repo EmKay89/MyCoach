@@ -75,7 +75,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Count = 15,
                     Name = "Hockstrecksprünge",
                     Unit = "Wiederholungen",
-                    Scores = 10,
+                    Scores = 0,
                     Info = "Hocke dich auf den Boden und führe aus dieser Position gerade Sprünge nach oben aus, nach denen du wieder in die Hocke gehst. Strecke bei jedem Sprung deine Arme so weit wie möglich nach oben aus.",
                     Active = true
                 },
@@ -362,7 +362,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Category = ExerciseCategory.CoolDown,
                     Count = 2,
                     Name = "Hände hinterrücks verschränken",
-                    Unit = "Sets aus 20 Sekunden je Seite",
+                    Unit = "Sets aus 20 Sekunden",
                     Scores = 0,
                     Info = "Führe eine Hand über deine Schulter hinweg zu deinem oberen Rücken. Die Hand auf der anderen Seite greift unter dem Schulterblatt ebenfalls in Richtung des oberen Rückens. Versuche in dieser Position beide Hände zu berühren und mit den Fingerspitzen zu verschränken.",
                     Active = true
@@ -374,7 +374,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Category = ExerciseCategory.CoolDown,
                     Count = 2,
                     Name = "Schultern dehnen",
-                    Unit = "Sets aus 20 Sekunden je Seite",
+                    Unit = "Sets aus 20 Sekunden",
                     Scores = 0,
                     Info = "Führe einen Arm gerade gestreckt zur anderen Körperseite, sodass er sich auf der Höhe deiner Schulter befindet. Ziehe den Arm mit deiner anderen Hand so nahe wie möglich an die Schulter heran.",
                     Active = true
@@ -386,7 +386,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Category = ExerciseCategory.CoolDown,
                     Count = 2,
                     Name = "Brustmuskel dehnen",
-                    Unit = "Sets aus 20 Sekunden je Seite",
+                    Unit = "Sets aus 20 Sekunden",
                     Scores = 0,
                     Info = "Stelle dich mit der Schulter seitlich an eine Wand. Strecke den Arm, der zur Wand zeigt, nach hinten aus und lege die Hand auf Schulterhöhe flach auf der Wand ab. Drücke nun deinen Oberkörper an die Wand heran, um eine maximale Dehnung zu erreichen.",
                     Active = true
@@ -398,7 +398,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Category = ExerciseCategory.CoolDown,
                     Count = 2,
                     Name = "Oberschenkel dehnen",
-                    Unit = "Sets aus 20 Sekunden je Seite",
+                    Unit = "Sets aus 20 Sekunden",
                     Scores = 0,
                     Info = "Ziehe im Stehen eine Ferse mit beiden Händen zu deinem Po, um deinen Oberschenkel zu dehnen.",
                     Active = true
