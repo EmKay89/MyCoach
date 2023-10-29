@@ -69,21 +69,32 @@ namespace MyCoach.ViewModel.Utilities
             TrainingSettings settings)
         {
             var activeCategories = settings.CategoriesEnabledForTraining;
-            var warmUpCategoryCount = DataInterface.GetInstance().GetData<Category>()
-                .Where(c => c.ID == ExerciseCategory.WarmUp).Single().Count;
-            var coolDownCategoryCount = DataInterface.GetInstance().GetData<Category>()
-                .Where(c => c.ID == ExerciseCategory.CoolDown).Single().Count;
+            var warmUpCategoryCount = DataInterface.GetInstance().GetData<Category>().Single(c => c.ID == ExerciseCategory.WarmUp).Count;
+            var coolDownCategoryCount = DataInterface.GetInstance().GetData<Category>().Single(c => c.ID == ExerciseCategory.CoolDown).Count;
 
-            if ((activeCategories.Contains(ExerciseCategory.WarmUp)
-                && exercises.Count(e => e.Category == ExerciseCategory.WarmUp) < warmUpCategoryCount)
-                || (activeCategories.Contains(ExerciseCategory.CoolDown)
+            if (permission == ExerciseSchedulingRepetitionPermission.No
+                && activeCategories.Contains(ExerciseCategory.WarmUp)
+                && exercises.Count(e => e.Category == ExerciseCategory.WarmUp) < warmUpCategoryCount
+                || (activeCategories.Contains(ExerciseCategory.CoolDown) 
                 && exercises.Count(e => e.Category == ExerciseCategory.CoolDown) < coolDownCategoryCount))
+            {
+                return false;
+            }
+
+            if ((activeCategories.Contains(ExerciseCategory.WarmUp) && exercises.Any(e => e.Category == ExerciseCategory.WarmUp) == false)
+                || (activeCategories.Contains(ExerciseCategory.CoolDown) && exercises.Any(e => e.Category == ExerciseCategory.CoolDown) == false))
             {
                 return false;
             }
             
             activeCategories.Remove(ExerciseCategory.WarmUp);
             activeCategories.Remove(ExerciseCategory.CoolDown);
+
+            if (activeCategories.Count == 0)
+            {
+                return true;
+            }
+            
             var trainingExercisesOfActiveCategories = exercises.Where(e => activeCategories.Any(c => c == e.Category)).ToList();
 
             return permission == ExerciseSchedulingRepetitionPermission.No
