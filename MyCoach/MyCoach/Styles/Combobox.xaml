@@ -72,12 +72,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="ComboBoxTextBox"
-                     TargetType="TextBox">
-        <Border x:Name="PART_ContentHost"
-                Focusable="False"
-                Background="{TemplateBinding Background}" />
-    </ControlTemplate>
     <Style TargetType="ComboBox"
            x:Key="DefaultComboBox">
         <Setter Property="SnapsToDevicePixels"
@@ -114,7 +108,7 @@
                                           HorizontalAlignment="Left" />
                         <TextBox x:Name="PART_EditableTextBox"
                                  Style="{x:Null}"
-                                 Template="{StaticResource ComboBoxTextBox}"
+                                 BorderThickness="0"
                                  HorizontalAlignment="Left"
                                  VerticalAlignment="Center"
                                  Margin="3,3,23,3"
