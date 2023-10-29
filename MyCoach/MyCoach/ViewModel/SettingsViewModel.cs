@@ -298,7 +298,7 @@ namespace MyCoach.ViewModel
 
         private void SetDefaultSettings()
         {
-            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen Ihre gespeicherten Einstellungen verloren. Möchten Sie fortfahren?",
+            var result = this.messageBoxService.ShowMessage("Achtung, hierdurch gehen deine gespeicherten Einstellungen verloren. Möchtest du fortfahren?",
                 "Zurücksetzen",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);

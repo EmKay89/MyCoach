@@ -40,11 +40,11 @@ namespace MyCoach.ViewModel
             this.ResetCommand = new RelayCommand(() => this.LoadBuffers(), () => this.HasUnsavedChanges);
         }
 
-        public const string CHANGE_SCHEDULE_TEXT = "Achtung, Änderungen an Typ oder Startdatum des Trainingsplans löschen alle gespeicherten Trainingspunkte. Möchten Sie fortfahren?";
+        public const string CHANGE_SCHEDULE_TEXT = "Achtung, Änderungen an Typ oder Startdatum des Trainingsplans löschen alle gespeicherten Trainingspunkte. Möchtest du fortfahren?";
         public const string RESET_SCHEDULE_CAPTION = "Trainingsplan löschen";
         public const string RESET_SCORES_CAPTION = "Trainingspunkte löschen";
-        public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch wird ihr Trainingsplan gelöscht. Möchten Sie fortfahren?";
-        public const string RESET_SCORES_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchten Sie fortfahren?";
+        public const string RESET_SCHEDULE_TEXT = "Achtung, hierdurch wird dein Trainingsplan gelöscht. Möchtest du fortfahren?";
+        public const string RESET_SCORES_TEXT = "Achtung, hierdurch werden alle gespeicherten Trainingspunkte gelöscht. Möchtest du fortfahren?";
 
         public TrainingSchedule Schedule { get; private set; }
 

@@ -42,7 +42,7 @@ namespace MyCoach.ViewModel
         public const string NEW_EXERCISE_NAME = "Neue Übung";
         public const string IMPORT_ERROR_TEXT = "Importieren fehlgeschlagen";
         public const string EXPORT_ERROR_TEXT = "Exportieren fehlgeschlagen";
-        public const string RESET_TEXT = "Achtung, hierdurch gehen Ihre gespeicherten Übungen verlohren. Möchten Sie fortfahren?";
+        public const string RESET_TEXT = "Achtung, hierdurch gehen deine gespeicherten Übungen verloren. Möchten du fortfahren?";
         public const string RESET_CAPTION = "Zurücksetzen";
 
         public event ExerciseEventHandler AddExerciseToTrainingExecuted;
