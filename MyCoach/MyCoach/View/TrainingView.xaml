@@ -120,17 +120,21 @@
                 <ContentControl Content="{Binding SelectedViewModel}" />
             </StackPanel>
         </StackPanel>
-        <ItemsControl BorderBrush="LightGray"
-                      BorderThickness="1"
-                      Margin="10"
-                      ItemsSource="{Binding Training}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <local:TrainingElementView />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Border BorderBrush="LightGray"
+                BorderThickness="1"
+                Margin="10, 10, 10, 5"
+                CornerRadius="3">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Training}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <local:TrainingElementView />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
     </DockPanel>
 </UserControl>
