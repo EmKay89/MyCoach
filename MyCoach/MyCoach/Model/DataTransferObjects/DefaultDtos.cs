@@ -90,7 +90,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Hantelheben 5 kg",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Nimm dir eine Hantel für jede Hand und lasse die Arme ausgestreckt an deiner Seite herunterhängen. Beuge nun abwechselnd je Seite (oder wenn du magst auch gleichzeitig) deine Arme und hebe die Hanteln an.",
+                    Info = "Nimm dir eine Hantel in jede Hand und lasse die Arme ausgestreckt an deiner Seite herunterhängen. Beuge nun abwechselnd je Seite (oder wenn du magst auch gleichzeitig) deine Arme und hebe die Hanteln an.",
                     Active = true
                 },
 
@@ -140,7 +140,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Situps",
                     Unit = "Wiederholungen",
                     Scores = 10,
-                    Info = "Lege dich auf den Rücken. Winkel deine Beine an und halte deine Hände zu Fäusten geballt neben den Schläfen. Bewege nun deinen Oberkörper nach oben. Um dich während der Übung zu stabilisieren, kannst du deine Füße auch fixieren, indem du sie zum Beispiel unter eine Sofakante schiebst oder jemanden bittest, deine Füße festzuhalten.",
+                    Info = "Lege dich auf den Rücken. Winkel deine Beine an und halte deine Hände neben den Schläfen. Bewege nun deinen Oberkörper nach oben, bis Ellenbogen die Knie berühren. Um dich während der Übung zu stabilisieren, kannst du deine Füße auch fixieren, indem du sie zum Beispiel unter eine Sofakante schiebst oder jemanden bittest, deine Füße festzuhalten.",
                     Active = true
                 },
 
@@ -152,7 +152,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Planke",
                     Unit = "Sekunden",
                     Scores = 10,
-                    Info = "Begib dich in Liegestützposition, bei der deine Ellenbogen auf dem Boden aufliegen. Die Hände können sich dabei berühren. Halte diese Position und achte dabei darauf, dass dein Rücken gerade bleibt.",
+                    Info = "Begib dich in eine Liegestützposition, bei der deine Ellenbogen auf dem Boden aufliegen. Die Hände können sich dabei berühren. Halte diese Position und achte dabei darauf, dass dein Rücken gerade bleibt.",
                     Active = true
                 },
 
@@ -176,7 +176,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Russian Twists",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Setze dich auf den Boden und hebe mit angewinkelten Knien deine Füße vom Boden ab. Lege deine Hände mit den Fingerspritzen vor deiner Brust aneinander. Drehe deinen Oberkörper nun abwechselnd zur linken und zur Rechten Seite, soweit wie möglich. Dabei berührt nur dein Po den Boden, deine Beine balancieren dich aus. Am Punkt der maximalen Drehung tippst du mit den Fingerspitzen kurz auf den Boden. Du kannst diese Übung auch mit einer leichten Hantel, die du in beiden Händen hältst, durchführen, um den Schwierigkeitsgrad zu erhöhen.",
+                    Info = "Setze dich auf den Boden und hebe mit angewinkelten Knien deine Füße vom Boden ab. Lege deine Hände mit den Fingerspritzen vor deiner Brust aneinander. Drehe deinen Oberkörper nun abwechselnd zur linken und zur rechten Seite, soweit wie möglich. Dabei berührt nur dein Po den Boden, deine Beine balancieren dich aus. Am Punkt der maximalen Drehung tippst du mit den Fingerspitzen kurz auf den Boden. Du kannst diese Übung auch mit einer leichten Hantel, die du in beiden Händen hältst, durchführen, um den Schwierigkeitsgrad zu erhöhen.",
                     Active = true
                 },
 
@@ -226,7 +226,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Hüftrollen",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Die Ausgangsposition ist auf dem Rücken liegend mit angewinkelten Beinen in der Luft. Die Arme sind zu beiden Seiten vom Körper weggestreckt. Drehe nun abwechselnd die Hüften zu beiden Seiten, bis die Beine fast auf dem Boden aufliegen.",
+                    Info = "Die Ausgangsposition ist auf dem Rücken liegend mit angewinkelten Beinen in der Luft. Die Arme sind zu beiden Seiten vom Körper weggestreckt. Drehe nun abwechselnd die Hüften zu beiden Seiten, bis die Beine fast auf dem Boden aufliegen. Die Schulterblätter bleiben dabei beide auf dem Boden und heben nicht ab.",
                     Active = true
                 },
 
@@ -240,7 +240,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Supermann",
                     Unit = "Sets mit je 5 Wdh. pro Seite",
                     Scores = 10,
-                    Info = "Begib dich in den Vierfüßlerstand. Achte darauf, dass deine Knie unter den Hüften und deine Handgelenke unter den Schultern stehen. Hebe nun das linke Knie und den rechten Arm vom Boden ab und strecke sie gleichzeitig aus. Halte die Position kurz und wiederhole die Bewegung mit dem anderen Knie und Arm.",
+                    Info = "Begib dich in den Vierfüßlerstand. Achte darauf, dass deine Knie unter den Hüften und deine Handgelenke unter den Schultern stehen. Hebe nun das linke Bein und den rechten Arm vom Boden ab und strecke sie gleichzeitig aus. Halte die Position kurz und wiederhole die Bewegung mit dem anderen Bein und Arm.",
                     Active = true
                 },
 
@@ -252,7 +252,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Reverse Situps",
                     Unit = "Wiederholungen",
                     Scores = 10,
-                    Info = "Lege dich auf den Bauch und führe die Hände zu den Schläfen. Hebe nun Oberkörper und Zehenspitzen so weit wie möglich vom Boden ab.",
+                    Info = "Lege dich auf den Bauch und führe die Hände zu den Schläfen. Hebe nun Oberkörper und Zehenspitzen so weit wie möglich vom Boden ab und lass sie danach wieder zu Boden sinken.",
                     Active = true
                 },
 
@@ -276,7 +276,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Hantel Rudern 5kg",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Stell dich seitlich zu einer ca. kniehohen Kante. Lege ein Knie auf der Kante ab, das andere Bein bleibt gestreckt. Beuge dich nach vorn und stütze dich mit dem zur Kante zeigenden Arm auf dieser ab. Dein Rücken sollte nun in etwa waagerecht zum Boden sein. Nimm mit der freien Hand eine Hantel und ziehe sie zur Hüfte. Der Ellenbogen bleibt dabei möglichst nahe am Körper. Halte während der gesamten Übung deinen Rücken gerade und nutze den Bewegungsradius deiner Schulter möglichst voll aus.",
+                    Info = "Stell dich seitlich zu einer ca. kniehohen Kante. Lege ein Knie auf der Kante ab, das andere Bein bleibt gestreckt. Beuge dich nach vorn und stütze dich mit dem zur Kante zeigenden Arm auf dieser ab. Dein Rücken sollte nun in etwa waagerecht zum Boden sein, das abstützende Knie in etwa unter deiner Hüfte und der abstützende Arm in etwa unter deiner Schulter. Nimm mit der freien Hand eine Hantel und ziehe sie zur Hüfte. Der Ellenbogen bleibt dabei möglichst nahe am Körper. Strecke danach den Arm wieder nach unten aus. Halte während der gesamten Übung deinen Rücken gerade und nutze den Bewegungsradius deiner Schulter möglichst voll aus.",
                     Active = true
                 },
 
@@ -290,7 +290,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Ausfallschritte",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Stelle dich gerade hin. Ziehe ein Knie zur Brust und halte es mit beiden Händen fest. Mache nun mit dem angewinkeltem Bein einen großen Ausfallschritt nach vorn. Stoße dich danach mit dem nach vorn gestreckten Bein wieder nach hinten ab, sodass du wieder aufrecht in der Ausgansposition stehst.",
+                    Info = "Stelle dich gerade hin. Um in die Ausgangsposition der Übung zu kommen, ziehe ein Knie zur Brust und halte es mit beiden Händen fest. Mache nun mit dem angewinkeltem Bein einen großen Ausfallschritt nach vorn. Das Knie des hinteren Beins geht runter bis fast auf den Boden. Stoße dich danach mit dem nach vorn gestreckten Bein wieder nach hinten ab, sodass du wieder aufrecht in der Ausgansposition stehst.",
                     Active = true
                 },
 
@@ -314,7 +314,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Wadenheben",
                     Unit = "Wiederholungen",
                     Scores = 10,
-                    Info = "Stelle dich mit den Fußballen auf eine Kante. Bewege nun die Fersen abwechselnd nach oben und unten und versuche dabei so viel vom Bewegungsradius wie möglich auszunutzen. Gegebenenfalls kannst du dich mit einem Arm an einer Wand oder einem Gegenstand in der Nähe festhalten, um die Balance nicht zu verlieren.",
+                    Info = "Stelle dich mit beiden Fußballen auf eine Kante. Bewege nun die Fersen abwechselnd nach oben und unten und versuche dabei so viel vom Bewegungsradius wie möglich auszunutzen. Gegebenenfalls kannst du dich mit einem Arm an einer Wand oder einem Gegenstand in der Nähe festhalten, um die Balance nicht zu verlieren.",
                     Active = true
                 },
 
@@ -326,7 +326,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Hüftheben",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Lege dich auf den Rücken. Winkel ein Bein an, das andere bleibt durchgestreckt. Hebe nun aus der Kraft des angewinkelten Beins dein Becken an, soweit bis Rücken und das durchgestreckte Bein eine Linie bilden. Führe nun das Becken wieder nach unten, lege es jedoch zwischen den einzelnen Wiederholungen nicht ab.",
+                    Info = "Lege dich auf den Rücken. Winkel ein Bein an, der Fuß bleibt auf dem Boden. Das andere Bein bleibt durchgestreckt. Hebe nun aus der Kraft des angewinkelten Beins dein Becken und das ausgestreckte Bein an. Dein Rücken und das durchgestreckte Bein bilden eine gerade Linie. Führe nun Becken und Bein wieder nach unten, lege beide jedoch zwischen den einzelnen Wiederholungen nicht ab.",
                     Active = true
                 },
 
@@ -364,7 +364,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Name = "Hände hinterrücks verschränken",
                     Unit = "Sets aus 20 Sekunden",
                     Scores = 0,
-                    Info = "Führe eine Hand über deine Schulter hinweg zu deinem oberen Rücken. Die Hand auf der anderen Seite greift unter dem Schulterblatt ebenfalls in Richtung des oberen Rückens. Versuche in dieser Position beide Hände zu berühren und mit den Fingerspitzen zu verschränken.",
+                    Info = "Führe eine Hand über deine Schulter hinweg zu deinem oberen Rücken. Die Hand auf der anderen Seite greift unter dem Schulterblatt ebenfalls in Richtung des oberen Rückens. Versuche in dieser Position beide Hände aneinander zu legen und mit den Fingerspitzen zu verschränken.",
                     Active = true
                 },
 
