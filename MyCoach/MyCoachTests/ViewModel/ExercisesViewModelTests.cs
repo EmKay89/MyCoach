@@ -339,9 +339,10 @@ namespace MyCoachTests.ViewModel
             }
 
             Assert.IsTrue(this.sut.HasUnsavedCategories == false);
-            Assert.AreEqual(2, this.PropertyChangedEvents.Count);
+            Assert.AreEqual(3, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.SelectedCategory));
-            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.ActiveCategories));
+            Assert.AreEqual(this.PropertyChangedEvents[1], nameof(this.sut.SelectedCategory));
+            Assert.AreEqual(this.PropertyChangedEvents[2], nameof(this.sut.ActiveCategories));
         }
 
         [TestMethod]

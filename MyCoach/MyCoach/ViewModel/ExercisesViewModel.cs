@@ -593,7 +593,8 @@ namespace MyCoach.ViewModel
             this.HasUnsavedCategories = false;
 
             if (savedSelectedCategoryId != null
-                && this.Categories.FirstOrDefault(c => c.ID == savedSelectedCategoryId) is var foundCategory)
+                && this.ActiveCategories.FirstOrDefault(c => c.ID == savedSelectedCategoryId) is var foundCategory
+                && foundCategory != null)
             {
                 this.SelectedCategory = foundCategory;
                 return;
@@ -679,7 +680,7 @@ namespace MyCoach.ViewModel
                 if (savedCategory != null)
                 {
                     category.CopyValuesTo(savedCategory);
-                }                
+                }
             }
 
             var result = DataInterface.GetInstance().SaveData<Category>();
@@ -688,7 +689,12 @@ namespace MyCoach.ViewModel
                 this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            this.InvokePropertiesChanged(nameof(this.SelectedCategory), nameof(this.ActiveCategories));
+            // Reset SelectedCategory, because simply invoking PropertyChanged with its name is not enough to update the name in the GUI, if it was changed.
+            var selectedCategory = this.SelectedCategory;
+            this.SelectedCategory = null;
+            this.SelectedCategory = selectedCategory;
+
+            this.InvokePropertiesChanged(nameof(this.ActiveCategories));
             this.HasUnsavedCategories = false;
         }
 
