@@ -60,6 +60,11 @@ namespace MyCoach.Model.DataTransferObjects
         /// </summary>
         public ObservableCollection<string> Units { get; } = new ObservableCollection<string>();
 
+        /// <summary>
+        ///     Ruft einen Multiplikator für Punkte und Wiederholungen von Übungen für die automatische Generierung von Trainings ab, oder legt ihn fest.
+        /// </summary>
+        public ushort RepeatsAndScoresMultiplier { get; set; }
+
         /// <inheritdoc/>
         public override void CopyValuesTo(DtoBase target)
         {
@@ -74,6 +79,7 @@ namespace MyCoach.Model.DataTransferObjects
                 targetSettings.ScoresRound3 = ScoresRound3;
                 targetSettings.RepeatsRound4 = RepeatsRound4;
                 targetSettings.ScoresRound4 = ScoresRound4;
+                targetSettings.RepeatsAndScoresMultiplier = RepeatsAndScoresMultiplier;
                 targetSettings.Units.Clear();
                 this.Units.ForEach(u => targetSettings.Units.Add(u));
             }
@@ -92,6 +98,7 @@ namespace MyCoach.Model.DataTransferObjects
                 && this.ScoresRound3 == settings.ScoresRound3
                 && this.RepeatsRound4 == settings.RepeatsRound4
                 && this.ScoresRound4 == settings.ScoresRound4
+                && this.RepeatsAndScoresMultiplier == settings.RepeatsAndScoresMultiplier
                 && this.Units.Count == settings.Units.Count
                 && this.Units.TrueForAll(u => settings.Units[this.Units.IndexOf(u)] == u);
         }

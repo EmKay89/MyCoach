@@ -104,18 +104,5 @@
                       SelectedValue="{Binding ExercisesPerLap}"
                       IsEnabled="{Binding TrainingSettingsEnabled}" />
         </StackPanel>
-        <StackPanel>
-            <Label Content="Multiplikator für Wiederholungen und Punkte"
-                   Style="{StaticResource Headline}" />
-            <StackPanel Margin="15,0,0,0"
-                        Orientation="Horizontal">
-                <TextBox Text="{Binding Multiplyer}"
-                         IsEnabled="{Binding TrainingSettingsEnabled}"
-                         Width="100" />
-                <TextBlock Text="%"
-                           Margin="5,0,0,0"
-                           VerticalAlignment="Center" />
-            </StackPanel>
-        </StackPanel>
     </StackPanel>
 </UserControl>

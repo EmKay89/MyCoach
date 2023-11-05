@@ -233,6 +233,22 @@ namespace MyCoach.ViewModel
             }
         }
 
+        public ushort RepeatsAndScoresMultiplier
+        {
+            get => this.Settings.RepeatsAndScoresMultiplier;
+
+            set
+            {
+                if (this.Settings.RepeatsAndScoresMultiplier == value)
+                {
+                    return;
+                }
+
+                this.Settings.RepeatsAndScoresMultiplier = value;
+                this.InvokePropertyChanged();
+            }
+        }
+
         private void AddUnit()
         {
             this.Units.Add(this.NewUnit);
@@ -258,7 +274,7 @@ namespace MyCoach.ViewModel
             else
             {
                 savedSettings.CopyValuesTo(this.Settings);
-            }            
+            }
 
             this.UpdatePermissionText();
             this.InvokePropertiesChanged(
@@ -271,7 +287,8 @@ namespace MyCoach.ViewModel
                 nameof(this.ScoresRound1),
                 nameof(this.ScoresRound2),
                 nameof(this.ScoresRound3),
-                nameof(this.ScoresRound4));
+                nameof(this.ScoresRound4),
+                nameof(this.RepeatsAndScoresMultiplier));
             this.Units.CollectionChanged += this.OnUnitsChanged;
             this.HasUnsavedChanges = false;
         }

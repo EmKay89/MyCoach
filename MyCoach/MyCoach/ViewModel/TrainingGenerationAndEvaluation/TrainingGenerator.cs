@@ -188,7 +188,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 var vm = new TrainingElementViewModel(TrainingElementType.Exercise, exercise)
                 {
                     RepeatsMultiplier = DetermineRepeatsMultiplierForLap(lap),
-                    ScoresMultiplier = DetermineScoresMultiplierForLap(lap)                    
+                    ScoresMultiplier = DetermineScoresMultiplierForLap(lap)
                 };
 
                 training.Add(vm);
@@ -200,13 +200,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return (double)globalSettings.RepeatsRound1 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.RepeatsRound1 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 2:
-                    return (double)globalSettings.RepeatsRound2 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.RepeatsRound2 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 3:
-                    return (double)globalSettings.RepeatsRound3 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.RepeatsRound3 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 4:
-                    return (double)globalSettings.RepeatsRound4 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.RepeatsRound4 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 default:
                     return 1.0;
             }
@@ -217,13 +217,13 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
             switch (lap)
             {
                 case 1:
-                    return (double)globalSettings.ScoresRound1 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.ScoresRound1 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 2:
-                    return (double)globalSettings.ScoresRound2 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.ScoresRound2 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 3:
-                    return (double)globalSettings.ScoresRound3 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.ScoresRound3 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 case 4:
-                    return (double)globalSettings.ScoresRound4 * (double)trainingSettings.Multiplyer / (double)10000;
+                    return (double)globalSettings.ScoresRound4 * (double)globalSettings.RepeatsAndScoresMultiplier / (double)10000;
                 default:
                     return 1.0;
             }

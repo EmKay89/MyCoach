@@ -16,6 +16,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="85" />
                 <ColumnDefinition Width="150" />
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -33,6 +34,22 @@
                       Grid.Column="1"
                       Grid.Row="0"
                       Margin="0,3,0,3" />
+            <Image Source="/Resources/QuestionIcon.jpg"
+                   Stretch="None"
+                   Margin="10,0,0,0"
+                   ToolTipService.ShowDuration="30000"
+                   ToolTipService.InitialShowDelay="300"
+                   Cursor="Help"
+                   Grid.Column="2"
+                   HorizontalAlignment="Left"
+                   Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Image.ToolTip>
+                    <ToolTip Width="600">
+                        <TextBlock Text="Tipp: Für ein zeitbasiertes Training erlaubt der globale Multiplikator für Anzahl und Punkte eine einfache, schrittweise Erhöhung der Schwierigkeit der Trainings über mehrere Monate."
+                                   TextWrapping="WrapWithOverflow" />
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
             <TextBlock Text="Dauer: "
                        Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}"
                        Grid.Column="0"

@@ -151,7 +151,8 @@ namespace MyCoachTests
                     RepeatsRound3 = 51,
                     ScoresRound3 = 101,
                     RepeatsRound4 = 31,
-                    ScoresRound4 = 101
+                    ScoresRound4 = 101,
+                    RepeatsAndScoresMultiplier = 100
                 }
             };
 

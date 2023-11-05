@@ -100,9 +100,9 @@ namespace MyCoach.Model.DataTransferObjects
                     Category = ExerciseCategory.Category1,
                     Count = 20,
                     Name = "Hantelheben Trizeps 5 kg",
-                    Unit = "Greife mit beiden Händen eine Hantel und lege sie hinter deinem Kopf in den Nacken. Strecke aus dieser Position heraus deine Arme aus und hebe die Hantel so weit wie möglich über deinen Kopf.",
+                    Unit = "Wiederholungen",
                     Scores = 10,
-                    Info = "",
+                    Info = "Greife mit beiden Händen eine Hantel und lege sie hinter deinem Kopf in den Nacken. Strecke aus dieser Position heraus deine Arme aus und hebe die Hantel so weit wie möglich über deinen Kopf.",
                     Active = true
                 },
 
@@ -435,6 +435,7 @@ namespace MyCoach.Model.DataTransferObjects
                         ScoresRound2 = 100,
                         ScoresRound3 = 100,
                         ScoresRound4 = 100,
+                        RepeatsAndScoresMultiplier = 100
                     }
                 };
 

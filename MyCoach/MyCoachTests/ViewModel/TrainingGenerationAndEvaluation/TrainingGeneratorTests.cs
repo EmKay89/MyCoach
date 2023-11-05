@@ -200,7 +200,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTraining()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 3, 2, 100, ExerciseCategory.Category1);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 3, 2, ExerciseCategory.Category1);
 
             var training = TrainingGenerator.CreateTraining(settings);
 
@@ -220,7 +220,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingLimitedByExerciseAvailabilityAndRepetitionPermission()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.WarmUp);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.WarmUp);
             this.Exercises.Where(e => e.Category == ExerciseCategory.WarmUp).First().Active = false;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -241,7 +241,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingWithRepeatsNotPreferred()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.CoolDown);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.CoolDown);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.NotPreferred;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -262,7 +262,7 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
         [TestMethod]
         public void CreateTraining_FocusTrainingWithRepeats()
         {
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, 100, ExerciseCategory.Category8);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 2, ExerciseCategory.Category8);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -291,9 +291,10 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             this.Settings.ScoresRound2 = 150;
             this.Settings.ScoresRound3 = 75;
             this.Settings.ScoresRound4 = 40;
+            this.Settings.RepeatsAndScoresMultiplier = 150;
             this.SetupData(TestExercises.TwoOfEachCategory);
             this.Exercises.Where(e => e.Category == ExerciseCategory.Category1).Last().Active = false;
-            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 1, 150, ExerciseCategory.Category1);
+            var settings = this.GetTrainingSettings(TrainingMode.FocusTraining, 4, 1, ExerciseCategory.Category1);
             this.Settings.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             var training = TrainingGenerator.CreateTraining(settings);
@@ -315,7 +316,6 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
             TrainingMode mode,
             ushort lapCount,
             ushort exercisesPerLap = 0,
-            ushort multiplyer = 100,
             ExerciseCategory categoryInFocus = ExerciseCategory.Category1)
         {
             this.activeCategoriesForTrainingSettings = new List<ExerciseCategory>()
@@ -336,7 +336,6 @@ namespace MyCoachTests.ViewModel.TrainingGenerationAndEvaluation
                 mode,
                 lapCount,
                 exercisesPerLap,
-                multiplyer,
                 categoryInFocus,
                 activeCategoriesForTrainingSettings);
         }

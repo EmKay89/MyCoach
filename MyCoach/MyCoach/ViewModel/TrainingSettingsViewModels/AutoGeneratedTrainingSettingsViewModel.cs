@@ -93,7 +93,6 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
                 this.TrainingMode,
                 this.LapCount,
                 this.ExercisesPerLap,
-                this.Multiplyer,
                 this.CategoryInFocus?.ID ?? null,
                 this.GetCategoriesEnabledForTraining());
 
@@ -150,9 +149,7 @@ namespace MyCoach.ViewModel.TrainingSettingsViewModels
                     nameof(this.NotEnoughExercisesAvailable));
             }
         }
-
-        public ushort Multiplyer { get; set; } = 100;
-              
+             
         public string CategoryWarmUpName => this.Categories.GetName(ExerciseCategory.WarmUp);
 
         public bool CategoryWarmUpActive => this.Categories.IsActive(ExerciseCategory.WarmUp);
