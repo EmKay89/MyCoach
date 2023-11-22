@@ -15,20 +15,18 @@
                     DockPanel.Dock="Bottom">
             <Button x:Name="btnStart"
                     Content="Start"
-                    Margin="10,0,0,10"
+                    Margin="10,10,0,10"
                     Click="btnStart_Click" />
             <Button x:Name="btnClose"
                     Content="Schließen"
-                    Margin="0,0,10,10"
+                    Margin="10,10,0,10"
                     Click="btnClose_Click" />
             <CheckBox x:Name="chkAutoRestart"
                       Content="Auto Restart"
                       Margin="10" />
         </StackPanel>
-        <Grid Background="LightGray"
-              Margin="10,10,10,0">
+        <Grid Margin="10,10,10,0">
             <TextBox x:Name="txtTime"
-                     Margin="10"
                      TextChanged="txtTime_TextChanged"
                      FontSize="120"
                      FontWeight="Bold"
