@@ -39,20 +39,9 @@ namespace MyCoach.ViewModel.Utilities
         {
             foreach (var category in settings.CategoriesEnabledForTraining)
             {
-                int compare;
-
-                if (category == ExerciseCategory.WarmUp || category == ExerciseCategory.CoolDown)
-                {
-                    compare = DataInterface.GetInstance().GetData<Category>().Single(c => c.ID == category).Count;
-                }
-                else if (permission == ExerciseSchedulingRepetitionPermission.No)
-                {
-                    compare = settings.LapCount;
-                }
-                else
-                {
-                    compare = 1;
-                }
+                int compare = (category == ExerciseCategory.WarmUp || category == ExerciseCategory.CoolDown) && permission == ExerciseSchedulingRepetitionPermission.No
+                    ? DataInterface.GetInstance().GetData<Category>().Single(c => c.ID == category).Count
+                    : permission == ExerciseSchedulingRepetitionPermission.No ? settings.LapCount : 1;
 
                 if (exercises.Count(e => e.Category == category) < compare)
                 {

@@ -45,120 +45,97 @@ namespace MyCoachTests.ViewModel
         {
             Assert.IsNotNull(this.sut.Settings);
             Assert.IsTrue(Utilities.AreEqual(sut.Settings, TestDtos.Settings.FirstOrDefault()));
-            Assert.IsFalse(this.sut.HasUnsavedChanges);
         }
 
         [TestMethod]
-        public void Construction_DataInterfaceSettingsIsNull_SetsBufferToDefaultSettings()
-        {
-            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns((ObservableCollection<Settings>)null);
-
-            this.sut = new SettingsViewModel(this.messageBoxService);
-
-            Assert.IsNotNull(this.sut.Settings);
-            Assert.IsTrue(Utilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
-        }
-
-        [TestMethod]
-        public void Construction_DataInterfaceSettingsIsEmpty_SetsBufferToDefaultSettings()
-        {
-            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns(new ObservableCollection<Settings>());
-
-            this.sut = new SettingsViewModel(this.messageBoxService);
-
-            Assert.IsNotNull(this.sut.Settings);
-            Assert.IsTrue(Utilities.AreEqual(sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
-        }
-
-        [TestMethod]
-        public void Permission_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void Permission_Changes_RaisesPropertyChangedAndSavesData()
         {            
             this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
 
             Assert.AreEqual(2, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], "Permission");
             Assert.AreEqual(this.PropertyChangedEvents[1], "PermissionText");
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void RepeatsRound1_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void RepeatsRound1_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound1));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void RepeatsRound2_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void RepeatsRound2_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.RepeatsRound2 = ++this.sut.RepeatsRound2;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound2));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void RepeatsRound3_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void RepeatsRound3_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.RepeatsRound3 = ++this.sut.RepeatsRound3;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound3));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void RepeatsRound4_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void RepeatsRound4_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.RepeatsRound4 = ++this.sut.RepeatsRound4;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.RepeatsRound4));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void ScoresRound1_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void ScoresRound1_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound1));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void ScoresRound2_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void ScoresRound2_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.ScoresRound2 = ++this.sut.ScoresRound2;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound2));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void ScoresRound3_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void ScoresRound3_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.ScoresRound3 = ++this.sut.ScoresRound3;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound3));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
-        public void ScoresRound4_Changes_RaisesPropertyChangedAndHasUnsavedChangesIsTrue()
+        public void ScoresRound4_Changes_RaisesPropertyChangedAndSavesData()
         {
             this.sut.ScoresRound4 = ++this.sut.ScoresRound4;
 
             Assert.AreEqual(1, this.PropertyChangedEvents.Count);
             Assert.AreEqual(this.PropertyChangedEvents[0], nameof(this.sut.ScoresRound4));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         #endregion
@@ -192,6 +169,7 @@ namespace MyCoachTests.ViewModel
             Assert.AreEqual(preexistingUnitsCount + 1, this.sut.Units.Count);
             Assert.AreEqual(this.sut.Units.Last(), "AnotherTestUnit");
             Assert.AreEqual(this.sut.NewUnit, string.Empty);
+            this.AssertSave();
         }
 
         [TestMethod]
@@ -221,33 +199,7 @@ namespace MyCoachTests.ViewModel
 
             Assert.AreEqual(preexistingUnitsCount - 1, this.sut.Units.Count);
             Assert.IsFalse(this.sut.Units.Contains(firstUnit));
-        }
-
-        [TestMethod]
-        public void SaveSettingsCommandCanExecute_NoUnsavedChanges_ReturnsFalse()
-        {
-            Assert.IsFalse(this.sut.SaveSettingsCommand.CanExecute(null));
-        }
-
-        [TestMethod]
-        public void SaveSettingsCommandCanExecute_HasUnsavedChanges_ReturnsTrue()
-        {
-            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
-
-            Assert.IsTrue(this.sut.SaveSettingsCommand.CanExecute(null));
-        }
-
-        [TestMethod]
-        public void SaveSettingsCommandExecute_HappyPath_CallsSaveDataOfDataManagerAndHasUnsavedChangesIsFalse()
-        {
-            Assert.IsFalse(Utilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
-            this.sut.Settings = DefaultDtos.Settings.First();
-
-            this.sut.SaveSettingsCommand.Execute(null);
-
-            Assert.IsTrue(Utilities.AreEqual(DefaultDtos.Settings.First(), this.Settings));
-            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
-            Assert.IsFalse(this.sut.HasUnsavedChanges);
+            this.AssertSave();
         }
 
         [TestMethod]
@@ -257,48 +209,37 @@ namespace MyCoachTests.ViewModel
         }
 
         [TestMethod]
-        public void SetDefaultsCommandExecute_HappyPath_CallsSetDefaultsOfDataManagerAndLoadsBufferAndHasUnsavedChangesIsFalse()
+        public void SetDefaultsCommandExecute_HappyPath_CallsSetDefaultsOfDataManagerAndInvokesPropertyChangesAndUpdatedPermissionText()
         {
-            Mock.Get(this.DataManager).Setup(dm => dm.GetData<Settings>()).Returns(DefaultDtos.Settings);
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Never);
-            Assert.IsFalse(Utilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
-            this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
+            this.sut.PermissionText = "AnyChangedText";
+            this.PropertyChangedEvents.Clear();
 
             this.sut.SetDefaultsCommand.Execute(null);
 
             Mock.Get(this.DataManager).Verify(dm => dm.SetDefaults<Settings>(), Times.Once);
-            Assert.IsTrue(Utilities.AreEqual(this.sut.Settings, DefaultDtos.Settings.FirstOrDefault()));
-            Assert.IsFalse(this.sut.HasUnsavedChanges);
+            this.AssertPropertyChangedInvokation(11);
+            this.AssertPropertyChangedInvokation(
+                nameof(this.sut.Permission),
+                nameof(this.sut.PermissionText),
+                nameof(this.sut.RepeatsRound1),
+                nameof(this.sut.RepeatsRound2),
+                nameof(this.sut.RepeatsRound3),
+                nameof(this.sut.RepeatsRound4),
+                nameof(this.sut.ScoresRound1),
+                nameof(this.sut.ScoresRound2),
+                nameof(this.sut.ScoresRound3),
+                nameof(this.sut.ScoresRound4),
+                nameof(this.sut.RepeatsAndScoresMultiplier));
         }
 
-        [TestMethod]
-        public void ResetSettingsCommandCanExecute_NoUnsavedChanges_ReturnsFalse()
+        #endregion
+
+        #region Helper Methods
+
+        private void AssertSave()
         {
-            Assert.IsFalse(this.sut.ResetSettingsCommand.CanExecute(null));
-        }
-
-        [TestMethod]
-        public void ResetSettingsCommandCanExecute_HasUnsavedChanges_ReturnsTrue()
-        {
-            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
-
-            Assert.IsTrue(this.sut.ResetSettingsCommand.CanExecute(null));
-        }
-
-        [TestMethod]
-        public void ResetSettingsCommandExecute_HappyPath_DiscardsChangesAndHasUnsavedChangesIsFalse()
-        {
-            this.sut.RepeatsRound1 = ++this.sut.RepeatsRound1;
-            this.sut.ScoresRound1 = ++this.sut.ScoresRound1;
-            this.sut.Permission = ExerciseSchedulingRepetitionPermission.Yes;
-            Assert.IsFalse(Utilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
-            Assert.IsTrue(this.sut.HasUnsavedChanges);
-
-            this.sut.ResetSettingsCommand.Execute(null);
-
-            Assert.IsTrue(Utilities.AreEqual(this.sut.Settings, TestDtos.Settings.FirstOrDefault()));
-            Assert.IsFalse(this.sut.HasUnsavedChanges);
+            Mock.Get(this.DataManager).Verify(dm => dm.SaveData<Settings>(), Times.Once);
         }
 
         #endregion

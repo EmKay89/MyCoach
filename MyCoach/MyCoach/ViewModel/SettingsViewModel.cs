@@ -20,19 +20,15 @@ namespace MyCoach.ViewModel
         public SettingsViewModel(IMessageBoxService messageBoxService = null)
         {
             this.messageBoxService = messageBoxService ?? new MessageBoxService();
-            this.Settings = new Settings();
-            this.LoadSettingsBuffer();
+            this.Settings = DataInterface.GetInstance().GetData<Settings>().Single();
 
             this.AddUnitCommand = new RelayCommand(this.AddUnit, () => this.NewUnit != null && this.NewUnit != string.Empty);
             this.DeleteUnitCommand = new RelayCommand(this.DeleteUnit, () => this.SelectedUnit != null);
-            this.SaveSettingsCommand = new RelayCommand(this.SaveSettings, () => this.HasUnsavedChanges);
             this.SetDefaultsCommand = new RelayCommand(this.SetDefaultSettings);
-            this.ResetSettingsCommand = new RelayCommand(this.LoadSettingsBuffer, () => this.HasUnsavedChanges);
 
-            this.PropertyChanged += delegate { this.HasUnsavedChanges = true; };
+            this.Units.CollectionChanged += this.OnUnitsChanged;
+            this.UpdatePermissionText();
         }
-
-        public bool HasUnsavedChanges { get; private set; }
 
         public Dictionary<ExerciseSchedulingRepetitionPermission, string> PremissionsWithCaption { get; } = new Dictionary<ExerciseSchedulingRepetitionPermission, string>
         {
@@ -45,11 +41,7 @@ namespace MyCoach.ViewModel
 
         public RelayCommand DeleteUnitCommand { get; }
 
-        public RelayCommand SaveSettingsCommand { get; }
-
         public RelayCommand SetDefaultsCommand { get; }
-
-        public RelayCommand ResetSettingsCommand { get; }
 
         public Settings Settings { get; set; }
 
@@ -70,6 +62,7 @@ namespace MyCoach.ViewModel
                 this.InvokePropertyChanged();
             }
         }
+
         public string SelectedUnit { get; set; }
 
         public ExerciseSchedulingRepetitionPermission Permission
@@ -86,6 +79,7 @@ namespace MyCoach.ViewModel
                 this.Settings.Permission = value;
                 this.InvokePropertyChanged();
                 this.UpdatePermissionText();
+                this.SaveSettings();
             }
         }
 
@@ -118,6 +112,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.RepeatsRound1 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -134,6 +129,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.RepeatsRound2 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -150,6 +146,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.RepeatsRound3 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -166,6 +163,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.RepeatsRound4 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -182,6 +180,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.ScoresRound1 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -198,6 +197,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.ScoresRound2 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -214,6 +214,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.ScoresRound3 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -230,6 +231,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.ScoresRound4 = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -246,6 +248,7 @@ namespace MyCoach.ViewModel
 
                 this.Settings.RepeatsAndScoresMultiplier = value;
                 this.InvokePropertyChanged();
+                this.SaveSettings();
             }
         }
 
@@ -263,54 +266,14 @@ namespace MyCoach.ViewModel
             }
         }
 
-        private void LoadSettingsBuffer()
-        {
-            this.Units.CollectionChanged -= this.OnUnitsChanged;
-            var savedSettings = DataInterface.GetInstance().GetData<Settings>()?.FirstOrDefault();            
-            if (savedSettings == null)
-            {
-                DefaultDtos.Settings.Single().CopyValuesTo(this.Settings);
-            }
-            else
-            {
-                savedSettings.CopyValuesTo(this.Settings);
-            }
-
-            this.UpdatePermissionText();
-            this.InvokePropertiesChanged(
-                nameof(this.Permission),
-                nameof(this.PermissionText),
-                nameof(this.RepeatsRound1),
-                nameof(this.RepeatsRound2),
-                nameof(this.RepeatsRound3),
-                nameof(this.RepeatsRound4),
-                nameof(this.ScoresRound1),
-                nameof(this.ScoresRound2),
-                nameof(this.ScoresRound3),
-                nameof(this.ScoresRound4),
-                nameof(this.RepeatsAndScoresMultiplier));
-            this.Units.CollectionChanged += this.OnUnitsChanged;
-            this.HasUnsavedChanges = false;
-        }
-
         private void OnUnitsChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.HasUnsavedChanges = true;
+            this.SaveSettings();
         }
 
         private void SaveSettings()
         {
-            this.Settings.CopyValuesTo(DataInterface.GetInstance().GetData<Settings>().First());
-            var result = DataInterface.GetInstance().SaveData<Settings>();
-            if (result == false)
-            {
-                this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT,
-                    SAVING_ERROR_CAPTION,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-            }
-
-            this.HasUnsavedChanges = false;
+            DataInterface.GetInstance().SaveData<Settings>();
         }
 
         private void SetDefaultSettings()
@@ -323,18 +286,27 @@ namespace MyCoach.ViewModel
             if (result == MessageBoxResult.Yes)
             {
                 DataInterface.GetInstance().SetDefaults<Settings>();
-                this.LoadSettingsBuffer();
-                this.HasUnsavedChanges = false;
+                this.InvokePropertiesChanged(
+                    nameof(this.Permission),
+                    nameof(this.RepeatsRound1),
+                    nameof(this.RepeatsRound2),
+                    nameof(this.RepeatsRound3),
+                    nameof(this.RepeatsRound4),
+                    nameof(this.ScoresRound1),
+                    nameof(this.ScoresRound2),
+                    nameof(this.ScoresRound3),
+                    nameof(this.ScoresRound4),
+                    nameof(this.RepeatsAndScoresMultiplier));
+                this.UpdatePermissionText();
             }
         }
 
         private void UpdatePermissionText()
         {
-            var savedSettings = this.HasUnsavedChanges;
             switch (this.Permission)
             {
                 case ExerciseSchedulingRepetitionPermission.Yes:
-                    this.PermissionText = "Eine Übung wird zufällig und somit unabhängig davon in eine Trainingsrunde " +
+                    this.PermissionText = "Eine Übung wird unabhängig davon in eine Trainingsrunde " +
                         "eingeplant, ob sie bereits in einer vorherigen Runde eingeplant wurde " +
                         "und ob noch andere Übungen derselben Kategorie nicht eingeplant wurden.";
                     break;
@@ -351,8 +323,6 @@ namespace MyCoach.ViewModel
                     this.PermissionText = "Keine Auswahl";
                     break;
             }
-
-            this.HasUnsavedChanges = savedSettings;
         }
     }
 }

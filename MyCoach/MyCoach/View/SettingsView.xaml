@@ -170,15 +170,6 @@
                     </Image.ToolTip>
                 </Image>
             </StackPanel>
-            <StackPanel Orientation="Horizontal"
-                        Margin="10,10,0,0">
-                <Button Content="Speichern"
-                        Command="{Binding SaveSettingsCommand}"
-                        HorizontalAlignment="Left" />
-                <Button Content="Verwerfen"
-                        Command="{Binding ResetSettingsCommand}"
-                        HorizontalAlignment="Left" />
-            </StackPanel>
             <Label Content="Einstellungen auf Standardeinstellungen zurücksetzen."
                    Style="{StaticResource Headline}" />
             <StackPanel Orientation="Horizontal"

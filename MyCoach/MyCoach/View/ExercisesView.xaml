@@ -55,17 +55,6 @@
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
-            <Label Content="Übungssatz importieren oder exportieren"
-                   Style="{StaticResource Headline}" />
-            <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
-                       Style="{StaticResource DefaultAfterHeadline}" />
-            <StackPanel Orientation="Horizontal"
-                        Margin="10,5,0,0">
-                <Button Content="Export"
-                        Command="{Binding ExportExercisesCommand}" />
-                <Button Content="Import"
-                        Command="{Binding ImportExercisesCommand}" />
-            </StackPanel>
             <Label Content="Übungskategorien bearbeiten"
                    Style="{StaticResource Headline}" />
             <Label Content="Aufwärmübungen"
@@ -224,7 +213,7 @@
                               Style="{StaticResource CategoryActiveCheckBox}" />
                 </StackPanel>
             </Grid>
-            <TextBlock Text="Folgend kannst du die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
+            <TextBlock Text="Folgend kannst du die Anzahl der Aufwärmübungen, die vor jedem Training absolviert werden sollen, sowie die Anzahl der Abwärmübungen, die nach jedem Training absolviert werden sollen, einstellen."
                        Style="{StaticResource DefaultTextBlock}" />
             <Grid Margin="20,10,0,0">
                 <Grid.ColumnDefinitions>
@@ -293,6 +282,27 @@
                         Command="{Binding SaveExercisesCommand}" />
                 <Button Content="Verwerfen"
                         Command="{Binding ResetExercisesCommand}" />
+            </StackPanel>
+            <Label Content="Übungssatz importieren oder exportieren"
+                   Style="{StaticResource Headline}" />
+            <StackPanel Orientation="Horizontal"
+                        Margin="10,5,0,0">
+                <Button Content="Import"
+                        Command="{Binding ImportExercisesCommand}" />
+                <Button Content="Export"
+                        Command="{Binding ExportExercisesCommand}" />
+                <Image Source="/Resources/QuestionIcon.jpg"
+                       Stretch="None"
+                       ToolTipService.ShowDuration="30000"
+                       ToolTipService.InitialShowDelay="300"
+                       Cursor="Help">
+                    <Image.ToolTip>
+                        <ToolTip Width="600">
+                            <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
+                                       TextWrapping="WrapWithOverflow" />
+                        </ToolTip>
+                    </Image.ToolTip>
+                </Image>
             </StackPanel>
             <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen."
                    Style="{StaticResource Headline}" />

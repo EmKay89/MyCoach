@@ -689,7 +689,8 @@ namespace MyCoach.ViewModel
                 this.messageBoxService.ShowMessage(SAVING_ERROR_TEXT, SAVING_ERROR_CAPTION, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            // Reset SelectedCategory, because simply invoking PropertyChanged with its name is not enough to update the name in the GUI, if it was changed.
+            // Reset SelectedCategory, because simply invoking PropertyChanged is not enough to update the name of thcategory  in the GUI, if the name was changed
+            // but not the SelectedCategory itself.
             var selectedCategory = this.SelectedCategory;
             this.SelectedCategory = null;
             this.SelectedCategory = selectedCategory;

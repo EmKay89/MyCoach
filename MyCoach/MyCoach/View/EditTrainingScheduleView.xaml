@@ -45,7 +45,7 @@
                    Visibility="{Binding TimeBasedScheduleElementsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Image.ToolTip>
                     <ToolTip Width="600">
-                        <TextBlock Text="Tipp: Für ein zeitbasiertes Training erlaubt der globale Multiplikator für Anzahl und Punkte eine einfache, schrittweise Erhöhung der Schwierigkeit der Trainings über mehrere Monate."
+                        <TextBlock Text="Tipp: Beim zeitbasierten Training erlaubt der Multiplikator für Anzahl und Punkte, der in den Einstellungen zu finden ist, eine einfache Erhöhung des Schwierigkeitsgrads der Trainings über mehrere Monate."
                                    TextWrapping="WrapWithOverflow" />
                     </ToolTip>
                 </Image.ToolTip>
