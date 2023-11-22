@@ -460,7 +460,7 @@ namespace MyCoach.Model.DataTransferObjects
             };
         }
 
-        public static ObservableCollection<Month> TrainingScores
+        public static ObservableCollection<Month> Months
         {
             get => new ObservableCollection<Month>();
         }
@@ -475,7 +475,7 @@ namespace MyCoach.Model.DataTransferObjects
                     Exercises = Exercises,
                     Settings = Settings,
                     TrainingSchedules = TrainingSchedules,
-                    TrainingScores = TrainingScores
+                    Months = Months
                 };
             }
         }

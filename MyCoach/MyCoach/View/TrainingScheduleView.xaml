@@ -10,7 +10,7 @@
     <ScrollViewer HorizontalScrollBarVisibility="Disabled">
         <StackPanel>
             <TextBlock Margin="5,10,0,0"
-                       Text="Für das Absolvieren einer Übung im Training erhältst du eine Anzahl von Punkten, die du für jede Übung separat festlegen kannst. Im Trainingsplan kannst du ein Monatsziel für die Punkte festlegen."
+                       Text="Für das Absolvieren einer Übung im Training erhältst du eine Anzahl von Punkten, die du für jede Übung separat festlegen kannst. Hier im Trainingsplan kannst du ein Monatsziel für diese Punkte festlegen."
                        TextWrapping="WrapWithOverflow" />
             <StackPanel Margin="10,5,0,0"
                         Orientation="Horizontal">

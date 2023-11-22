@@ -163,7 +163,7 @@ namespace MyCoach.Model.DataTransferObjects
                 || AreEqual(collection1.Exercises, collection2.Exercises) == false
                 || AreEqual(collection1.Settings, collection2.Settings) == false
                 || AreEqual(collection1.TrainingSchedules, collection2.TrainingSchedules) == false
-                || AreEqual(collection1.TrainingScores, collection2.TrainingScores) == false)
+                || AreEqual(collection1.Months, collection2.Months) == false)
             {
                 return false;
             }

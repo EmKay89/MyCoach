@@ -99,11 +99,11 @@ namespace MyCoach.DataHandling.DataManager
                     break;
 
                 case nameof(Month):
-                    this.Buffer.TrainingScores.ResetSubscriptions();
-                    this.Buffer.TrainingScores.Clear();
-                    foreach (var ts in DefaultDtos.TrainingScores)
+                    this.Buffer.Months.ResetSubscriptions();
+                    this.Buffer.Months.Clear();
+                    foreach (var ts in DefaultDtos.Months)
                     {
-                        this.Buffer.TrainingScores.Add(ts);
+                        this.Buffer.Months.Add(ts);
                     }
 
                     break;

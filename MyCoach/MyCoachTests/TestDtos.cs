@@ -30,7 +30,7 @@ namespace MyCoachTests
             Exercises = Exercises,
             Settings = Settings,
             TrainingSchedules = TrainingSchedules,
-            TrainingScores = TrainingScores
+            Months = TrainingScores
         };
 
         public static ObservableCollection<Category> Categories => categories;

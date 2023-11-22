@@ -53,7 +53,7 @@ namespace MyCoachTests.DataHandling.DataManager
             Assert.IsTrue(Utilities.AreEqual(loadedExercises, DefaultDtos.Exercises));
             Assert.IsTrue(Utilities.AreEqual(loadedSettings, DefaultDtos.Settings));
             Assert.IsTrue(Utilities.AreEqual(loadedTrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(Utilities.AreEqual(loadedTrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(loadedTrainingScores, DefaultDtos.Months));
         }
 
         [TestMethod]

@@ -283,31 +283,16 @@
                 <Button Content="Verwerfen"
                         Command="{Binding ResetExercisesCommand}" />
             </StackPanel>
-            <Label Content="Übungssatz importieren oder exportieren"
+            <Label Content="Importieren, exportieren oder Standardübungen wiederherstellen"
                    Style="{StaticResource Headline}" />
+            <TextBlock Text="Die folgenden Aktionen betreffen alle Übungen und Übungskategorien."
+                       Style="{StaticResource DefaultAfterHeadline}" />
             <StackPanel Orientation="Horizontal"
                         Margin="10,5,0,0">
                 <Button Content="Import"
                         Command="{Binding ImportExercisesCommand}" />
                 <Button Content="Export"
                         Command="{Binding ExportExercisesCommand}" />
-                <Image Source="/Resources/QuestionIcon.jpg"
-                       Stretch="None"
-                       ToolTipService.ShowDuration="30000"
-                       ToolTipService.InitialShowDelay="300"
-                       Cursor="Help">
-                    <Image.ToolTip>
-                        <ToolTip Width="600">
-                            <TextBlock Text="Ein Übungssatz umfasst sowohl alle Übungen als auch alle Einstellungen zu den Übungskategorien."
-                                       TextWrapping="WrapWithOverflow" />
-                        </ToolTip>
-                    </Image.ToolTip>
-                </Image>
-            </StackPanel>
-            <Label Content="Übungssatz auf Standardeinstellungen zurücksetzen."
-                   Style="{StaticResource Headline}" />
-            <StackPanel Orientation="Horizontal"
-                        Margin="10,5,0,0">
                 <Button Content="Zurücksetzen"
                         Command="{Binding SetDefaultsCommand}" />
             </StackPanel>

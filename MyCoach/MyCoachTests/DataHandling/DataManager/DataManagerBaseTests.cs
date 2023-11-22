@@ -43,7 +43,7 @@ namespace MyCoachTests.DataHandling.DataManager
             this.sut.GetBuffer().Exercises.Clear();
             this.sut.GetBuffer().Settings.First().RepeatsRound1 = 111;
             this.sut.GetBuffer().TrainingSchedules.First().StartMonth = new DateTime(1989, 11, 14);
-            this.sut.GetBuffer().TrainingScores.Clear();
+            this.sut.GetBuffer().Months.Clear();
 
             this.sut.SetDefaults<Category>();
             this.sut.SetDefaults<Exercise>();
@@ -55,7 +55,7 @@ namespace MyCoachTests.DataHandling.DataManager
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Months, DefaultDtos.Months));
         }
 
         [TestMethod]
@@ -130,7 +130,7 @@ namespace MyCoachTests.DataHandling.DataManager
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Exercises, DefaultDtos.Exercises));
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Settings, DefaultDtos.Settings));
             Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingSchedules, DefaultDtos.TrainingSchedules));
-            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().TrainingScores, DefaultDtos.TrainingScores));
+            Assert.IsTrue(Utilities.AreEqual(this.sut.GetBuffer().Months, DefaultDtos.Months));
         }
     }
 

@@ -13,11 +13,10 @@ namespace MyCoach.ViewModel.Utilities
     /// </summary>
     public static class TrainingModeDescriptions
     {
-        public const string DESCRIPTION_CIRCLETRAINING = "In diesem Modus wird pro Runde je eine Übung aller aktiven Kategorien ins Training eingeplant.";
-        public const string DESCRIPTION_RONDOMTRAINING = "In diesem Modus wird pro Runde die gewählte Anzahl an Übungen zufällig aus allen aktiven Kategorien " +
-            "gewählt und dann ins Training eingeplant.";
-        public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie ins Training eingeplant.";
-        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training frei aus Übungen und Rundenüberschriften erstellt werden." +
+        public const string DESCRIPTION_CIRCLETRAINING = "In diesem Modus wird pro Runde je eine Übung aus allen aktiven Kategorien in das Training eingeplant.";
+        public const string DESCRIPTION_RONDOMTRAINING = "In diesem Modus werden die Übungen für eine Trainingsrunde völlig zufällig aus allen aktiven Kategorien ausgewählt.";
+        public const string DESCRIPTION_FOCUSTRAINING = "In diesem Modus werden nur Übungen der ausgewählten Kategorie in das Training eingeplant.";
+        public const string DESCRIPTION_USERDEFINEDTRAINING = "In diesem Modus kann ein Training frei erstellt werden." +
             "Nach dem Hinzufügen kannst du eine Übung oder Überschrift durch Anklicken bearbeiten." +
             "Ein frei erstelltes Training kann gespeichert und später wieder geladen werden.";
 
