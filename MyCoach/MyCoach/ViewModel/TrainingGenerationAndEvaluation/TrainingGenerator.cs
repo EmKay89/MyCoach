@@ -1,8 +1,8 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,5 +1,5 @@
-﻿using MyCoach.Model.Defines;
-using MyExtensions.IEnumerable;
+﻿using MyCoach.Helpers.Extensions.IEnumerable;
+using MyCoach.Model.Defines;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 

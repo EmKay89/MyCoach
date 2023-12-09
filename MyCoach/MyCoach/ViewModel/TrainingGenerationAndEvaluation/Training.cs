@@ -1,6 +1,6 @@
 ﻿using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.ViewModel.Events;
-using MyExtensions.IEnumerable;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

@@ -4,8 +4,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.Model.DataTransferObjects;
-using MyExtensions.IEnumerable;
 
 namespace MyCoachTests.DataHandling.DataManager
 {

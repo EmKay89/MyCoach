@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingSettingsViewModels;
-using MyExtensions.IEnumerable;
 using System;
 using System.Linq;
 

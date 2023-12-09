@@ -1,7 +1,7 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.Helpers.Mvvm.Commands;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyMvvm.Commands;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;

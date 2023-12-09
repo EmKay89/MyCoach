@@ -1,11 +1,11 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.Helpers.Mvvm.Commands;
+using MyCoach.Helpers.Mvvm.Services;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.DataTransferObjects.CollectionExtensions;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel.DataBaseValidation;
 using MyCoach.ViewModel.Events;
-using MyMvvm.Commands;
-using MyMvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

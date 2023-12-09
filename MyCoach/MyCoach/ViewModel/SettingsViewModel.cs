@@ -1,8 +1,8 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.Helpers.Mvvm.Commands;
+using MyCoach.Helpers.Mvvm.Services;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyMvvm.Commands;
-using MyMvvm.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;

@@ -1,5 +1,5 @@
-﻿using MyCoach.ViewModel;
-using MyExtensions.String;
+﻿using MyCoach.Helpers.Extensions.String;
+using MyCoach.ViewModel;
 using System.Windows;
 using System.Windows.Documents;
 

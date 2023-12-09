@@ -1,7 +1,7 @@
-﻿using MyCoach.View.Windows;
+﻿using MyCoach.Helpers.Mvvm.Commands;
+using MyCoach.View.Windows;
 using MyCoach.ViewModel.DataBaseValidation;
 using MyCoach.ViewModel.Events;
-using MyMvvm.Commands;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;

@@ -70,6 +70,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataHandling\DataManager\TrainingElement.cs" />
+    <Compile Include="Helpers\CustomTypes\Pair.cs" />
+    <Compile Include="Helpers\CustomTypes\Triple.cs" />
+    <Compile Include="Helpers\Extensions\Enumeration\EnumerationExtensions.cs" />
+    <Compile Include="Helpers\Extensions\IEnumerable\IEnumerableExtensions.cs" />
+    <Compile Include="Helpers\Extensions\String\StringExtensions.cs" />
+    <Compile Include="Helpers\Mvvm\Commands\RelayCommand.cs" />
+    <Compile Include="Helpers\Mvvm\Services\FileDialogService.cs" />
+    <Compile Include="Helpers\Mvvm\Services\IFileDialogService.cs" />
+    <Compile Include="Helpers\Mvvm\Services\IMessageBoxService.cs" />
+    <Compile Include="Helpers\Mvvm\Services\MessageBoxService.cs" />
+    <Compile Include="Helpers\Mvvm\TypeConverter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\Mvvm\TypeConverter\EnumToBooleanConverter.cs" />
+    <Compile Include="Helpers\Mvvm\TypeConverter\UintToGridLenthConverter.cs" />
     <Compile Include="Model\DataTransferObjects\CollectionExtensions\DtoBaseCollectionExtensions.cs" />
     <Compile Include="Model\DataTransferObjects\DtoBase.cs" />
     <Compile Include="Model\Defines\ScheduleType.cs" />
@@ -336,20 +349,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\InfoIcon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\libs\MyCustomTypes\MyCustomTypes\MyCustomTypes.csproj">
-      <Project>{b30cdb91-e3ae-40f3-8738-80b71f719956}</Project>
-      <Name>MyCustomTypes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\libs\MyExtensions\MyExtensions\MyExtensions.csproj">
-      <Project>{7f9f2579-d9ae-405c-9ed2-ab914ad4f59d}</Project>
-      <Name>MyExtensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\libs\MyMvvm\MyMvvm\MyMvvm.csproj">
-      <Project>{5c282469-a1ee-4f4d-a4e9-da4dc5673af6}</Project>
-      <Name>MyMvvm</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Chart.png" />

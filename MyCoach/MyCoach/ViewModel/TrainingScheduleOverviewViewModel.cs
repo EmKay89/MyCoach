@@ -1,7 +1,7 @@
 ﻿using MyCoach.DataHandling;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.DataTransferObjects.CollectionExtensions;
-using MyExtensions.IEnumerable;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

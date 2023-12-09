@@ -1,4 +1,4 @@
-﻿using MyMvvm.Commands;
+﻿using MyCoach.Helpers.Mvvm.Commands;
 
 namespace MyCoach.ViewModel
 {

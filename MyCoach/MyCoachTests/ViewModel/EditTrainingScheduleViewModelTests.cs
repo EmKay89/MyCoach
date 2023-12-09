@@ -11,7 +11,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using MyCoach.ViewModel.Defines;
-using MyMvvm.Services;
+using MyCoach.Helpers.Mvvm.Services;
 
 namespace MyCoachTests.ViewModel
 {

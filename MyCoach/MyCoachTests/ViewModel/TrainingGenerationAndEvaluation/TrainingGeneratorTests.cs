@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.Extensions.IEnumerable;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
-using MyExtensions.IEnumerable;
 using System.Collections.Generic;
 using System.Linq;
 

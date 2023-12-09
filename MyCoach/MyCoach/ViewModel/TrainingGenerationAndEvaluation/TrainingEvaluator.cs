@@ -1,9 +1,9 @@
 ﻿using MyCoach.DataHandling;
 using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.CustomTypes;
+using MyCoach.Helpers.Mvvm.Services;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.Model.Defines;
-using MyCustomTypes.Classes;
-using MyMvvm.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

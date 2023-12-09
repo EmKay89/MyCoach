@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MyCoach.DataHandling.DataManager;
+using MyCoach.Helpers.Extensions.IEnumerable;
+using MyCoach.Helpers.Mvvm.Services;
 using MyCoach.Model.DataTransferObjects;
 using MyCoach.ViewModel;
 using MyCoach.ViewModel.TrainingGenerationAndEvaluation;
 using MyCoach.ViewModel.TrainingSettingsViewModels;
-using MyExtensions.IEnumerable;
-using MyMvvm.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
