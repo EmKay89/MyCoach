@@ -248,4 +248,5 @@ paket-files/
 
 # User defined files
 # Reminder to include files here before they are actually created! Otherwise remove them with "git rm --cached [item]"
-Bugs.xlsx
+*.xlsx
+*.docx
