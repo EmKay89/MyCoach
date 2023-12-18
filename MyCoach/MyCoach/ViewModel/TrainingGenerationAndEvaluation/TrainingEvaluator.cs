@@ -109,7 +109,7 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
                 }
             }
 
-            Task.Run(() => MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information));            
+            MessageBoxService.ShowMessage(sb.ToString(), "Training beendet.", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

@@ -53,8 +53,12 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
         public void Finish()
         {
             this.IsActive = false;
-            TrainingEvaluator.Evaluate(this);
+
+            // Evaluate a copy to make sure that the training elements are cleared in the GUI when the TrainingEvaluator displays its results.
+            var copy = new Training();
+            this.ForEach(e => copy.Add(e));
             this.Clear();
+            TrainingEvaluator.Evaluate(copy);
         }
 
         private void OnBaseCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
