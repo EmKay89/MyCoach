@@ -210,11 +210,11 @@ namespace MyCoach.Model.DataTransferObjects
                 {
                     ID = 14,
                     Category = ExerciseCategory.Category3,
-                    Count = 30,
-                    Name = "Seitliches Oberkörperbeugen",
+                    Count = 15,
+                    Name = "Gracy Drills",
                     Unit = "Wiederholungen je Seite",
                     Scores = 10,
-                    Info = "Im Stehen beugst du einen Oberkörper zur Seite, sodass sich die Hand in Richtung deines Knies bewegt. Führe währenddessen die andere Hand über deinen Kopf. Falls dir diese Übung zu leicht ist, kannst du in beiden Händen jeweils ein leichtes Gewicht halten.",
+                    Info = "Stell dich in die Liegestützposition. Schwing das rechte Bein unter dir durch und schwing gleichzeitig den linken Arm hinter dich, bis deine Hand den Boden berührt. Schwing nun das rechte Bein wieder unter dir zurück, sodass du in die Ausgangsposition kommst. Wiederhol die Übung auf der anderen Seite. Diese Bewegungen sollten fließend sein, es sollte keine Pause zwischen den Bewegungen geben.\r\n",
                     Active = true
                 },
 

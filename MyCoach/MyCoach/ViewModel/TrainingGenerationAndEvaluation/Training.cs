@@ -87,13 +87,16 @@ namespace MyCoach.ViewModel.TrainingGenerationAndEvaluation
 
             foreach (var item in e.OldItems)
             {
-                if (item is TrainingElementViewModel vm && vm.Type == TrainingElementType.Exercise)
+                var vm = item as TrainingElementViewModel;
+
+                if (vm.Type == TrainingElementType.Exercise)
                 {
                     vm.PropertyChanged -= this.OnTrainingExerciseChanged;
-                    vm.RemoveElementFromTrainingExecuted -= this.OnRemoveExerciseFromTrainingExecuted;
-                    vm.MoveElementUpExecuted -= this.OnMoveExerciseUpExecuted;
-                    vm.MoveElementDownExecuted -= this.OnMoveExerciseDownExecuted;
                 }
+
+                vm.RemoveElementFromTrainingExecuted -= this.OnRemoveExerciseFromTrainingExecuted;
+                vm.MoveElementUpExecuted -= this.OnMoveExerciseUpExecuted;
+                vm.MoveElementDownExecuted -= this.OnMoveExerciseDownExecuted;
             }
         }
 
